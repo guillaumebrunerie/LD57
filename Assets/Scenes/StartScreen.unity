@@ -930,7 +930,7 @@ GameObject:
   - component: {fileID: 448518841}
   - component: {fileID: 448518844}
   m_Layer: 5
-  m_Name: startScreen
+  m_Name: StartScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1057,6 +1057,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fader
       objectReference: {fileID: 0}
+    - target: {fileID: 114758526028642208, guid: f9c1d2640980b3944ad3815c18cc1cad,
+        type: 3}
+      propertyPath: DefaultTween.MMTweenDefinitionType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 224518304298186988, guid: f9c1d2640980b3944ad3815c18cc1cad,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1151,6 +1156,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Alpha
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 225746014528968042, guid: f9c1d2640980b3944ad3815c18cc1cad,
+        type: 3}
+      propertyPath: m_IgnoreParentGroups
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4597,17 +4607,17 @@ PrefabInstance:
     - target: {fileID: 224288369594095690, guid: 3cd8618a612eaaf4fa46e96866d54350,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.000486
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224288369594095690, guid: 3cd8618a612eaaf4fa46e96866d54350,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.000486
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224288369594095690, guid: 3cd8618a612eaaf4fa46e96866d54350,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.000486
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224288369594095690, guid: 3cd8618a612eaaf4fa46e96866d54350,
         type: 3}
@@ -4653,6 +4663,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -69.99997
+      objectReference: {fileID: 0}
+    - target: {fileID: 224288369594095690, guid: 3cd8618a612eaaf4fa46e96866d54350,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
