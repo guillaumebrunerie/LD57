@@ -22,7 +22,46 @@ export class Game {
 		| "gameover"
 		| "win" = "logo";
 
+	posX = 0;
+	posY = 150;
+	depth = 0;
+	cameraSpeed = 500;
+	sideSpeed = 500;
+
+	movingLeft = false;
+	movingRight = false;
+
 	constructor() {}
+
+	tick(delta: number) {
+		if (this.isPaused) {
+			return;
+		}
+		this.lt += delta;
+		this.startLt += delta;
+
+		if (this.state == "gameover") {
+			return;
+		}
+
+		this.depth += this.cameraSpeed * delta;
+		this.posY += this.cameraSpeed * delta;
+
+		if (this.movingLeft) {
+			this.posX -= this.sideSpeed * delta;
+		}
+		if (this.movingRight) {
+			this.posX += this.sideSpeed * delta;
+		}
+	}
+
+	moveLeft(activate: boolean) {
+		this.movingLeft = activate;
+	}
+
+	moveRight(activate: boolean) {
+		this.movingRight = activate;
+	}
 
 	skipLogo() {
 		this.state = "levelSelect";
@@ -81,18 +120,6 @@ export class Game {
 	autoResume() {
 		if (this.state == "levelSelect") {
 			this.resume();
-		}
-	}
-
-	tick(delta: number) {
-		if (this.isPaused) {
-			return;
-		}
-		this.lt += delta;
-		this.startLt += delta;
-
-		if (this.state == "gameover") {
-			return;
 		}
 	}
 

@@ -3,28 +3,83 @@ import { Bg, PauseBtn, Click } from "./assets";
 import { Rectangle } from "./Rectangle";
 import { GameOverScreen, LogoScreen, PauseScreen, WinScreen } from "./Postings";
 import type { FederatedPointerEvent } from "pixi.js";
+import { Circle } from "./Circle";
+import { mod } from "./utils";
+import { useWindowEventListener } from "./useWindowEventListener";
 
 export const GameC = ({ game }: { game: Game }) => {
+	useWindowEventListener("keydown", (event) => {
+		switch (event.code) {
+			case "ArrowLeft":
+				game.moveLeft(true);
+				break;
+			case "ArrowRight":
+				game.moveRight(true);
+				break;
+		}
+	});
+	useWindowEventListener("keyup", (event) => {
+		switch (event.code) {
+			case "ArrowLeft":
+				game.moveLeft(false);
+				break;
+			case "ArrowRight":
+				game.moveRight(false);
+				break;
+		}
+	});
+
 	if (game.state == "logo") {
 		return <LogoScreen game={game} />;
 	}
 
 	return (
 		<container>
+			<Background game={game} />
+			<Player game={game} />
+			<PauseButton game={game} />
+			{game.state == "gameover" && <GameOverScreen game={game} />}
+			{game.state == "win" && <WinScreen game={game} />}
+			{game.isPaused && <PauseScreen game={game} />}
+		</container>
+	);
+};
+
+const Background = ({ game }: { game: Game }) => {
+	const y = mod(-game.depth, 1920);
+
+	return (
+		<>
 			<sprite
 				texture={Bg}
-				x={0}
-				y={0}
+				angle={90}
+				x={1080}
+				y={y}
 				eventMode="static"
 				onPointerDown={(e: FederatedPointerEvent) => {
 					const { x, y } = e.global;
 					game.tap({ x, y });
 				}}
 			/>
-			<PauseButton game={game} />
-			{game.state == "gameover" && <GameOverScreen game={game} />}
-			{game.state == "win" && <WinScreen game={game} />}
-			{game.isPaused && <PauseScreen game={game} />}
+			<sprite
+				texture={Bg}
+				angle={90}
+				x={1080}
+				y={y - 1920}
+				eventMode="static"
+				onPointerDown={(e: FederatedPointerEvent) => {
+					const { x, y } = e.global;
+					game.tap({ x, y });
+				}}
+			/>
+		</>
+	);
+};
+
+const Player = ({ game }: { game: Game }) => {
+	return (
+		<container x={1080 / 2 + game.posX} y={game.posY - game.depth}>
+			<Circle radius={30} draw={() => {}} />
 		</container>
 	);
 };

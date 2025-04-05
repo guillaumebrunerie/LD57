@@ -13,8 +13,8 @@ const root = createRoot(document.getElementById("container") as Element);
 root.render(
 	<StrictMode>
 		<Application
-			width={1920}
-			height={1080}
+			width={1080}
+			height={1920}
 			backgroundColor={0x2d293f}
 			useBackBuffer
 		>

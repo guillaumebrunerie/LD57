@@ -5,7 +5,7 @@ import { useWindowEventListener } from "./useWindowEventListener";
 
 export const AppC = () => {
 	useWindowEventListener("keydown", (event) => {
-		if (!import.meta.env.DEV) {
+		if (!import.meta.env.DEV || !event.ctrlKey) {
 			return;
 		}
 		switch (event.code) {
