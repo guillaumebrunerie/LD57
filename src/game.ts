@@ -207,8 +207,8 @@ class ObstacleManager {
 	}
 
 	nextLevel() {
-		this.minSpacingY *= 0.6;
-		this.maxSpacingY *= 0.6;
+		this.minSpacingY *= 0.8;
+		this.maxSpacingY *= 0.8;
 
 		this.minSpacingY = Math.max(this.minSpacingY, 100);
 		this.maxSpacingY = Math.max(this.maxSpacingY, 200);
@@ -244,8 +244,8 @@ class EnemyManager {
 	}
 
 	nextLevel() {
-		this.minSpacingY *= 0.6;
-		this.maxSpacingY *= 0.6;
+		this.minSpacingY *= 0.7;
+		this.maxSpacingY *= 0.7;
 
 		this.minSpacingY = Math.max(this.minSpacingY, 100);
 		this.maxSpacingY = Math.max(this.maxSpacingY, 200);
