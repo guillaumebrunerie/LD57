@@ -25,7 +25,7 @@ import {
 	PauseScreen,
 	// WinScreen,
 } from "./Postings";
-import type { FederatedPointerEvent } from "pixi.js";
+import { Polygon, type FederatedPointerEvent } from "pixi.js";
 import { mod } from "./utils";
 import { useWindowEventListener } from "./useWindowEventListener";
 import type { Obstacle } from "./obstacle";
@@ -34,6 +34,7 @@ import type { Enemy } from "./enemy";
 import { CustomText } from "./CustomText";
 import { PolygonShape } from "./Polygon";
 import { useOnKeyDown } from "./useOnKeyDown";
+import { useRef } from "react";
 // import { crossfadeFilter } from "./crossfade";
 
 export const GameC = ({ game }: { game: Game }) => {
@@ -58,6 +59,8 @@ export const GameC = ({ game }: { game: Game }) => {
 		}
 	});
 
+	const ref = useRef(null);
+
 	if (game.state == "startScreen") {
 		return <StartScreen game={game} />;
 	}
@@ -66,13 +69,38 @@ export const GameC = ({ game }: { game: Game }) => {
 		return <PolygonEditor game={game} />;
 	}
 
+	let mask = undefined;
+	if (game.depth >= game.levelDepth * game.levels - 2000) {
+		mask = new Polygon([
+			0,
+			0,
+			1080,
+			0,
+			1080,
+			game.levelDepth * game.levels - 30,
+			1080 - 75,
+			game.levelDepth * game.levels,
+			1080 - 150,
+			game.levelDepth * game.levels - 30,
+			150,
+			game.levelDepth * game.levels - 30,
+			75,
+			game.levelDepth * game.levels,
+			0,
+			game.levelDepth * game.levels - 30,
+		]);
+	}
+
 	return (
 		<container>
 			<container y={-game.depth}>
 				<Background game={game} />
-				{game.obstaclesManager.obstacles.map((obstacle) => (
-					<ObstacleC key={obstacle.id} obstacle={obstacle} />
-				))}
+				{mask && <PolygonShape polygon={mask} myRef={ref} />}
+				<container mask={mask ? ref.current : undefined}>
+					{game.obstaclesManager.obstacles.map((obstacle) => (
+						<ObstacleC key={obstacle.id} obstacle={obstacle} />
+					))}
+				</container>
 				{game.enemiesManager.enemies.map((enemy) => (
 					<EnemyC key={enemy.id} enemy={enemy} />
 				))}
@@ -161,8 +189,8 @@ const End = ({ game }: { game: Game }) => {
 			<sprite
 				texture={T_Devil}
 				anchor={{ x: 0.5, y: 1 }}
-				x={1080 / 2}
-				y={game.levelDepth * game.levels + 1920 - 150}
+				x={750}
+				y={game.levelDepth * game.levels + 1920 - 450}
 			/>
 		</container>
 	);

@@ -33,21 +33,20 @@ export class Player {
 	}
 
 	tick(delta: number) {
-		const canMove = this.game.level <= this.game.levels;
-		if (this.movingLeft && canMove) {
+		if (this.game.level > this.game.levels) {
+			this.targetX = 250;
+			this.movingLeft = false;
+			this.movingRight = false;
+		}
+		if (this.movingLeft) {
 			this.posX -= this.sideSpeed * delta;
 			this.lookingLeft = true;
 		}
-		if (this.movingRight && canMove) {
+		if (this.movingRight) {
 			this.posX += this.sideSpeed * delta;
 			this.lookingLeft = false;
 		}
-		if (
-			!this.movingLeft &&
-			!this.movingRight &&
-			this.targetX !== null &&
-			canMove
-		) {
+		if (!this.movingLeft && !this.movingRight && this.targetX !== null) {
 			const speedFraction = Math.max(
 				-1,
 				Math.min(
@@ -64,7 +63,7 @@ export class Player {
 		this.posY += this.game.cameraSpeed * delta;
 		this.posY = Math.min(
 			this.posY,
-			this.game.levelDepth * this.game.levels + 1920 - 500,
+			this.game.levelDepth * this.game.levels + 1920 - 1200,
 		);
 
 		this.invincibleTimeout -= delta;

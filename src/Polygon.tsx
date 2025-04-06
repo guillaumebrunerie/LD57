@@ -1,7 +1,8 @@
-import type { Polygon } from "pixi.js";
+import type { Graphics, Polygon } from "pixi.js";
 import { type ComponentProps, useCallback } from "react";
 
 type PolygonProps = Omit<ComponentProps<"graphics">, "draw"> & {
+	myRef?: React.Ref<Graphics>;
 	polygon: Polygon;
 	alpha?: number;
 	y?: number;
@@ -10,6 +11,7 @@ type PolygonProps = Omit<ComponentProps<"graphics">, "draw"> & {
 type Draw = ComponentProps<"graphics">["draw"];
 
 export const PolygonShape = ({
+	myRef,
 	polygon,
 	alpha = 0.0,
 	...rest
@@ -23,5 +25,5 @@ export const PolygonShape = ({
 		[polygon, alpha],
 	);
 
-	return <graphics {...rest} draw={draw} />;
+	return <graphics {...rest} ref={myRef} draw={draw} />;
 };
