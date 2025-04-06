@@ -5,6 +5,7 @@ import {
 	MusicMenu,
 	StartLevel,
 } from "./assets";
+import { Obstacle } from "./obstacle";
 import { type Point } from "./utils";
 
 export type PowerUp = "shockwave" | "push" | "bomb" | "hologram" | "freeze";
@@ -26,10 +27,14 @@ export class Game {
 	posY = 150;
 	depth = 0;
 	cameraSpeed = 500;
-	sideSpeed = 500;
+	sideSpeed = 700;
 
 	movingLeft = false;
 	movingRight = false;
+
+	boundX = 450;
+
+	obstacles: Obstacle[] = [];
 
 	constructor() {}
 
@@ -53,6 +58,7 @@ export class Game {
 		if (this.movingRight) {
 			this.posX += this.sideSpeed * delta;
 		}
+		this.posX = Math.max(-this.boundX, Math.min(this.posX, this.boundX));
 	}
 
 	moveLeft(activate: boolean) {
@@ -63,10 +69,28 @@ export class Game {
 		this.movingRight = activate;
 	}
 
+	initLevel() {
+		const boundsX = 250;
+		const minSpacingY = 250;
+		const maxSpacingY = 500;
+		let y = 1000;
+		for (let i = 0; i < 40; i++) {
+			y += Math.random() * (maxSpacingY - minSpacingY) + minSpacingY;
+			this.obstacles.push(
+				new Obstacle(
+					(Math.random() - 0.5) * 2 * boundsX,
+					y,
+					Math.random() < 0.5 ? 0xff0000 : 0x0000ff,
+				),
+			);
+		}
+	}
+
 	skipLogo() {
 		this.state = "levelSelect";
 		MusicMenu.singleInstance = true;
 		void MusicMenu.play({ loop: true, volume: 0.5 });
+		this.initLevel();
 	}
 
 	reset() {
@@ -90,6 +114,8 @@ export class Game {
 			Music.singleInstance = true;
 			void Music.play({ loop: true, volume: 0.3 });
 		}, 700);
+
+		this.initLevel();
 	}
 
 	pause() {

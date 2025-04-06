@@ -6,6 +6,7 @@ import type { FederatedPointerEvent } from "pixi.js";
 import { Circle } from "./Circle";
 import { mod } from "./utils";
 import { useWindowEventListener } from "./useWindowEventListener";
+import type { Obstacle } from "./obstacle";
 
 export const GameC = ({ game }: { game: Game }) => {
 	useWindowEventListener("keydown", (event) => {
@@ -37,6 +38,9 @@ export const GameC = ({ game }: { game: Game }) => {
 		<container>
 			<Background game={game} />
 			<Player game={game} />
+			{game.obstacles.map((obstacle, i) => (
+				<ObstacleC key={i} game={game} obstacle={obstacle} />
+			))}
 			<PauseButton game={game} />
 			{game.state == "gameover" && <GameOverScreen game={game} />}
 			{game.state == "win" && <WinScreen game={game} />}
@@ -80,6 +84,21 @@ const Player = ({ game }: { game: Game }) => {
 	return (
 		<container x={1080 / 2 + game.posX} y={game.posY - game.depth}>
 			<Circle radius={30} draw={() => {}} />
+		</container>
+	);
+};
+
+const ObstacleC = ({ game, obstacle }: { game: Game; obstacle: Obstacle }) => {
+	return (
+		<container x={1080 / 2 + obstacle.x} y={obstacle.y - game.depth}>
+			<Rectangle
+				x={-obstacle.width / 2}
+				y={-obstacle.height / 2}
+				width={obstacle.width}
+				height={obstacle.height}
+				color={obstacle.color}
+				draw={() => {}}
+			/>
 		</container>
 	);
 };
