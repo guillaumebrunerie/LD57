@@ -67,8 +67,11 @@ export class Game {
 			this.nextLevel();
 		}
 
-		if (this.obstaclesManager.checkCollision(this.player)) {
-			this.gameOver();
+		if (
+			this.obstaclesManager.checkCollision(this.player) &&
+			this.player.invincibleTimeout == 0
+		) {
+			this.player.hit();
 		}
 	}
 
@@ -162,15 +165,6 @@ export class Game {
 		if (this.state == "game") {
 			this.resume();
 		}
-	}
-
-	gameOver() {
-		console.log("GAME OVER");
-		// if (this.state == "gameover") {
-		// 	return;
-		// }
-		// void LoseGame.play({ volume: 0.5 });
-		// this.state = "gameover";
 	}
 
 	// win() {

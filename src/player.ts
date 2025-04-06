@@ -25,6 +25,9 @@ export class Player {
 
 	tapActionY: "up" | "down" | null = null;
 
+	lives = 3;
+	invincibleTimeout = 0;
+
 	constructor(game: Game) {
 		this.game = game;
 	}
@@ -53,6 +56,16 @@ export class Player {
 		}
 		this.posX = Math.max(minX, Math.min(this.posX, maxX));
 		this.posY += this.game.cameraSpeed * delta;
+
+		this.invincibleTimeout -= delta;
+		if (this.invincibleTimeout < 0) {
+			this.invincibleTimeout = 0;
+		}
+	}
+
+	hit() {
+		this.lives--;
+		this.invincibleTimeout = 1.2;
 	}
 
 	moveLeft(activate: boolean) {

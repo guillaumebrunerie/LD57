@@ -12,6 +12,8 @@ import {
 	T_Bg_Level_09,
 	T_Cupid,
 	T_EnemyFlying_Level1_01,
+	T_Heart_Off,
+	T_Heart_On,
 	T_PauseBtn,
 } from "./assets";
 import { Rectangle } from "./Rectangle";
@@ -22,7 +24,6 @@ import {
 	// WinScreen,
 } from "./Postings";
 import type { FederatedPointerEvent } from "pixi.js";
-import { Circle } from "./Circle";
 import { mod } from "./utils";
 import { useWindowEventListener } from "./useWindowEventListener";
 import type { Obstacle } from "./obstacle";
@@ -75,6 +76,7 @@ export const GameC = ({ game }: { game: Game }) => {
 				))}
 				<PlayerC player={game.player} />
 			</container>
+			<Hearts player={game.player} />
 			<Timer game={game} />
 			<PauseButton game={game} />
 			{/* {game.state == "gameover" && <GameOverScreen game={game} />} */}
@@ -154,22 +156,39 @@ const Timer = ({ game }: { game: Game }) => {
 	);
 };
 
+const heartDeltaX = 100;
+
+const Hearts = ({ player }: { player: Player }) => {
+	return (
+		<container x={1080 / 2} y={55}>
+			<sprite
+				texture={player.lives >= 1 ? T_Heart_On : T_Heart_Off}
+				anchor={0.5}
+				x={-heartDeltaX}
+			/>
+			<sprite
+				texture={player.lives >= 2 ? T_Heart_On : T_Heart_Off}
+				anchor={0.5}
+				x={0}
+			/>
+			<sprite
+				texture={player.lives >= 3 ? T_Heart_On : T_Heart_Off}
+				anchor={0.5}
+				x={heartDeltaX}
+			/>
+		</container>
+	);
+};
+
 const PlayerC = ({ player }: { player: Player }) => {
 	return (
 		<container x={player.posX} y={player.posY}>
 			<sprite
 				texture={T_Cupid}
 				anchor={0.5}
+				alpha={player.invincibleTimeout > 0 ? 0.4 : 1}
 				scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
 			/>
-			{player.game.obstaclesManager.checkCollision(player) && (
-				<Circle
-					radius={30}
-					alpha={0.4}
-					color={0xff0000}
-					draw={() => {}}
-				/>
-			)}
 		</container>
 	);
 };
