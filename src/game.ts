@@ -2,6 +2,9 @@ import {
 	// S_CompleteLevel,
 	// LoseGame,
 	S_Music,
+	S_MusicIntensity1,
+	S_MusicIntensity2,
+	S_MusicIntensity3,
 	// S_StartLevel,
 } from "./assets";
 import { Enemy } from "./enemy";
@@ -9,6 +12,7 @@ import { ObstacleManager as ObstaclesManager } from "./obstaclesManager";
 import { Player } from "./player";
 import { type Point } from "./utils";
 import { PolygonEditor } from "./polygonEditor";
+import { fadeVolume } from "./sound";
 
 export class Game {
 	lt = 0;
@@ -30,9 +34,18 @@ export class Game {
 	enemiesManager = new EnemiesManager(this);
 
 	level = 0;
-	levelDepth = 5000;
+	levelDepth = 7500;
 
 	constructor() {}
+
+	init() {
+		S_MusicIntensity1.singleInstance = true;
+		S_MusicIntensity2.singleInstance = true;
+		S_MusicIntensity3.singleInstance = true;
+		void S_MusicIntensity1.play({ loop: true, volume: 0.1 });
+		void S_MusicIntensity2.play({ loop: true, volume: 0.1 });
+		void S_MusicIntensity3.play({ loop: true, volume: 0.1 });
+	}
 
 	tick(delta: number) {
 		if (this.isPaused) {
@@ -51,10 +64,7 @@ export class Game {
 		this.enemiesManager.tick(delta);
 		this.obstaclesManager.tick(delta);
 		if (this.depth > this.levelDepth * this.level) {
-			this.level++;
-			this.obstaclesManager.nextLevel();
-			this.enemiesManager.nextLevel();
-			this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;
+			this.nextLevel();
 		}
 
 		if (this.obstaclesManager.checkCollision(this.player)) {
@@ -62,10 +72,60 @@ export class Game {
 		}
 	}
 
+	nextLevel() {
+		this.level++;
+		this.obstaclesManager.nextLevel();
+		this.enemiesManager.nextLevel();
+		this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;
+		S_MusicIntensity1.singleInstance = true;
+		S_MusicIntensity2.singleInstance = true;
+		S_MusicIntensity3.singleInstance = true;
+
+		const musicVolumes = [
+			[2, 0, 0],
+			[1.3, 0.7, 0],
+			[0.7, 1.3, 0],
+			[0, 2, 0],
+			[0, 1.6, 0.4],
+			[0, 1.2, 0.8],
+			[0, 0.8, 1.2],
+			[0, 0.4, 1.6],
+			[0, 0, 2],
+		];
+
+		const minVolume = 0.1;
+
+		fadeVolume(
+			"S_MusicIntensity1",
+			S_MusicIntensity1,
+			musicVolumes[this.level - 1][0] + minVolume,
+			1000,
+		);
+		fadeVolume(
+			"S_MusicIntensity2",
+			S_MusicIntensity2,
+			musicVolumes[this.level - 1][1] + minVolume,
+			1000,
+		);
+		fadeVolume(
+			"S_MusicIntensity3",
+			S_MusicIntensity3,
+			musicVolumes[this.level - 1][2] + minVolume,
+			1000,
+		);
+	}
+
 	start() {
 		this.state = "game";
-		S_Music.singleInstance = true;
-		void S_Music.play({ loop: true, volume: 0.5 });
+		S_MusicIntensity1.singleInstance = true;
+		S_MusicIntensity2.singleInstance = true;
+		S_MusicIntensity3.singleInstance = true;
+		void S_MusicIntensity1.play({ loop: true, volume: 0.1 });
+		void S_MusicIntensity2.play({ loop: true, volume: 0.1 });
+		void S_MusicIntensity3.play({ loop: true, volume: 0.1 });
+		S_MusicIntensity1.volume = 0.1;
+		S_MusicIntensity2.volume = 0.1;
+		S_MusicIntensity3.volume = 0.1;
 		this.lt = 0;
 	}
 

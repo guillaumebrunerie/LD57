@@ -1,4 +1,4 @@
-/** Generated on Sun Apr  6 18:50:23 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Sun Apr  6 19:18:34 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -42,6 +42,9 @@ import Click_ from "../audio/Click.mp3?sound";
 import CompleteLevel_ from "../audio/CompleteLevel.mp3?sound";
 import LoseGame_ from "../audio/LoseGame.mp3?sound";
 import Music_ from "../audio/Music.mp3?sound";
+import MusicIntensity1_ from "../audio/MusicIntensity1.mp3?sound";
+import MusicIntensity2_ from "../audio/MusicIntensity2.mp3?sound";
+import MusicIntensity3_ from "../audio/MusicIntensity3.mp3?sound";
 import MusicMenu_ from "../audio/MusicMenu.mp3?sound";
 import StartLevel_ from "../audio/StartLevel.mp3?sound";
 
@@ -86,6 +89,9 @@ export const [
 	S_CompleteLevel,
 	S_LoseGame,
 	S_Music,
+	S_MusicIntensity1,
+	S_MusicIntensity2,
+	S_MusicIntensity3,
 	S_MusicMenu,
 	S_StartLevel,
 	F_Comix_Loud,
@@ -127,6 +133,9 @@ export const [
 	CompleteLevel_,
 	LoseGame_,
 	Music_,
+	MusicIntensity1_,
+	MusicIntensity2_,
+	MusicIntensity3_,
 	MusicMenu_,
 	StartLevel_,
 	Comix_Loud_,
