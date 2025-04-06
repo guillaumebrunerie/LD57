@@ -23,6 +23,8 @@ import type { Obstacle } from "./obstacle";
 import type { Player } from "./player";
 import type { Enemy } from "./enemy";
 import { CustomText } from "./CustomText";
+import { PolygonShape } from "./Polygon";
+import { useOnKeyDown } from "./useOnKeyDown";
 // import { crossfadeFilter } from "./crossfade";
 
 export const GameC = ({ game }: { game: Game }) => {
@@ -49,6 +51,10 @@ export const GameC = ({ game }: { game: Game }) => {
 
 	if (game.state == "logo") {
 		return <LogoScreen game={game} />;
+	}
+
+	if (game.state == "polygonEditor") {
+		return <PolygonEditor game={game} />;
 	}
 
 	return (
@@ -227,6 +233,38 @@ const PauseButton = ({ game }: { game: Game }) => {
 				draw={() => {}}
 			/>
 			<sprite texture={PauseBtn} anchor={0.5} />
+		</container>
+	);
+};
+
+const PolygonEditor = ({ game }: { game: Game }) => {
+	useOnKeyDown("Enter", async () => {
+		await game.polygonEditor.save();
+	});
+	useOnKeyDown("ArrowRight", () => {
+		game.polygonEditor.switch(1);
+	});
+	useOnKeyDown("ArrowLeft", () => {
+		game.polygonEditor.switch(-1);
+	});
+
+	return (
+		<container>
+			<sprite
+				texture={getBg(1)}
+				eventMode="static"
+				onPointerDown={(e: FederatedPointerEvent) => {
+					const { x, y } = e.global;
+					game.polygonEditor.click({ x: x - 200, y: y - 200 });
+				}}
+			/>
+			<container x={200} y={200}>
+				<sprite texture={game.polygonEditor.obstacle.texture} />
+				<PolygonShape
+					polygon={game.polygonEditor.obstacle.polygon}
+					alpha={0.5}
+				/>
+			</container>
 		</container>
 	);
 };

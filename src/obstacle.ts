@@ -1,9 +1,10 @@
-import type { Texture } from "pixi.js";
+import type { Polygon, Texture } from "pixi.js";
 import type { Game } from "./game";
 
 export type ObstacleData = {
 	type: "wall" | "center";
 	texture: Texture;
+	polygon: Polygon;
 };
 
 export class Obstacle {

@@ -9,6 +9,7 @@ import { Enemy } from "./enemy";
 import { ObstacleManager } from "./obstaclesManager";
 import { Player } from "./player";
 import { type Point } from "./utils";
+import { PolygonEditor } from "./polygonEditor";
 
 export class Game {
 	lt = 0;
@@ -21,18 +22,22 @@ export class Game {
 		| "gameStarting"
 		| "game"
 		| "gameover"
-		| "win" = "logo";
+		| "win"
+		| "polygonEditor" = "logo";
+	polygonEditor = new PolygonEditor();
 
 	depth = 0;
-	cameraSpeed = 700;
+	baseSpeed = 600;
+	speedIncrease = 40;
+	cameraSpeed = this.baseSpeed;
 
 	boundX = 450;
 
 	yBgOffset = Math.random();
 
+	player = new Player(this);
 	obstacleManager = new ObstacleManager(this);
 	enemyManager = new EnemyManager(this);
-	player = new Player(this);
 
 	level = 0;
 	levelDepth = 5000;
@@ -59,6 +64,7 @@ export class Game {
 			this.level++;
 			this.obstacleManager.nextLevel();
 			this.enemyManager.nextLevel();
+			this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;
 		}
 	}
 

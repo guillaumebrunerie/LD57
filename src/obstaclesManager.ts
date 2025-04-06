@@ -1,3 +1,4 @@
+import { Polygon } from "pixi.js";
 import {
 	WallSpike_Level1_01,
 	WallSpike_Level1_02,
@@ -10,14 +11,88 @@ import { Obstacle, type ObstacleData } from "./obstacle";
 const possibleObstacles: ObstacleData[][] = [
 	// Level 1
 	[
-		{ type: "wall", texture: WallSpike_Level1_01 },
-		{ type: "wall", texture: WallSpike_Level1_02 },
-		{ type: "wall", texture: WallSpike_Level1_03 },
-		{ type: "wall", texture: WallSpike_Level1_04 },
+		{
+			type: "wall",
+			texture: WallSpike_Level1_01,
+			polygon: new Polygon(
+				46.94,
+				94.84,
+				304.48,
+				14.91,
+				187.25,
+				194.3,
+				270.73,
+				238.7,
+				46.94,
+				393.23,
+			),
+		},
+		{
+			type: "wall",
+			texture: WallSpike_Level1_02,
+			polygon: new Polygon(
+				29.18,
+				14.91,
+				128.64,
+				22.02,
+				272.51,
+				87.73,
+				418.15,
+				73.52,
+				601.09,
+				125.03,
+				665.03,
+				126.81,
+				572.67,
+				176.54,
+				501.63,
+				199.63,
+				380.85,
+				172.99,
+				281.39,
+				235.15,
+				178.37,
+				235.15,
+				64.7,
+				300.87,
+				48.71,
+				295.54,
+			),
+		},
+		{
+			type: "wall",
+			texture: WallSpike_Level1_03,
+			polygon: new Polygon(
+				20.3,
+				6.03,
+				366.64,
+				14.91,
+				332.9,
+				78.85,
+				206.79,
+				116.15,
+				22.07,
+				160.56,
+			),
+		},
+		{
+			type: "wall",
+			texture: WallSpike_Level1_04,
+			polygon: new Polygon(
+				50.49,
+				6.03,
+				240.54,
+				94.84,
+				224.55,
+				146.35,
+				25.62,
+				307.97,
+			),
+		},
 	],
 ];
 
-const getPossibleObstacles = (_level: number) => {
+export const getPossibleObstacles = (_level: number) => {
 	return possibleObstacles[0];
 };
 
