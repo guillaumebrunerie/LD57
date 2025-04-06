@@ -7,7 +7,6 @@ import {
 	S_MusicIntensity3,
 	// S_StartLevel,
 } from "./assets";
-import { Enemy } from "./enemy";
 import { ObstacleManager as ObstaclesManager } from "./obstaclesManager";
 import { Player } from "./player";
 import { type Point } from "./utils";
@@ -31,7 +30,6 @@ export class Game {
 
 	player = new Player(this);
 	obstaclesManager = new ObstaclesManager(this);
-	enemiesManager = new EnemiesManager(this);
 
 	level = 0;
 	levelDepth = 7500;
@@ -71,7 +69,6 @@ export class Game {
 
 		this.player.tick(delta);
 
-		this.enemiesManager.tick(delta);
 		this.obstaclesManager.tick(delta);
 
 		if (
@@ -86,7 +83,6 @@ export class Game {
 	nextLevel() {
 		this.level++;
 		this.obstaclesManager.nextLevel();
-		this.enemiesManager.nextLevel();
 		this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;
 		S_MusicIntensity1.singleInstance = true;
 		S_MusicIntensity2.singleInstance = true;
@@ -195,42 +191,5 @@ export class Game {
 				this.player.onPointerUp();
 				break;
 		}
-	}
-}
-
-class EnemiesManager {
-	constructor(public game: Game) {}
-
-	enemies: Enemy[] = [];
-
-	lastY = 2000;
-
-	minSpacingY = 2000;
-	maxSpacingY = 3000;
-
-	tick(delta: number) {
-		if (this.enemies.some((e) => e.isOutOfBounds())) {
-			this.enemies = this.enemies.filter((e) => !e.isOutOfBounds());
-		}
-
-		while (this.lastY <= this.game.depth + 1920) {
-			this.lastY +=
-				Math.random() * (this.maxSpacingY - this.minSpacingY) +
-				this.minSpacingY;
-			const x = (Math.random() * 2 - 1) * 450 + 1080 / 2;
-			this.enemies.push(new Enemy(this.game, x, this.lastY));
-		}
-
-		this.enemies.forEach((e) => {
-			e.tick(delta);
-		});
-	}
-
-	nextLevel() {
-		this.minSpacingY *= 0.7;
-		this.maxSpacingY *= 0.7;
-
-		this.minSpacingY = Math.max(this.minSpacingY, 100);
-		this.maxSpacingY = Math.max(this.maxSpacingY, 200);
 	}
 }

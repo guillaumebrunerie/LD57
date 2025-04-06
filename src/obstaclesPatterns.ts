@@ -3,6 +3,8 @@ type PatternData = {
 	y: [number, number];
 	flipped: boolean;
 	index: number;
+	frequency?: number;
+	range?: [number, number];
 };
 
 export type Pattern = { side: "left" | "right"; data: PatternData[] };
@@ -38,6 +40,20 @@ const rock = (
 	index,
 });
 
+const enemy = (
+	index: number,
+	frequency: number,
+	range: [number, number],
+	y: number | [number, number] = 0,
+): PatternData => ({
+	x: [0, 0],
+	y: typeof y == "number" ? [y, y] : y,
+	flipped: false,
+	index,
+	frequency,
+	range,
+});
+
 type LevelPattern = {
 	spacing: [number, number];
 	data: Pattern[];
@@ -62,6 +78,8 @@ export const obstaclesPatternsData: LevelPattern[] = [
 	{
 		spacing: [700, 1100],
 		data: [
+			{ side: "right", data: [enemy(8, 1, [250, 830], [-100, 100])] },
+			{ side: "left", data: [enemy(8, 1, [250, 830], [-100, 100])] },
 			{ side: "right", data: [spikeLeft(2)] },
 			{ side: "left", data: [spikeRight(2)] },
 			{ side: "left", data: [rock(5, [50, 200])] },
@@ -76,6 +94,8 @@ export const obstaclesPatternsData: LevelPattern[] = [
 	{
 		spacing: [700, 1100],
 		data: [
+			{ side: "right", data: [enemy(8, 1, [250, 830], [-100, 100])] },
+			{ side: "left", data: [enemy(8, 1, [250, 830], [-100, 100])] },
 			{ side: "left", data: [spikeLeft(1), spikeRight(2, [50, 100])] },
 			{ side: "right", data: [spikeRight(3), spikeLeft(2, [50, 100])] },
 			{ side: "left", data: [spikeLeft(1), spikeRight(2, [50, 100])] },
@@ -88,20 +108,54 @@ export const obstaclesPatternsData: LevelPattern[] = [
 			{ side: "right", data: [rock(7, [-200, 50])] },
 		],
 	},
+	// Level 4
+	{
+		spacing: [600, 1000],
+		data: [
+			{
+				side: "right",
+				data: [spikeLeft(1), enemy(8, 1, [400, 850], [-100, 100])],
+			},
+			{
+				side: "right",
+				data: [spikeLeft(2), enemy(8, 2, [500, 850], [150, 200])],
+			},
+			{
+				side: "right",
+				data: [spikeLeft(3), enemy(8, 1, [500, 850], [-100, 100])],
+			},
+			{
+				side: "right",
+				data: [spikeLeft(4), enemy(8, 1, [350, 850], [-100, 100])],
+			},
+			{
+				side: "left",
+				data: [spikeRight(1), enemy(8, 1, [680, 230], [-100, 100])],
+			},
+			{
+				side: "left",
+				data: [spikeRight(2), enemy(8, 2, [580, 230], [150, 200])],
+			},
+			{
+				side: "left",
+				data: [spikeRight(3), enemy(8, 1, [580, 230], [-100, 100])],
+			},
+			{
+				side: "left",
+				data: [spikeRight(4), enemy(8, 1, [730, 230], [-100, 100])],
+			},
+		],
+	},
 ];
 
-obstaclesPatternsData[3] = {
-	...obstaclesPatternsData[2],
-	spacing: [600, 1000],
-};
 obstaclesPatternsData[4] = {
-	...obstaclesPatternsData[2],
+	...obstaclesPatternsData[3],
 	spacing: [600, 1000],
 };
-obstaclesPatternsData[5] = { ...obstaclesPatternsData[2], spacing: [500, 900] };
-obstaclesPatternsData[6] = { ...obstaclesPatternsData[2], spacing: [500, 900] };
-obstaclesPatternsData[7] = { ...obstaclesPatternsData[2], spacing: [400, 800] };
-obstaclesPatternsData[8] = { ...obstaclesPatternsData[2], spacing: [300, 700] };
+obstaclesPatternsData[5] = { ...obstaclesPatternsData[3], spacing: [500, 900] };
+obstaclesPatternsData[6] = { ...obstaclesPatternsData[3], spacing: [500, 900] };
+obstaclesPatternsData[7] = { ...obstaclesPatternsData[3], spacing: [400, 800] };
+obstaclesPatternsData[8] = { ...obstaclesPatternsData[3], spacing: [300, 700] };
 
 const otherSide = {
 	left: "right",

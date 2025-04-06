@@ -1,9 +1,11 @@
-/** Generated on Sun Apr  6 23:22:20 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Mon Apr  7 00:31:54 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
 
 /** Textures */
+import Arrow_Off_ from "../gfx/Arrow_Off.png?texture";
+import Arrow_On_ from "../gfx/Arrow_On.png?texture";
 import Bg_Level_01_ from "../gfx/Bg_Level_01.jpg?texture";
 import Bg_Level_02_ from "../gfx/Bg_Level_02.jpg?texture";
 import Bg_Level_03_ from "../gfx/Bg_Level_03.jpg?texture";
@@ -25,6 +27,7 @@ import CupidArrow_ from "../gfx/CupidArrow.png?texture";
 import CupidArrow_Blurred_ from "../gfx/CupidArrow_Blurred.png?texture";
 import Devil_ from "../gfx/Devil.png?texture";
 import EnemyFlying_Level1_01_ from "../gfx/EnemyFlying_Level1_01.png?texture";
+import EnemyStill_Level1_01_ from "../gfx/EnemyStill_Level1_01.png?texture";
 import Heart_Off_ from "../gfx/Heart_Off.png?texture";
 import Heart_On_ from "../gfx/Heart_On.png?texture";
 import Loading_ from "../gfx/Loading.jpg?texture";
@@ -60,6 +63,8 @@ import Heroes_Legend_ from "../fonts/Heroes_Legend.ttf?font";
 import Laffayette_Comic_Pro_ from "../fonts/Laffayette_Comic_Pro.ttf?font";
 
 export const [
+	T_Arrow_Off,
+	T_Arrow_On,
 	T_Bg_Level_01,
 	T_Bg_Level_02,
 	T_Bg_Level_03,
@@ -81,6 +86,7 @@ export const [
 	T_CupidArrow_Blurred,
 	T_Devil,
 	T_EnemyFlying_Level1_01,
+	T_EnemyStill_Level1_01,
 	T_Heart_Off,
 	T_Heart_On,
 	T_Loading,
@@ -109,6 +115,8 @@ export const [
 	F_Heroes_Legend,
 	F_Laffayette_Comic_Pro,
 ] = await Promise.all([
+	Arrow_Off_,
+	Arrow_On_,
 	Bg_Level_01_,
 	Bg_Level_02_,
 	Bg_Level_03_,
@@ -130,6 +138,7 @@ export const [
 	CupidArrow_Blurred_,
 	Devil_,
 	EnemyFlying_Level1_01_,
+	EnemyStill_Level1_01_,
 	Heart_Off_,
 	Heart_On_,
 	Loading_,

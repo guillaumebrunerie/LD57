@@ -1,6 +1,8 @@
 import type { Game } from "./game";
 import {
 	S_Click,
+	T_Arrow_Off,
+	T_Arrow_On,
 	T_Bg_Level_01,
 	T_Bg_Level_02,
 	T_Bg_Level_03,
@@ -13,7 +15,6 @@ import {
 	T_Bg_Level_09_End,
 	T_Cupid,
 	T_Devil,
-	T_EnemyFlying_Level1_01,
 	T_Heart_Off,
 	T_Heart_On,
 	T_PauseBtn,
@@ -30,7 +31,6 @@ import { mod } from "./utils";
 import { useWindowEventListener } from "./useWindowEventListener";
 import type { Obstacle } from "./obstacle";
 import type { Player } from "./player";
-import type { Enemy } from "./enemy";
 import { CustomText } from "./CustomText";
 import { PolygonShape } from "./Polygon";
 import { useOnKeyDown } from "./useOnKeyDown";
@@ -101,12 +101,10 @@ export const GameC = ({ game }: { game: Game }) => {
 						<ObstacleC key={obstacle.id} obstacle={obstacle} />
 					))}
 				</container>
-				{game.enemiesManager.enemies.map((enemy) => (
-					<EnemyC key={enemy.id} enemy={enemy} />
-				))}
 				<PlayerC player={game.player} />
 			</container>
 			<Hearts player={game.player} />
+			<ArrowIndicators player={game.player} />
 			<Timer game={game} />
 			<PauseButton game={game} />
 			{/* {game.state == "gameover" && <GameOverScreen game={game} />} */}
@@ -206,11 +204,11 @@ const Timer = ({ game }: { game: Game }) => {
 	);
 };
 
-const heartDeltaX = 80;
+const heartDeltaX = 65;
 
 const Hearts = ({ player }: { player: Player }) => {
 	return (
-		<container x={1080 / 2} y={55}>
+		<container x={1080 / 2 - 120} y={55}>
 			<sprite
 				texture={player.lives >= 1 ? T_Heart_On : T_Heart_Off}
 				anchor={0.5}
@@ -225,6 +223,30 @@ const Hearts = ({ player }: { player: Player }) => {
 				texture={player.lives >= 3 ? T_Heart_On : T_Heart_Off}
 				anchor={0.5}
 				x={heartDeltaX}
+			/>
+		</container>
+	);
+};
+
+const arrowDeltaX = 60;
+
+const ArrowIndicators = ({ player }: { player: Player }) => {
+	return (
+		<container x={1080 / 2 + 120} y={55}>
+			<sprite
+				texture={player.lives >= 1 ? T_Arrow_On : T_Arrow_Off}
+				anchor={0.5}
+				x={-arrowDeltaX}
+			/>
+			<sprite
+				texture={player.lives >= 2 ? T_Arrow_On : T_Arrow_Off}
+				anchor={0.5}
+				x={0}
+			/>
+			<sprite
+				texture={player.lives >= 3 ? T_Arrow_On : T_Arrow_Off}
+				anchor={0.5}
+				x={arrowDeltaX}
 			/>
 		</container>
 	);
@@ -253,14 +275,6 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 		>
 			<sprite texture={obstacle.data.texture}></sprite>
 			<PolygonShape alpha={0} polygon={obstacle.polygon()} />
-		</container>
-	);
-};
-
-const EnemyC = ({ enemy }: { enemy: Enemy }) => {
-	return (
-		<container x={enemy.x} y={enemy.y} scale={{ x: enemy.scaleX, y: 1 }}>
-			<sprite anchor={0.5} texture={T_EnemyFlying_Level1_01} />
 		</container>
 	);
 };

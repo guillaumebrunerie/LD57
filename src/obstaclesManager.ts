@@ -29,7 +29,7 @@ export class ObstacleManager {
 
 	previousPatterns: Pattern[] = [];
 
-	tick(_delta: number) {
+	tick(delta: number) {
 		if (this.obstacles.some((o) => o.isOutOfBounds())) {
 			this.obstacles = this.obstacles.filter((o) => !o.isOutOfBounds());
 		}
@@ -87,6 +87,8 @@ export class ObstacleManager {
 						this.lastY + y,
 						patternData.flipped,
 						obstaclesData[this.game.level - 1][patternData.index],
+						patternData.frequency,
+						patternData.range,
 					),
 				);
 			}
@@ -96,6 +98,10 @@ export class ObstacleManager {
 		if (needSort) {
 			this.obstacles.sort((a, b) => a.z - b.z);
 		}
+
+		this.obstacles.forEach((e) => {
+			e.tick(delta);
+		});
 	}
 
 	nextLevel() {}
