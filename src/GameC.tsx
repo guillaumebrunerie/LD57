@@ -156,7 +156,7 @@ const Timer = ({ game }: { game: Game }) => {
 	);
 };
 
-const heartDeltaX = 100;
+const heartDeltaX = 80;
 
 const Hearts = ({ player }: { player: Player }) => {
 	return (
