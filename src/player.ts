@@ -82,5 +82,6 @@ export class Player {
 	onPointerUp() {
 		this.tapPos = null;
 		this.tapActionY = null;
+		this.targetX = null;
 	}
 }

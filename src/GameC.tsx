@@ -100,7 +100,7 @@ const getBg = (level: number) => {
 	}
 };
 
-// const f = crossfadeFilter(getBg(1), getBg(2));
+// const f = crossfadeFilter(getBg(4), getBg(6));
 
 const Background = ({ game }: { game: Game }) => {
 	const y = mod(-game.depth, 1920);
