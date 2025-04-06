@@ -47,7 +47,7 @@ export class Player {
 				),
 			);
 			this.posX += this.sideSpeed * speedFraction * delta;
-			if (Math.abs(speedFraction) > 0.1) {
+			if (Math.abs(speedFraction) > 0.5) {
 				this.lookingLeft = speedFraction < 0;
 			}
 		}
@@ -72,7 +72,7 @@ export class Player {
 		if (!this.tapPos) {
 			return;
 		}
-		this.targetX = pos.x - this.tapPos.x;
+		this.targetX = pos.x - this.tapPos.x + 1080 / 2;
 
 		// const yThreshold = 100;
 		// const yThresholdRevert = 50;
