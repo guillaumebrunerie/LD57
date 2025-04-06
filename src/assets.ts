@@ -1,4 +1,4 @@
-/** Generated on Sun Apr  6 19:18:34 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Sun Apr  6 20:16:18 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -22,6 +22,7 @@ import BtnOverTxt_ from "../gfx/BtnOverTxt.png?texture";
 import Cupid_ from "../gfx/Cupid.png?texture";
 import CupidArrow_ from "../gfx/CupidArrow.png?texture";
 import CupidArrow_Blurred_ from "../gfx/CupidArrow_Blurred.png?texture";
+import EnemyFlying_Level1_01_ from "../gfx/EnemyFlying_Level1_01.png?texture";
 import Loading_ from "../gfx/Loading.jpg?texture";
 import PauseBtn_ from "../gfx/PauseBtn.png?texture";
 import Rock_Level1_01_ from "../gfx/Rock_Level1_01.png?texture";
@@ -73,6 +74,7 @@ export const [
 	T_Cupid,
 	T_CupidArrow,
 	T_CupidArrow_Blurred,
+	T_EnemyFlying_Level1_01,
 	T_Loading,
 	T_PauseBtn,
 	T_Rock_Level1_01,
@@ -117,6 +119,7 @@ export const [
 	Cupid_,
 	CupidArrow_,
 	CupidArrow_Blurred_,
+	EnemyFlying_Level1_01_,
 	Loading_,
 	PauseBtn_,
 	Rock_Level1_01_,

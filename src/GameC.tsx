@@ -11,6 +11,7 @@ import {
 	T_Bg_Level_08,
 	T_Bg_Level_09,
 	T_Cupid,
+	T_EnemyFlying_Level1_01,
 	T_PauseBtn,
 } from "./assets";
 import { Rectangle } from "./Rectangle";
@@ -189,14 +190,7 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 const EnemyC = ({ enemy }: { enemy: Enemy }) => {
 	return (
 		<container x={1080 / 2 + enemy.x} y={enemy.y}>
-			<Rectangle
-				x={-enemy.width / 2}
-				y={-enemy.height / 2}
-				width={enemy.width}
-				height={enemy.height}
-				color={enemy.color}
-				draw={() => {}}
-			/>
+			<sprite texture={T_EnemyFlying_Level1_01} />
 		</container>
 	);
 };
