@@ -65,6 +65,9 @@ export class ObstacleManager {
 
 		while (this.lastY <= this.game.depth + 1920) {
 			this.lastY += getPatternSpacing(this.game.level);
+			if (this.lastY >= this.game.levelDepth * this.game.levels) {
+				break;
+			}
 			const pattern = getObstaclePattern(
 				this.game.level,
 				this.previousPatterns,

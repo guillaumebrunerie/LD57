@@ -1,5 +1,5 @@
-- placing obstacles and enemies in a smarter way
 - enemies
+- placing obstacles and enemies in a smarter way
 - shooting
 - lives
 - game over flow

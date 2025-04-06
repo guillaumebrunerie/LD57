@@ -47,6 +47,8 @@ export class Game {
 		void S_MusicIntensity3.play({ loop: true, volume: 0.1 });
 	}
 
+	levels = 9;
+
 	tick(delta: number) {
 		if (this.isPaused) {
 			return;
@@ -58,16 +60,20 @@ export class Game {
 			return;
 		}
 
-		this.depth += this.cameraSpeed * delta;
+		if (this.level <= this.levels) {
+			this.depth += this.cameraSpeed * delta;
+			if (this.depth > this.levelDepth * this.level) {
+				this.nextLevel();
+			}
+		}
+
 		this.player.tick(delta);
 
 		this.enemiesManager.tick(delta);
 		this.obstaclesManager.tick(delta);
-		if (this.depth > this.levelDepth * this.level) {
-			this.nextLevel();
-		}
 
 		if (
+			this.level < this.levels &&
 			this.obstaclesManager.checkCollision(this.player) &&
 			this.player.invincibleTimeout == 0
 		) {

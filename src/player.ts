@@ -33,15 +33,21 @@ export class Player {
 	}
 
 	tick(delta: number) {
-		if (this.movingLeft) {
+		const canMove = this.game.level <= this.game.levels;
+		if (this.movingLeft && canMove) {
 			this.posX -= this.sideSpeed * delta;
 			this.lookingLeft = true;
 		}
-		if (this.movingRight) {
+		if (this.movingRight && canMove) {
 			this.posX += this.sideSpeed * delta;
 			this.lookingLeft = false;
 		}
-		if (!this.movingLeft && !this.movingRight && this.targetX !== null) {
+		if (
+			!this.movingLeft &&
+			!this.movingRight &&
+			this.targetX !== null &&
+			canMove
+		) {
 			const speedFraction = Math.max(
 				-1,
 				Math.min(
