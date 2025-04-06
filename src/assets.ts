@@ -1,4 +1,4 @@
-/** Generated on Sun Apr  6 16:10:11 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Sun Apr  6 18:08:41 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -19,6 +19,9 @@ import BtnGamePausedTxt_ from "../gfx/BtnGamePausedTxt.png?texture";
 import BtnGameTxt_ from "../gfx/BtnGameTxt.png?texture";
 import BtnLevelTxt_ from "../gfx/BtnLevelTxt.png?texture";
 import BtnOverTxt_ from "../gfx/BtnOverTxt.png?texture";
+import Cupid_ from "../gfx/Cupid.png?texture";
+import CupidArrow_ from "../gfx/CupidArrow.png?texture";
+import CupidArrow_Blurred_ from "../gfx/CupidArrow_Blurred.png?texture";
 import Loading_ from "../gfx/Loading.jpg?texture";
 import Logo_ from "../gfx/Logo.jpg?texture";
 import PauseBtn_ from "../gfx/PauseBtn.png?texture";
@@ -64,6 +67,9 @@ export const [
 	BtnGameTxt,
 	BtnLevelTxt,
 	BtnOverTxt,
+	Cupid,
+	CupidArrow,
+	CupidArrow_Blurred,
 	Loading,
 	Logo,
 	PauseBtn,
@@ -102,6 +108,9 @@ export const [
 	BtnGameTxt_,
 	BtnLevelTxt_,
 	BtnOverTxt_,
+	Cupid_,
+	CupidArrow_,
+	CupidArrow_Blurred_,
 	Loading_,
 	Logo_,
 	PauseBtn_,

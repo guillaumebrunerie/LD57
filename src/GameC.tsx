@@ -11,6 +11,7 @@ import {
 	Bg_Level_03,
 	Bg_Level_02,
 	Bg_Level_07,
+	Cupid,
 } from "./assets";
 import { Rectangle } from "./Rectangle";
 import { GameOverScreen, LogoScreen, PauseScreen, WinScreen } from "./Postings";
@@ -150,15 +151,15 @@ const Timer = ({ game }: { game: Game }) => {
 const PlayerC = ({ player }: { player: Player }) => {
 	return (
 		<container x={player.posX} y={player.posY}>
-			<Circle
-				radius={30}
-				color={
-					player.game.obstaclesManager.checkCollision(player) ?
-						0xff0000
-					:	0x0000ff
-				}
-				draw={() => {}}
-			/>
+			<sprite texture={Cupid} anchor={0.5} />
+			{player.game.obstaclesManager.checkCollision(player) && (
+				<Circle
+					radius={30}
+					alpha={0.4}
+					color={0xff0000}
+					draw={() => {}}
+				/>
+			)}
 		</container>
 	);
 };
