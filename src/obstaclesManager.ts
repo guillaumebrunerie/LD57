@@ -1,5 +1,5 @@
 import type { Game } from "./game";
-import { Obstacle } from "./obstacle";
+import { Obstacle, type ObstacleData } from "./obstacle";
 import { obstacles as obstacleData } from "./obstaclesData";
 import type { Player } from "./player";
 
@@ -7,8 +7,8 @@ export const getPossibleObstacles = (_level: number) => {
 	return obstacleData[0];
 };
 
-const getRandomObstacle = (level: number) => {
-	const obstacles = getPossibleObstacles(level);
+const getRandomObstacle = (level: number, type: ObstacleData["type"]) => {
+	const obstacles = getPossibleObstacles(level).filter((o) => o.type == type);
 	return obstacles[Math.floor(Math.random() * obstacles.length)];
 };
 
@@ -16,6 +16,9 @@ export class ObstacleManager {
 	constructor(public game: Game) {}
 
 	obstacles: Obstacle[] = [];
+
+	lastYWallLeft = 0;
+	lastYWallRight = Math.random() * 1920 - 1920;
 
 	lastYLeft = 2000;
 	lastYRight = 2000;
@@ -28,6 +31,32 @@ export class ObstacleManager {
 			this.obstacles = this.obstacles.filter((o) => !o.isOutOfBounds());
 		}
 
+		while (this.lastYWallLeft <= this.game.depth + 1920) {
+			this.obstacles.push(
+				new Obstacle(
+					this.game,
+					0,
+					this.lastYWallLeft,
+					false,
+					getRandomObstacle(this.game.level, "wall"),
+				),
+			);
+			this.lastYWallLeft += 1920;
+		}
+
+		while (this.lastYWallRight <= this.game.depth + 1920) {
+			this.obstacles.push(
+				new Obstacle(
+					this.game,
+					1080,
+					this.lastYWallRight,
+					true,
+					getRandomObstacle(this.game.level, "wall"),
+				),
+			);
+			this.lastYWallRight += 1920;
+		}
+
 		while (this.lastYLeft <= this.game.depth + 1920) {
 			this.lastYLeft +=
 				Math.random() * (this.maxSpacingY - this.minSpacingY) +
@@ -38,7 +67,7 @@ export class ObstacleManager {
 					0,
 					this.lastYLeft,
 					false,
-					getRandomObstacle(this.game.level),
+					getRandomObstacle(this.game.level, "spike"),
 				),
 			);
 		}
@@ -53,7 +82,7 @@ export class ObstacleManager {
 					1080,
 					this.lastYRight,
 					true,
-					getRandomObstacle(this.game.level),
+					getRandomObstacle(this.game.level, "spike"),
 				),
 			);
 		}

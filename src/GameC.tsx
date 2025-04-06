@@ -11,7 +11,6 @@ import {
 	Bg_Level_03,
 	Bg_Level_02,
 	Bg_Level_07,
-	Bg_Walls_Level1,
 } from "./assets";
 import { Rectangle } from "./Rectangle";
 import { GameOverScreen, LogoScreen, PauseScreen, WinScreen } from "./Postings";
@@ -61,11 +60,10 @@ export const GameC = ({ game }: { game: Game }) => {
 		<container>
 			<container y={-game.depth}>
 				<Background game={game} />
-				{game.enemyManager.enemies.map((enemy) => (
+				{game.enemiesManager.enemies.map((enemy) => (
 					<EnemyC key={enemy.id} enemy={enemy} />
 				))}
-				<Foreground game={game} />
-				{game.obstacleManager.obstacles.map((obstacle) => (
+				{game.obstaclesManager.obstacles.map((obstacle) => (
 					<ObstacleC key={obstacle.id} obstacle={obstacle} />
 				))}
 				<PlayerC player={game.player} />
@@ -139,31 +137,6 @@ const Background = ({ game }: { game: Game }) => {
 	);
 };
 
-const Foreground = ({ game }: { game: Game }) => {
-	const y = mod(-game.depth, 1920);
-	const y2 = mod(-game.depth + 1920 * game.yBgOffset, 1920);
-	return (
-		<>
-			<sprite y={y + game.depth} texture={Bg_Walls_Level1} />
-			<sprite y={y + game.depth - 1920} texture={Bg_Walls_Level1} />
-			<sprite
-				anchor={{ x: 0, y: 0 }}
-				x={1080}
-				y={y2 + game.depth}
-				scale={{ x: -1, y: 1 }}
-				texture={Bg_Walls_Level1}
-			/>
-			<sprite
-				anchor={{ x: 0, y: 0 }}
-				x={1080}
-				y={y2 + game.depth - 1920}
-				scale={{ x: -1, y: 1 }}
-				texture={Bg_Walls_Level1}
-			/>
-		</>
-	);
-};
-
 const Timer = ({ game }: { game: Game }) => {
 	const minutes = Math.floor(game.lt / 60);
 	const seconds = Math.floor(game.lt - minutes * 60);
@@ -180,7 +153,7 @@ const PlayerC = ({ player }: { player: Player }) => {
 			<Circle
 				radius={30}
 				color={
-					player.game.obstacleManager.checkCollision(player) ?
+					player.game.obstaclesManager.checkCollision(player) ?
 						0xff0000
 					:	0x0000ff
 				}
@@ -198,7 +171,7 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 			scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
 		>
 			<sprite texture={obstacle.data.texture}></sprite>
-			<PolygonShape polygon={obstacle.polygon()} />
+			<PolygonShape alpha={0} polygon={obstacle.polygon()} />
 		</container>
 	);
 };
@@ -258,12 +231,15 @@ const PolygonEditor = ({ game }: { game: Game }) => {
 				eventMode="static"
 				onPointerDown={(e: FederatedPointerEvent) => {
 					const { x, y } = e.global;
-					game.polygonEditor.click({ x: x - 200, y: y - 200 });
+					game.polygonEditor.click({ x: x - 200, y });
 				}}
 			/>
-			<container x={200} y={200}>
+			<container x={200} y={0}>
 				<sprite texture={game.polygonEditor.obstacle.texture} />
-				<PolygonShape polygon={game.polygonEditor.obstacle.polygon} />
+				<PolygonShape
+					alpha={0.4}
+					polygon={game.polygonEditor.obstacle.polygon}
+				/>
 			</container>
 		</container>
 	);

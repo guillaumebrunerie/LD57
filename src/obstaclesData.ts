@@ -1,5 +1,6 @@
 import { Polygon } from "pixi.js";
 import {
+	Bg_Walls_Level1,
 	WallSpike_Level1_01,
 	WallSpike_Level1_02,
 	WallSpike_Level1_03,
@@ -12,6 +13,46 @@ export const obstacles: ObstacleData[][] = [
 	[
 		{
 			type: "wall",
+			texture: Bg_Walls_Level1,
+			polygon: new Polygon(
+				2.53,
+				7.1,
+				130.42,
+				3.55,
+				130.42,
+				174.06,
+				107.33,
+				293.06,
+				142.85,
+				442.26,
+				98.45,
+				699.8,
+				135.74,
+				1017.72,
+				135.74,
+				1168.7,
+				109.1,
+				1223.76,
+				109.1,
+				1392.49,
+				125.09,
+				1424.46,
+				146.4,
+				1570.1,
+				102.0,
+				1673.12,
+				94.89,
+				1753.04,
+				114.43,
+				1816.98,
+				117.98,
+				1918.22,
+				2.53,
+				1916.45,
+			),
+		},
+		{
+			type: "spike",
 			texture: WallSpike_Level1_01,
 			polygon: new Polygon(
 				46.94,
@@ -27,7 +68,7 @@ export const obstacles: ObstacleData[][] = [
 			),
 		},
 		{
-			type: "wall",
+			type: "spike",
 			texture: WallSpike_Level1_02,
 			polygon: new Polygon(
 				29.18,
@@ -59,7 +100,7 @@ export const obstacles: ObstacleData[][] = [
 			),
 		},
 		{
-			type: "wall",
+			type: "spike",
 			texture: WallSpike_Level1_03,
 			polygon: new Polygon(
 				20.3,
@@ -75,7 +116,7 @@ export const obstacles: ObstacleData[][] = [
 			),
 		},
 		{
-			type: "wall",
+			type: "spike",
 			texture: WallSpike_Level1_04,
 			polygon: new Polygon(
 				50.49,

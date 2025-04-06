@@ -1,7 +1,7 @@
 import type { Game } from "./game";
 import type { Point } from "./utils";
 
-const marginX = 120;
+const marginX = 10;
 const minX = marginX;
 const maxX = 1080 - marginX;
 

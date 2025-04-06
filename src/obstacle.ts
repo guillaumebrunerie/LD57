@@ -3,7 +3,7 @@ import type { Game } from "./game";
 import type { Player } from "./player";
 
 export type ObstacleData = {
-	type: "wall" | "center";
+	type: "wall" | "spike" | "rock";
 	texture: Texture;
 	polygon: Polygon;
 };
@@ -34,7 +34,7 @@ export class Obstacle {
 	}
 
 	isOutOfBounds() {
-		return this.y < this.game.depth - 1920 / 2;
+		return this.y < this.game.depth - 1920;
 	}
 
 	polygon() {

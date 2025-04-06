@@ -6,7 +6,7 @@ import {
 	StartLevel,
 } from "./assets";
 import { Enemy } from "./enemy";
-import { ObstacleManager } from "./obstaclesManager";
+import { ObstacleManager as ObstaclesManager } from "./obstaclesManager";
 import { Player } from "./player";
 import { type Point } from "./utils";
 import { PolygonEditor } from "./polygonEditor";
@@ -34,8 +34,8 @@ export class Game {
 	yBgOffset = Math.random();
 
 	player = new Player(this);
-	obstacleManager = new ObstacleManager(this);
-	enemyManager = new EnemyManager(this);
+	obstaclesManager = new ObstaclesManager(this);
+	enemiesManager = new EnemiesManager(this);
 
 	level = 0;
 	levelDepth = 5000;
@@ -56,16 +56,16 @@ export class Game {
 		this.depth += this.cameraSpeed * delta;
 		this.player.tick(delta);
 
-		this.enemyManager.tick(delta);
-		this.obstacleManager.tick(delta);
+		this.enemiesManager.tick(delta);
+		this.obstaclesManager.tick(delta);
 		if (this.depth > this.levelDepth * this.level) {
 			this.level++;
-			this.obstacleManager.nextLevel();
-			this.enemyManager.nextLevel();
+			this.obstaclesManager.nextLevel();
+			this.enemiesManager.nextLevel();
 			this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;
 		}
 
-		if (this.obstacleManager.checkCollision(this.player)) {
+		if (this.obstaclesManager.checkCollision(this.player)) {
 			this.gameOver();
 		}
 	}
@@ -162,7 +162,7 @@ export class Game {
 	}
 }
 
-class EnemyManager {
+class EnemiesManager {
 	constructor(public game: Game) {}
 
 	enemies: Enemy[] = [];
