@@ -25,6 +25,8 @@ export const LogoScreen = ({ game }: { game: Game }) => {
 		<container>
 			<sprite
 				texture={Logo}
+				anchor={{ x: 0, y: 1 }}
+				angle={90}
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
@@ -34,8 +36,8 @@ export const LogoScreen = ({ game }: { game: Game }) => {
 			/>
 			<CustomText
 				anchor={0.5}
-				x={1920 / 2}
-				y={900}
+				x={1080 / 2}
+				y={1700}
 				text="Click to start"
 			/>
 		</container>

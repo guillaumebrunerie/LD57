@@ -12,7 +12,7 @@ export class Player {
 	width = 50;
 
 	posX = 0;
-	posY = 150;
+	posY = 300;
 
 	tapPos: Point | null = null;
 	tapActionX: "left" | "right" | null = null;
@@ -54,13 +54,15 @@ export class Player {
 		}
 
 		const xThreshold = 50;
-		const xThresholdRevert = 20;
+		const xThresholdRevert = -20;
 		const dx = pos.x - this.tapPos.x;
 
 		if (dx < -xThreshold) {
 			this.tapActionX = "left";
+			this.tapPos = pos;
 		} else if (dx > xThreshold) {
 			this.tapActionX = "right";
+			this.tapPos = pos;
 		} else if (Math.abs(dx) < xThresholdRevert) {
 			this.tapActionX = null;
 		}
