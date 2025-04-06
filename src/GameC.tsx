@@ -7,25 +7,26 @@ import { Circle } from "./Circle";
 import { mod } from "./utils";
 import { useWindowEventListener } from "./useWindowEventListener";
 import type { Obstacle } from "./obstacle";
+import type { Player } from "./player";
 
 export const GameC = ({ game }: { game: Game }) => {
 	useWindowEventListener("keydown", (event) => {
 		switch (event.code) {
 			case "ArrowLeft":
-				game.moveLeft(true);
+				game.player.moveLeft(true);
 				break;
 			case "ArrowRight":
-				game.moveRight(true);
+				game.player.moveRight(true);
 				break;
 		}
 	});
 	useWindowEventListener("keyup", (event) => {
 		switch (event.code) {
 			case "ArrowLeft":
-				game.moveLeft(false);
+				game.player.moveLeft(false);
 				break;
 			case "ArrowRight":
-				game.moveRight(false);
+				game.player.moveRight(false);
 				break;
 		}
 	});
@@ -37,9 +38,9 @@ export const GameC = ({ game }: { game: Game }) => {
 	return (
 		<container>
 			<Background game={game} />
-			<Player game={game} />
-			{game.obstacles.map((obstacle, i) => (
-				<ObstacleC key={i} game={game} obstacle={obstacle} />
+			<PlayerC player={game.player} />
+			{game.obstacles.map((obstacle) => (
+				<ObstacleC key={obstacle.id} game={game} obstacle={obstacle} />
 			))}
 			<PauseButton game={game} />
 			{game.state == "gameover" && <GameOverScreen game={game} />}
@@ -76,13 +77,32 @@ const Background = ({ game }: { game: Game }) => {
 					game.tap({ x, y });
 				}}
 			/>
+			<Rectangle
+				x={0}
+				y={0}
+				width={1080 / 2 - game.boundX}
+				height={1920}
+				color={0x444444}
+				draw={() => {}}
+			/>
+			<Rectangle
+				x={1080 / 2 + game.boundX}
+				y={0}
+				width={1080 / 2 - game.boundX}
+				height={1920}
+				color={0x444444}
+				draw={() => {}}
+			/>
 		</>
 	);
 };
 
-const Player = ({ game }: { game: Game }) => {
+const PlayerC = ({ player }: { player: Player }) => {
 	return (
-		<container x={1080 / 2 + game.posX} y={game.posY - game.depth}>
+		<container
+			x={1080 / 2 + player.posX}
+			y={player.posY - player.game.depth}
+		>
 			<Circle radius={30} draw={() => {}} />
 		</container>
 	);

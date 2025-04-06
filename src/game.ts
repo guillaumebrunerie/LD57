@@ -6,6 +6,7 @@ import {
 	StartLevel,
 } from "./assets";
 import { Obstacle } from "./obstacle";
+import { Player } from "./player";
 import { type Point } from "./utils";
 
 export type PowerUp = "shockwave" | "push" | "bomb" | "hologram" | "freeze";
@@ -23,18 +24,17 @@ export class Game {
 		| "gameover"
 		| "win" = "logo";
 
-	posX = 0;
-	posY = 150;
 	depth = 0;
 	cameraSpeed = 700;
-	sideSpeed = 800;
-
-	movingLeft = false;
-	movingRight = false;
 
 	boundX = 450;
 
+	obstacleGenerator = new ObstacleGenerator(this);
+	player = new Player(this);
 	obstacles: Obstacle[] = [];
+
+	level = 0;
+	levelDepth = 10000;
 
 	constructor() {}
 
@@ -50,47 +50,16 @@ export class Game {
 		}
 
 		this.depth += this.cameraSpeed * delta;
-		this.posY += this.cameraSpeed * delta;
+		this.player.tick(delta);
 
-		if (this.movingLeft) {
-			this.posX -= this.sideSpeed * delta;
-		}
-		if (this.movingRight) {
-			this.posX += this.sideSpeed * delta;
-		}
-		this.posX = Math.max(-this.boundX, Math.min(this.posX, this.boundX));
-	}
-
-	moveLeft(activate: boolean) {
-		this.movingLeft = activate;
-	}
-
-	moveRight(activate: boolean) {
-		this.movingRight = activate;
-	}
-
-	initLevel() {
-		const boundsX = 450;
-		const minSpacingY = 400;
-		const maxSpacingY = 600;
-		const minWidth = 50;
-		const maxWidth = 500;
-		let y = 1000;
-		for (let i = 0; i < 40; i++) {
-			y += Math.random() * (maxSpacingY - minSpacingY) + minSpacingY;
-			const width = Math.random() * (maxWidth - minWidth) + minWidth;
-			this.obstacles.push(
-				new Obstacle(-boundsX + width / 2, y, width, 0xff0000),
-			);
+		if (this.obstacles.some((o) => o.isOutOfBounds())) {
+			this.obstacles = this.obstacles.filter((o) => !o.isOutOfBounds());
 		}
 
-		y = 1000;
-		for (let i = 0; i < 40; i++) {
-			y += Math.random() * (maxSpacingY - minSpacingY) + minSpacingY;
-			const width = Math.random() * (maxWidth - minWidth) + minWidth;
-			this.obstacles.push(
-				new Obstacle(boundsX - width / 2, y, width, 0x0000ff),
-			);
+		this.obstacleGenerator.tick(delta);
+		if (this.depth > this.levelDepth * this.level) {
+			this.level++;
+			this.obstacleGenerator.nextLevel();
 		}
 	}
 
@@ -98,7 +67,6 @@ export class Game {
 		this.state = "levelSelect";
 		MusicMenu.singleInstance = true;
 		void MusicMenu.play({ loop: true, volume: 0.5 });
-		this.initLevel();
 	}
 
 	reset() {
@@ -122,8 +90,6 @@ export class Game {
 			Music.singleInstance = true;
 			void Music.play({ loop: true, volume: 0.3 });
 		}, 700);
-
-		this.initLevel();
 	}
 
 	pause() {
@@ -173,4 +139,57 @@ export class Game {
 	}
 
 	tap(_pos: Point) {}
+}
+
+class ObstacleGenerator {
+	constructor(public game: Game) {}
+
+	lastYLeft = 1000;
+	lastYRight = 1000;
+
+	minSpacingY = 800;
+	maxSpacingY = 1200;
+	minWidth = 50;
+	maxWidth = 500;
+
+	tick(_delta: number) {
+		while (this.lastYLeft <= this.game.depth + 1920) {
+			this.lastYLeft +=
+				Math.random() * (this.maxSpacingY - this.minSpacingY) +
+				this.minSpacingY;
+			const width =
+				Math.random() * (this.maxWidth - this.minWidth) + this.minWidth;
+			this.game.obstacles.push(
+				new Obstacle(
+					this.game,
+					-this.game.boundX + width / 2,
+					this.lastYLeft,
+					width,
+					0xff0000,
+				),
+			);
+		}
+
+		while (this.lastYRight <= this.game.depth + 1920) {
+			this.lastYRight +=
+				Math.random() * (this.maxSpacingY - this.minSpacingY) +
+				this.minSpacingY;
+			const width =
+				Math.random() * (this.maxWidth - this.minWidth) + this.minWidth;
+			this.game.obstacles.push(
+				new Obstacle(
+					this.game,
+					this.game.boundX - width / 2,
+					this.lastYRight,
+					width,
+					0x0000ff,
+				),
+			);
+		}
+	}
+
+	nextLevel() {
+		this.minSpacingY *= 0.6;
+		this.maxSpacingY *= 0.6;
+	}
 }
