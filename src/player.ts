@@ -1,4 +1,5 @@
 import type { Game } from "./game";
+import type { Point } from "./utils";
 
 export class Player {
 	game: Game;
@@ -12,6 +13,8 @@ export class Player {
 
 	posX = 0;
 	posY = 150;
+
+	tapPos: Point | null = null;
 
 	constructor(game: Game) {
 		this.game = game;
@@ -37,5 +40,19 @@ export class Player {
 
 	moveRight(activate: boolean) {
 		this.movingRight = activate;
+	}
+
+	onPointerDown(pos: Point) {
+		this.tapPos = pos;
+	}
+
+	onPointerMove(pos: Point) {
+		if (!this.tapPos) {
+			return;
+		}
+	}
+
+	onPointerUp() {
+		this.tapPos = null;
 	}
 }

@@ -8,6 +8,7 @@ import { mod } from "./utils";
 import { useWindowEventListener } from "./useWindowEventListener";
 import type { Obstacle } from "./obstacle";
 import type { Player } from "./player";
+import type { Enemy } from "./enemy";
 
 export const GameC = ({ game }: { game: Game }) => {
 	useWindowEventListener("keydown", (event) => {
@@ -38,10 +39,14 @@ export const GameC = ({ game }: { game: Game }) => {
 	return (
 		<container>
 			<Background game={game} />
-			<PlayerC player={game.player} />
-			{game.obstacles.map((obstacle) => (
+			{game.obstacleManager.obstacles.map((obstacle) => (
 				<ObstacleC key={obstacle.id} game={game} obstacle={obstacle} />
 			))}
+			{game.enemyManager.enemies.map((enemy) => (
+				<EnemyC key={enemy.id} game={game} enemy={enemy} />
+			))}
+			<PlayerC player={game.player} />
+			<Foreground game={game} />
 			<PauseButton game={game} />
 			{game.state == "gameover" && <GameOverScreen game={game} />}
 			{game.state == "win" && <WinScreen game={game} />}
@@ -49,6 +54,13 @@ export const GameC = ({ game }: { game: Game }) => {
 		</container>
 	);
 };
+
+const pointerEventListener =
+	(game: Game, type: "pointerdown" | "pointermove" | "pointerup") =>
+	(e: FederatedPointerEvent) => {
+		const { x, y } = e.global;
+		game.onEvent(type, { x, y });
+	};
 
 const Background = ({ game }: { game: Game }) => {
 	const y = mod(-game.depth, 1920);
@@ -61,10 +73,9 @@ const Background = ({ game }: { game: Game }) => {
 				x={1080}
 				y={y}
 				eventMode="static"
-				onPointerDown={(e: FederatedPointerEvent) => {
-					const { x, y } = e.global;
-					game.tap({ x, y });
-				}}
+				onPointerDown={pointerEventListener(game, "pointerdown")}
+				onPointerMove={pointerEventListener(game, "pointermove")}
+				onPointerUp={pointerEventListener(game, "pointerup")}
 			/>
 			<sprite
 				texture={Bg}
@@ -72,11 +83,17 @@ const Background = ({ game }: { game: Game }) => {
 				x={1080}
 				y={y - 1920}
 				eventMode="static"
-				onPointerDown={(e: FederatedPointerEvent) => {
-					const { x, y } = e.global;
-					game.tap({ x, y });
-				}}
+				onPointerDown={pointerEventListener(game, "pointerdown")}
+				onPointerMove={pointerEventListener(game, "pointermove")}
+				onPointerUp={pointerEventListener(game, "pointerup")}
 			/>
+		</>
+	);
+};
+
+const Foreground = ({ game }: { game: Game }) => {
+	return (
+		<>
 			<Rectangle
 				x={0}
 				y={0}
@@ -117,6 +134,21 @@ const ObstacleC = ({ game, obstacle }: { game: Game; obstacle: Obstacle }) => {
 				width={obstacle.width}
 				height={obstacle.height}
 				color={obstacle.color}
+				draw={() => {}}
+			/>
+		</container>
+	);
+};
+
+const EnemyC = ({ game, enemy }: { game: Game; enemy: Enemy }) => {
+	return (
+		<container x={1080 / 2 + enemy.x} y={enemy.y - game.depth}>
+			<Rectangle
+				x={-enemy.width / 2}
+				y={-enemy.height / 2}
+				width={enemy.width}
+				height={enemy.height}
+				color={enemy.color}
 				draw={() => {}}
 			/>
 		</container>

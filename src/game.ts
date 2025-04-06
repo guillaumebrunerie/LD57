@@ -5,6 +5,7 @@ import {
 	MusicMenu,
 	StartLevel,
 } from "./assets";
+import { Enemy } from "./enemy";
 import { Obstacle } from "./obstacle";
 import { Player } from "./player";
 import { type Point } from "./utils";
@@ -29,9 +30,9 @@ export class Game {
 
 	boundX = 450;
 
-	obstacleGenerator = new ObstacleGenerator(this);
+	obstacleManager = new ObstacleManager(this);
+	enemyManager = new EnemyManager(this);
 	player = new Player(this);
-	obstacles: Obstacle[] = [];
 
 	level = 0;
 	levelDepth = 10000;
@@ -52,14 +53,12 @@ export class Game {
 		this.depth += this.cameraSpeed * delta;
 		this.player.tick(delta);
 
-		if (this.obstacles.some((o) => o.isOutOfBounds())) {
-			this.obstacles = this.obstacles.filter((o) => !o.isOutOfBounds());
-		}
-
-		this.obstacleGenerator.tick(delta);
+		this.enemyManager.tick(delta);
+		this.obstacleManager.tick(delta);
 		if (this.depth > this.levelDepth * this.level) {
 			this.level++;
-			this.obstacleGenerator.nextLevel();
+			this.obstacleManager.nextLevel();
+			this.enemyManager.nextLevel();
 		}
 	}
 
@@ -138,28 +137,47 @@ export class Game {
 		this.startLt = 0;
 	}
 
-	tap(_pos: Point) {}
+	onEvent(type: "pointerdown" | "pointermove" | "pointerup", pos: Point) {
+		switch (type) {
+			case "pointerdown":
+				this.player.onPointerDown(pos);
+				break;
+			case "pointermove":
+				this.player.onPointerMove(pos);
+				break;
+			case "pointerup":
+				this.player.onPointerUp();
+				break;
+		}
+	}
 }
 
-class ObstacleGenerator {
+class ObstacleManager {
 	constructor(public game: Game) {}
+
+	obstacles: Obstacle[] = [];
 
 	lastYLeft = 1000;
 	lastYRight = 1000;
 
 	minSpacingY = 800;
 	maxSpacingY = 1200;
-	minWidth = 50;
+
+	minWidth = 150;
 	maxWidth = 500;
 
 	tick(_delta: number) {
+		if (this.obstacles.some((o) => o.isOutOfBounds())) {
+			this.obstacles = this.obstacles.filter((o) => !o.isOutOfBounds());
+		}
+
 		while (this.lastYLeft <= this.game.depth + 1920) {
 			this.lastYLeft +=
 				Math.random() * (this.maxSpacingY - this.minSpacingY) +
 				this.minSpacingY;
 			const width =
 				Math.random() * (this.maxWidth - this.minWidth) + this.minWidth;
-			this.game.obstacles.push(
+			this.obstacles.push(
 				new Obstacle(
 					this.game,
 					-this.game.boundX + width / 2,
@@ -176,7 +194,7 @@ class ObstacleGenerator {
 				this.minSpacingY;
 			const width =
 				Math.random() * (this.maxWidth - this.minWidth) + this.minWidth;
-			this.game.obstacles.push(
+			this.obstacles.push(
 				new Obstacle(
 					this.game,
 					this.game.boundX - width / 2,
@@ -191,5 +209,45 @@ class ObstacleGenerator {
 	nextLevel() {
 		this.minSpacingY *= 0.6;
 		this.maxSpacingY *= 0.6;
+
+		this.minSpacingY = Math.max(this.minSpacingY, 100);
+		this.maxSpacingY = Math.max(this.maxSpacingY, 200);
+	}
+}
+
+class EnemyManager {
+	constructor(public game: Game) {}
+
+	enemies: Enemy[] = [];
+
+	lastY = 1000;
+
+	minSpacingY = 2000;
+	maxSpacingY = 3000;
+
+	tick(delta: number) {
+		if (this.enemies.some((e) => e.isOutOfBounds())) {
+			this.enemies = this.enemies.filter((e) => !e.isOutOfBounds());
+		}
+
+		while (this.lastY <= this.game.depth + 1920) {
+			this.lastY +=
+				Math.random() * (this.maxSpacingY - this.minSpacingY) +
+				this.minSpacingY;
+			const x = (Math.random() * 2 - 1) * this.game.boundX;
+			this.enemies.push(new Enemy(this.game, x, this.lastY));
+		}
+
+		this.enemies.forEach((e) => {
+			e.tick(delta);
+		});
+	}
+
+	nextLevel() {
+		this.minSpacingY *= 0.6;
+		this.maxSpacingY *= 0.6;
+
+		this.minSpacingY = Math.max(this.minSpacingY, 100);
+		this.maxSpacingY = Math.max(this.maxSpacingY, 200);
 	}
 }
