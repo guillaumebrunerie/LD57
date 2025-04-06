@@ -1,6 +1,6 @@
 import {
 	CompleteLevel,
-	LoseGame,
+	// LoseGame,
 	Music,
 	MusicMenu,
 	StartLevel,
@@ -30,8 +30,6 @@ export class Game {
 	baseSpeed = 600;
 	speedIncrease = 40;
 	cameraSpeed = this.baseSpeed;
-
-	boundX = 450;
 
 	yBgOffset = Math.random();
 
@@ -65,6 +63,10 @@ export class Game {
 			this.obstacleManager.nextLevel();
 			this.enemyManager.nextLevel();
 			this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;
+		}
+
+		if (this.obstacleManager.checkCollision(this.player)) {
+			this.gameOver();
 		}
 	}
 
@@ -130,11 +132,12 @@ export class Game {
 	}
 
 	gameOver() {
-		if (this.state == "gameover") {
-			return;
-		}
-		void LoseGame.play({ volume: 0.5 });
-		this.state = "gameover";
+		console.log("GAME OVER");
+		// if (this.state == "gameover") {
+		// 	return;
+		// }
+		// void LoseGame.play({ volume: 0.5 });
+		// this.state = "gameover";
 	}
 
 	win() {
@@ -178,7 +181,7 @@ class EnemyManager {
 			this.lastY +=
 				Math.random() * (this.maxSpacingY - this.minSpacingY) +
 				this.minSpacingY;
-			const x = (Math.random() * 2 - 1) * this.game.boundX;
+			const x = (Math.random() * 2 - 1) * 450;
 			this.enemies.push(new Enemy(this.game, x, this.lastY));
 		}
 

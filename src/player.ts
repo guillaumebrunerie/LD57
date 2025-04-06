@@ -1,6 +1,10 @@
 import type { Game } from "./game";
 import type { Point } from "./utils";
 
+const marginX = 120;
+const minX = marginX;
+const maxX = 1080 - marginX;
+
 export class Player {
 	game: Game;
 
@@ -11,7 +15,7 @@ export class Player {
 
 	width = 50;
 
-	posX = 0;
+	posX = 1080 / 2;
 	posY = 300;
 
 	tapPos: Point | null = null;
@@ -40,10 +44,7 @@ export class Player {
 			);
 			this.posX += this.sideSpeed * speedFraction * delta;
 		}
-		this.posX = Math.max(
-			-this.game.boundX,
-			Math.min(this.posX, this.game.boundX),
-		);
+		this.posX = Math.max(minX, Math.min(this.posX, maxX));
 		this.posY += this.game.cameraSpeed * delta;
 	}
 

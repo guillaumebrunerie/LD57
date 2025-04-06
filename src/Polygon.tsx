@@ -3,12 +3,17 @@ import { type ComponentProps, useCallback } from "react";
 
 type PolygonProps = Omit<ComponentProps<"graphics">, "draw"> & {
 	polygon: Polygon;
-	alpha: number;
+	alpha?: number;
+	y?: number;
 };
 
 type Draw = ComponentProps<"graphics">["draw"];
 
-export const PolygonShape = ({ polygon, alpha, ...rest }: PolygonProps) => {
+export const PolygonShape = ({
+	polygon,
+	alpha = 0.0,
+	...rest
+}: PolygonProps) => {
 	const draw = useCallback<Draw>(
 		(g) => {
 			g.clear();

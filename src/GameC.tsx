@@ -59,15 +59,17 @@ export const GameC = ({ game }: { game: Game }) => {
 
 	return (
 		<container>
-			<Background game={game} />
-			{game.enemyManager.enemies.map((enemy) => (
-				<EnemyC key={enemy.id} game={game} enemy={enemy} />
-			))}
-			<Foreground game={game} />
-			{game.obstacleManager.obstacles.map((obstacle) => (
-				<ObstacleC key={obstacle.id} game={game} obstacle={obstacle} />
-			))}
-			<PlayerC player={game.player} />
+			<container y={-game.depth}>
+				<Background game={game} />
+				{game.enemyManager.enemies.map((enemy) => (
+					<EnemyC key={enemy.id} enemy={enemy} />
+				))}
+				<Foreground game={game} />
+				{game.obstacleManager.obstacles.map((obstacle) => (
+					<ObstacleC key={obstacle.id} obstacle={obstacle} />
+				))}
+				<PlayerC player={game.player} />
+			</container>
 			<Timer game={game} />
 			<PauseButton game={game} />
 			{game.state == "gameover" && <GameOverScreen game={game} />}
@@ -117,7 +119,7 @@ const Background = ({ game }: { game: Game }) => {
 			<sprite
 				texture={getBg(game.level)}
 				x={0}
-				y={y}
+				y={y + game.depth}
 				eventMode="static"
 				onPointerDown={pointerEventListener(game, "pointerdown")}
 				onPointerMove={pointerEventListener(game, "pointermove")}
@@ -127,7 +129,7 @@ const Background = ({ game }: { game: Game }) => {
 				texture={getBg(game.level)}
 				// filters={[f]}
 				x={0}
-				y={y - 1920}
+				y={y + game.depth - 1920}
 				eventMode="static"
 				onPointerDown={pointerEventListener(game, "pointerdown")}
 				onPointerMove={pointerEventListener(game, "pointermove")}
@@ -142,19 +144,19 @@ const Foreground = ({ game }: { game: Game }) => {
 	const y2 = mod(-game.depth + 1920 * game.yBgOffset, 1920);
 	return (
 		<>
-			<sprite y={y} texture={Bg_Walls_Level1} />
-			<sprite y={y - 1920} texture={Bg_Walls_Level1} />
+			<sprite y={y + game.depth} texture={Bg_Walls_Level1} />
+			<sprite y={y + game.depth - 1920} texture={Bg_Walls_Level1} />
 			<sprite
 				anchor={{ x: 0, y: 0 }}
 				x={1080}
-				y={y2}
+				y={y2 + game.depth}
 				scale={{ x: -1, y: 1 }}
 				texture={Bg_Walls_Level1}
 			/>
 			<sprite
 				anchor={{ x: 0, y: 0 }}
 				x={1080}
-				y={y2 - 1920}
+				y={y2 + game.depth - 1920}
 				scale={{ x: -1, y: 1 }}
 				texture={Bg_Walls_Level1}
 			/>
@@ -174,35 +176,36 @@ const Timer = ({ game }: { game: Game }) => {
 
 const PlayerC = ({ player }: { player: Player }) => {
 	return (
-		<container
-			x={1080 / 2 + player.posX}
-			y={player.posY - player.game.depth}
-		>
-			<Circle radius={30} draw={() => {}} />
-		</container>
-	);
-};
-
-const ObstacleC = ({ game, obstacle }: { game: Game; obstacle: Obstacle }) => {
-	return (
-		<container x={0} y={obstacle.y - game.depth}>
-			<sprite
-				anchor={{ x: 0, y: 0.5 }}
-				texture={obstacle.data.texture}
-				x={obstacle.flipped ? 1080 : 0}
-				y={0}
-				scale={{
-					x: obstacle.flipped ? -1 : 1,
-					y: 1,
-				}}
+		<container x={player.posX} y={player.posY}>
+			<Circle
+				radius={30}
+				color={
+					player.game.obstacleManager.checkCollision(player) ?
+						0xff0000
+					:	0x0000ff
+				}
+				draw={() => {}}
 			/>
 		</container>
 	);
 };
 
-const EnemyC = ({ game, enemy }: { game: Game; enemy: Enemy }) => {
+const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 	return (
-		<container x={1080 / 2 + enemy.x} y={enemy.y - game.depth}>
+		<container
+			x={obstacle.x}
+			y={obstacle.y}
+			scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
+		>
+			<sprite texture={obstacle.data.texture}></sprite>
+			<PolygonShape polygon={obstacle.polygon()} />
+		</container>
+	);
+};
+
+const EnemyC = ({ enemy }: { enemy: Enemy }) => {
+	return (
+		<container x={1080 / 2 + enemy.x} y={enemy.y}>
 			<Rectangle
 				x={-enemy.width / 2}
 				y={-enemy.height / 2}
@@ -260,10 +263,7 @@ const PolygonEditor = ({ game }: { game: Game }) => {
 			/>
 			<container x={200} y={200}>
 				<sprite texture={game.polygonEditor.obstacle.texture} />
-				<PolygonShape
-					polygon={game.polygonEditor.obstacle.polygon}
-					alpha={0.5}
-				/>
+				<PolygonShape polygon={game.polygonEditor.obstacle.polygon} />
 			</container>
 		</container>
 	);
