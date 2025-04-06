@@ -25,7 +25,7 @@ export class ObstacleManager {
 	lastYWallLeft = 0;
 	lastYWallRight = Math.random() * 1920 - 1920;
 
-	lastY = 2000;
+	lastY = 1500;
 
 	previousPatterns: Pattern[] = [];
 

@@ -1,7 +1,6 @@
 - enemies
-- placing obstacles and enemies in a smarter way
+- placing enemies in a smarter way
 - shooting
-- lives
 - game over flow
 - first balancing
 - basic background crossfade

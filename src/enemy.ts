@@ -21,13 +21,15 @@ export class Enemy {
 		this.y = y;
 		this.originalX = x;
 		this.range = 200;
-		this.frequency = 0.5;
+		this.frequency = 1;
 	}
 
 	tick(delta: number) {
 		this.lt += delta;
 		this.x =
-			this.originalX + Math.sin(this.lt / this.frequency) * this.range;
+			this.originalX +
+			(2 * Math.abs(((this.lt / this.frequency) % 2) - 1) - 1) *
+				this.range;
 	}
 
 	isOutOfBounds() {

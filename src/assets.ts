@@ -1,4 +1,4 @@
-/** Generated on Sun Apr  6 22:20:33 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Sun Apr  6 23:22:20 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -13,6 +13,7 @@ import Bg_Level_06_ from "../gfx/Bg_Level_06.jpg?texture";
 import Bg_Level_07_ from "../gfx/Bg_Level_07.jpg?texture";
 import Bg_Level_08_ from "../gfx/Bg_Level_08.jpg?texture";
 import Bg_Level_09_ from "../gfx/Bg_Level_09.jpg?texture";
+import Bg_Level_09_End_ from "../gfx/Bg_Level_09_End.png?texture";
 import Bg_Walls_Level1_ from "../gfx/Bg_Walls_Level1.png?texture";
 import BtnCompleteTxt_ from "../gfx/BtnCompleteTxt.png?texture";
 import BtnGamePausedTxt_ from "../gfx/BtnGamePausedTxt.png?texture";
@@ -22,6 +23,7 @@ import BtnOverTxt_ from "../gfx/BtnOverTxt.png?texture";
 import Cupid_ from "../gfx/Cupid.png?texture";
 import CupidArrow_ from "../gfx/CupidArrow.png?texture";
 import CupidArrow_Blurred_ from "../gfx/CupidArrow_Blurred.png?texture";
+import Devil_ from "../gfx/Devil.png?texture";
 import EnemyFlying_Level1_01_ from "../gfx/EnemyFlying_Level1_01.png?texture";
 import Heart_Off_ from "../gfx/Heart_Off.png?texture";
 import Heart_On_ from "../gfx/Heart_On.png?texture";
@@ -67,6 +69,7 @@ export const [
 	T_Bg_Level_07,
 	T_Bg_Level_08,
 	T_Bg_Level_09,
+	T_Bg_Level_09_End,
 	T_Bg_Walls_Level1,
 	T_BtnCompleteTxt,
 	T_BtnGamePausedTxt,
@@ -76,6 +79,7 @@ export const [
 	T_Cupid,
 	T_CupidArrow,
 	T_CupidArrow_Blurred,
+	T_Devil,
 	T_EnemyFlying_Level1_01,
 	T_Heart_Off,
 	T_Heart_On,
@@ -114,6 +118,7 @@ export const [
 	Bg_Level_07_,
 	Bg_Level_08_,
 	Bg_Level_09_,
+	Bg_Level_09_End_,
 	Bg_Walls_Level1_,
 	BtnCompleteTxt_,
 	BtnGamePausedTxt_,
@@ -123,6 +128,7 @@ export const [
 	Cupid_,
 	CupidArrow_,
 	CupidArrow_Blurred_,
+	Devil_,
 	EnemyFlying_Level1_01_,
 	Heart_Off_,
 	Heart_On_,

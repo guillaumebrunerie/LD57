@@ -62,6 +62,10 @@ export class Player {
 		}
 		this.posX = Math.max(minX, Math.min(this.posX, maxX));
 		this.posY += this.game.cameraSpeed * delta;
+		this.posY = Math.min(
+			this.posY,
+			this.game.levelDepth * this.game.levels + 1920 - 500,
+		);
 
 		this.invincibleTimeout -= delta;
 		if (this.invincibleTimeout < 0) {

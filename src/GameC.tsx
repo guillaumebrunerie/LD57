@@ -10,7 +10,9 @@ import {
 	T_Bg_Level_07,
 	T_Bg_Level_08,
 	T_Bg_Level_09,
+	T_Bg_Level_09_End,
 	T_Cupid,
+	T_Devil,
 	T_EnemyFlying_Level1_01,
 	T_Heart_Off,
 	T_Heart_On,
@@ -142,7 +144,27 @@ const Background = ({ game }: { game: Game }) => {
 				onPointerMove={pointerEventListener(game, "pointermove")}
 				onPointerUp={pointerEventListener(game, "pointerup")}
 			/>
+			<End game={game} />
 		</>
+	);
+};
+
+const End = ({ game }: { game: Game }) => {
+	return (
+		<container>
+			<sprite
+				texture={T_Bg_Level_09_End}
+				anchor={{ x: 0, y: 1 }}
+				x={0}
+				y={game.levelDepth * game.levels + 1920}
+			/>
+			<sprite
+				texture={T_Devil}
+				anchor={{ x: 0.5, y: 1 }}
+				x={1080 / 2}
+				y={game.levelDepth * game.levels + 1920 - 150}
+			/>
+		</container>
 	);
 };
 

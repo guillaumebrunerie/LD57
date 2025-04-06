@@ -65,6 +65,8 @@ export class Game {
 			if (this.depth > this.levelDepth * this.level) {
 				this.nextLevel();
 			}
+		} else {
+			this.depth = this.levelDepth * this.levels;
 		}
 
 		this.player.tick(delta);
@@ -99,6 +101,7 @@ export class Game {
 			[0, 1.2, 0.8],
 			[0, 0.8, 1.2],
 			[0, 0.4, 1.6],
+			[0, 0, 2],
 			[0, 0, 2],
 		];
 
