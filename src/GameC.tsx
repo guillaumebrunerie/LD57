@@ -21,6 +21,8 @@ import { useWindowEventListener } from "./useWindowEventListener";
 import type { Obstacle } from "./obstacle";
 import type { Player } from "./player";
 import type { Enemy } from "./enemy";
+import { CustomText } from "./CustomText";
+// import { crossfadeFilter } from "./crossfade";
 
 export const GameC = ({ game }: { game: Game }) => {
 	useWindowEventListener("keydown", (event) => {
@@ -59,6 +61,7 @@ export const GameC = ({ game }: { game: Game }) => {
 			))}
 			<PlayerC player={game.player} />
 			<Foreground game={game} />
+			<Timer game={game} />
 			<PauseButton game={game} />
 			{game.state == "gameover" && <GameOverScreen game={game} />}
 			{game.state == "win" && <WinScreen game={game} />}
@@ -97,6 +100,8 @@ const getBg = (level: number) => {
 	}
 };
 
+// const f = crossfadeFilter(getBg(1), getBg(2));
+
 const Background = ({ game }: { game: Game }) => {
 	const y = mod(-game.depth, 1920);
 
@@ -113,6 +118,7 @@ const Background = ({ game }: { game: Game }) => {
 			/>
 			<sprite
 				texture={getBg(game.level)}
+				// filters={[f]}
 				x={0}
 				y={y - 1920}
 				eventMode="static"
@@ -144,6 +150,16 @@ const Foreground = ({ game }: { game: Game }) => {
 				draw={() => {}}
 			/>
 		</>
+	);
+};
+
+const Timer = ({ game }: { game: Game }) => {
+	const minutes = Math.floor(game.lt / 60);
+	const seconds = Math.floor(game.lt - minutes * 60);
+	const text = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+	return (
+		<CustomText anchor={{ x: 1, y: 0 }} x={1080 - 20} y={20} text={text} />
 	);
 };
 
