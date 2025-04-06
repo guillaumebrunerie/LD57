@@ -1,7 +1,11 @@
 import type { Game } from "./game";
 import { Obstacle, type ObstacleData } from "./obstacle";
 import { obstaclesData } from "./obstaclesData";
-import { getObstaclePattern, obstaclesPatternsData } from "./obstaclesPatterns";
+import {
+	getObstaclePattern,
+	getPatternSpacing,
+	type Pattern,
+} from "./obstaclesPatterns";
 import type { Player } from "./player";
 
 export const getPossibleObstacles = (_level: number) => {
@@ -23,8 +27,7 @@ export class ObstacleManager {
 
 	lastY = 2000;
 
-	minSpacingY = 800;
-	maxSpacingY = 1200;
+	previousPatterns: Pattern[] = [];
 
 	tick(_delta: number) {
 		if (this.obstacles.some((o) => o.isOutOfBounds())) {
@@ -61,11 +64,13 @@ export class ObstacleManager {
 		}
 
 		while (this.lastY <= this.game.depth + 1920) {
-			this.lastY +=
-				Math.random() * (this.maxSpacingY - this.minSpacingY) +
-				this.minSpacingY;
-			const pattern = getObstaclePattern(this.game.level);
-			for (const patternData of pattern) {
+			this.lastY += getPatternSpacing(this.game.level);
+			const pattern = getObstaclePattern(
+				this.game.level,
+				this.previousPatterns,
+			);
+			this.previousPatterns.push(pattern);
+			for (const patternData of pattern.data) {
 				const x =
 					Math.random() * (patternData.x[1] - patternData.x[0]) +
 					patternData.x[0];
@@ -90,13 +95,7 @@ export class ObstacleManager {
 		}
 	}
 
-	nextLevel() {
-		this.minSpacingY *= 0.8;
-		this.maxSpacingY *= 0.8;
-
-		this.minSpacingY = Math.max(this.minSpacingY, 100);
-		this.maxSpacingY = Math.max(this.maxSpacingY, 200);
-	}
+	nextLevel() {}
 
 	checkCollision(player: Player) {
 		for (const obstacle of this.obstacles) {
