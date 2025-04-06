@@ -14,6 +14,8 @@ export class Obstacle {
 	y: number;
 	scaleX: number;
 	scaleY: number;
+	pivotX = 0;
+	pivotY = 0;
 	id: string;
 	data: ObstacleData;
 
@@ -31,6 +33,9 @@ export class Obstacle {
 		this.scaleX = flipped ? -1 : 1;
 		this.scaleY = 1;
 		this.data = data;
+		if (this.data.type == "rock") {
+			this.pivotX = this.data.texture.width / 2;
+		}
 	}
 
 	isOutOfBounds() {
@@ -55,8 +60,8 @@ export class Obstacle {
 		transform.setTransform(
 			this.x,
 			this.y,
-			0,
-			0,
+			this.pivotX,
+			this.pivotY,
 			this.scaleX,
 			this.scaleY,
 			0,

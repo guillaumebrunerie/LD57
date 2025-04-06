@@ -11,7 +11,7 @@ import {
 } from "./assets";
 import type { ObstacleData } from "./obstacle";
 
-export const obstacles: ObstacleData[][] = [
+export const obstaclesData: ObstacleData[][] = [
 	// Level 1
 	[
 		{
@@ -216,3 +216,12 @@ export const obstacles: ObstacleData[][] = [
 		},
 	],
 ];
+
+obstaclesData[1] = obstaclesData[0];
+obstaclesData[2] = obstaclesData[0];
+obstaclesData[3] = obstaclesData[0];
+obstaclesData[4] = obstaclesData[0];
+obstaclesData[5] = obstaclesData[0];
+obstaclesData[6] = obstaclesData[0];
+obstaclesData[7] = obstaclesData[0];
+obstaclesData[8] = obstaclesData[0];

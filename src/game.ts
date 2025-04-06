@@ -214,7 +214,7 @@ class EnemiesManager {
 			this.lastY +=
 				Math.random() * (this.maxSpacingY - this.minSpacingY) +
 				this.minSpacingY;
-			const x = (Math.random() * 2 - 1) * 450;
+			const x = (Math.random() * 2 - 1) * 450 + 1080 / 2;
 			this.enemies.push(new Enemy(this.game, x, this.lastY));
 		}
 

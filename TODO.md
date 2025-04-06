@@ -1,0 +1,12 @@
+- placing obstacles and enemies in a smarter way
+- enemies
+- shooting
+- lives
+- game over flow
+- first balancing
+- basic background crossfade
+- win flow
+- shooting animation
+- win animation
+- implement all other obstacles
+- sound triggers

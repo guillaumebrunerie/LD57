@@ -67,11 +67,11 @@ export const GameC = ({ game }: { game: Game }) => {
 		<container>
 			<container y={-game.depth}>
 				<Background game={game} />
-				{game.enemiesManager.enemies.map((enemy) => (
-					<EnemyC key={enemy.id} enemy={enemy} />
-				))}
 				{game.obstaclesManager.obstacles.map((obstacle) => (
 					<ObstacleC key={obstacle.id} obstacle={obstacle} />
+				))}
+				{game.enemiesManager.enemies.map((enemy) => (
+					<EnemyC key={enemy.id} enemy={enemy} />
 				))}
 				<PlayerC player={game.player} />
 			</container>
@@ -177,6 +177,7 @@ const PlayerC = ({ player }: { player: Player }) => {
 const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 	return (
 		<container
+			pivot={{ x: obstacle.pivotX, y: obstacle.pivotY }}
 			x={obstacle.x}
 			y={obstacle.y}
 			scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
@@ -189,7 +190,7 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 
 const EnemyC = ({ enemy }: { enemy: Enemy }) => {
 	return (
-		<container x={1080 / 2 + enemy.x} y={enemy.y}>
+		<container x={enemy.x} y={enemy.y}>
 			<sprite texture={T_EnemyFlying_Level1_01} />
 		</container>
 	);

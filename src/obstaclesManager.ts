@@ -1,10 +1,11 @@
 import type { Game } from "./game";
 import { Obstacle, type ObstacleData } from "./obstacle";
-import { obstacles as obstacleData } from "./obstaclesData";
+import { obstaclesData } from "./obstaclesData";
+import { getObstaclePattern, obstaclesPatternsData } from "./obstaclesPatterns";
 import type { Player } from "./player";
 
 export const getPossibleObstacles = (_level: number) => {
-	return obstacleData[0];
+	return obstaclesData[0];
 };
 
 const getRandomObstacle = (level: number, type: ObstacleData["type"]) => {
@@ -20,9 +21,7 @@ export class ObstacleManager {
 	lastYWallLeft = 0;
 	lastYWallRight = Math.random() * 1920 - 1920;
 
-	lastYLeft = 2000;
-	lastYRight = 2000;
-	lastYMiddle = 2000;
+	lastY = 2000;
 
 	minSpacingY = 800;
 	maxSpacingY = 1200;
@@ -61,51 +60,28 @@ export class ObstacleManager {
 			needSort = true;
 		}
 
-		while (this.lastYLeft <= this.game.depth + 1920) {
-			this.lastYLeft +=
+		while (this.lastY <= this.game.depth + 1920) {
+			this.lastY +=
 				Math.random() * (this.maxSpacingY - this.minSpacingY) +
 				this.minSpacingY;
-			this.obstacles.push(
-				new Obstacle(
-					this.game,
-					0,
-					this.lastYLeft,
-					false,
-					getRandomObstacle(this.game.level, "spike"),
-				),
-			);
-			needSort = true;
-		}
-
-		while (this.lastYRight <= this.game.depth + 1920) {
-			this.lastYRight +=
-				Math.random() * (this.maxSpacingY - this.minSpacingY) +
-				this.minSpacingY;
-			this.obstacles.push(
-				new Obstacle(
-					this.game,
-					1080,
-					this.lastYRight,
-					true,
-					getRandomObstacle(this.game.level, "spike"),
-				),
-			);
-			needSort = true;
-		}
-
-		while (this.lastYMiddle <= this.game.depth + 1920) {
-			this.lastYMiddle +=
-				Math.random() * (this.maxSpacingY - this.minSpacingY) +
-				this.minSpacingY;
-			this.obstacles.push(
-				new Obstacle(
-					this.game,
-					1080 / 2,
-					this.lastYMiddle,
-					false,
-					getRandomObstacle(this.game.level, "rock"),
-				),
-			);
+			const pattern = getObstaclePattern(this.game.level);
+			for (const patternData of pattern) {
+				const x =
+					Math.random() * (patternData.x[1] - patternData.x[0]) +
+					patternData.x[0];
+				const y =
+					Math.random() * (patternData.y[1] - patternData.y[0]) +
+					patternData.y[0];
+				this.obstacles.push(
+					new Obstacle(
+						this.game,
+						x,
+						this.lastY + y,
+						patternData.flipped,
+						obstaclesData[this.game.level - 1][patternData.index],
+					),
+				);
+			}
 			needSort = true;
 		}
 
