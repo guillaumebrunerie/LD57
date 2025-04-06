@@ -1,8 +1,8 @@
 import {
-	S_CompleteLevel,
+	// S_CompleteLevel,
 	// LoseGame,
 	S_Music,
-	S_StartLevel,
+	// S_StartLevel,
 } from "./assets";
 import { Enemy } from "./enemy";
 import { ObstacleManager as ObstaclesManager } from "./obstaclesManager";
@@ -15,14 +15,7 @@ export class Game {
 	startLt = 0;
 
 	isPaused = false;
-	state:
-		| "logo"
-		| "levelSelect"
-		| "gameStarting"
-		| "game"
-		| "gameover"
-		| "win"
-		| "polygonEditor" = "logo";
+	state: "startScreen" | "game" | "polygonEditor" = "startScreen";
 	polygonEditor = new PolygonEditor();
 
 	depth = 0;
@@ -48,7 +41,7 @@ export class Game {
 		this.lt += delta;
 		this.startLt += delta;
 
-		if (this.state == "gameover") {
+		if (this.state !== "game") {
 			return;
 		}
 
@@ -69,8 +62,8 @@ export class Game {
 		}
 	}
 
-	skipLogo() {
-		this.state = "levelSelect";
+	start() {
+		this.state = "game";
 		S_Music.singleInstance = true;
 		void S_Music.play({ loop: true, volume: 0.5 });
 		this.lt = 0;
@@ -83,20 +76,8 @@ export class Game {
 
 	backToMainMenu() {
 		this.reset();
-		this.state = "levelSelect";
+		this.state = "startScreen";
 		void S_Music.resume();
-	}
-
-	startLevel() {
-		void S_Music.pause();
-		void S_StartLevel.play({ volume: 0.5 });
-		this.state = "gameStarting";
-		this.startLt = 0;
-
-		setTimeout(() => {
-			S_Music.singleInstance = true;
-			void S_Music.play({ loop: true, volume: 0.3 });
-		}, 700);
 	}
 
 	pause() {
@@ -106,26 +87,19 @@ export class Game {
 	}
 
 	resume() {
-		if (this.state == "levelSelect") {
-			void S_Music.resume();
-		} else {
-			void S_Music.resume();
-		}
+		void S_Music.resume();
+
 		this.isPaused = false;
 	}
 
 	autoPause() {
-		if (
-			this.state == "levelSelect" ||
-			this.state == "game" ||
-			this.state == "gameStarting"
-		) {
+		if (this.state == "game") {
 			this.pause();
 		}
 	}
 
 	autoResume() {
-		if (this.state == "levelSelect") {
+		if (this.state == "game") {
 			this.resume();
 		}
 	}
@@ -139,12 +113,12 @@ export class Game {
 		// this.state = "gameover";
 	}
 
-	win() {
-		void S_Music.pause();
-		void S_CompleteLevel.play({ volume: 0.5 });
-		this.state = "win";
-		this.startLt = 0;
-	}
+	// win() {
+	// 	void S_Music.pause();
+	// 	void S_CompleteLevel.play({ volume: 0.5 });
+	// 	this.state = "win";
+	// 	this.startLt = 0;
+	// }
 
 	onEvent(type: "pointerdown" | "pointermove" | "pointerup", pos: Point) {
 		switch (type) {

@@ -1,20 +1,25 @@
 import type { Game } from "./game";
 import {
-	T_Bg_Level_01,
-	T_PauseBtn,
 	S_Click,
-	T_Bg_Level_09,
-	T_Bg_Level_08,
-	T_Bg_Level_06,
-	T_Bg_Level_05,
-	T_Bg_Level_04,
-	T_Bg_Level_03,
+	T_Bg_Level_01,
 	T_Bg_Level_02,
+	T_Bg_Level_03,
+	T_Bg_Level_04,
+	T_Bg_Level_05,
+	T_Bg_Level_06,
 	T_Bg_Level_07,
+	T_Bg_Level_08,
+	T_Bg_Level_09,
 	T_Cupid,
+	T_PauseBtn,
 } from "./assets";
 import { Rectangle } from "./Rectangle";
-import { GameOverScreen, LogoScreen, PauseScreen, WinScreen } from "./Postings";
+import {
+	// GameOverScreen,
+	StartScreen,
+	PauseScreen,
+	// WinScreen,
+} from "./Postings";
 import type { FederatedPointerEvent } from "pixi.js";
 import { Circle } from "./Circle";
 import { mod } from "./utils";
@@ -49,8 +54,8 @@ export const GameC = ({ game }: { game: Game }) => {
 		}
 	});
 
-	if (game.state == "logo") {
-		return <LogoScreen game={game} />;
+	if (game.state == "startScreen") {
+		return <StartScreen game={game} />;
 	}
 
 	if (game.state == "polygonEditor") {
@@ -71,8 +76,8 @@ export const GameC = ({ game }: { game: Game }) => {
 			</container>
 			<Timer game={game} />
 			<PauseButton game={game} />
-			{game.state == "gameover" && <GameOverScreen game={game} />}
-			{game.state == "win" && <WinScreen game={game} />}
+			{/* {game.state == "gameover" && <GameOverScreen game={game} />} */}
+			{/* {game.state == "win" && <WinScreen game={game} />} */}
 			{game.isPaused && <PauseScreen game={game} />}
 		</container>
 	);

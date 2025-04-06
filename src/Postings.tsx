@@ -20,7 +20,7 @@ const buttonsXRight = (1920 * 2) / 3;
 const backdropFilter = new BackdropBlurFilter();
 const textColor = "#DDD";
 
-export const LogoScreen = ({ game }: { game: Game }) => {
+export const StartScreen = ({ game }: { game: Game }) => {
 	return (
 		<container>
 			<sprite
@@ -29,7 +29,7 @@ export const LogoScreen = ({ game }: { game: Game }) => {
 				eventMode="static"
 				onPointerDown={() => {
 					void S_Click.play();
-					game.skipLogo();
+					game.start();
 				}}
 			/>
 			<CustomText
