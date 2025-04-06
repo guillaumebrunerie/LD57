@@ -1,6 +1,4 @@
-- mask walls before end
-- enemies
-- placing enemies in a smarter way
+- intro flow
 - shooting
 - game over flow
 - first balancing

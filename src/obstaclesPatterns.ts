@@ -40,13 +40,28 @@ const rock = (
 	index,
 });
 
-const enemy = (
+const enemyHorizontal = (
 	index: number,
 	frequency: number,
 	range: [number, number],
 	y: number | [number, number] = 0,
 ): PatternData => ({
 	x: [0, 0],
+	y: typeof y == "number" ? [y, y] : y,
+	flipped: false,
+	index,
+	frequency,
+	range,
+});
+
+const enemyVertical = (
+	index: number,
+	frequency: number,
+	x: number | [number, number],
+	range: [number, number],
+	y: number | [number, number] = 0,
+): PatternData => ({
+	x: typeof x == "number" ? [x, x] : x,
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
 	index,
@@ -78,8 +93,14 @@ export const obstaclesPatternsData: LevelPattern[] = [
 	{
 		spacing: [700, 1100],
 		data: [
-			{ side: "right", data: [enemy(8, 1, [250, 830], [-100, 100])] },
-			{ side: "left", data: [enemy(8, 1, [250, 830], [-100, 100])] },
+			{
+				side: "right",
+				data: [enemyHorizontal(8, 1, [250, 830], [-100, 100])],
+			},
+			{
+				side: "left",
+				data: [enemyHorizontal(8, 1, [250, 830], [-100, 100])],
+			},
 			{ side: "right", data: [spikeLeft(2)] },
 			{ side: "left", data: [spikeRight(2)] },
 			{ side: "left", data: [rock(5, [50, 200])] },
@@ -94,8 +115,16 @@ export const obstaclesPatternsData: LevelPattern[] = [
 	{
 		spacing: [700, 1100],
 		data: [
-			{ side: "right", data: [enemy(8, 1, [250, 830], [-100, 100])] },
-			{ side: "left", data: [enemy(8, 1, [250, 830], [-100, 100])] },
+			{ side: "right", data: [enemyVertical(9, 0.8, 300, [-100, 100])] },
+			{ side: "left", data: [enemyVertical(9, 0.8, 780, [-100, 100])] },
+			{
+				side: "right",
+				data: [enemyHorizontal(8, 1, [250, 830], [-100, 100])],
+			},
+			{
+				side: "left",
+				data: [enemyHorizontal(8, 1, [250, 830], [-100, 100])],
+			},
 			{ side: "left", data: [spikeLeft(1), spikeRight(2, [50, 100])] },
 			{ side: "right", data: [spikeRight(3), spikeLeft(2, [50, 100])] },
 			{ side: "left", data: [spikeLeft(1), spikeRight(2, [50, 100])] },
@@ -114,35 +143,59 @@ export const obstaclesPatternsData: LevelPattern[] = [
 		data: [
 			{
 				side: "right",
-				data: [spikeLeft(1), enemy(8, 1, [400, 850], [-100, 100])],
+				data: [
+					spikeLeft(1),
+					enemyHorizontal(8, 1, [400, 850], [-100, 100]),
+				],
 			},
 			{
 				side: "right",
-				data: [spikeLeft(2), enemy(8, 2, [500, 850], [150, 200])],
+				data: [
+					spikeLeft(2),
+					enemyHorizontal(8, 2, [500, 850], [150, 200]),
+				],
 			},
 			{
 				side: "right",
-				data: [spikeLeft(3), enemy(8, 1, [500, 850], [-100, 100])],
+				data: [
+					spikeLeft(3),
+					enemyHorizontal(8, 1, [500, 850], [-100, 100]),
+				],
 			},
 			{
 				side: "right",
-				data: [spikeLeft(4), enemy(8, 1, [350, 850], [-100, 100])],
+				data: [
+					spikeLeft(4),
+					enemyHorizontal(8, 1, [350, 850], [-100, 100]),
+				],
 			},
 			{
 				side: "left",
-				data: [spikeRight(1), enemy(8, 1, [680, 230], [-100, 100])],
+				data: [
+					spikeRight(1),
+					enemyHorizontal(8, 1, [680, 230], [-100, 100]),
+				],
 			},
 			{
 				side: "left",
-				data: [spikeRight(2), enemy(8, 2, [580, 230], [150, 200])],
+				data: [
+					spikeRight(2),
+					enemyHorizontal(8, 2, [580, 230], [150, 200]),
+				],
 			},
 			{
 				side: "left",
-				data: [spikeRight(3), enemy(8, 1, [580, 230], [-100, 100])],
+				data: [
+					spikeRight(3),
+					enemyHorizontal(8, 1, [580, 230], [-100, 100]),
+				],
 			},
 			{
 				side: "left",
-				data: [spikeRight(4), enemy(8, 1, [730, 230], [-100, 100])],
+				data: [
+					spikeRight(4),
+					enemyHorizontal(8, 1, [730, 230], [-100, 100]),
+				],
 			},
 		],
 	},

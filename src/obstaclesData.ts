@@ -2,6 +2,7 @@ import { Polygon } from "pixi.js";
 import {
 	T_Bg_Walls_Level1,
 	T_EnemyFlying_Level1_01,
+	T_EnemyStill_Level1_01,
 	T_Rock_Level1_01,
 	T_Rock_Level1_02,
 	T_Rock_Level1_03,
@@ -228,6 +229,11 @@ export const obstaclesData: ObstacleData[][] = [
 				130.77,
 				127.88,
 			),
+		},
+		{
+			type: "enemy-vertical",
+			texture: T_EnemyStill_Level1_01,
+			polygon: new Polygon(),
 		},
 	],
 ];
