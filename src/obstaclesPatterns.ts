@@ -173,28 +173,28 @@ export const obstaclesPatternsData: LevelPattern[] = [
 				side: "left",
 				data: [
 					spikeRight(1),
-					enemyHorizontal(8, 1, [680, 230], [-100, 100]),
+					enemyHorizontal(8, 1, [230, 680], [-100, 100]),
 				],
 			},
 			{
 				side: "left",
 				data: [
 					spikeRight(2),
-					enemyHorizontal(8, 2, [580, 230], [150, 200]),
+					enemyHorizontal(8, 2, [230, 580], [150, 200]),
 				],
 			},
 			{
 				side: "left",
 				data: [
 					spikeRight(3),
-					enemyHorizontal(8, 1, [580, 230], [-100, 100]),
+					enemyHorizontal(8, 1, [230, 580], [-100, 100]),
 				],
 			},
 			{
 				side: "left",
 				data: [
 					spikeRight(4),
-					enemyHorizontal(8, 1, [730, 230], [-100, 100]),
+					enemyHorizontal(8, 1, [230, 730], [-100, 100]),
 				],
 			},
 		],

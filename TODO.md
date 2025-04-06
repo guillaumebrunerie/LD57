@@ -1,5 +1,6 @@
 - intro flow
 - shooting
+- enemy explosion
 - game over flow
 - first balancing
 - basic background crossfade
