@@ -5,7 +5,7 @@ type PatternData = {
 	index: number;
 };
 
-type Pattern = PatternData[];
+export type Pattern = { side: "left" | "right"; data: PatternData[] };
 
 const spikeLeft = (
 	index: number,
@@ -29,57 +29,111 @@ const spikeRight = (
 
 const rock = (
 	index: number,
-	x: number,
+	x: [number, number],
 	y: number | [number, number] = 0,
 ): PatternData => ({
-	x: [1080 / 2 - x, 1080 / 2 + x],
+	x: [1080 / 2 + x[0], 1080 / 2 + x[1]],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
 	index,
 });
 
-export const obstaclesPatternsData: Pattern[][] = [
+type LevelPattern = {
+	spacing: [number, number];
+	data: Pattern[];
+};
+
+export const obstaclesPatternsData: LevelPattern[] = [
 	// Level 1
-	[
-		[spikeLeft(1)],
-		[spikeLeft(2)],
-		[spikeLeft(3)],
-		[spikeLeft(4)],
-		[spikeRight(1)],
-		[spikeRight(2)],
-		[spikeRight(3)],
-		[spikeRight(4)],
-	],
+	{
+		spacing: [800, 1200],
+		data: [
+			{ side: "right", data: [spikeLeft(1)] },
+			{ side: "right", data: [spikeLeft(2)] },
+			{ side: "right", data: [spikeLeft(3)] },
+			{ side: "right", data: [spikeLeft(4)] },
+			{ side: "left", data: [spikeRight(1)] },
+			{ side: "left", data: [spikeRight(2)] },
+			{ side: "left", data: [spikeRight(3)] },
+			{ side: "left", data: [spikeRight(4)] },
+		],
+	},
 	// Level 2
-	[
-		[spikeLeft(2)],
-		[spikeRight(2)],
-		[rock(5, 200)],
-		[rock(6, 200)],
-		[rock(7, 200)],
-	],
+	{
+		spacing: [700, 1100],
+		data: [
+			{ side: "right", data: [spikeLeft(2)] },
+			{ side: "left", data: [spikeRight(2)] },
+			{ side: "left", data: [rock(5, [50, 200])] },
+			{ side: "left", data: [rock(6, [50, 200])] },
+			{ side: "left", data: [rock(7, [50, 200])] },
+			{ side: "right", data: [rock(5, [-200, 50])] },
+			{ side: "right", data: [rock(6, [-200, 50])] },
+			{ side: "right", data: [rock(7, [-200, 50])] },
+		],
+	},
 	// Level 3
-	[
-		[spikeLeft(1), spikeRight(2, [50, 100])],
-		[spikeRight(3), spikeLeft(2, [50, 100])],
-		[spikeLeft(1), spikeRight(2, [50, 100])],
-		[spikeRight(3), spikeLeft(2, [50, 100])],
-		[rock(5, 200)],
-		[rock(6, 200)],
-		[rock(7, 200)],
-	],
+	{
+		spacing: [700, 1100],
+		data: [
+			{ side: "left", data: [spikeLeft(1), spikeRight(2, [50, 100])] },
+			{ side: "right", data: [spikeRight(3), spikeLeft(2, [50, 100])] },
+			{ side: "left", data: [spikeLeft(1), spikeRight(2, [50, 100])] },
+			{ side: "right", data: [spikeRight(3), spikeLeft(2, [50, 100])] },
+			{ side: "left", data: [rock(5, [50, 200])] },
+			{ side: "left", data: [rock(6, [50, 200])] },
+			{ side: "left", data: [rock(7, [50, 200])] },
+			{ side: "right", data: [rock(5, [-200, 50])] },
+			{ side: "right", data: [rock(6, [-200, 50])] },
+			{ side: "right", data: [rock(7, [-200, 50])] },
+		],
+	},
 ];
 
-obstaclesPatternsData[3] = obstaclesPatternsData[2];
-obstaclesPatternsData[4] = obstaclesPatternsData[2];
-obstaclesPatternsData[5] = obstaclesPatternsData[2];
-obstaclesPatternsData[6] = obstaclesPatternsData[2];
-obstaclesPatternsData[7] = obstaclesPatternsData[2];
-obstaclesPatternsData[8] = obstaclesPatternsData[2];
+obstaclesPatternsData[3] = {
+	...obstaclesPatternsData[2],
+	spacing: [600, 1000],
+};
+obstaclesPatternsData[4] = {
+	...obstaclesPatternsData[2],
+	spacing: [600, 1000],
+};
+obstaclesPatternsData[5] = { ...obstaclesPatternsData[2], spacing: [500, 900] };
+obstaclesPatternsData[6] = { ...obstaclesPatternsData[2], spacing: [500, 900] };
+obstaclesPatternsData[7] = { ...obstaclesPatternsData[2], spacing: [400, 800] };
+obstaclesPatternsData[8] = { ...obstaclesPatternsData[2], spacing: [300, 700] };
 
-export const getObstaclePattern = (level: number) => {
-	const possibleObstaclePatterns = obstaclesPatternsData[level - 1];
+const otherSide = {
+	left: "right",
+	right: "left",
+} as const;
+
+export const getObstaclePattern = (
+	level: number,
+	previousPatterns: Pattern[],
+) => {
+	const last = previousPatterns.at(-1);
+	const previousLast = previousPatterns.at(-2);
+	let side;
+	if (!last) {
+		side = Math.random() < 0.5 ? "left" : "right";
+	} else if (!previousLast || last.side != previousLast.side) {
+		side = Math.random() < 0.7 ? otherSide[last.side] : last.side;
+	} else {
+		side = last.side == "left" ? "right" : "left";
+	}
+
+	const possibleObstaclePatterns = obstaclesPatternsData[
+		level - 1
+	].data.filter(
+		(o) => o.side == side && JSON.stringify(o) != JSON.stringify(last),
+	);
 	return possibleObstaclePatterns[
 		Math.floor(Math.random() * possibleObstaclePatterns.length)
 	];
+};
+
+export const getPatternSpacing = (level: number) => {
+	const [minSpacingY, maxSpacingY] = obstaclesPatternsData[level - 1].spacing;
+	return Math.random() * (maxSpacingY - minSpacingY) + minSpacingY;
 };
