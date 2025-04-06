@@ -151,7 +151,11 @@ const Timer = ({ game }: { game: Game }) => {
 const PlayerC = ({ player }: { player: Player }) => {
 	return (
 		<container x={player.posX} y={player.posY}>
-			<sprite texture={Cupid} anchor={0.5} />
+			<sprite
+				texture={Cupid}
+				anchor={0.5}
+				scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
+			/>
 			{player.game.obstaclesManager.checkCollision(player) && (
 				<Circle
 					radius={30}

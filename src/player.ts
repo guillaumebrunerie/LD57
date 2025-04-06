@@ -13,6 +13,8 @@ export class Player {
 	movingLeft = false;
 	movingRight = false;
 
+	lookingLeft = false;
+
 	width = 50;
 
 	posX = 1080 / 2;
@@ -30,9 +32,11 @@ export class Player {
 	tick(delta: number) {
 		if (this.movingLeft) {
 			this.posX -= this.sideSpeed * delta;
+			this.lookingLeft = true;
 		}
 		if (this.movingRight) {
 			this.posX += this.sideSpeed * delta;
+			this.lookingLeft = false;
 		}
 		if (!this.movingLeft && !this.movingRight && this.targetX !== null) {
 			const speedFraction = Math.max(
@@ -43,6 +47,9 @@ export class Player {
 				),
 			);
 			this.posX += this.sideSpeed * speedFraction * delta;
+			if (Math.abs(speedFraction) > 0.1) {
+				this.lookingLeft = speedFraction < 0;
+			}
 		}
 		this.posX = Math.max(minX, Math.min(this.posX, maxX));
 		this.posY += this.game.cameraSpeed * delta;
