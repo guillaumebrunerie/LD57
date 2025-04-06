@@ -1,5 +1,17 @@
 import type { Game } from "./game";
-import { Bg, PauseBtn, Click } from "./assets";
+import {
+	Bg_Level_01,
+	PauseBtn,
+	Click,
+	Bg_Level_09,
+	Bg_Level_08,
+	Bg_Level_06,
+	Bg_Level_05,
+	Bg_Level_04,
+	Bg_Level_03,
+	Bg_Level_02,
+	Bg_Level_07,
+} from "./assets";
 import { Rectangle } from "./Rectangle";
 import { GameOverScreen, LogoScreen, PauseScreen, WinScreen } from "./Postings";
 import type { FederatedPointerEvent } from "pixi.js";
@@ -62,15 +74,37 @@ const pointerEventListener =
 		game.onEvent(type, { x, y });
 	};
 
+const getBg = (level: number) => {
+	switch (level) {
+		case 1:
+			return Bg_Level_01;
+		case 2:
+			return Bg_Level_02;
+		case 3:
+			return Bg_Level_03;
+		case 4:
+			return Bg_Level_04;
+		case 5:
+			return Bg_Level_05;
+		case 6:
+			return Bg_Level_06;
+		case 7:
+			return Bg_Level_07;
+		case 8:
+			return Bg_Level_08;
+		default:
+			return Bg_Level_09;
+	}
+};
+
 const Background = ({ game }: { game: Game }) => {
 	const y = mod(-game.depth, 1920);
 
 	return (
 		<>
 			<sprite
-				texture={Bg}
-				angle={90}
-				x={1080}
+				texture={getBg(game.level)}
+				x={0}
 				y={y}
 				eventMode="static"
 				onPointerDown={pointerEventListener(game, "pointerdown")}
@@ -78,9 +112,8 @@ const Background = ({ game }: { game: Game }) => {
 				onPointerUp={pointerEventListener(game, "pointerup")}
 			/>
 			<sprite
-				texture={Bg}
-				angle={90}
-				x={1080}
+				texture={getBg(game.level)}
+				x={0}
 				y={y - 1920}
 				eventMode="static"
 				onPointerDown={pointerEventListener(game, "pointerdown")}

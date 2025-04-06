@@ -1,10 +1,18 @@
-/** Generated on Sun Apr  6 00:49:20 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Sun Apr  6 12:59:49 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
 
 /** Textures */
-import Bg_ from "../gfx/Bg.jpg?texture";
+import Bg_Level_01_ from "../gfx/Bg_Level_01.jpg?texture";
+import Bg_Level_02_ from "../gfx/Bg_Level_02.jpg?texture";
+import Bg_Level_03_ from "../gfx/Bg_Level_03.jpg?texture";
+import Bg_Level_04_ from "../gfx/Bg_Level_04.jpg?texture";
+import Bg_Level_05_ from "../gfx/Bg_Level_05.jpg?texture";
+import Bg_Level_06_ from "../gfx/Bg_Level_06.jpg?texture";
+import Bg_Level_07_ from "../gfx/Bg_Level_07.jpg?texture";
+import Bg_Level_08_ from "../gfx/Bg_Level_08.jpg?texture";
+import Bg_Level_09_ from "../gfx/Bg_Level_09.jpg?texture";
 import BtnCompleteTxt_ from "../gfx/BtnCompleteTxt.png?texture";
 import BtnGamePausedTxt_ from "../gfx/BtnGamePausedTxt.png?texture";
 import BtnGameTxt_ from "../gfx/BtnGameTxt.png?texture";
@@ -33,7 +41,15 @@ import Heroes_Legend_ from "../fonts/Heroes_Legend.ttf?font";
 import Laffayette_Comic_Pro_ from "../fonts/Laffayette_Comic_Pro.ttf?font";
 
 export const [
-	Bg,
+	Bg_Level_01,
+	Bg_Level_02,
+	Bg_Level_03,
+	Bg_Level_04,
+	Bg_Level_05,
+	Bg_Level_06,
+	Bg_Level_07,
+	Bg_Level_08,
+	Bg_Level_09,
 	BtnCompleteTxt,
 	BtnGamePausedTxt,
 	BtnGameTxt,
@@ -55,7 +71,15 @@ export const [
 	Heroes_Legend,
 	Laffayette_Comic_Pro,
 ] = await Promise.all([
-	Bg_,
+	Bg_Level_01_,
+	Bg_Level_02_,
+	Bg_Level_03_,
+	Bg_Level_04_,
+	Bg_Level_05_,
+	Bg_Level_06_,
+	Bg_Level_07_,
+	Bg_Level_08_,
+	Bg_Level_09_,
 	BtnCompleteTxt_,
 	BtnGamePausedTxt_,
 	BtnGameTxt_,

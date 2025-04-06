@@ -10,8 +10,6 @@ import { Obstacle } from "./obstacle";
 import { Player } from "./player";
 import { type Point } from "./utils";
 
-export type PowerUp = "shockwave" | "push" | "bomb" | "hologram" | "freeze";
-
 export class Game {
 	lt = 0;
 	startLt = 0;
@@ -35,7 +33,7 @@ export class Game {
 	player = new Player(this);
 
 	level = 0;
-	levelDepth = 10000;
+	levelDepth = 5000;
 
 	constructor() {}
 
@@ -66,6 +64,7 @@ export class Game {
 		this.state = "levelSelect";
 		MusicMenu.singleInstance = true;
 		void MusicMenu.play({ loop: true, volume: 0.5 });
+		this.lt = 0;
 	}
 
 	reset() {
@@ -157,8 +156,8 @@ class ObstacleManager {
 
 	obstacles: Obstacle[] = [];
 
-	lastYLeft = 1000;
-	lastYRight = 1000;
+	lastYLeft = 2000;
+	lastYRight = 2000;
 
 	minSpacingY = 800;
 	maxSpacingY = 1200;
@@ -220,7 +219,7 @@ class EnemyManager {
 
 	enemies: Enemy[] = [];
 
-	lastY = 1000;
+	lastY = 2000;
 
 	minSpacingY = 2000;
 	maxSpacingY = 3000;

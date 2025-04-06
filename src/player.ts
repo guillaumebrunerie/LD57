@@ -15,7 +15,8 @@ export class Player {
 	posY = 300;
 
 	tapPos: Point | null = null;
-	tapActionX: "left" | "right" | null = null;
+	targetX: number | null = null;
+
 	tapActionY: "up" | "down" | null = null;
 
 	constructor(game: Game) {
@@ -23,11 +24,21 @@ export class Player {
 	}
 
 	tick(delta: number) {
-		if (this.movingLeft || this.tapActionX === "left") {
+		if (this.movingLeft) {
 			this.posX -= this.sideSpeed * delta;
 		}
-		if (this.movingRight || this.tapActionX === "right") {
+		if (this.movingRight) {
 			this.posX += this.sideSpeed * delta;
+		}
+		if (!this.movingLeft && !this.movingRight && this.targetX !== null) {
+			const speedFraction = Math.max(
+				-1,
+				Math.min(
+					1,
+					(this.targetX - this.posX) / this.sideSpeed / delta,
+				),
+			);
+			this.posX += this.sideSpeed * speedFraction * delta;
 		}
 		this.posX = Math.max(
 			-this.game.boundX,
@@ -46,43 +57,30 @@ export class Player {
 
 	onPointerDown(pos: Point) {
 		this.tapPos = pos;
+		this.targetX = 0;
 	}
 
 	onPointerMove(pos: Point) {
 		if (!this.tapPos) {
 			return;
 		}
+		this.targetX = pos.x - this.tapPos.x;
 
-		const xThreshold = 50;
-		const xThresholdRevert = -20;
-		const dx = pos.x - this.tapPos.x;
+		// const yThreshold = 100;
+		// const yThresholdRevert = 50;
+		// const dy = pos.y - this.tapPos.y;
 
-		if (dx < -xThreshold) {
-			this.tapActionX = "left";
-			this.tapPos = pos;
-		} else if (dx > xThreshold) {
-			this.tapActionX = "right";
-			this.tapPos = pos;
-		} else if (Math.abs(dx) < xThresholdRevert) {
-			this.tapActionX = null;
-		}
-
-		const yThreshold = 100;
-		const yThresholdRevert = 50;
-		const dy = pos.y - this.tapPos.y;
-
-		if (dy < -yThreshold) {
-			this.tapActionY = "up";
-		} else if (dy > yThreshold) {
-			this.tapActionY = "down";
-		} else if (Math.abs(dy) < yThresholdRevert) {
-			this.tapActionY = null;
-		}
+		// if (dy < -yThreshold) {
+		// 	this.tapActionY = "up";
+		// } else if (dy > yThreshold) {
+		// 	this.tapActionY = "down";
+		// } else if (Math.abs(dy) < yThresholdRevert) {
+		// 	this.tapActionY = null;
+		// }
 	}
 
 	onPointerUp() {
 		this.tapPos = null;
-		this.tapActionX = null;
 		this.tapActionY = null;
 	}
 }
