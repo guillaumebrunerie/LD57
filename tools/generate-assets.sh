@@ -22,7 +22,7 @@ do
 	then
 		echo "import ${name}_ from \"../gfx/$texture?texture\";"
 		names+=(${name})
-		exports+=(${name})
+		exports+=(T_${name})
 	fi
 done
 
@@ -33,9 +33,9 @@ do
 	spritesheet=$(basename ${file%.*})
 	echo "import ${spritesheet}_ from \"../gfx/$spritesheet.png?spritesheet\";"
 	names+=($spritesheet)
-	exports+=(${spritesheet}Sheet)
+	exports+=(SS_${spritesheet})
 	names+=($spritesheet)
-	exports+=("{ animations: { $spritesheet } }")
+	exports+=("{ animations: { A_$spritesheet } }")
 done
 
 echo
@@ -45,7 +45,7 @@ do
 	sound=$(basename ${file%.*})
 	echo "import ${sound}_ from \"../audio/$sound.mp3?sound\";"
 	names+=($sound)
-	exports+=(${sound})
+	exports+=(S_${sound})
 done
 
 echo
@@ -55,7 +55,7 @@ do
 	font=$(basename ${file%.*})
 	echo "import ${font}_ from \"../fonts/$font.ttf?font\";"
 	names+=($font)
-	exports+=(${font})
+	exports+=(F_${font})
 done
 
 echo

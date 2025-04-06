@@ -1,17 +1,17 @@
 import type { Game } from "./game";
 import {
-	Bg_Level_01,
-	PauseBtn,
-	Click,
-	Bg_Level_09,
-	Bg_Level_08,
-	Bg_Level_06,
-	Bg_Level_05,
-	Bg_Level_04,
-	Bg_Level_03,
-	Bg_Level_02,
-	Bg_Level_07,
-	Cupid,
+	T_Bg_Level_01,
+	T_PauseBtn,
+	S_Click,
+	T_Bg_Level_09,
+	T_Bg_Level_08,
+	T_Bg_Level_06,
+	T_Bg_Level_05,
+	T_Bg_Level_04,
+	T_Bg_Level_03,
+	T_Bg_Level_02,
+	T_Bg_Level_07,
+	T_Cupid,
 } from "./assets";
 import { Rectangle } from "./Rectangle";
 import { GameOverScreen, LogoScreen, PauseScreen, WinScreen } from "./Postings";
@@ -88,23 +88,23 @@ const pointerEventListener =
 const getBg = (level: number) => {
 	switch (level) {
 		case 1:
-			return Bg_Level_01;
+			return T_Bg_Level_01;
 		case 2:
-			return Bg_Level_02;
+			return T_Bg_Level_02;
 		case 3:
-			return Bg_Level_03;
+			return T_Bg_Level_03;
 		case 4:
-			return Bg_Level_04;
+			return T_Bg_Level_04;
 		case 5:
-			return Bg_Level_05;
+			return T_Bg_Level_05;
 		case 6:
-			return Bg_Level_06;
+			return T_Bg_Level_06;
 		case 7:
-			return Bg_Level_07;
+			return T_Bg_Level_07;
 		case 8:
-			return Bg_Level_08;
+			return T_Bg_Level_08;
 		default:
-			return Bg_Level_09;
+			return T_Bg_Level_09;
 	}
 };
 
@@ -152,7 +152,7 @@ const PlayerC = ({ player }: { player: Player }) => {
 	return (
 		<container x={player.posX} y={player.posY}>
 			<sprite
-				texture={Cupid}
+				texture={T_Cupid}
 				anchor={0.5}
 				scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
 			/>
@@ -208,12 +208,12 @@ const PauseButton = ({ game }: { game: Game }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
-					void Click.play();
+					void S_Click.play();
 					game.pause();
 				}}
 				draw={() => {}}
 			/>
-			<sprite texture={PauseBtn} anchor={0.5} />
+			<sprite texture={T_PauseBtn} anchor={0.5} />
 		</container>
 	);
 };

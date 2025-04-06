@@ -1,4 +1,4 @@
-/** Generated on Sun Apr  6 18:08:41 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Sun Apr  6 18:50:23 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -23,13 +23,13 @@ import Cupid_ from "../gfx/Cupid.png?texture";
 import CupidArrow_ from "../gfx/CupidArrow.png?texture";
 import CupidArrow_Blurred_ from "../gfx/CupidArrow_Blurred.png?texture";
 import Loading_ from "../gfx/Loading.jpg?texture";
-import Logo_ from "../gfx/Logo.jpg?texture";
 import PauseBtn_ from "../gfx/PauseBtn.png?texture";
 import Rock_Level1_01_ from "../gfx/Rock_Level1_01.png?texture";
 import Rock_Level1_02_ from "../gfx/Rock_Level1_02.png?texture";
 import Rock_Level1_03_ from "../gfx/Rock_Level1_03.png?texture";
 import SoundOffTxt_ from "../gfx/SoundOffTxt.png?texture";
 import SoundOnTxt_ from "../gfx/SoundOnTxt.png?texture";
+import StartScreen_ from "../gfx/StartScreen.jpg?texture";
 import WallSpike_Level1_01_ from "../gfx/WallSpike_Level1_01.png?texture";
 import WallSpike_Level1_02_ from "../gfx/WallSpike_Level1_02.png?texture";
 import WallSpike_Level1_03_ from "../gfx/WallSpike_Level1_03.png?texture";
@@ -52,46 +52,46 @@ import Heroes_Legend_ from "../fonts/Heroes_Legend.ttf?font";
 import Laffayette_Comic_Pro_ from "../fonts/Laffayette_Comic_Pro.ttf?font";
 
 export const [
-	Bg_Level_01,
-	Bg_Level_02,
-	Bg_Level_03,
-	Bg_Level_04,
-	Bg_Level_05,
-	Bg_Level_06,
-	Bg_Level_07,
-	Bg_Level_08,
-	Bg_Level_09,
-	Bg_Walls_Level1,
-	BtnCompleteTxt,
-	BtnGamePausedTxt,
-	BtnGameTxt,
-	BtnLevelTxt,
-	BtnOverTxt,
-	Cupid,
-	CupidArrow,
-	CupidArrow_Blurred,
-	Loading,
-	Logo,
-	PauseBtn,
-	Rock_Level1_01,
-	Rock_Level1_02,
-	Rock_Level1_03,
-	SoundOffTxt,
-	SoundOnTxt,
-	WallSpike_Level1_01,
-	WallSpike_Level1_02,
-	WallSpike_Level1_03,
-	WallSpike_Level1_04,
-	Click,
-	CompleteLevel,
-	LoseGame,
-	Music,
-	MusicMenu,
-	StartLevel,
-	Comix_Loud,
-	Digital_Display_Tfb,
-	Heroes_Legend,
-	Laffayette_Comic_Pro,
+	T_Bg_Level_01,
+	T_Bg_Level_02,
+	T_Bg_Level_03,
+	T_Bg_Level_04,
+	T_Bg_Level_05,
+	T_Bg_Level_06,
+	T_Bg_Level_07,
+	T_Bg_Level_08,
+	T_Bg_Level_09,
+	T_Bg_Walls_Level1,
+	T_BtnCompleteTxt,
+	T_BtnGamePausedTxt,
+	T_BtnGameTxt,
+	T_BtnLevelTxt,
+	T_BtnOverTxt,
+	T_Cupid,
+	T_CupidArrow,
+	T_CupidArrow_Blurred,
+	T_Loading,
+	T_PauseBtn,
+	T_Rock_Level1_01,
+	T_Rock_Level1_02,
+	T_Rock_Level1_03,
+	T_SoundOffTxt,
+	T_SoundOnTxt,
+	T_StartScreen,
+	T_WallSpike_Level1_01,
+	T_WallSpike_Level1_02,
+	T_WallSpike_Level1_03,
+	T_WallSpike_Level1_04,
+	S_Click,
+	S_CompleteLevel,
+	S_LoseGame,
+	S_Music,
+	S_MusicMenu,
+	S_StartLevel,
+	F_Comix_Loud,
+	F_Digital_Display_Tfb,
+	F_Heroes_Legend,
+	F_Laffayette_Comic_Pro,
 ] = await Promise.all([
 	Bg_Level_01_,
 	Bg_Level_02_,
@@ -112,13 +112,13 @@ export const [
 	CupidArrow_,
 	CupidArrow_Blurred_,
 	Loading_,
-	Logo_,
 	PauseBtn_,
 	Rock_Level1_01_,
 	Rock_Level1_02_,
 	Rock_Level1_03_,
 	SoundOffTxt_,
 	SoundOnTxt_,
+	StartScreen_,
 	WallSpike_Level1_01_,
 	WallSpike_Level1_02_,
 	WallSpike_Level1_03_,

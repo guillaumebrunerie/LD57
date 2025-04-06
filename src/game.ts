@@ -1,8 +1,8 @@
 import {
-	CompleteLevel,
+	S_CompleteLevel,
 	// LoseGame,
-	Music,
-	StartLevel,
+	S_Music,
+	S_StartLevel,
 } from "./assets";
 import { Enemy } from "./enemy";
 import { ObstacleManager as ObstaclesManager } from "./obstaclesManager";
@@ -71,45 +71,45 @@ export class Game {
 
 	skipLogo() {
 		this.state = "levelSelect";
-		Music.singleInstance = true;
-		void Music.play({ loop: true, volume: 0.5 });
+		S_Music.singleInstance = true;
+		void S_Music.play({ loop: true, volume: 0.5 });
 		this.lt = 0;
 	}
 
 	reset() {
 		this.isPaused = false;
-		void Music.stop();
+		void S_Music.stop();
 	}
 
 	backToMainMenu() {
 		this.reset();
 		this.state = "levelSelect";
-		void Music.resume();
+		void S_Music.resume();
 	}
 
 	startLevel() {
-		void Music.pause();
-		void StartLevel.play({ volume: 0.5 });
+		void S_Music.pause();
+		void S_StartLevel.play({ volume: 0.5 });
 		this.state = "gameStarting";
 		this.startLt = 0;
 
 		setTimeout(() => {
-			Music.singleInstance = true;
-			void Music.play({ loop: true, volume: 0.3 });
+			S_Music.singleInstance = true;
+			void S_Music.play({ loop: true, volume: 0.3 });
 		}, 700);
 	}
 
 	pause() {
-		void Music.pause();
-		void Music.pause();
+		void S_Music.pause();
+		void S_Music.pause();
 		this.isPaused = true;
 	}
 
 	resume() {
 		if (this.state == "levelSelect") {
-			void Music.resume();
+			void S_Music.resume();
 		} else {
-			void Music.resume();
+			void S_Music.resume();
 		}
 		this.isPaused = false;
 	}
@@ -140,8 +140,8 @@ export class Game {
 	}
 
 	win() {
-		void Music.pause();
-		void CompleteLevel.play({ volume: 0.5 });
+		void S_Music.pause();
+		void S_CompleteLevel.play({ volume: 0.5 });
 		this.state = "win";
 		this.startLt = 0;
 	}

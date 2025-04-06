@@ -1,12 +1,12 @@
 import { BackdropBlurFilter } from "pixi-filters";
 import {
-	BtnCompleteTxt,
-	BtnGamePausedTxt,
-	BtnGameTxt,
-	BtnLevelTxt,
-	BtnOverTxt,
-	Click,
-	Logo,
+	T_BtnCompleteTxt,
+	T_BtnGamePausedTxt,
+	T_BtnGameTxt,
+	T_BtnLevelTxt,
+	T_BtnOverTxt,
+	S_Click,
+	T_StartScreen,
 } from "./assets";
 import { CustomText } from "./CustomText";
 import type { Game } from "./game";
@@ -24,13 +24,11 @@ export const LogoScreen = ({ game }: { game: Game }) => {
 	return (
 		<container>
 			<sprite
-				texture={Logo}
-				anchor={{ x: 0, y: 1 }}
-				angle={90}
+				texture={T_StartScreen}
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
-					void Click.play();
+					void S_Click.play();
 					game.skipLogo();
 				}}
 			/>
@@ -59,12 +57,12 @@ export const PauseScreen = ({ game }: { game: Game }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
-					void Click.play();
+					void S_Click.play();
 					game.resume();
 				}}
 			/>
 			<sprite
-				texture={BtnGamePausedTxt}
+				texture={T_BtnGamePausedTxt}
 				anchor={0.5}
 				x={1920 / 2}
 				y={450}
@@ -106,12 +104,12 @@ export const LevelSelectPauseScreen = ({ game }: { game: Game }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
-					void Click.play();
+					void S_Click.play();
 					game.resume();
 				}}
 			/>
 			<sprite
-				texture={BtnGamePausedTxt}
+				texture={T_BtnGamePausedTxt}
 				anchor={0.5}
 				x={1920 / 2}
 				y={450}
@@ -156,7 +154,7 @@ const RestartButton = () => {
 				},
 			}}
 			onPointerDown={() => {
-				void Click.play();
+				void S_Click.play();
 				// game.restart();
 			}}
 		/>
@@ -181,7 +179,7 @@ const MainMenuButton = ({ game }: { game: Game }) => {
 			cursor="pointer"
 			eventMode="static"
 			onPointerDown={() => {
-				void Click.play();
+				void S_Click.play();
 				game.backToMainMenu();
 			}}
 		/>
@@ -206,7 +204,7 @@ const MainMenuButton2 = ({ game }: { game: Game }) => {
 			cursor="pointer"
 			eventMode="static"
 			onPointerDown={() => {
-				void Click.play();
+				void S_Click.play();
 				game.backToMainMenu();
 			}}
 		/>
@@ -231,7 +229,7 @@ const WipeSaveButton = ({ game }: { game: Game }) => {
 			cursor="pointer"
 			eventMode="static"
 			onPointerDown={() => {
-				void Click.play();
+				void S_Click.play();
 				// game.resetLastUnlockedLevel();
 				game.resume();
 			}}
@@ -254,8 +252,8 @@ export const GameOverScreen = ({ game }: { game: Game }) => {
 				eventMode="static"
 			/>
 			<container x={1920 / 2} y={450}>
-				<sprite texture={BtnGameTxt} anchor={0.5} />
-				<sprite texture={BtnOverTxt} anchor={0.5} />
+				<sprite texture={T_BtnGameTxt} anchor={0.5} />
+				<sprite texture={T_BtnOverTxt} anchor={0.5} />
 			</container>
 			<container y={70}>
 				<RestartButton />
@@ -283,8 +281,8 @@ export const WinScreen = ({ game }: { game: Game }) => {
 				eventMode="static"
 			/>
 			<container x={1920 / 2} y={400}>
-				<sprite texture={BtnLevelTxt} anchor={0.5} />
-				<sprite texture={BtnCompleteTxt} anchor={0.5} />
+				<sprite texture={T_BtnLevelTxt} anchor={0.5} />
+				<sprite texture={T_BtnCompleteTxt} anchor={0.5} />
 			</container>
 			<MainMenuButton2 game={game} />
 		</container>

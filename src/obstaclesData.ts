@@ -1,13 +1,13 @@
 import { Polygon } from "pixi.js";
 import {
-	Bg_Walls_Level1,
-	Rock_Level1_01,
-	Rock_Level1_02,
-	Rock_Level1_03,
-	WallSpike_Level1_01,
-	WallSpike_Level1_02,
-	WallSpike_Level1_03,
-	WallSpike_Level1_04,
+	T_Bg_Walls_Level1,
+	T_Rock_Level1_01,
+	T_Rock_Level1_02,
+	T_Rock_Level1_03,
+	T_WallSpike_Level1_01,
+	T_WallSpike_Level1_02,
+	T_WallSpike_Level1_03,
+	T_WallSpike_Level1_04,
 } from "./assets";
 import type { ObstacleData } from "./obstacle";
 
@@ -16,7 +16,7 @@ export const obstacles: ObstacleData[][] = [
 	[
 		{
 			type: "wall",
-			texture: Bg_Walls_Level1,
+			texture: T_Bg_Walls_Level1,
 			polygon: new Polygon(
 				2.53,
 				7.1,
@@ -56,7 +56,7 @@ export const obstacles: ObstacleData[][] = [
 		},
 		{
 			type: "spike",
-			texture: WallSpike_Level1_01,
+			texture: T_WallSpike_Level1_01,
 			polygon: new Polygon(
 				46.94,
 				94.84,
@@ -72,7 +72,7 @@ export const obstacles: ObstacleData[][] = [
 		},
 		{
 			type: "spike",
-			texture: WallSpike_Level1_02,
+			texture: T_WallSpike_Level1_02,
 			polygon: new Polygon(
 				29.18,
 				14.91,
@@ -104,7 +104,7 @@ export const obstacles: ObstacleData[][] = [
 		},
 		{
 			type: "spike",
-			texture: WallSpike_Level1_03,
+			texture: T_WallSpike_Level1_03,
 			polygon: new Polygon(
 				20.3,
 				6.03,
@@ -120,7 +120,7 @@ export const obstacles: ObstacleData[][] = [
 		},
 		{
 			type: "spike",
-			texture: WallSpike_Level1_04,
+			texture: T_WallSpike_Level1_04,
 			polygon: new Polygon(
 				50.49,
 				6.03,
@@ -134,7 +134,7 @@ export const obstacles: ObstacleData[][] = [
 		},
 		{
 			type: "rock",
-			texture: Rock_Level1_01,
+			texture: T_Rock_Level1_01,
 			polygon: new Polygon(
 				36.28,
 				149.2,
@@ -156,7 +156,7 @@ export const obstacles: ObstacleData[][] = [
 		},
 		{
 			type: "rock",
-			texture: Rock_Level1_02,
+			texture: T_Rock_Level1_02,
 			polygon: new Polygon(
 				57.59,
 				74.6,
@@ -188,7 +188,7 @@ export const obstacles: ObstacleData[][] = [
 		},
 		{
 			type: "rock",
-			texture: Rock_Level1_03,
+			texture: T_Rock_Level1_03,
 			polygon: new Polygon(
 				9.1,
 				58.61,

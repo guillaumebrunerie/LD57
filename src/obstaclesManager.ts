@@ -93,21 +93,21 @@ export class ObstacleManager {
 			needSort = true;
 		}
 
-		// while (this.lastYRight <= this.game.depth + 1920) {
-		// 	this.lastYRight +=
-		// 		Math.random() * (this.maxSpacingY - this.minSpacingY) +
-		// 		this.minSpacingY;
-		// 	this.obstacles.push(
-		// 		new Obstacle(
-		// 			this.game,
-		// 			1080,
-		// 			this.lastYRight,
-		// 			true,
-		// 			getRandomObstacle(this.game.level, "spike"),
-		// 		),
-		// 	);
-		// 	needSort = true;
-		// }
+		while (this.lastYMiddle <= this.game.depth + 1920) {
+			this.lastYMiddle +=
+				Math.random() * (this.maxSpacingY - this.minSpacingY) +
+				this.minSpacingY;
+			this.obstacles.push(
+				new Obstacle(
+					this.game,
+					1080 / 2,
+					this.lastYMiddle,
+					false,
+					getRandomObstacle(this.game.level, "rock"),
+				),
+			);
+			needSort = true;
+		}
 
 		if (needSort) {
 			this.obstacles.sort((a, b) => a.z - b.z);
