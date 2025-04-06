@@ -11,6 +11,7 @@ import {
 	Bg_Level_03,
 	Bg_Level_02,
 	Bg_Level_07,
+	Bg_Walls_Level1,
 } from "./assets";
 import { Rectangle } from "./Rectangle";
 import { GameOverScreen, LogoScreen, PauseScreen, WinScreen } from "./Postings";
@@ -53,14 +54,14 @@ export const GameC = ({ game }: { game: Game }) => {
 	return (
 		<container>
 			<Background game={game} />
-			{game.obstacleManager.obstacles.map((obstacle) => (
-				<ObstacleC key={obstacle.id} game={game} obstacle={obstacle} />
-			))}
 			{game.enemyManager.enemies.map((enemy) => (
 				<EnemyC key={enemy.id} game={game} enemy={enemy} />
 			))}
-			<PlayerC player={game.player} />
 			<Foreground game={game} />
+			{game.obstacleManager.obstacles.map((obstacle) => (
+				<ObstacleC key={obstacle.id} game={game} obstacle={obstacle} />
+			))}
+			<PlayerC player={game.player} />
 			<Timer game={game} />
 			<PauseButton game={game} />
 			{game.state == "gameover" && <GameOverScreen game={game} />}
@@ -131,23 +132,25 @@ const Background = ({ game }: { game: Game }) => {
 };
 
 const Foreground = ({ game }: { game: Game }) => {
+	const y = mod(-game.depth, 1920);
+	const y2 = mod(-game.depth + 1920 * game.yBgOffset, 1920);
 	return (
 		<>
-			<Rectangle
-				x={0}
-				y={0}
-				width={1080 / 2 - game.boundX}
-				height={1920}
-				color={0x444444}
-				draw={() => {}}
+			<sprite y={y} texture={Bg_Walls_Level1} />
+			<sprite y={y - 1920} texture={Bg_Walls_Level1} />
+			<sprite
+				anchor={{ x: 0, y: 0 }}
+				x={1080}
+				y={y2}
+				scale={{ x: -1, y: 1 }}
+				texture={Bg_Walls_Level1}
 			/>
-			<Rectangle
-				x={1080 / 2 + game.boundX}
-				y={0}
-				width={1080 / 2 - game.boundX}
-				height={1920}
-				color={0x444444}
-				draw={() => {}}
+			<sprite
+				anchor={{ x: 0, y: 0 }}
+				x={1080}
+				y={y2 - 1920}
+				scale={{ x: -1, y: 1 }}
+				texture={Bg_Walls_Level1}
 			/>
 		</>
 	);
@@ -176,14 +179,16 @@ const PlayerC = ({ player }: { player: Player }) => {
 
 const ObstacleC = ({ game, obstacle }: { game: Game; obstacle: Obstacle }) => {
 	return (
-		<container x={1080 / 2 + obstacle.x} y={obstacle.y - game.depth}>
-			<Rectangle
-				x={-obstacle.width / 2}
-				y={-obstacle.height / 2}
-				width={obstacle.width}
-				height={obstacle.height}
-				color={obstacle.color}
-				draw={() => {}}
+		<container x={0} y={obstacle.y - game.depth}>
+			<sprite
+				anchor={{ x: 0, y: 0.5 }}
+				texture={obstacle.data.texture}
+				x={obstacle.flipped ? 1080 : 0}
+				y={0}
+				scale={{
+					x: obstacle.flipped ? -1 : 1,
+					y: 1,
+				}}
 			/>
 		</container>
 	);
