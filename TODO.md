@@ -1,3 +1,4 @@
+- mask walls before end
 - enemies
 - placing enemies in a smarter way
 - shooting

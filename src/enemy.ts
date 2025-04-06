@@ -1,5 +1,13 @@
 import type { Game } from "./game";
 
+const smoothTriangle = (t: number) => {
+	const x = ((t % 2) + 2) % 2; // wrap to [0, 2)
+	const raw = x < 1 ? x : 2 - x; // triangle shape in [0, 1]
+	// Apply smoothstep-style easing
+	const eased = raw * raw * (3 - 2 * raw);
+	return 2 * eased - 1; // scale to [-1, 1]
+};
+
 export class Enemy {
 	game: Game;
 	x: number;
@@ -8,6 +16,7 @@ export class Enemy {
 	height = 50;
 	color = 0x00ff00;
 	id: string;
+	scaleX = 1;
 
 	lt = 0;
 	originalX: number;
@@ -28,8 +37,8 @@ export class Enemy {
 		this.lt += delta;
 		this.x =
 			this.originalX +
-			(2 * Math.abs(((this.lt / this.frequency) % 2) - 1) - 1) *
-				this.range;
+			smoothTriangle(this.lt / this.frequency) * this.range;
+		this.scaleX = Math.floor(this.lt / this.frequency) % 2 === 0 ? 1 : -1;
 	}
 
 	isOutOfBounds() {

@@ -231,8 +231,8 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 
 const EnemyC = ({ enemy }: { enemy: Enemy }) => {
 	return (
-		<container x={enemy.x} y={enemy.y}>
-			<sprite texture={T_EnemyFlying_Level1_01} />
+		<container x={enemy.x} y={enemy.y} scale={{ x: enemy.scaleX, y: 1 }}>
+			<sprite anchor={0.5} texture={T_EnemyFlying_Level1_01} />
 		</container>
 	);
 };
