@@ -5,9 +5,10 @@ export class Obstacle {
 	height = 50;
 	color = 0xff0000;
 
-	constructor(x: number, y: number, color: number) {
+	constructor(x: number, y: number, width: number, color: number) {
 		this.x = x;
 		this.y = y;
+		this.width = width;
 		this.color = color;
 	}
 }

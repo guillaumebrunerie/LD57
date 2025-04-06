@@ -26,8 +26,8 @@ export class Game {
 	posX = 0;
 	posY = 150;
 	depth = 0;
-	cameraSpeed = 500;
-	sideSpeed = 700;
+	cameraSpeed = 700;
+	sideSpeed = 800;
 
 	movingLeft = false;
 	movingRight = false;
@@ -70,18 +70,26 @@ export class Game {
 	}
 
 	initLevel() {
-		const boundsX = 250;
-		const minSpacingY = 250;
-		const maxSpacingY = 500;
+		const boundsX = 450;
+		const minSpacingY = 400;
+		const maxSpacingY = 600;
+		const minWidth = 50;
+		const maxWidth = 500;
 		let y = 1000;
 		for (let i = 0; i < 40; i++) {
 			y += Math.random() * (maxSpacingY - minSpacingY) + minSpacingY;
+			const width = Math.random() * (maxWidth - minWidth) + minWidth;
 			this.obstacles.push(
-				new Obstacle(
-					(Math.random() - 0.5) * 2 * boundsX,
-					y,
-					Math.random() < 0.5 ? 0xff0000 : 0x0000ff,
-				),
+				new Obstacle(-boundsX + width / 2, y, width, 0xff0000),
+			);
+		}
+
+		y = 1000;
+		for (let i = 0; i < 40; i++) {
+			y += Math.random() * (maxSpacingY - minSpacingY) + minSpacingY;
+			const width = Math.random() * (maxWidth - minWidth) + minWidth;
+			this.obstacles.push(
+				new Obstacle(boundsX - width / 2, y, width, 0x0000ff),
 			);
 		}
 	}
