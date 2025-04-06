@@ -2,7 +2,6 @@ import {
 	CompleteLevel,
 	// LoseGame,
 	Music,
-	MusicMenu,
 	StartLevel,
 } from "./assets";
 import { Enemy } from "./enemy";
@@ -72,8 +71,8 @@ export class Game {
 
 	skipLogo() {
 		this.state = "levelSelect";
-		MusicMenu.singleInstance = true;
-		void MusicMenu.play({ loop: true, volume: 0.5 });
+		Music.singleInstance = true;
+		void Music.play({ loop: true, volume: 0.5 });
 		this.lt = 0;
 	}
 
@@ -85,11 +84,11 @@ export class Game {
 	backToMainMenu() {
 		this.reset();
 		this.state = "levelSelect";
-		void MusicMenu.resume();
+		void Music.resume();
 	}
 
 	startLevel() {
-		void MusicMenu.pause();
+		void Music.pause();
 		void StartLevel.play({ volume: 0.5 });
 		this.state = "gameStarting";
 		this.startLt = 0;
@@ -102,13 +101,13 @@ export class Game {
 
 	pause() {
 		void Music.pause();
-		void MusicMenu.pause();
+		void Music.pause();
 		this.isPaused = true;
 	}
 
 	resume() {
 		if (this.state == "levelSelect") {
-			void MusicMenu.resume();
+			void Music.resume();
 		} else {
 			void Music.resume();
 		}

@@ -22,6 +22,7 @@ export class ObstacleManager {
 
 	lastYLeft = 2000;
 	lastYRight = 2000;
+	lastYMiddle = 2000;
 
 	minSpacingY = 800;
 	maxSpacingY = 1200;
@@ -31,6 +32,7 @@ export class ObstacleManager {
 			this.obstacles = this.obstacles.filter((o) => !o.isOutOfBounds());
 		}
 
+		let needSort = false;
 		while (this.lastYWallLeft <= this.game.depth + 1920) {
 			this.obstacles.push(
 				new Obstacle(
@@ -42,6 +44,7 @@ export class ObstacleManager {
 				),
 			);
 			this.lastYWallLeft += 1920;
+			needSort = true;
 		}
 
 		while (this.lastYWallRight <= this.game.depth + 1920) {
@@ -55,6 +58,7 @@ export class ObstacleManager {
 				),
 			);
 			this.lastYWallRight += 1920;
+			needSort = true;
 		}
 
 		while (this.lastYLeft <= this.game.depth + 1920) {
@@ -70,6 +74,7 @@ export class ObstacleManager {
 					getRandomObstacle(this.game.level, "spike"),
 				),
 			);
+			needSort = true;
 		}
 
 		while (this.lastYRight <= this.game.depth + 1920) {
@@ -85,6 +90,27 @@ export class ObstacleManager {
 					getRandomObstacle(this.game.level, "spike"),
 				),
 			);
+			needSort = true;
+		}
+
+		// while (this.lastYRight <= this.game.depth + 1920) {
+		// 	this.lastYRight +=
+		// 		Math.random() * (this.maxSpacingY - this.minSpacingY) +
+		// 		this.minSpacingY;
+		// 	this.obstacles.push(
+		// 		new Obstacle(
+		// 			this.game,
+		// 			1080,
+		// 			this.lastYRight,
+		// 			true,
+		// 			getRandomObstacle(this.game.level, "spike"),
+		// 		),
+		// 	);
+		// 	needSort = true;
+		// }
+
+		if (needSort) {
+			this.obstacles.sort((a, b) => a.z - b.z);
 		}
 	}
 

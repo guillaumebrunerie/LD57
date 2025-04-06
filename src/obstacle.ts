@@ -41,6 +41,14 @@ export class Obstacle {
 		return this.data.polygon;
 	}
 
+	get z() {
+		if (this.data.type == "wall") {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+
 	checkCollision(player: Player) {
 		const polygon = this.polygon();
 		const transform = Matrix.shared;

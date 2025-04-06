@@ -236,10 +236,10 @@ const PolygonEditor = ({ game }: { game: Game }) => {
 				eventMode="static"
 				onPointerDown={(e: FederatedPointerEvent) => {
 					const { x, y } = e.global;
-					game.polygonEditor.click({ x: x - 200, y });
+					game.polygonEditor.click({ x: x - 300, y });
 				}}
 			/>
-			<container x={200} y={0}>
+			<container x={300} y={0}>
 				<sprite texture={game.polygonEditor.obstacle.texture} />
 				<PolygonShape
 					alpha={0.4}
