@@ -31,7 +31,7 @@ import {
 	// WinScreen,
 } from "./Postings";
 import { Polygon, type FederatedPointerEvent } from "pixi.js";
-import { mod } from "./utils";
+import { mod, smoothTriangle } from "./utils";
 import type { Obstacle } from "./obstacle";
 import type { Arrow, Player } from "./player";
 import { CustomText } from "./CustomText";
@@ -40,6 +40,7 @@ import { useOnKeyDown } from "./useOnKeyDown";
 import { useRef } from "react";
 import { useOnKeyDownUp } from "./useOnKeyDownUp";
 import { getFrame } from "./Animation";
+import { Circle } from "./Circle";
 
 export const GameC = ({ game }: { game: Game }) => {
 	useOnKeyDownUp(
@@ -285,8 +286,15 @@ const ArrowIndicators = ({ player }: { player: Player }) => {
 };
 
 const PlayerC = ({ player }: { player: Player }) => {
+	const initialDuration = 0.3;
+	const dy =
+		600 *
+			smoothTriangle(
+				Math.min(1 + 2 * (player.game.lt - initialDuration), 1),
+			) -
+		600;
 	return (
-		<container x={player.posX} y={player.posY}>
+		<container x={player.posX} y={player.posY + dy}>
 			<sprite
 				texture={T_Cupid}
 				anchor={0.5}
@@ -306,6 +314,10 @@ const PlayerC = ({ player }: { player: Player }) => {
 					scale={{ x: player.lookingLeft ? -2 : 2, y: 2 }}
 				/>
 			)}
+			{/* <Circle x={-40} y={-40} radius={10} /> */}
+			{/* <Circle x={-40} y={40} radius={10} /> */}
+			{/* <Circle x={40} y={-40} radius={10} /> */}
+			{/* <Circle x={40} y={40} radius={10} /> */}
 		</container>
 	);
 };

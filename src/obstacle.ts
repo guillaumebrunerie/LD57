@@ -118,7 +118,20 @@ export class Obstacle {
 			0,
 			0,
 		);
-		const pos = transform.applyInverse({ x: player.posX, y: player.posY });
-		return polygon.contains(pos.x, pos.y);
+		for (const { dx, dy } of [
+			{ dx: -40, dy: -40 },
+			{ dx: -40, dy: 40 },
+			{ dx: 40, dy: -40 },
+			{ dx: 40, dy: 40 },
+		]) {
+			const pos = transform.applyInverse({
+				x: player.posX + dx,
+				y: player.posY + dy,
+			});
+			if (polygon.contains(pos.x, pos.y)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
