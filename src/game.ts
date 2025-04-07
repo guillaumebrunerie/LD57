@@ -56,7 +56,7 @@ export class Game {
 		this.lt += delta;
 		this.startLt += delta;
 
-		if (this.state == "startScreen" && this.lt >= 1.5) {
+		if (this.state == "startScreen" && this.lt >= 1.8) {
 			this.state = "game";
 			this.lt = 0;
 		}

@@ -21,6 +21,7 @@ import { CustomText } from "./CustomText";
 import type { Game } from "./game";
 import { Rectangle } from "./Rectangle";
 import { getFrame } from "./Animation";
+import { smoothTriangle } from "./utils";
 
 const buttonsY = 850;
 
@@ -31,11 +32,11 @@ const backdropFilter = new BackdropBlurFilter();
 const textColor = "#DDD";
 
 export const StartScreen = ({ game }: { game: Game }) => {
-	const cloudAlpha = Math.max(1 - game.lt / 0.5, 0);
-	const cupidY = game.lt * game.lt * 2000 + 1350;
-	const cameraDt = Math.min(game.lt / 1, 1);
-	const cameraY = -(1 - Math.pow(1 - cameraDt, 1.5)) * 1920;
-	const fadeAlpha = Math.max(0, Math.min(1, (game.lt - 1) / 0.5));
+	const fallLt = Math.max(game.lt - 0.3, 0);
+	const cupidY = fallLt * fallLt * 2000 + 1350;
+	const cameraDt = Math.min(fallLt / 1, 1);
+	const cameraY = -smoothTriangle(cameraDt) * 1920;
+	const fadeAlpha = Math.max(0, Math.min(1, (game.lt - 1.3) / 0.5));
 	return (
 		<container y={cameraY}>
 			<sprite

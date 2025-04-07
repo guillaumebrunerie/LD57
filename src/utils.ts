@@ -73,4 +73,9 @@ export const pick = <T>(array: T[]) => {
 	return array[Math.floor(Math.random() * array.length)];
 };
 
-export const none = 42;
+export const smoothTriangle = (t: number) => {
+	const x = ((t % 2) + 2) % 2; // wrap to [0, 2)
+	const raw = x < 1 ? x : 2 - x; // triangle shape in [0, 1]
+	// Apply smoothstep-style easing
+	return raw * raw * (3 - 2 * raw);
+};

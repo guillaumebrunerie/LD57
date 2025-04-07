@@ -2,19 +2,13 @@ import { Matrix, type Polygon, type Texture } from "pixi.js";
 import type { Game } from "./game";
 import type { Player } from "./player";
 import { getDuration } from "./Animation";
-import { A_DemonExplosion, A_HeartExplosion } from "./assets";
+import { A_HeartExplosion } from "./assets";
+import { smoothTriangle } from "./utils";
 
 export type ObstacleData = {
 	type: "wall" | "spike" | "rock" | "enemy-horizontal" | "enemy-vertical";
 	texture: Texture;
 	polygon: Polygon;
-};
-
-const smoothTriangle = (t: number) => {
-	const x = ((t % 2) + 2) % 2; // wrap to [0, 2)
-	const raw = x < 1 ? x : 2 - x; // triangle shape in [0, 1]
-	// Apply smoothstep-style easing
-	return raw * raw * (3 - 2 * raw);
 };
 
 export class Obstacle {
