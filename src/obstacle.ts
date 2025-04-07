@@ -1,6 +1,8 @@
 import { Matrix, type Polygon, type Texture } from "pixi.js";
 import type { Game } from "./game";
 import type { Player } from "./player";
+import { getDuration } from "./Animation";
+import { A_DemonExplosion } from "./assets";
 
 export type ObstacleData = {
 	type: "wall" | "spike" | "rock" | "enemy-horizontal" | "enemy-vertical";
@@ -29,6 +31,9 @@ export class Obstacle {
 	data: ObstacleData;
 	frequency?: number;
 	range?: [number, number];
+
+	isDestroyed = false;
+	destroyTimeout = Infinity;
 
 	constructor(
 		game: Game,
@@ -60,6 +65,7 @@ export class Obstacle {
 
 	tick(delta: number) {
 		this.lt += delta;
+		this.destroyTimeout -= delta;
 		if (this.frequency === undefined || !this.range) {
 			return;
 		}
@@ -81,7 +87,16 @@ export class Obstacle {
 	}
 
 	isOutOfBounds() {
-		return this.y < this.game.depth - 1920;
+		return (
+			this.y < this.game.depth - 1920 ||
+			(this.isDestroyed && this.destroyTimeout < 0)
+		);
+	}
+
+	destroy() {
+		this.isDestroyed = true;
+		this.destroyTimeout = getDuration(A_DemonExplosion, 15);
+		this.lt = 0;
 	}
 
 	polygon() {
@@ -97,6 +112,9 @@ export class Obstacle {
 	}
 
 	checkCollision(player: Player) {
+		if (this.isDestroyed) {
+			return false;
+		}
 		const polygon = this.polygon();
 		const transform = Matrix.shared;
 		transform.setTransform(

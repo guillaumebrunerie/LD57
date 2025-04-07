@@ -1,4 +1,4 @@
-/** Generated on Mon Apr  7 02:16:08 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Mon Apr  7 09:09:40 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -119,7 +119,9 @@ export const [
 	T_WallSpike_Level1_03,
 	T_WallSpike_Level1_04,
 	SS_DemonExplosion,
-	{ animations: { A_DemonExplosion } },
+	{
+		animations: { DemonExplosion: A_DemonExplosion },
+	},
 	S_Click,
 	S_CompleteLevel,
 	S_LoseGame,

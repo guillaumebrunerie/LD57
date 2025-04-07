@@ -74,8 +74,12 @@ export class Game {
 		}
 
 		this.player.tick(delta);
-
 		this.obstaclesManager.tick(delta);
+
+		if (this.player.arrow && this.player.arrow.timeout < 0) {
+			this.obstaclesManager.destroy(this.player.arrow.targetId);
+			this.player.arrow = null;
+		}
 
 		if (
 			this.level < this.levels &&
@@ -100,11 +104,11 @@ export class Game {
 			);
 		targets.sort((a, b) => distance(a) - distance(b));
 		const target = targets[0];
+		const dx = target.x - this.player.posX;
+		const dy = target.y - this.player.posY;
 		this.player.shoot(
-			Math.atan2(
-				target.y - this.player.posY,
-				target.x - this.player.posX,
-			),
+			Math.atan2(dy, dx),
+			Math.sqrt(dx * dx + dy * dy),
 			target.id,
 		);
 	}

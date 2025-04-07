@@ -82,9 +82,9 @@ export class Player {
 		this.invincibleTimeout = 1.2;
 	}
 
-	shoot(angle: number, targetId: string) {
+	shoot(angle: number, distance: number, targetId: string) {
 		this.arrows--;
-		this.arrow = new Arrow(this.posX, this.posY, angle, targetId);
+		this.arrow = new Arrow(this.posX, this.posY, angle, distance, targetId);
 	}
 
 	moveLeft(activate: boolean) {
@@ -127,21 +127,30 @@ export class Player {
 }
 
 export class Arrow {
+	timeout: number;
 	x: number;
 	y: number;
 	angle: number;
 	targetId: string;
 	speed = 5000;
 
-	constructor(x: number, y: number, angle: number, targetId: string) {
+	constructor(
+		x: number,
+		y: number,
+		angle: number,
+		distance: number,
+		targetId: string,
+	) {
 		this.x = x;
 		this.y = y;
 		this.angle = angle;
 		this.targetId = targetId;
+		this.timeout = distance / this.speed;
 	}
 
 	tick(delta: number) {
 		this.x += Math.cos(this.angle) * this.speed * delta;
 		this.y += Math.sin(this.angle) * this.speed * delta;
+		this.timeout -= delta;
 	}
 }

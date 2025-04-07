@@ -1,5 +1,6 @@
 import type { Game } from "./game";
 import {
+	A_DemonExplosion,
 	S_Click,
 	T_Arrow_Off,
 	T_Arrow_On,
@@ -14,7 +15,6 @@ import {
 	T_Bg_Level_09,
 	T_Bg_Level_09_End,
 	T_Cupid,
-	T_CupidArrow,
 	T_CupidArrow_Blurred,
 	T_Devil,
 	T_Heart_Off,
@@ -30,7 +30,6 @@ import {
 } from "./Postings";
 import { Polygon, type FederatedPointerEvent } from "pixi.js";
 import { mod } from "./utils";
-import { useWindowEventListener } from "./useWindowEventListener";
 import type { Obstacle } from "./obstacle";
 import type { Arrow, Player } from "./player";
 import { CustomText } from "./CustomText";
@@ -38,6 +37,7 @@ import { PolygonShape } from "./Polygon";
 import { useOnKeyDown } from "./useOnKeyDown";
 import { useRef } from "react";
 import { useOnKeyDownUp } from "./useOnKeyDownUp";
+import { getFrame, getNtFrame } from "./Animation";
 // import { crossfadeFilter } from "./crossfade";
 
 export const GameC = ({ game }: { game: Game }) => {
@@ -287,7 +287,14 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 			y={obstacle.y}
 			scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
 		>
-			<sprite texture={obstacle.data.texture}></sprite>
+			<sprite
+				// anchor={0.5}
+				texture={
+					obstacle.isDestroyed ?
+						getFrame(A_DemonExplosion, 15, obstacle.lt)
+					:	obstacle.data.texture
+				}
+			></sprite>
 			<PolygonShape alpha={0} polygon={obstacle.polygon()} />
 		</container>
 	);

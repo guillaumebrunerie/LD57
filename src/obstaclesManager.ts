@@ -114,4 +114,12 @@ export class ObstacleManager {
 		}
 		return false;
 	}
+
+	destroy(targetId: string) {
+		for (const obstacle of this.obstacles) {
+			if (obstacle.id == targetId) {
+				obstacle.destroy();
+			}
+		}
+	}
 }

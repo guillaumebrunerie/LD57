@@ -35,7 +35,7 @@ do
 	names+=($spritesheet)
 	exports+=(SS_${spritesheet})
 	names+=($spritesheet)
-	exports+=("{ animations: { A_$spritesheet } }")
+	exports+=("{ animations: { $spritesheet: A_$spritesheet } }")
 done
 
 echo
