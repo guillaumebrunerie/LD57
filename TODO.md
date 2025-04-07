@@ -1,5 +1,6 @@
-- clouds slowly moving in start screen
 - first basic balancing
+- mobile fire
+- clouds slowly moving in start screen
 
 Waiting
 - win flow

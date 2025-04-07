@@ -344,6 +344,7 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 						getFrame(A_HeartExplosion, 15, obstacle.lt, "remove")
 					:	obstacle.data.texture
 				}
+				scale={obstacle.isDestroyed ? 1.2 : 1}
 			></sprite>
 			<PolygonShape alpha={0} polygon={obstacle.polygon()} />
 			{/* <Circle radius={10} color={0xff0000} draw={() => {}} /> */}
