@@ -1,9 +1,9 @@
 - clouds slowly moving in start screen
-- check the whole flow is working
 - first basic balancing
 
 Waiting
 - win flow
+- check the whole flow is working
 - cupid shooting animation
 - sound triggers
 - implement all other obstacles

@@ -40,7 +40,6 @@ import { useOnKeyDown } from "./useOnKeyDown";
 import { useRef } from "react";
 import { useOnKeyDownUp } from "./useOnKeyDownUp";
 import { getFrame } from "./Animation";
-import { Circle } from "./Circle";
 
 export const GameC = ({ game }: { game: Game }) => {
 	useOnKeyDownUp(

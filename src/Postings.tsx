@@ -22,6 +22,7 @@ import type { Game } from "./game";
 import { Rectangle } from "./Rectangle";
 import { getFrame } from "./Animation";
 import { smoothTriangle } from "./utils";
+import { useOnKeyDown } from "./useOnKeyDown";
 
 const buttonsY = 850;
 
@@ -37,6 +38,7 @@ export const StartScreen = ({ game }: { game: Game }) => {
 	const cameraDt = Math.min(fallLt / 1, 1);
 	const cameraY = -smoothTriangle(cameraDt) * 1920;
 	const fadeAlpha = Math.max(0, Math.min(1, (game.lt - 1.3) / 0.5));
+	useOnKeyDown("Space", () => game.clickStart());
 	return (
 		<container y={cameraY}>
 			<sprite
