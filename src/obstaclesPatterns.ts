@@ -79,6 +79,10 @@ export const obstaclesPatternsData: LevelPattern[] = [
 	{
 		spacing: [800, 1200],
 		data: [
+			{ side: "right", data: [enemyVertical(9, 0.8, 300, [-100, 100])] },
+			{ side: "left", data: [enemyVertical(9, 0.8, 780, [-100, 100])] },
+			{ side: "right", data: [enemyVertical(9, 0.8, 300, [-50, 50])] },
+			{ side: "left", data: [enemyVertical(9, 0.8, 780, [-50, 50])] },
 			{ side: "right", data: [spikeLeft(1)] },
 			{ side: "right", data: [spikeLeft(2)] },
 			{ side: "right", data: [spikeLeft(3)] },
