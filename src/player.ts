@@ -83,6 +83,9 @@ export class Player {
 	}
 
 	shoot(angle: number, distance: number, targetId: string) {
+		if (this.arrow || this.arrows <= 0) {
+			return;
+		}
 		this.arrows--;
 		this.arrow = new Arrow(this.posX, this.posY, angle, distance, targetId);
 	}

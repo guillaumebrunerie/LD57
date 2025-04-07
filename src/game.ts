@@ -76,9 +76,20 @@ export class Game {
 		this.player.tick(delta);
 		this.obstaclesManager.tick(delta);
 
-		if (this.player.arrow && this.player.arrow.timeout < 0) {
-			this.obstaclesManager.destroy(this.player.arrow.targetId);
-			this.player.arrow = null;
+		if (this.player.arrow) {
+			const targetId = this.player.arrow.targetId;
+			const target = this.obstaclesManager.obstacles.find(
+				(obstacle) => obstacle.id == targetId,
+			);
+			if (!target || this.player.arrow.timeout < 0) {
+				this.obstaclesManager.destroy(targetId);
+				this.player.arrow = null;
+			} else {
+				this.player.arrow.angle = Math.atan2(
+					target.y - this.player.arrow.y,
+					target.x - this.player.arrow.x,
+				);
+			}
 		}
 
 		if (
@@ -92,7 +103,11 @@ export class Game {
 
 	shoot() {
 		const targets = this.obstaclesManager.obstacles.filter(
-			(o) => o.y > this.player.posY && o.data.type.startsWith("enemy"),
+			(o) =>
+				o.data.type.startsWith("enemy") &&
+				!o.isDestroyed &&
+				o.y > this.player.posY &&
+				o.y < this.depth + 1920,
 		);
 		if (targets.length == 0) {
 			return;
@@ -111,6 +126,13 @@ export class Game {
 			Math.sqrt(dx * dx + dy * dy),
 			target.id,
 		);
+	}
+
+	cheat() {
+		if (import.meta.env.DEV) {
+			this.player.lives = 3;
+			this.player.arrows = 3;
+		}
 	}
 
 	nextLevel() {

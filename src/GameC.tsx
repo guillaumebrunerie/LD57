@@ -38,6 +38,7 @@ import { useOnKeyDown } from "./useOnKeyDown";
 import { useRef } from "react";
 import { useOnKeyDownUp } from "./useOnKeyDownUp";
 import { getFrame, getNtFrame } from "./Animation";
+// import { Circle } from "./Circle";
 // import { crossfadeFilter } from "./crossfade";
 
 export const GameC = ({ game }: { game: Game }) => {
@@ -52,6 +53,7 @@ export const GameC = ({ game }: { game: Game }) => {
 		() => game.player.moveRight(false),
 	);
 	useOnKeyDown("Space", () => game.shoot());
+	useOnKeyDown("Enter", () => game.cheat());
 
 	const ref = useRef(null);
 
@@ -282,20 +284,20 @@ const ArrowC = ({ arrow }: { arrow: Arrow }) => {
 const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 	return (
 		<container
-			pivot={{ x: obstacle.pivotX, y: obstacle.pivotY }}
 			x={obstacle.x}
 			y={obstacle.y}
 			scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
 		>
 			<sprite
-				// anchor={0.5}
+				anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
 				texture={
 					obstacle.isDestroyed ?
-						getFrame(A_DemonExplosion, 15, obstacle.lt)
+						getFrame(A_DemonExplosion, 15, obstacle.lt, "remove")
 					:	obstacle.data.texture
 				}
 			></sprite>
 			<PolygonShape alpha={0} polygon={obstacle.polygon()} />
+			{/* <Circle radius={10} color={0xff0000} draw={() => {}} /> */}
 		</container>
 	);
 };

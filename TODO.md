@@ -1,11 +1,12 @@
-- intro flow
-- shooting
-- enemy explosion
 - game over flow
-- first balancing
-- basic background crossfade
-- win flow
-- shooting animation
-- win animation
-- implement all other obstacles
+- first basic balancing
+- background crossfade
+- clouds slowly moving
+- cupid falling in in first screen
+- better balancing
+
+Waiting
+- cupid shooting animation
 - sound triggers
+- implement all other obstacles
+- win flow

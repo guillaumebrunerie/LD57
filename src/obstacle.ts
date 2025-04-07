@@ -25,8 +25,8 @@ export class Obstacle {
 	y: number;
 	scaleX: number;
 	scaleY: number;
-	pivotX = 0;
-	pivotY = 0;
+	anchorX = 0.5;
+	anchorY = 0.5;
 	id: string;
 	data: ObstacleData;
 	frequency?: number;
@@ -54,19 +54,15 @@ export class Obstacle {
 		this.data = data;
 		this.frequency = frequency;
 		this.range = range;
-		if (
-			["rock", "enemy-vertical", "enemy-horizontal"].includes(
-				this.data.type,
-			)
-		) {
-			this.pivotX = this.data.texture.width / 2;
+		if (["wall", "spike"].includes(this.data.type)) {
+			this.anchorX = 0;
 		}
 	}
 
 	tick(delta: number) {
 		this.lt += delta;
 		this.destroyTimeout -= delta;
-		if (this.frequency === undefined || !this.range) {
+		if (this.frequency === undefined || !this.range || this.isDestroyed) {
 			return;
 		}
 		if (this.data.type == "enemy-horizontal") {
@@ -120,8 +116,8 @@ export class Obstacle {
 		transform.setTransform(
 			this.x,
 			this.y,
-			this.pivotX,
-			this.pivotY,
+			this.anchorX * this.data.texture.width,
+			this.anchorY * this.data.texture.height,
 			this.scaleX,
 			this.scaleY,
 			0,

@@ -22,8 +22,8 @@ export class ObstacleManager {
 
 	obstacles: Obstacle[] = [];
 
-	lastYWallLeft = 0;
-	lastYWallRight = Math.random() * 1920 - 1920;
+	lastYWallLeft = Math.random() * 1920 - 1920 * 2;
+	lastYWallRight = Math.random() * 1920 - 1920 * 2;
 
 	lastY = 1500;
 
@@ -36,6 +36,7 @@ export class ObstacleManager {
 
 		let needSort = false;
 		while (this.lastYWallLeft <= this.game.depth + 1920) {
+			this.lastYWallLeft += 1920;
 			this.obstacles.push(
 				new Obstacle(
 					this.game,
@@ -45,11 +46,11 @@ export class ObstacleManager {
 					getRandomObstacle(this.game.level, "wall"),
 				),
 			);
-			this.lastYWallLeft += 1920;
 			needSort = true;
 		}
 
 		while (this.lastYWallRight <= this.game.depth + 1920) {
+			this.lastYWallRight += 1920;
 			this.obstacles.push(
 				new Obstacle(
 					this.game,
@@ -59,7 +60,6 @@ export class ObstacleManager {
 					getRandomObstacle(this.game.level, "wall"),
 				),
 			);
-			this.lastYWallRight += 1920;
 			needSort = true;
 		}
 
