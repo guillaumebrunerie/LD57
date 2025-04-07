@@ -28,6 +28,9 @@ export class Player {
 	lives = 3;
 	invincibleTimeout = 0;
 
+	arrows = 3;
+	arrow: Arrow | null = null;
+
 	constructor(game: Game) {
 		this.game = game;
 	}
@@ -70,11 +73,18 @@ export class Player {
 		if (this.invincibleTimeout < 0) {
 			this.invincibleTimeout = 0;
 		}
+
+		this.arrow?.tick(delta);
 	}
 
 	hit() {
 		this.lives--;
 		this.invincibleTimeout = 1.2;
+	}
+
+	shoot(angle: number, targetId: string) {
+		this.arrows--;
+		this.arrow = new Arrow(this.posX, this.posY, angle, targetId);
 	}
 
 	moveLeft(activate: boolean) {
@@ -113,5 +123,25 @@ export class Player {
 		this.tapPos = null;
 		this.tapActionY = null;
 		this.targetX = null;
+	}
+}
+
+export class Arrow {
+	x: number;
+	y: number;
+	angle: number;
+	targetId: string;
+	speed = 5000;
+
+	constructor(x: number, y: number, angle: number, targetId: string) {
+		this.x = x;
+		this.y = y;
+		this.angle = angle;
+		this.targetId = targetId;
+	}
+
+	tick(delta: number) {
+		this.x += Math.cos(this.angle) * this.speed * delta;
+		this.y += Math.sin(this.angle) * this.speed * delta;
 	}
 }

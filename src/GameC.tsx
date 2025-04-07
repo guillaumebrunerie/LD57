@@ -14,6 +14,8 @@ import {
 	T_Bg_Level_09,
 	T_Bg_Level_09_End,
 	T_Cupid,
+	T_CupidArrow,
+	T_CupidArrow_Blurred,
 	T_Devil,
 	T_Heart_Off,
 	T_Heart_On,
@@ -30,34 +32,26 @@ import { Polygon, type FederatedPointerEvent } from "pixi.js";
 import { mod } from "./utils";
 import { useWindowEventListener } from "./useWindowEventListener";
 import type { Obstacle } from "./obstacle";
-import type { Player } from "./player";
+import type { Arrow, Player } from "./player";
 import { CustomText } from "./CustomText";
 import { PolygonShape } from "./Polygon";
 import { useOnKeyDown } from "./useOnKeyDown";
 import { useRef } from "react";
+import { useOnKeyDownUp } from "./useOnKeyDownUp";
 // import { crossfadeFilter } from "./crossfade";
 
 export const GameC = ({ game }: { game: Game }) => {
-	useWindowEventListener("keydown", (event) => {
-		switch (event.code) {
-			case "ArrowLeft":
-				game.player.moveLeft(true);
-				break;
-			case "ArrowRight":
-				game.player.moveRight(true);
-				break;
-		}
-	});
-	useWindowEventListener("keyup", (event) => {
-		switch (event.code) {
-			case "ArrowLeft":
-				game.player.moveLeft(false);
-				break;
-			case "ArrowRight":
-				game.player.moveRight(false);
-				break;
-		}
-	});
+	useOnKeyDownUp(
+		"ArrowLeft",
+		() => game.player.moveLeft(true),
+		() => game.player.moveLeft(false),
+	);
+	useOnKeyDownUp(
+		"ArrowRight",
+		() => game.player.moveRight(true),
+		() => game.player.moveRight(false),
+	);
+	useOnKeyDown("Space", () => game.shoot());
 
 	const ref = useRef(null);
 
@@ -104,6 +98,7 @@ export const GameC = ({ game }: { game: Game }) => {
 					))}
 				</container>
 				<PlayerC player={game.player} />
+				{game.player.arrow && <ArrowC arrow={game.player.arrow} />}
 			</container>
 			<Hearts player={game.player} />
 			<ArrowIndicators player={game.player} />
@@ -113,6 +108,8 @@ export const GameC = ({ game }: { game: Game }) => {
 			{/* {game.state == "win" && <WinScreen game={game} />} */}
 			{game.isPaused && <PauseScreen game={game} />}
 			<Rectangle
+				x={0}
+				y={0}
 				width={1080}
 				height={1920}
 				color={0x000000}
@@ -243,17 +240,17 @@ const ArrowIndicators = ({ player }: { player: Player }) => {
 	return (
 		<container x={1080 / 2 + 120} y={55}>
 			<sprite
-				texture={player.lives >= 1 ? T_Arrow_On : T_Arrow_Off}
+				texture={player.arrows >= 1 ? T_Arrow_On : T_Arrow_Off}
 				anchor={0.5}
 				x={-arrowDeltaX}
 			/>
 			<sprite
-				texture={player.lives >= 2 ? T_Arrow_On : T_Arrow_Off}
+				texture={player.arrows >= 2 ? T_Arrow_On : T_Arrow_Off}
 				anchor={0.5}
 				x={0}
 			/>
 			<sprite
-				texture={player.lives >= 3 ? T_Arrow_On : T_Arrow_Off}
+				texture={player.arrows >= 3 ? T_Arrow_On : T_Arrow_Off}
 				anchor={0.5}
 				x={arrowDeltaX}
 			/>
@@ -270,6 +267,14 @@ const PlayerC = ({ player }: { player: Player }) => {
 				alpha={player.invincibleTimeout > 0 ? 0.4 : 1}
 				scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
 			/>
+		</container>
+	);
+};
+
+const ArrowC = ({ arrow }: { arrow: Arrow }) => {
+	return (
+		<container x={arrow.x} y={arrow.y} rotation={arrow.angle - Math.PI / 2}>
+			<sprite texture={T_CupidArrow_Blurred} anchor={0.5} />
 		</container>
 	);
 };

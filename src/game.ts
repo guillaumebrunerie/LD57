@@ -12,6 +12,7 @@ import { Player } from "./player";
 import { type Point } from "./utils";
 import { PolygonEditor } from "./polygonEditor";
 import { fadeVolume } from "./sound";
+import type { Obstacle } from "./obstacle";
 
 export class Game {
 	lt = 0;
@@ -83,6 +84,29 @@ export class Game {
 		) {
 			this.player.hit();
 		}
+	}
+
+	shoot() {
+		const targets = this.obstaclesManager.obstacles.filter(
+			(o) => o.y > this.player.posY && o.data.type.startsWith("enemy"),
+		);
+		if (targets.length == 0) {
+			return;
+		}
+		const distance = (a: Obstacle) =>
+			Math.sqrt(
+				Math.pow(a.x - this.player.posX, 2) +
+					Math.pow(a.y - this.player.posY, 2),
+			);
+		targets.sort((a, b) => distance(a) - distance(b));
+		const target = targets[0];
+		this.player.shoot(
+			Math.atan2(
+				target.y - this.player.posY,
+				target.x - this.player.posX,
+			),
+			target.id,
+		);
 	}
 
 	nextLevel() {
