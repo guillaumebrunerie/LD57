@@ -1,0 +1,63 @@
+{"frames": {
+
+"CloudStartButton_000.png":
+{
+	"frame": {"x":1,"y":1499,"w":684,"h":292},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":158,"y":354,"w":684,"h":292},
+	"sourceSize": {"w":1000,"h":1000}
+},
+"CloudStartButton_001.png":
+{
+	"frame": {"x":720,"y":1161,"w":640,"h":274},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":180,"y":363,"w":640,"h":274},
+	"sourceSize": {"w":1000,"h":1000}
+},
+"CloudStartButton_002.png":
+{
+	"frame": {"x":1,"y":1161,"w":717,"h":336},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":142,"y":331,"w":717,"h":336},
+	"sourceSize": {"w":1000,"h":1000}
+},
+"CloudStartButton_003.png":
+{
+	"frame": {"x":1,"y":784,"w":789,"h":375},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":106,"y":310,"w":789,"h":375},
+	"sourceSize": {"w":1000,"h":1000}
+},
+"CloudStartButton_004.png":
+{
+	"frame": {"x":1,"y":403,"w":839,"h":379},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":81,"y":312,"w":839,"h":379},
+	"sourceSize": {"w":1000,"h":1000}
+},
+"CloudStartButton_005.png":
+{
+	"frame": {"x":1,"y":1,"w":870,"h":400},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":66,"y":315,"w":870,"h":400},
+	"sourceSize": {"w":1000,"h":1000}
+}},
+"animations": {
+	"CloudStartButton": ["CloudStartButton_000.png","CloudStartButton_001.png","CloudStartButton_002.png","CloudStartButton_003.png","CloudStartButton_004.png","CloudStartButton_005.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "CloudStartButton.png",
+	"format": "RGBA8888",
+	"size": {"w":995,"h":1802},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:7046177c37fe7e56e78f96fdc69fd3a3:e322dced880995abf337afeed050dd75:05b9e703c8f36bc79a39f7a3011eec1f$"
+}
+}

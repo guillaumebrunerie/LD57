@@ -1,0 +1,79 @@
+{"frames": {
+
+"HeartExplosion_000.png":
+{
+	"frame": {"x":1231,"y":294,"w":250,"h":247},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":122,"y":131,"w":250,"h":247},
+	"sourceSize": {"w":500,"h":500}
+},
+"HeartExplosion_001.png":
+{
+	"frame": {"x":421,"y":420,"w":400,"h":389},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":45,"y":61,"w":400,"h":389},
+	"sourceSize": {"w":500,"h":500}
+},
+"HeartExplosion_002.png":
+{
+	"frame": {"x":823,"y":415,"w":406,"h":394},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":43,"y":54,"w":406,"h":394},
+	"sourceSize": {"w":500,"h":500}
+},
+"HeartExplosion_003.png":
+{
+	"frame": {"x":802,"y":1,"w":412,"h":403},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":41,"y":43,"w":412,"h":403},
+	"sourceSize": {"w":500,"h":500}
+},
+"HeartExplosion_004.png":
+{
+	"frame": {"x":1,"y":1,"w":418,"h":404},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":37,"y":39,"w":418,"h":404},
+	"sourceSize": {"w":500,"h":500}
+},
+"HeartExplosion_005.png":
+{
+	"frame": {"x":407,"y":1,"w":417,"h":393},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":35,"y":42,"w":417,"h":393},
+	"sourceSize": {"w":500,"h":500}
+},
+"HeartExplosion_006.png":
+{
+	"frame": {"x":1,"y":421,"w":418,"h":386},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":35,"y":42,"w":418,"h":386},
+	"sourceSize": {"w":500,"h":500}
+},
+"HeartExplosion_007.png":
+{
+	"frame": {"x":1207,"y":1,"w":291,"h":276},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":108,"y":108,"w":291,"h":276},
+	"sourceSize": {"w":500,"h":500}
+}},
+"animations": {
+	"HeartExplosion": ["HeartExplosion_000.png","HeartExplosion_001.png","HeartExplosion_002.png","HeartExplosion_003.png","HeartExplosion_004.png","HeartExplosion_005.png","HeartExplosion_006.png","HeartExplosion_007.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "HeartExplosion.png",
+	"format": "RGBA8888",
+	"size": {"w":1484,"h":810},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:751cb44244c9a4a61871e0d424e84a09:b6a57beb6b728b85e3e873fbf822dede:d0fb7fe7bc81162c2810a77f8814ce97$"
+}
+}
