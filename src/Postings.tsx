@@ -30,8 +30,10 @@ const textColor = "#DDD";
 
 export const StartScreen = ({ game }: { game: Game }) => {
 	const cloudAlpha = Math.max(1 - game.lt / 0.5, 0);
-	const cupidY = game.lt * 1500 + 1350;
-	const cameraY = Math.max(-game.lt * 1920, -1920);
+	const cupidY = game.lt * game.lt * 2000 + 1350;
+	const cameraDt = Math.min(game.lt / 1, 1);
+	const cameraY = -(1 - Math.pow(1 - cameraDt, 1.5)) * 1920;
+	const fadeAlpha = Math.max(0, Math.min(1, (game.lt - 1) / 0.5));
 	return (
 		<container y={cameraY}>
 			<sprite
@@ -65,6 +67,15 @@ export const StartScreen = ({ game }: { game: Game }) => {
 				anchor={0.5}
 				x={1080 / 2}
 				y={1500}
+			/>
+			<Rectangle
+				x={0}
+				y={-cameraY}
+				width={1080}
+				height={1920}
+				color={0x000000}
+				alpha={fadeAlpha}
+				draw={() => {}}
 			/>
 		</container>
 	);

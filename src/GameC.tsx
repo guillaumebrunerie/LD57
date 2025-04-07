@@ -91,6 +91,8 @@ export const GameC = ({ game }: { game: Game }) => {
 		]);
 	}
 
+	const fadeAlpha = Math.max(0, Math.min(1, 1 - game.lt / 0.5));
+
 	return (
 		<container>
 			<container y={-game.depth}>
@@ -110,6 +112,13 @@ export const GameC = ({ game }: { game: Game }) => {
 			{/* {game.state == "gameover" && <GameOverScreen game={game} />} */}
 			{/* {game.state == "win" && <WinScreen game={game} />} */}
 			{game.isPaused && <PauseScreen game={game} />}
+			<Rectangle
+				width={1080}
+				height={1920}
+				color={0x000000}
+				alpha={fadeAlpha}
+				draw={() => {}}
+			/>
 		</container>
 	);
 };
