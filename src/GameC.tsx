@@ -205,10 +205,21 @@ const End = ({ game }: { game: Game }) => {
 const Timer = ({ game }: { game: Game }) => {
 	const minutes = Math.floor(game.lt / 60);
 	const seconds = Math.floor(game.lt - minutes * 60);
-	const text = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 
 	return (
-		<CustomText anchor={{ x: 1, y: 0 }} x={1080 - 20} y={20} text={text} />
+		<container x={1080 - 95} y={20}>
+			<CustomText
+				anchor={{ x: 1, y: 0 }}
+				x={-10}
+				text={String(minutes).padStart(2, "0")}
+			/>
+			<CustomText anchor={{ x: 0.5, y: 0 }} text={":"} />
+			<CustomText
+				anchor={{ x: 0, y: 0 }}
+				x={10}
+				text={String(seconds).padStart(2, "0")}
+			/>
+		</container>
 	);
 };
 
