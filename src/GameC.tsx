@@ -18,6 +18,7 @@ import {
 	T_Cupid,
 	T_CupidArrow_Blurred,
 	T_Devil,
+	T_Gradient,
 	T_Heart_Off,
 	T_Heart_On,
 	T_PauseBtn,
@@ -40,8 +41,6 @@ import { useOnKeyDown } from "./useOnKeyDown";
 import { useRef } from "react";
 import { useOnKeyDownUp } from "./useOnKeyDownUp";
 import { getFrame } from "./Animation";
-// import { Circle } from "./Circle";
-// import { crossfadeFilter } from "./crossfade";
 
 export const GameC = ({ game }: { game: Game }) => {
 	useOnKeyDownUp(
@@ -155,33 +154,45 @@ const getBg = (level: number) => {
 	}
 };
 
-// const f = crossfadeFilter(getBg(4), getBg(6));
-
 const Background = ({ game }: { game: Game }) => {
 	const y = mod(-game.depth, 1920);
+	return (
+		<>
+			<container y={y + game.depth}>
+				<BackgroundFragment game={game} depth={y + game.depth} />
+			</container>
+			<container y={y + game.depth - 1920}>
+				<BackgroundFragment game={game} depth={y + game.depth - 1920} />
+			</container>
+			<End game={game} />
+		</>
+	);
+};
+
+const BackgroundFragment = ({ game, depth }: { game: Game; depth: number }) => {
+	const startLevel = 1 + Math.floor(depth / game.levelDepth);
+	const endLevel = 1 + Math.floor((depth + 1920) / game.levelDepth);
+
+	const ref = useRef(null);
 
 	return (
 		<>
 			<sprite
-				texture={getBg(game.level)}
-				x={0}
-				y={y + game.depth}
+				texture={getBg(startLevel)}
 				eventMode="static"
 				onPointerDown={pointerEventListener(game, "pointerdown")}
 				onPointerMove={pointerEventListener(game, "pointermove")}
 				onPointerUp={pointerEventListener(game, "pointerup")}
 			/>
+			<sprite texture={T_Gradient} ref={ref} />
 			<sprite
-				texture={getBg(game.level)}
-				// filters={[f]}
-				x={0}
-				y={y + game.depth - 1920}
+				texture={getBg(endLevel)}
 				eventMode="static"
 				onPointerDown={pointerEventListener(game, "pointerdown")}
 				onPointerMove={pointerEventListener(game, "pointermove")}
 				onPointerUp={pointerEventListener(game, "pointerup")}
+				mask={ref.current}
 			/>
-			<End game={game} />
 		</>
 	);
 };

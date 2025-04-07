@@ -1,4 +1,4 @@
-/** Generated on Mon Apr  7 20:11:55 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Mon Apr  7 21:30:11 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -33,6 +33,7 @@ import CupidArrow_Blurred_ from "../gfx/CupidArrow_Blurred.png?texture";
 import Devil_ from "../gfx/Devil.png?texture";
 import EnemyFlying_Level1_01_ from "../gfx/EnemyFlying_Level1_01.png?texture";
 import EnemyStill_Level1_01_ from "../gfx/EnemyStill_Level1_01.png?texture";
+import Gradient_ from "../gfx/Gradient.png?texture";
 import GroundMask_ from "../gfx/GroundMask.png?texture";
 import Heart_Off_ from "../gfx/Heart_Off.png?texture";
 import Heart_On_ from "../gfx/Heart_On.png?texture";
@@ -103,6 +104,7 @@ export const [
 	T_Devil,
 	T_EnemyFlying_Level1_01,
 	T_EnemyStill_Level1_01,
+	T_Gradient,
 	T_GroundMask,
 	T_Heart_Off,
 	T_Heart_On,
@@ -169,6 +171,7 @@ export const [
 	Devil_,
 	EnemyFlying_Level1_01_,
 	EnemyStill_Level1_01_,
+	Gradient_,
 	GroundMask_,
 	Heart_Off_,
 	Heart_On_,
