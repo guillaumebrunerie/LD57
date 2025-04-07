@@ -25,7 +25,6 @@ import {
 } from "./assets";
 import { Rectangle } from "./Rectangle";
 import {
-	// GameOverScreen,
 	StartScreen,
 	PauseScreen,
 	GameOverScreen,

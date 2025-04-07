@@ -1,4 +1,3 @@
-- background crossfade
 - clouds slowly moving in start screen
 - cupid falling in in first screen
 - collision detection with more of Cupid

@@ -61,8 +61,7 @@ export class Game {
 		}
 
 		if (this.state == "startScreen" && this.lt >= 1.8) {
-			this.state = "game";
-			this.lt = 0;
+			this.start();
 		}
 
 		if (this.state !== "game") {
@@ -187,7 +186,8 @@ export class Game {
 	}
 
 	start() {
-		// this.state = "game";
+		this.state = "game";
+		this.lt = 0;
 		S_MusicIntensity1.singleInstance = true;
 		S_MusicIntensity2.singleInstance = true;
 		S_MusicIntensity3.singleInstance = true;
@@ -197,7 +197,6 @@ export class Game {
 		S_MusicIntensity1.volume = 0.1;
 		S_MusicIntensity2.volume = 0.1;
 		S_MusicIntensity3.volume = 0.1;
-		this.lt = 0;
 	}
 
 	reset() {
