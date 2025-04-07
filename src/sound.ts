@@ -23,12 +23,7 @@ export const useSetVolumeAll = () => {
 	] as const;
 };
 
-export const fadeVolume = (
-	name: string,
-	sound: Sound,
-	to: number,
-	duration: number,
-) => {
+export const fadeVolume = (sound: Sound, to: number, duration: number) => {
 	const from = sound.volume;
 	const steps = 10;
 	let step = 0;

@@ -37,7 +37,7 @@ import { PolygonShape } from "./Polygon";
 import { useOnKeyDown } from "./useOnKeyDown";
 import { useRef } from "react";
 import { useOnKeyDownUp } from "./useOnKeyDownUp";
-import { getFrame, getNtFrame } from "./Animation";
+import { getFrame } from "./Animation";
 // import { Circle } from "./Circle";
 // import { crossfadeFilter } from "./crossfade";
 

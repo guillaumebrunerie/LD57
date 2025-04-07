@@ -159,19 +159,16 @@ export class Game {
 		const minVolume = 0.1;
 
 		fadeVolume(
-			"S_MusicIntensity1",
 			S_MusicIntensity1,
 			musicVolumes[this.level - 1][0] + minVolume,
 			1000,
 		);
 		fadeVolume(
-			"S_MusicIntensity2",
 			S_MusicIntensity2,
 			musicVolumes[this.level - 1][1] + minVolume,
 			1000,
 		);
 		fadeVolume(
-			"S_MusicIntensity3",
 			S_MusicIntensity3,
 			musicVolumes[this.level - 1][2] + minVolume,
 			1000,
