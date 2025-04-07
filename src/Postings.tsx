@@ -32,7 +32,7 @@ const backdropFilter = new BackdropBlurFilter();
 const textColor = "#DDD";
 
 export const StartScreen = ({ game }: { game: Game }) => {
-	const fallLt = Math.max(game.lt - 0.3, 0);
+	const fallLt = Math.max(game.lt - 0.25, 0);
 	const cupidY = fallLt * fallLt * 2000 + 1350;
 	const cameraDt = Math.min(fallLt / 1, 1);
 	const cameraY = -smoothTriangle(cameraDt) * 1920;
