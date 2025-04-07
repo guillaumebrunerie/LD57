@@ -52,6 +52,7 @@ export class Game {
 		if (this.isPaused) {
 			return;
 		}
+
 		this.lt += delta;
 		this.startLt += delta;
 
@@ -64,13 +65,15 @@ export class Game {
 			return;
 		}
 
-		if (this.level <= this.levels) {
-			this.depth += this.cameraSpeed * delta;
-			if (this.depth > this.levelDepth * this.level) {
-				this.nextLevel();
+		if (this.player.lives > 0) {
+			if (this.level <= this.levels) {
+				this.depth += this.cameraSpeed * delta;
+				if (this.depth > this.levelDepth * this.level) {
+					this.nextLevel();
+				}
+			} else {
+				this.depth = this.levelDepth * this.levels;
 			}
-		} else {
-			this.depth = this.levelDepth * this.levels;
 		}
 
 		this.player.tick(delta);

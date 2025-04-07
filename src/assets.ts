@@ -1,4 +1,4 @@
-/** Generated on Mon Apr  7 09:09:40 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Mon Apr  7 20:11:55 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -52,7 +52,9 @@ import WallSpike_Level1_03_ from "../gfx/WallSpike_Level1_03.png?texture";
 import WallSpike_Level1_04_ from "../gfx/WallSpike_Level1_04.png?texture";
 
 /** Spritesheets */
+import CloudStartButton_ from "../gfx/CloudStartButton.png?spritesheet";
 import DemonExplosion_ from "../gfx/DemonExplosion.png?spritesheet";
+import HeartExplosion_ from "../gfx/HeartExplosion.png?spritesheet";
 
 /** Sounds */
 import Click_ from "../audio/Click.mp3?sound";
@@ -118,10 +120,12 @@ export const [
 	T_WallSpike_Level1_02,
 	T_WallSpike_Level1_03,
 	T_WallSpike_Level1_04,
+	SS_CloudStartButton,
+	{ animations: { CloudStartButton: A_CloudStartButton } },
 	SS_DemonExplosion,
-	{
-		animations: { DemonExplosion: A_DemonExplosion },
-	},
+	{ animations: { DemonExplosion: A_DemonExplosion } },
+	SS_HeartExplosion,
+	{ animations: { HeartExplosion: A_HeartExplosion } },
 	S_Click,
 	S_CompleteLevel,
 	S_LoseGame,
@@ -182,8 +186,12 @@ export const [
 	WallSpike_Level1_02_,
 	WallSpike_Level1_03_,
 	WallSpike_Level1_04_,
+	CloudStartButton_,
+	CloudStartButton_,
 	DemonExplosion_,
 	DemonExplosion_,
+	HeartExplosion_,
+	HeartExplosion_,
 	Click_,
 	CompleteLevel_,
 	LoseGame_,

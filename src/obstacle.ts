@@ -2,7 +2,7 @@ import { Matrix, type Polygon, type Texture } from "pixi.js";
 import type { Game } from "./game";
 import type { Player } from "./player";
 import { getDuration } from "./Animation";
-import { A_DemonExplosion } from "./assets";
+import { A_DemonExplosion, A_HeartExplosion } from "./assets";
 
 export type ObstacleData = {
 	type: "wall" | "spike" | "rock" | "enemy-horizontal" | "enemy-vertical";
@@ -91,7 +91,7 @@ export class Obstacle {
 
 	destroy() {
 		this.isDestroyed = true;
-		this.destroyTimeout = getDuration(A_DemonExplosion, 15);
+		this.destroyTimeout = getDuration(A_HeartExplosion, 15);
 		this.lt = 0;
 	}
 

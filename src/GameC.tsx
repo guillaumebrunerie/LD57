@@ -1,6 +1,6 @@
 import type { Game } from "./game";
 import {
-	A_DemonExplosion,
+	A_HeartExplosion,
 	S_Click,
 	T_Arrow_Off,
 	T_Arrow_On,
@@ -303,7 +303,7 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 				anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
 				texture={
 					obstacle.isDestroyed ?
-						getFrame(A_DemonExplosion, 15, obstacle.lt, "remove")
+						getFrame(A_HeartExplosion, 15, obstacle.lt, "remove")
 					:	obstacle.data.texture
 				}
 			></sprite>

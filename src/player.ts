@@ -36,6 +36,12 @@ export class Player {
 	}
 
 	tick(delta: number) {
+		this.arrow?.tick(delta);
+
+		if (this.lives == 0) {
+			return;
+		}
+
 		if (this.game.level > this.game.levels) {
 			this.targetX = 250;
 			this.movingLeft = false;
@@ -73,8 +79,6 @@ export class Player {
 		if (this.invincibleTimeout < 0) {
 			this.invincibleTimeout = 0;
 		}
-
-		this.arrow?.tick(delta);
 	}
 
 	hit() {

@@ -233,7 +233,16 @@ export const obstaclesData: ObstacleData[][] = [
 		{
 			type: "enemy-vertical",
 			texture: T_EnemyStill_Level1_01,
-			polygon: new Polygon(),
+			polygon: new Polygon(
+				43.74,
+				103.02,
+				36.63,
+				37.3,
+				104.13,
+				44.4,
+				100.57,
+				113.67,
+			),
 		},
 	],
 ];
