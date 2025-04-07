@@ -13,7 +13,7 @@ export type ObstacleData = {
 
 export class Obstacle {
 	game: Game;
-	lt = 0;
+	lt = Math.random() * 1000;
 	originalY: number;
 	x: number;
 	y: number;

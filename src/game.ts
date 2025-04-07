@@ -34,7 +34,7 @@ export class Game {
 	obstaclesManager = new ObstaclesManager(this);
 
 	level = 0;
-	levelDepth = 7500;
+	levelDepth = 15000;
 
 	constructor() {}
 
@@ -43,6 +43,7 @@ export class Game {
 		this.score = 0;
 		this.state = "game";
 		this.depth = 0;
+		this.level = 0;
 		this.player = new Player(this);
 		this.obstaclesManager = new ObstaclesManager(this);
 	}
@@ -143,6 +144,12 @@ export class Game {
 
 	nextLevel() {
 		this.level++;
+		if (this.player.lives < 3) {
+			this.player.lives++;
+		}
+		if (this.player.arrows < 3) {
+			this.player.arrows++;
+		}
 		this.obstaclesManager.nextLevel();
 		this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;
 		S_MusicIntensity1.singleInstance = true;

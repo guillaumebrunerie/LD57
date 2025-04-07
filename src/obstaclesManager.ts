@@ -73,6 +73,7 @@ export class ObstacleManager {
 				this.previousPatterns,
 			);
 			this.previousPatterns.push(pattern);
+			let maxY = this.lastY;
 			for (const patternData of pattern.data) {
 				const x =
 					Math.random() * (patternData.x[1] - patternData.x[0]) +
@@ -91,7 +92,9 @@ export class ObstacleManager {
 						patternData.range,
 					),
 				);
+				maxY = Math.max(maxY, this.lastY + y);
 			}
+			this.lastY = maxY;
 			needSort = true;
 		}
 

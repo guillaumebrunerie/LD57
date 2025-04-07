@@ -7,7 +7,10 @@ type PatternData = {
 	range?: [number, number];
 };
 
-export type Pattern = { side: "left" | "right"; data: PatternData[] };
+export type Pattern = {
+	side: "left" | "right";
+	data: PatternData[];
+};
 
 const spikeLeft = (
 	index: number,
@@ -74,145 +77,329 @@ type LevelPattern = {
 	data: Pattern[];
 };
 
+const patterns: Pattern[][] = [
+	[],
+	// Difficulty 1
+	[
+		{ side: "right", data: [spikeLeft(1)] },
+		{ side: "right", data: [spikeLeft(3)] },
+		{ side: "right", data: [spikeLeft(4)] },
+		{ side: "right", data: [rock(6, [-200, -50])] },
+		{ side: "right", data: [rock(7, [-200, 50])] },
+		{ side: "left", data: [spikeRight(1)] },
+		{ side: "left", data: [spikeRight(3)] },
+		{ side: "left", data: [spikeRight(4)] },
+		{ side: "left", data: [rock(6, [50, 200])] },
+		{ side: "left", data: [rock(7, [-50, 200])] },
+	],
+	// Difficulty 2
+	[
+		{ side: "right", data: [spikeLeft(2)] },
+		{ side: "left", data: [spikeRight(2)] },
+		{ side: "right", data: [spikeLeft(2, [0, 50])] },
+		{ side: "left", data: [spikeRight(2, [0, 50])] },
+		{
+			side: "left",
+			data: [spikeLeft(3, [0, 100]), spikeRight(4, [0, 100])],
+		},
+		{
+			side: "left",
+			data: [spikeLeft(1, [0, 100]), spikeRight(3, [0, 100])],
+		},
+		{ side: "left", data: [rock(5, [50, 200])] },
+		{
+			side: "right",
+			data: [spikeLeft(4, [0, 100]), spikeRight(3, [0, 100])],
+		},
+		{
+			side: "right",
+			data: [spikeLeft(3, [0, 100]), spikeRight(1, [0, 100])],
+		},
+		{ side: "right", data: [rock(5, [-200, 50])] },
+	],
+	// Difficulty 3
+	[
+		{
+			side: "right",
+			data: [enemyHorizontal(8, 1, [250, 830], [-100, 100])],
+		},
+		{
+			side: "left",
+			data: [enemyHorizontal(8, 1, [250, 830], [-100, 100])],
+		},
+		{
+			side: "right",
+			data: [
+				spikeLeft(1),
+				enemyHorizontal(8, 1, [400, 850], [-100, 100]),
+			],
+		},
+		{
+			side: "right",
+			data: [
+				spikeLeft(3),
+				enemyHorizontal(8, 1, [500, 850], [-100, 100]),
+			],
+		},
+		{
+			side: "right",
+			data: [
+				spikeLeft(4),
+				enemyHorizontal(8, 1, [350, 850], [-100, 100]),
+			],
+		},
+		{
+			side: "left",
+			data: [
+				spikeRight(1),
+				enemyHorizontal(8, 1, [230, 680], [-100, 100]),
+			],
+		},
+		{
+			side: "left",
+			data: [
+				spikeRight(3),
+				enemyHorizontal(8, 1, [230, 580], [-100, 100]),
+			],
+		},
+		{
+			side: "left",
+			data: [
+				spikeRight(4),
+				enemyHorizontal(8, 1, [230, 730], [-100, 100]),
+			],
+		},
+	],
+	// Difficulty 4
+	[
+		{
+			side: "right",
+			data: [spikeLeft(2), enemyHorizontal(8, 2, [500, 850], [100, 150])],
+		},
+		{
+			side: "right",
+			data: [spikeLeft(2), enemyVertical(9, 1, 600, [100, 350])],
+		},
+		{
+			side: "right",
+			data: [spikeLeft(1), enemyVertical(9, 1, [600, 800], [-200, 200])],
+		},
+		{
+			side: "right",
+			data: [spikeLeft(3), enemyVertical(9, 1, [600, 800], [-200, 200])],
+		},
+		{
+			side: "right",
+			data: [spikeLeft(4), enemyVertical(9, 1, [600, 800], [-200, 200])],
+		},
+		{
+			side: "left",
+			data: [
+				spikeRight(2),
+				enemyHorizontal(8, 2, [230, 580], [100, 150]),
+			],
+		},
+		{
+			side: "left",
+			data: [spikeRight(2), enemyVertical(9, 1, 480, [100, 350])],
+		},
+		{
+			side: "left",
+			data: [spikeRight(1), enemyVertical(9, 1, [280, 480], [-200, 200])],
+		},
+		{
+			side: "left",
+			data: [spikeRight(3), enemyVertical(9, 1, [280, 480], [-200, 200])],
+		},
+		{
+			side: "left",
+			data: [spikeRight(4), enemyVertical(9, 1, [280, 480], [-200, 200])],
+		},
+	],
+	// Difficulty 5
+	[
+		{
+			side: "right",
+			data: [spikeLeft(2), spikeRight(1, [350, 450])],
+		},
+		{
+			side: "right",
+			data: [spikeLeft(2), spikeRight(3, [200, 300])],
+		},
+		{
+			side: "right",
+			data: [spikeLeft(2), spikeRight(4, [200, 300])],
+		},
+		{
+			side: "left",
+			data: [spikeRight(2), spikeLeft(1, [350, 450])],
+		},
+		{
+			side: "left",
+			data: [spikeRight(2), spikeLeft(3, [200, 300])],
+		},
+		{
+			side: "left",
+			data: [spikeRight(2), spikeLeft(4, [200, 300])],
+		},
+	],
+	// Difficulty 6
+	[
+		{
+			side: "left",
+			data: [
+				enemyHorizontal(8, 2, [250, 830]),
+				enemyHorizontal(8, 2, [250, 830], [200, 300]),
+			],
+		},
+		{
+			side: "left",
+			data: [
+				spikeRight(1),
+				enemyHorizontal(8, 1, [230, 680], [-200, -100]),
+				enemyHorizontal(8, 1, [230, 680], [100, 200]),
+			],
+		},
+		{
+			side: "left",
+			data: [
+				spikeRight(3),
+				enemyHorizontal(8, 1, [230, 580], [-200, -100]),
+				enemyHorizontal(8, 1, [230, 580], [100, 200]),
+			],
+		},
+		{
+			side: "left",
+			data: [
+				spikeRight(4),
+				enemyHorizontal(8, 1, [230, 730], [-200, -100]),
+				enemyHorizontal(8, 1, [230, 730], [100, 200]),
+			],
+		},
+		{
+			side: "right",
+			data: [
+				enemyHorizontal(8, 2, [250, 830]),
+				enemyHorizontal(8, 2, [250, 830], [200, 300]),
+			],
+		},
+		{
+			side: "right",
+			data: [
+				spikeLeft(1),
+				enemyHorizontal(8, 1, [400, 850], [-200, -100]),
+				enemyHorizontal(8, 1, [400, 850], [100, 200]),
+			],
+		},
+		{
+			side: "right",
+			data: [
+				spikeLeft(3),
+				enemyHorizontal(8, 1, [500, 850], [-200, -100]),
+				enemyHorizontal(8, 1, [500, 850], [100, 200]),
+			],
+		},
+		{
+			side: "right",
+			data: [
+				spikeLeft(4),
+				enemyHorizontal(8, 1, [350, 850], [-200, -100]),
+				enemyHorizontal(8, 1, [350, 850], [100, 200]),
+			],
+		},
+	],
+	// Difficulty 7
+	[
+		{
+			side: "right",
+			data: [spikeLeft(2), spikeRight(2, [400, 500])],
+		},
+		{
+			side: "right",
+			data: [
+				spikeLeft(3),
+				spikeRight(4, [0, 100]),
+				enemyHorizontal(8, 2, [500, 730]),
+			],
+		},
+		{
+			side: "right",
+			data: [
+				spikeLeft(4),
+				spikeRight(1, [0, 100]),
+				enemyHorizontal(8, 2, [350, 680]),
+			],
+		},
+		{
+			side: "left",
+			data: [spikeRight(2), spikeLeft(2, [400, 500])],
+		},
+		{
+			side: "left",
+			data: [
+				spikeRight(3),
+				spikeLeft(4, [0, 100]),
+				enemyHorizontal(8, 2, [350, 580]),
+			],
+		},
+		{
+			side: "left",
+			data: [
+				spikeRight(4),
+				spikeLeft(1, [0, 100]),
+				enemyHorizontal(8, 2, [400, 730]),
+			],
+		},
+	],
+];
+
 export const obstaclesPatternsData: LevelPattern[] = [
 	// Level 1
 	{
 		spacing: [800, 1200],
-		data: [
-			{ side: "right", data: [enemyVertical(9, 0.8, 300, [-100, 100])] },
-			{ side: "left", data: [enemyVertical(9, 0.8, 780, [-100, 100])] },
-			{ side: "right", data: [enemyVertical(9, 0.8, 300, [-50, 50])] },
-			{ side: "left", data: [enemyVertical(9, 0.8, 780, [-50, 50])] },
-			{ side: "right", data: [spikeLeft(1)] },
-			{ side: "right", data: [spikeLeft(2)] },
-			{ side: "right", data: [spikeLeft(3)] },
-			{ side: "right", data: [spikeLeft(4)] },
-			{ side: "left", data: [spikeRight(1)] },
-			{ side: "left", data: [spikeRight(2)] },
-			{ side: "left", data: [spikeRight(3)] },
-			{ side: "left", data: [spikeRight(4)] },
-		],
+		data: [...patterns[1]],
 	},
 	// Level 2
 	{
-		spacing: [700, 1100],
-		data: [
-			{
-				side: "right",
-				data: [enemyHorizontal(8, 1, [250, 830], [-100, 100])],
-			},
-			{
-				side: "left",
-				data: [enemyHorizontal(8, 1, [250, 830], [-100, 100])],
-			},
-			{ side: "right", data: [spikeLeft(2)] },
-			{ side: "left", data: [spikeRight(2)] },
-			{ side: "left", data: [rock(5, [50, 200])] },
-			{ side: "left", data: [rock(6, [50, 200])] },
-			{ side: "left", data: [rock(7, [50, 200])] },
-			{ side: "right", data: [rock(5, [-200, 50])] },
-			{ side: "right", data: [rock(6, [-200, 50])] },
-			{ side: "right", data: [rock(7, [-200, 50])] },
-		],
+		spacing: [700, 1000],
+		data: [...patterns[1], ...patterns[2]],
 	},
 	// Level 3
 	{
-		spacing: [700, 1100],
-		data: [
-			{ side: "right", data: [enemyVertical(9, 0.8, 300, [-100, 100])] },
-			{ side: "left", data: [enemyVertical(9, 0.8, 780, [-100, 100])] },
-			{
-				side: "right",
-				data: [enemyHorizontal(8, 1, [250, 830], [-100, 100])],
-			},
-			{
-				side: "left",
-				data: [enemyHorizontal(8, 1, [250, 830], [-100, 100])],
-			},
-			{ side: "left", data: [spikeLeft(1), spikeRight(2, [50, 100])] },
-			{ side: "right", data: [spikeRight(3), spikeLeft(2, [50, 100])] },
-			{ side: "left", data: [spikeLeft(1), spikeRight(2, [50, 100])] },
-			{ side: "right", data: [spikeRight(3), spikeLeft(2, [50, 100])] },
-			{ side: "left", data: [rock(5, [50, 200])] },
-			{ side: "left", data: [rock(6, [50, 200])] },
-			{ side: "left", data: [rock(7, [50, 200])] },
-			{ side: "right", data: [rock(5, [-200, 50])] },
-			{ side: "right", data: [rock(6, [-200, 50])] },
-			{ side: "right", data: [rock(7, [-200, 50])] },
-		],
+		spacing: [700, 900],
+		data: [...patterns[1], ...patterns[2], ...patterns[3]],
 	},
 	// Level 4
 	{
 		spacing: [600, 1000],
-		data: [
-			{
-				side: "right",
-				data: [
-					spikeLeft(1),
-					enemyHorizontal(8, 1, [400, 850], [-100, 100]),
-				],
-			},
-			{
-				side: "right",
-				data: [
-					spikeLeft(2),
-					enemyHorizontal(8, 2, [500, 850], [150, 200]),
-				],
-			},
-			{
-				side: "right",
-				data: [
-					spikeLeft(3),
-					enemyHorizontal(8, 1, [500, 850], [-100, 100]),
-				],
-			},
-			{
-				side: "right",
-				data: [
-					spikeLeft(4),
-					enemyHorizontal(8, 1, [350, 850], [-100, 100]),
-				],
-			},
-			{
-				side: "left",
-				data: [
-					spikeRight(1),
-					enemyHorizontal(8, 1, [230, 680], [-100, 100]),
-				],
-			},
-			{
-				side: "left",
-				data: [
-					spikeRight(2),
-					enemyHorizontal(8, 2, [230, 580], [150, 200]),
-				],
-			},
-			{
-				side: "left",
-				data: [
-					spikeRight(3),
-					enemyHorizontal(8, 1, [230, 580], [-100, 100]),
-				],
-			},
-			{
-				side: "left",
-				data: [
-					spikeRight(4),
-					enemyHorizontal(8, 1, [230, 730], [-100, 100]),
-				],
-			},
-		],
+		data: [...patterns[1], ...patterns[4]],
+	},
+	// Level 5
+	{
+		spacing: [700, 1000],
+		data: [...patterns[2], ...patterns[5]],
+	},
+	// Level 6
+	{
+		spacing: [600, 1000],
+		data: [...patterns[3], ...patterns[6]],
+	},
+	// Level 7
+	{
+		spacing: [500, 900],
+		data: [...patterns[4], ...patterns[7]],
+	},
+	// Level 8
+	{
+		spacing: [500, 900],
+		data: [...patterns[5], ...patterns[6]],
+	},
+	// Level 9
+	{
+		spacing: [400, 800],
+		data: [...patterns[5], ...patterns[6], ...patterns[7]],
 	},
 ];
-
-obstaclesPatternsData[4] = {
-	...obstaclesPatternsData[3],
-	spacing: [600, 1000],
-};
-obstaclesPatternsData[5] = { ...obstaclesPatternsData[3], spacing: [500, 900] };
-obstaclesPatternsData[6] = { ...obstaclesPatternsData[3], spacing: [500, 900] };
-obstaclesPatternsData[7] = { ...obstaclesPatternsData[3], spacing: [400, 800] };
-obstaclesPatternsData[8] = { ...obstaclesPatternsData[3], spacing: [300, 700] };
 
 const otherSide = {
 	left: "right",
