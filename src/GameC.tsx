@@ -1,5 +1,6 @@
 import type { Game } from "./game";
 import {
+	A_DemonExplosion,
 	A_HeartExplosion,
 	S_Click,
 	T_Arrow_Off,
@@ -106,6 +107,7 @@ export const GameC = ({ game }: { game: Game }) => {
 			<ArrowIndicators player={game.player} />
 			<Timer game={game} />
 			<PauseButton game={game} />
+			{/* {game.player.lives == 0 && <GameOverScreen game={game} />} */}
 			{/* {game.state == "gameover" && <GameOverScreen game={game} />} */}
 			{/* {game.state == "win" && <WinScreen game={game} />} */}
 			{game.isPaused && <PauseScreen game={game} />}
@@ -277,9 +279,22 @@ const PlayerC = ({ player }: { player: Player }) => {
 			<sprite
 				texture={T_Cupid}
 				anchor={0.5}
-				alpha={player.invincibleTimeout > 0 ? 0.4 : 1}
 				scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
 			/>
+			{player.invincibleTimeout > 0 && (
+				<sprite
+					texture={getFrame(A_DemonExplosion, 15, player.lt, "hold")}
+					anchor={0.5}
+					scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
+				/>
+			)}
+			{player.lives == 0 && (
+				<sprite
+					texture={getFrame(A_DemonExplosion, 15, player.lt, "loop")}
+					anchor={0.5}
+					scale={{ x: player.lookingLeft ? -2 : 2, y: 2 }}
+				/>
+			)}
 		</container>
 	);
 };
@@ -301,6 +316,7 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 		>
 			<sprite
 				anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
+				blendMode={obstacle.isDestroyed ? "add" : "normal"}
 				texture={
 					obstacle.isDestroyed ?
 						getFrame(A_HeartExplosion, 15, obstacle.lt, "remove")

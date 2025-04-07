@@ -7,6 +7,7 @@ const maxX = 1080 - marginX;
 
 export class Player {
 	game: Game;
+	lt = 0;
 
 	sideSpeed = 800;
 
@@ -36,6 +37,7 @@ export class Player {
 	}
 
 	tick(delta: number) {
+		this.lt += delta;
 		this.arrow?.tick(delta);
 
 		if (this.lives == 0) {
@@ -84,6 +86,7 @@ export class Player {
 	hit() {
 		this.lives--;
 		this.invincibleTimeout = 1.2;
+		this.lt = 0;
 	}
 
 	shoot(angle: number, distance: number, targetId: string) {

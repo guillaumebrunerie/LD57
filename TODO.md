@@ -1,13 +1,15 @@
 - game over flow
-- first basic balancing
 - background crossfade
-- clouds slowly moving
+- clouds slowly moving in start screen
 - cupid falling in in first screen
-- better balancing
 - collision detection with more of Cupid
+- win flow
+- check the whole flow is working
+- first basic balancing
 
 Waiting
 - cupid shooting animation
 - sound triggers
 - implement all other obstacles
 - win flow
+- better balancing

@@ -276,22 +276,27 @@ export const GameOverScreen = ({ game }: { game: Game }) => {
 			<Rectangle
 				x={0}
 				y={0}
-				width={1920}
-				height={1080}
+				width={1080}
+				height={1920}
 				draw={() => {}}
 				filters={backdropFilter}
 				alpha={0.3}
-				color={0}
+				color={0x000000}
+				cursor="pointer"
 				eventMode="static"
+				onPointerDown={() => {
+					void S_Click.play();
+					game.restart();
+				}}
 			/>
-			<container x={1920 / 2} y={450}>
-				<sprite texture={T_BtnGameTxt} anchor={0.5} />
-				<sprite texture={T_BtnOverTxt} anchor={0.5} />
-			</container>
-			<container y={70}>
-				<RestartButton />
-				<MainMenuButton game={game} />
-			</container>
+			{/* <container x={1920 / 2} y={450}> */}
+			{/* 	<sprite texture={T_BtnGameTxt} anchor={0.5} /> */}
+			{/* 	<sprite texture={T_BtnOverTxt} anchor={0.5} /> */}
+			{/* </container> */}
+			{/* <container y={70}> */}
+			{/* 	<RestartButton /> */}
+			{/* 	<MainMenuButton game={game} /> */}
+			{/* </container> */}
 		</container>
 	);
 };
