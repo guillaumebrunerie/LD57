@@ -17,7 +17,7 @@ export class Game {
 	lt = 0;
 	startLt = 0;
 
-	isPaused = false;
+	isPaused = true;
 	state: "startScreen" | "game" | "polygonEditor" = "startScreen";
 	polygonEditor = new PolygonEditor();
 
@@ -53,6 +53,10 @@ export class Game {
 		}
 		this.lt += delta;
 		this.startLt += delta;
+
+		if (this.state == "startScreen" && this.lt >= 2) {
+			this.state = "game";
+		}
 
 		if (this.state !== "game") {
 			return;
@@ -123,8 +127,12 @@ export class Game {
 		);
 	}
 
+	clickStart() {
+		this.isPaused = false;
+	}
+
 	start() {
-		this.state = "game";
+		// this.state = "game";
 		S_MusicIntensity1.singleInstance = true;
 		S_MusicIntensity2.singleInstance = true;
 		S_MusicIntensity3.singleInstance = true;

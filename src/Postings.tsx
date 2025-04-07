@@ -6,7 +6,15 @@ import {
 	T_BtnLevelTxt,
 	T_BtnOverTxt,
 	S_Click,
-	T_StartScreen,
+	T_BgMenu,
+	T_CloudStart_Btn,
+	T_Cloud_01,
+	T_Cloud_02,
+	T_Cloud_03,
+	T_StartTxt,
+	T_Logo,
+	T_Cupid,
+	T_GroundMask,
 } from "./assets";
 import { CustomText } from "./CustomText";
 import type { Game } from "./game";
@@ -21,22 +29,42 @@ const backdropFilter = new BackdropBlurFilter();
 const textColor = "#DDD";
 
 export const StartScreen = ({ game }: { game: Game }) => {
+	const cloudAlpha = Math.max(1 - game.lt / 0.5, 0);
+	const cupidY = game.lt * 1500 + 1350;
+	const cameraY = Math.max(-game.lt * 1920, -1920);
 	return (
-		<container>
+		<container y={cameraY}>
 			<sprite
-				texture={T_StartScreen}
+				texture={T_BgMenu}
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
 					void S_Click.play();
-					game.start();
+					game.clickStart();
 				}}
 			/>
-			<CustomText
+			<sprite texture={T_Cloud_01} anchor={0.5} x={300} y={250} />
+			<sprite texture={T_Cloud_02} anchor={0.5} x={900} y={900} />
+			<sprite texture={T_Cloud_03} anchor={0.5} x={200} y={1100} />
+			<sprite texture={T_Cloud_03} anchor={0.5} x={300} y={2150} />
+			<sprite texture={T_Cloud_01} anchor={0.5} x={900} y={2800} />
+			<sprite texture={T_Cloud_02} anchor={0.5} x={200} y={3300} />
+			<sprite texture={T_Logo} anchor={0.5} x={1080 / 2} y={650} />
+			<sprite texture={T_Cupid} anchor={0.5} x={1080 / 2} y={cupidY} />
+			<sprite texture={T_GroundMask} />
+			<sprite
+				texture={T_CloudStart_Btn}
+				alpha={cloudAlpha}
 				anchor={0.5}
 				x={1080 / 2}
-				y={1700}
-				text="Click to start"
+				y={1500}
+			/>
+			<sprite
+				texture={T_StartTxt}
+				alpha={cloudAlpha}
+				anchor={0.5}
+				x={1080 / 2}
+				y={1500}
 			/>
 		</container>
 	);
