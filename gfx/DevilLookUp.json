@@ -1,0 +1,47 @@
+{"frames": {
+
+"DevilLookUp_017.png":
+{
+	"frame": {"x":1,"y":1,"w":432,"h":510},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":136,"y":91,"w":432,"h":510},
+	"sourceSize": {"w":700,"h":700}
+},
+"DevilLookUp_018.png":
+{
+	"frame": {"x":435,"y":1,"w":431,"h":522},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":150,"y":79,"w":431,"h":522},
+	"sourceSize": {"w":700,"h":700}
+},
+"DevilLookUp_019.png":
+{
+	"frame": {"x":570,"y":434,"w":424,"h":547},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":182,"y":54,"w":424,"h":547},
+	"sourceSize": {"w":700,"h":700}
+},
+"DevilLookUp_020.png":
+{
+	"frame": {"x":1,"y":513,"w":409,"h":567},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":34,"w":409,"h":567},
+	"sourceSize": {"w":700,"h":700}
+}},
+"animations": {
+	"DevilLookUp": ["DevilLookUp_017.png","DevilLookUp_018.png","DevilLookUp_019.png","DevilLookUp_020.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "DevilLookUp.png",
+	"format": "RGBA8888",
+	"size": {"w":995,"h":982},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:575ec741ddf07c55004a27ad6eac47e2:42848f0af8632d3cd85bf6efdc7fb555:ca2f4019ae0d64195de44ed33787142d$"
+}
+}

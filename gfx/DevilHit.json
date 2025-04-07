@@ -1,0 +1,55 @@
+{"frames": {
+
+"DevilHit_022.png":
+{
+	"frame": {"x":1,"y":597,"w":419,"h":575},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":26,"w":419,"h":575},
+	"sourceSize": {"w":700,"h":700}
+},
+"DevilHit_023.png":
+{
+	"frame": {"x":490,"y":1,"w":457,"h":589},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":12,"w":457,"h":589},
+	"sourceSize": {"w":700,"h":700}
+},
+"DevilHit_024.png":
+{
+	"frame": {"x":1,"y":1,"w":487,"h":594},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":7,"w":487,"h":594},
+	"sourceSize": {"w":700,"h":700}
+},
+"DevilHit_025.png":
+{
+	"frame": {"x":949,"y":1,"w":451,"h":583},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":18,"w":451,"h":583},
+	"sourceSize": {"w":700,"h":700}
+},
+"DevilHit_026.png":
+{
+	"frame": {"x":578,"y":592,"w":420,"h":554},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":193,"y":47,"w":420,"h":554},
+	"sourceSize": {"w":700,"h":700}
+}},
+"animations": {
+	"DevilHit": ["DevilHit_022.png","DevilHit_023.png","DevilHit_024.png","DevilHit_025.png","DevilHit_026.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "DevilHit.png",
+	"format": "RGBA8888",
+	"size": {"w":1401,"h":1017},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:b9d9f37df1442cf131bcf0a222ae1f99:3a8d7764a7a07591da2de2431cfc61d8:7599de5f0e9ccd19b5b3b6b045b089d9$"
+}
+}
