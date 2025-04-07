@@ -15,10 +15,12 @@ import {
 	T_Logo,
 	T_Cupid,
 	T_GroundMask,
+	A_CloudStartButton,
 } from "./assets";
 import { CustomText } from "./CustomText";
 import type { Game } from "./game";
 import { Rectangle } from "./Rectangle";
+import { getFrame } from "./Animation";
 
 const buttonsY = 850;
 
@@ -55,15 +57,7 @@ export const StartScreen = ({ game }: { game: Game }) => {
 			<sprite texture={T_Cupid} anchor={0.5} x={1080 / 2} y={cupidY} />
 			<sprite texture={T_GroundMask} />
 			<sprite
-				texture={T_CloudStart_Btn}
-				alpha={cloudAlpha}
-				anchor={0.5}
-				x={1080 / 2}
-				y={1500}
-			/>
-			<sprite
-				texture={T_StartTxt}
-				alpha={cloudAlpha}
+				texture={getFrame(A_CloudStartButton, 15, game.lt, "remove")}
 				anchor={0.5}
 				x={1080 / 2}
 				y={1500}
