@@ -280,7 +280,7 @@ export const GameOverScreen = ({ game }: { game: Game }) => {
 				width={1080}
 				height={1920}
 				draw={() => {}}
-				filters={backdropFilter}
+				// filters={backdropFilter}
 				alpha={0.3}
 				color={0x000000}
 				cursor="pointer"
@@ -290,14 +290,20 @@ export const GameOverScreen = ({ game }: { game: Game }) => {
 					game.restart();
 				}}
 			/>
-			{/* <container x={1920 / 2} y={450}> */}
-			{/* 	<sprite texture={T_BtnGameTxt} anchor={0.5} /> */}
-			{/* 	<sprite texture={T_BtnOverTxt} anchor={0.5} /> */}
-			{/* </container> */}
-			{/* <container y={70}> */}
-			{/* 	<RestartButton /> */}
-			{/* 	<MainMenuButton game={game} /> */}
-			{/* </container> */}
+			<CustomText
+				x={1080 / 2}
+				y={1700}
+				anchor={0.5}
+				text="Click to restart"
+				style={{
+					fontFamily: "Heroes Legend",
+					fill: textColor,
+					dropShadow: {
+						angle: 90,
+						distance: 6,
+					},
+				}}
+			/>
 		</container>
 	);
 };

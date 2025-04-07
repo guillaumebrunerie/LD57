@@ -1,4 +1,3 @@
-- game over flow
 - background crossfade
 - clouds slowly moving in start screen
 - cupid falling in in first screen

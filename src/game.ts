@@ -17,6 +17,7 @@ import type { Obstacle } from "./obstacle";
 export class Game {
 	lt = 0;
 	startLt = 0;
+	score = 0;
 
 	isPaused = true;
 	state: "startScreen" | "game" | "polygonEditor" = "startScreen";
@@ -37,13 +38,13 @@ export class Game {
 
 	constructor() {}
 
-	init() {
-		S_MusicIntensity1.singleInstance = true;
-		S_MusicIntensity2.singleInstance = true;
-		S_MusicIntensity3.singleInstance = true;
-		void S_MusicIntensity1.play({ loop: true, volume: 0.1 });
-		void S_MusicIntensity2.play({ loop: true, volume: 0.1 });
-		void S_MusicIntensity3.play({ loop: true, volume: 0.1 });
+	restart() {
+		this.lt = 0;
+		this.score = 0;
+		this.state = "game";
+		this.depth = 0;
+		this.player = new Player(this);
+		this.obstaclesManager = new ObstaclesManager(this);
 	}
 
 	levels = 9;
@@ -55,6 +56,9 @@ export class Game {
 
 		this.lt += delta;
 		this.startLt += delta;
+		if (this.state == "game" && this.player.lives > 0) {
+			this.score += delta;
+		}
 
 		if (this.state == "startScreen" && this.lt >= 1.8) {
 			this.state = "game";

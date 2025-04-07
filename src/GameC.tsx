@@ -27,6 +27,7 @@ import {
 	// GameOverScreen,
 	StartScreen,
 	PauseScreen,
+	GameOverScreen,
 	// WinScreen,
 } from "./Postings";
 import { Polygon, type FederatedPointerEvent } from "pixi.js";
@@ -105,9 +106,9 @@ export const GameC = ({ game }: { game: Game }) => {
 			</container>
 			<Hearts player={game.player} />
 			<ArrowIndicators player={game.player} />
-			<Timer game={game} />
+			<Score game={game} />
 			<PauseButton game={game} />
-			{/* {game.player.lives == 0 && <GameOverScreen game={game} />} */}
+			{game.player.lives == 0 && <GameOverScreen game={game} />}
 			{/* {game.state == "gameover" && <GameOverScreen game={game} />} */}
 			{/* {game.state == "win" && <WinScreen game={game} />} */}
 			{game.isPaused && <PauseScreen game={game} />}
@@ -204,9 +205,9 @@ const End = ({ game }: { game: Game }) => {
 	);
 };
 
-const Timer = ({ game }: { game: Game }) => {
-	const minutes = Math.floor(game.lt / 60);
-	const seconds = Math.floor(game.lt - minutes * 60);
+const Score = ({ game }: { game: Game }) => {
+	const minutes = Math.floor(game.score / 60);
+	const seconds = Math.floor(game.score - minutes * 60);
 
 	return (
 		<container x={1080 - 95} y={20}>
