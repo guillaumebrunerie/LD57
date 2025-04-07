@@ -1,0 +1,103 @@
+{"frames": {
+
+"CupidShot_025.png":
+{
+	"frame": {"x":392,"y":386,"w":173,"h":195},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":162,"y":135,"w":173,"h":195},
+	"sourceSize": {"w":500,"h":500}
+},
+"CupidShot_026.png":
+{
+	"frame": {"x":197,"y":198,"w":186,"h":195},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":157,"y":135,"w":186,"h":195},
+	"sourceSize": {"w":500,"h":500}
+},
+"CupidShot_027.png":
+{
+	"frame": {"x":253,"y":1,"w":217,"h":195},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":151,"y":135,"w":217,"h":195},
+	"sourceSize": {"w":500,"h":500}
+},
+"CupidShot_028.png":
+{
+	"frame": {"x":1,"y":1,"w":250,"h":195},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":142,"y":136,"w":250,"h":195},
+	"sourceSize": {"w":500,"h":500}
+},
+"CupidShot_029.png":
+{
+	"frame": {"x":672,"y":1,"w":193,"h":197},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":138,"y":135,"w":193,"h":197},
+	"sourceSize": {"w":500,"h":500}
+},
+"CupidShot_030.png":
+{
+	"frame": {"x":472,"y":1,"w":197,"h":198},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":135,"y":134,"w":197,"h":198},
+	"sourceSize": {"w":500,"h":500}
+},
+"CupidShot_031.png":
+{
+	"frame": {"x":672,"y":196,"w":191,"h":196},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":135,"y":134,"w":191,"h":196},
+	"sourceSize": {"w":500,"h":500}
+},
+"CupidShot_032.png":
+{
+	"frame": {"x":1,"y":198,"w":189,"h":194},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":136,"y":135,"w":189,"h":194},
+	"sourceSize": {"w":500,"h":500}
+},
+"CupidShot_033.png":
+{
+	"frame": {"x":394,"y":200,"w":184,"h":194},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":141,"y":135,"w":184,"h":194},
+	"sourceSize": {"w":500,"h":500}
+},
+"CupidShot_034.png":
+{
+	"frame": {"x":1,"y":389,"w":174,"h":194},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":151,"y":135,"w":174,"h":194},
+	"sourceSize": {"w":500,"h":500}
+},
+"CupidShot_035.png":
+{
+	"frame": {"x":197,"y":386,"w":176,"h":193},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":158,"y":136,"w":176,"h":193},
+	"sourceSize": {"w":500,"h":500}
+}},
+"animations": {
+	"CupidShot": ["CupidShot_025.png","CupidShot_026.png","CupidShot_027.png","CupidShot_028.png","CupidShot_029.png","CupidShot_030.png","CupidShot_031.png","CupidShot_032.png","CupidShot_033.png","CupidShot_034.png","CupidShot_035.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "CupidShot.png",
+	"format": "RGBA8888",
+	"size": {"w":870,"h":564},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:ae894da90e8001e9405271d6df0695fc:581c0b30e365e58c41938db02f568f05:866646ab075675317f0a4654cfe672b3$"
+}
+}
