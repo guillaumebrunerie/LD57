@@ -1,6 +1,11 @@
 import type { Game } from "./game";
 import {
 	A_DemonExplosion,
+	A_DevilHit,
+	A_DevilIdle,
+	A_DevilLookUp,
+	A_DevilWin,
+	A_DevilWinLoop,
 	A_HeartExplosion,
 	S_Click,
 	T_Arrow_Off,
@@ -17,7 +22,6 @@ import {
 	T_Bg_Level_09_End,
 	T_Cupid,
 	T_CupidArrow_Blurred,
-	T_Devil,
 	T_Gradient,
 	T_Heart_Off,
 	T_Heart_On,
@@ -39,7 +43,7 @@ import { PolygonShape } from "./Polygon";
 import { useOnKeyDown } from "./useOnKeyDown";
 import { useRef } from "react";
 import { useOnKeyDownUp } from "./useOnKeyDownUp";
-import { getFrame } from "./Animation";
+import { getDuration, getFrame } from "./Animation";
 
 export const GameC = ({ game }: { game: Game }) => {
 	useOnKeyDownUp(
@@ -116,7 +120,7 @@ export const GameC = ({ game }: { game: Game }) => {
 				width={1080}
 				height={1920}
 				color={0x000000}
-				alpha={fadeAlpha}
+				alpha={game.isWinning ? 0 : fadeAlpha}
 				draw={() => {}}
 			/>
 		</container>
@@ -197,6 +201,22 @@ const BackgroundFragment = ({ game, depth }: { game: Game; depth: number }) => {
 };
 
 const End = ({ game }: { game: Game }) => {
+	let frame = getFrame(A_DevilIdle, 25, game.lt);
+	let explosionLt = game.lt - 0.2;
+	if (game.isWinning) {
+		const d1 = getDuration(A_DevilLookUp, 15);
+		const d2 = getDuration(A_DevilHit, 15);
+		const d3 = getDuration(A_DevilWin, 15);
+		if (game.lt < d1) {
+			frame = getFrame(A_DevilLookUp, 15, game.lt);
+		} else if (game.lt < d1 + d2) {
+			frame = getFrame(A_DevilHit, 15, game.lt - d1);
+		} else if (game.lt < d1 + d2 + d3) {
+			frame = getFrame(A_DevilWin, 15, game.lt - d1 - d2);
+		} else {
+			frame = getFrame(A_DevilWinLoop, 15, game.lt - d1 - d2 - d3);
+		}
+	}
 	return (
 		<container>
 			<sprite
@@ -206,11 +226,27 @@ const End = ({ game }: { game: Game }) => {
 				y={game.levelDepth * game.levels + 1920}
 			/>
 			<sprite
-				texture={T_Devil}
+				texture={frame}
 				anchor={{ x: 0.5, y: 1 }}
 				x={750}
-				y={game.levelDepth * game.levels + 1920 - 450}
+				y={game.levelDepth * game.levels + 1920 - 350}
+				scale={1.3}
 			/>
+			{explosionLt > 0 && (
+				<sprite
+					x={750}
+					y={game.levelDepth * game.levels + 1920 - 700}
+					anchor={{ x: 0.5, y: 0.5 }}
+					blendMode="add"
+					texture={getFrame(
+						A_HeartExplosion,
+						15,
+						explosionLt,
+						"remove",
+					)}
+					scale={1.2}
+				/>
+			)}
 		</container>
 	);
 };
@@ -293,7 +329,10 @@ const PlayerC = ({ player }: { player: Player }) => {
 			) -
 		600;
 	return (
-		<container x={player.posX} y={player.posY + dy}>
+		<container
+			x={player.posX}
+			y={player.posY + (player.game.isWinning ? 0 : dy)}
+		>
 			<sprite
 				texture={T_Cupid}
 				anchor={0.5}

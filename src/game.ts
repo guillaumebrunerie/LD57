@@ -1,11 +1,7 @@
 import {
-	// S_CompleteLevel,
-	// LoseGame,
-	S_Music,
 	S_MusicIntensity1,
 	S_MusicIntensity2,
 	S_MusicIntensity3,
-	// S_StartLevel,
 } from "./assets";
 import { ObstacleManager as ObstaclesManager } from "./obstaclesManager";
 import { Player } from "./player";
@@ -35,6 +31,8 @@ export class Game {
 
 	level = 0;
 	levelDepth = 15000;
+
+	isWinning = false;
 
 	constructor() {}
 
@@ -83,7 +81,7 @@ export class Game {
 		this.player.tick(delta);
 		this.obstaclesManager.tick(delta);
 
-		if (this.player.arrow) {
+		if (this.player.arrow && this.player.arrow.targetId != "") {
 			const targetId = this.player.arrow.targetId;
 			const target = this.obstaclesManager.obstacles.find(
 				(obstacle) => obstacle.id == targetId,
@@ -99,12 +97,23 @@ export class Game {
 			}
 		}
 
+		if (this.player.arrow?.targetId === "" && this.lt > 0.15) {
+			this.player.arrow = null;
+		}
+
 		if (
 			this.level < this.levels &&
 			this.obstaclesManager.checkCollision(this.player) &&
 			this.player.invincibleTimeout == 0
 		) {
 			this.player.hit();
+		}
+	}
+
+	win() {
+		if (!this.isWinning) {
+			this.lt = 0;
+			this.isWinning = true;
 		}
 	}
 
@@ -208,23 +217,22 @@ export class Game {
 
 	reset() {
 		this.isPaused = false;
-		void S_Music.stop();
+		// void S_Music.stop();
 	}
 
 	backToMainMenu() {
 		this.reset();
 		this.state = "startScreen";
-		void S_Music.resume();
+		// void S_Music.resume();
 	}
 
 	pause() {
-		void S_Music.pause();
-		void S_Music.pause();
+		// void S_Music.pause();
 		this.isPaused = true;
 	}
 
 	resume() {
-		void S_Music.resume();
+		// void S_Music.resume();
 
 		this.isPaused = false;
 	}

@@ -72,10 +72,19 @@ export class Player {
 		}
 		this.posX = Math.max(minX, Math.min(this.posX, maxX));
 		this.posY += this.game.cameraSpeed * delta;
-		this.posY = Math.min(
-			this.posY,
-			this.game.levelDepth * this.game.levels + 1920 - 1200,
-		);
+		const targetY = this.game.levelDepth * this.game.levels + 1920 - 1200;
+		this.posY = Math.min(this.posY, targetY);
+
+		if (
+			this.game.level > this.game.levels &&
+			Math.abs(this.posX - 250) < 1 &&
+			Math.abs(this.posY - targetY) < 1 &&
+			!this.game.isWinning
+		) {
+			this.game.win();
+			this.finalShoot();
+			this.lookingLeft = false;
+		}
 
 		this.invincibleTimeout -= delta;
 		if (this.invincibleTimeout < 0) {
@@ -95,6 +104,20 @@ export class Player {
 		}
 		this.arrows--;
 		this.arrow = new Arrow(this.posX, this.posY, angle, distance, targetId);
+	}
+
+	finalShoot() {
+		const targetX = 750;
+		const targetY = this.game.levelDepth * this.game.levels + 1920 - 700;
+		const dx = targetX - this.posX;
+		const dy = targetY - this.posY;
+		this.arrow = new Arrow(
+			this.posX,
+			this.posY,
+			Math.atan2(dy, dx),
+			Math.sqrt(dx * dx + dy * dy),
+			"",
+		);
 	}
 
 	moveLeft(activate: boolean) {

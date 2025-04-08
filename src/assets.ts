@@ -1,4 +1,4 @@
-/** Generated on Mon Apr  7 21:30:11 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Tue Apr  8 01:17:03 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -55,6 +55,11 @@ import WallSpike_Level1_04_ from "../gfx/WallSpike_Level1_04.png?texture";
 /** Spritesheets */
 import CloudStartButton_ from "../gfx/CloudStartButton.png?spritesheet";
 import DemonExplosion_ from "../gfx/DemonExplosion.png?spritesheet";
+import DevilHit_ from "../gfx/DevilHit.png?spritesheet";
+import DevilIdle_ from "../gfx/DevilIdle.png?spritesheet";
+import DevilLookUp_ from "../gfx/DevilLookUp.png?spritesheet";
+import DevilWin_ from "../gfx/DevilWin.png?spritesheet";
+import DevilWinLoop_ from "../gfx/DevilWinLoop.png?spritesheet";
 import HeartExplosion_ from "../gfx/HeartExplosion.png?spritesheet";
 
 /** Sounds */
@@ -126,6 +131,16 @@ export const [
 	{ animations: { CloudStartButton: A_CloudStartButton } },
 	SS_DemonExplosion,
 	{ animations: { DemonExplosion: A_DemonExplosion } },
+	SS_DevilHit,
+	{ animations: { DevilHit: A_DevilHit } },
+	SS_DevilIdle,
+	{ animations: { DevilIdle: A_DevilIdle } },
+	SS_DevilLookUp,
+	{ animations: { DevilLookUp: A_DevilLookUp } },
+	SS_DevilWin,
+	{ animations: { DevilWin: A_DevilWin } },
+	SS_DevilWinLoop,
+	{ animations: { DevilWinLoop: A_DevilWinLoop } },
 	SS_HeartExplosion,
 	{ animations: { HeartExplosion: A_HeartExplosion } },
 	S_Click,
@@ -193,6 +208,16 @@ export const [
 	CloudStartButton_,
 	DemonExplosion_,
 	DemonExplosion_,
+	DevilHit_,
+	DevilHit_,
+	DevilIdle_,
+	DevilIdle_,
+	DevilLookUp_,
+	DevilLookUp_,
+	DevilWin_,
+	DevilWin_,
+	DevilWinLoop_,
+	DevilWinLoop_,
 	HeartExplosion_,
 	HeartExplosion_,
 	Click_,

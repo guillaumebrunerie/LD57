@@ -1,4 +1,3 @@
-- first basic balancing
 - mobile fire
 - clouds slowly moving in start screen
 
