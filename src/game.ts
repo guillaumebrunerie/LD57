@@ -2,6 +2,7 @@ import {
 	S_MusicIntensity1,
 	S_MusicIntensity2,
 	S_MusicIntensity3,
+	S_StartButton,
 } from "./assets";
 import { ObstacleManager as ObstaclesManager } from "./obstaclesManager";
 import { Player } from "./player";
@@ -55,7 +56,7 @@ export class Game {
 
 		this.lt += delta;
 		this.startLt += delta;
-		if (this.state == "game" && this.player.lives > 0) {
+		if (this.state == "game" && this.player.lives > 0 && !this.isWinning) {
 			this.score += delta;
 		}
 
@@ -198,6 +199,7 @@ export class Game {
 	}
 
 	clickStart() {
+		void S_StartButton.play({ volume: 0.5 });
 		this.isPaused = false;
 	}
 

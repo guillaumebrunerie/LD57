@@ -2,7 +2,7 @@ import { Matrix, type Polygon, type Texture } from "pixi.js";
 import type { Game } from "./game";
 import type { Player } from "./player";
 import { getDuration } from "./Animation";
-import { A_HeartExplosion } from "./assets";
+import { A_HeartExplosion, S_EnemyDiePuff, S_EnemyDieVoice } from "./assets";
 import { smoothTriangle } from "./utils";
 
 export type ObstacleData = {
@@ -87,6 +87,8 @@ export class Obstacle {
 		this.isDestroyed = true;
 		this.destroyTimeout = getDuration(A_HeartExplosion, 15);
 		this.lt = 0;
+		void S_EnemyDiePuff.play({ volume: 0.3 });
+		void S_EnemyDieVoice.play({ volume: 0.3 });
 	}
 
 	polygon() {

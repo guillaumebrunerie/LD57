@@ -12,6 +12,7 @@ import {
 	T_Cupid,
 	T_GroundMask,
 	A_CloudStartButton,
+	S_StartButton,
 } from "./assets";
 import { CustomText } from "./CustomText";
 import type { Game } from "./game";
@@ -42,7 +43,6 @@ export const StartScreen = ({ game }: { game: Game }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
-					void S_Click.play();
 					game.clickStart();
 				}}
 			/>

@@ -1,3 +1,9 @@
+import {
+	S_ArrowShot,
+	S_CupidHurt,
+	S_GameOver,
+	S_GameOverDevilLaughter,
+} from "./assets";
 import type { Game } from "./game";
 import type { Point } from "./utils";
 
@@ -96,6 +102,12 @@ export class Player {
 		this.lives--;
 		this.invincibleTimeout = 1.2;
 		this.lt = 0;
+		if (this.lives > 0) {
+			void S_CupidHurt.play({ volume: 0.5 });
+		} else {
+			void S_GameOver.play({ volume: 0.2 });
+			// void S_GameOverDevilLaughter.play({ volume: 0.3 });
+		}
 	}
 
 	shoot(angle: number, distance: number, targetId: string) {
@@ -104,6 +116,7 @@ export class Player {
 		}
 		this.arrows--;
 		this.arrow = new Arrow(this.posX, this.posY, angle, distance, targetId);
+		void S_ArrowShot.play({ volume: 0.5 });
 	}
 
 	finalShoot() {
@@ -118,6 +131,7 @@ export class Player {
 			Math.sqrt(dx * dx + dy * dy),
 			"",
 		);
+		void S_ArrowShot.play({ volume: 0.5 });
 	}
 
 	moveLeft(activate: boolean) {
