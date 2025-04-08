@@ -24,6 +24,7 @@ export class Player {
 
 	tapPos: Point | null = null;
 	targetX: number | null = null;
+	previousY = 0;
 
 	tapActionY: "up" | "down" | null = null;
 
@@ -139,6 +140,7 @@ export class Player {
 	onPointerDown(pos: Point) {
 		this.tapPos = pos;
 		this.targetX = 0;
+		this.previousY = pos.y;
 	}
 
 	onPointerMove(pos: Point) {
@@ -147,17 +149,10 @@ export class Player {
 		}
 		this.targetX = pos.x - this.tapPos.x + 1080 / 2;
 
-		// const yThreshold = 100;
-		// const yThresholdRevert = 50;
-		// const dy = pos.y - this.tapPos.y;
-
-		// if (dy < -yThreshold) {
-		// 	this.tapActionY = "up";
-		// } else if (dy > yThreshold) {
-		// 	this.tapActionY = "down";
-		// } else if (Math.abs(dy) < yThresholdRevert) {
-		// 	this.tapActionY = null;
-		// }
+		if (pos.y < this.previousY - 50) {
+			this.game.shoot();
+		}
+		this.previousY = pos.y;
 	}
 
 	onPointerUp() {
