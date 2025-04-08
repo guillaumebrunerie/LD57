@@ -2,15 +2,12 @@ import type { Game } from "./game";
 import {
 	A_CupidDie,
 	A_CupidIdle,
-	A_DemonExplosion,
 	A_DevilHit,
 	A_DevilIdle,
 	A_DevilLookUp,
 	A_DevilWin,
 	A_DevilWinLoop,
 	A_HeartExplosion,
-	S_Click,
-	S_StartButton,
 	T_Arrow_Off,
 	T_Arrow_On,
 	T_Bg_Level_01,
@@ -23,17 +20,14 @@ import {
 	T_Bg_Level_08,
 	T_Bg_Level_09,
 	T_Bg_Level_09_End,
-	T_Cupid,
 	T_CupidArrow_Blurred,
 	T_Gradient,
 	T_Heart_Off,
 	T_Heart_On,
-	T_PauseBtn,
 } from "./assets";
 import { Rectangle } from "./Rectangle";
 import {
 	StartScreen,
-	PauseScreen,
 	GameOverScreen,
 	// WinScreen,
 } from "./Postings";
@@ -112,11 +106,9 @@ export const GameC = ({ game }: { game: Game }) => {
 			<Hearts player={game.player} />
 			<ArrowIndicators player={game.player} />
 			<Score game={game} />
-			<PauseButton game={game} />
 			{game.player.lives == 0 && <GameOverScreen game={game} />}
 			{/* {game.state == "gameover" && <GameOverScreen game={game} />} */}
 			{/* {game.state == "win" && <WinScreen game={game} />} */}
-			{game.isPaused && <PauseScreen game={game} />}
 			<Rectangle
 				x={0}
 				y={0}
@@ -397,28 +389,6 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 			></sprite>
 			<PolygonShape alpha={0} polygon={obstacle.polygon()} />
 			{/* <Circle radius={10} color={0xff0000} draw={() => {}} /> */}
-		</container>
-	);
-};
-
-const PauseButton = ({ game }: { game: Game }) => {
-	return (
-		<container x={1920 - 50} y={50}>
-			<Rectangle
-				x={-50}
-				y={-50}
-				width={100}
-				height={100}
-				alpha={0}
-				cursor="pointer"
-				eventMode="static"
-				onPointerDown={() => {
-					void S_StartButton.play();
-					game.pause();
-				}}
-				draw={() => {}}
-			/>
-			<sprite texture={T_PauseBtn} anchor={0.5} />
 		</container>
 	);
 };
