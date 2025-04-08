@@ -1,4 +1,4 @@
-/** Generated on Tue Apr  8 01:17:03 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Tue Apr  8 02:12:47 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -54,6 +54,9 @@ import WallSpike_Level1_04_ from "../gfx/WallSpike_Level1_04.png?texture";
 
 /** Spritesheets */
 import CloudStartButton_ from "../gfx/CloudStartButton.png?spritesheet";
+import CupidDie_ from "../gfx/CupidDie.png?spritesheet";
+import CupidIdle_ from "../gfx/CupidIdle.png?spritesheet";
+import CupidShot_ from "../gfx/CupidShot.png?spritesheet";
 import DemonExplosion_ from "../gfx/DemonExplosion.png?spritesheet";
 import DevilHit_ from "../gfx/DevilHit.png?spritesheet";
 import DevilIdle_ from "../gfx/DevilIdle.png?spritesheet";
@@ -63,14 +66,21 @@ import DevilWinLoop_ from "../gfx/DevilWinLoop.png?spritesheet";
 import HeartExplosion_ from "../gfx/HeartExplosion.png?spritesheet";
 
 /** Sounds */
+import ArrowShot_ from "../audio/ArrowShot.mp3?sound";
 import Click_ from "../audio/Click.mp3?sound";
 import CompleteLevel_ from "../audio/CompleteLevel.mp3?sound";
+import CupidHurt_ from "../audio/CupidHurt.mp3?sound";
+import EnemyDiePuff_ from "../audio/EnemyDiePuff.mp3?sound";
+import EnemyDieVoice_ from "../audio/EnemyDieVoice.mp3?sound";
+import GameOver_ from "../audio/GameOver.mp3?sound";
+import GameOverDevilLaughter_ from "../audio/GameOverDevilLaughter.mp3?sound";
 import LoseGame_ from "../audio/LoseGame.mp3?sound";
 import Music_ from "../audio/Music.mp3?sound";
 import MusicIntensity1_ from "../audio/MusicIntensity1.mp3?sound";
 import MusicIntensity2_ from "../audio/MusicIntensity2.mp3?sound";
 import MusicIntensity3_ from "../audio/MusicIntensity3.mp3?sound";
 import MusicMenu_ from "../audio/MusicMenu.mp3?sound";
+import StartButton_ from "../audio/StartButton.mp3?sound";
 import StartLevel_ from "../audio/StartLevel.mp3?sound";
 
 /** Fonts */
@@ -129,6 +139,12 @@ export const [
 	T_WallSpike_Level1_04,
 	SS_CloudStartButton,
 	{ animations: { CloudStartButton: A_CloudStartButton } },
+	SS_CupidDie,
+	{ animations: { CupidDie: A_CupidDie } },
+	SS_CupidIdle,
+	{ animations: { CupidIdle: A_CupidIdle } },
+	SS_CupidShot,
+	{ animations: { CupidShot: A_CupidShot } },
 	SS_DemonExplosion,
 	{ animations: { DemonExplosion: A_DemonExplosion } },
 	SS_DevilHit,
@@ -143,14 +159,21 @@ export const [
 	{ animations: { DevilWinLoop: A_DevilWinLoop } },
 	SS_HeartExplosion,
 	{ animations: { HeartExplosion: A_HeartExplosion } },
+	S_ArrowShot,
 	S_Click,
 	S_CompleteLevel,
+	S_CupidHurt,
+	S_EnemyDiePuff,
+	S_EnemyDieVoice,
+	S_GameOver,
+	S_GameOverDevilLaughter,
 	S_LoseGame,
 	S_Music,
 	S_MusicIntensity1,
 	S_MusicIntensity2,
 	S_MusicIntensity3,
 	S_MusicMenu,
+	S_StartButton,
 	S_StartLevel,
 	F_Comix_Loud,
 	F_Digital_Display_Tfb,
@@ -206,6 +229,12 @@ export const [
 	WallSpike_Level1_04_,
 	CloudStartButton_,
 	CloudStartButton_,
+	CupidDie_,
+	CupidDie_,
+	CupidIdle_,
+	CupidIdle_,
+	CupidShot_,
+	CupidShot_,
 	DemonExplosion_,
 	DemonExplosion_,
 	DevilHit_,
@@ -220,14 +249,21 @@ export const [
 	DevilWinLoop_,
 	HeartExplosion_,
 	HeartExplosion_,
+	ArrowShot_,
 	Click_,
 	CompleteLevel_,
+	CupidHurt_,
+	EnemyDiePuff_,
+	EnemyDieVoice_,
+	GameOver_,
+	GameOverDevilLaughter_,
 	LoseGame_,
 	Music_,
 	MusicIntensity1_,
 	MusicIntensity2_,
 	MusicIntensity3_,
 	MusicMenu_,
+	StartButton_,
 	StartLevel_,
 	Comix_Loud_,
 	Digital_Display_Tfb_,

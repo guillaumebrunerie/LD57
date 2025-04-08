@@ -1,5 +1,7 @@
 import type { Game } from "./game";
 import {
+	A_CupidDie,
+	A_CupidIdle,
 	A_DemonExplosion,
 	A_DevilHit,
 	A_DevilIdle,
@@ -333,23 +335,30 @@ const PlayerC = ({ player }: { player: Player }) => {
 			x={player.posX}
 			y={player.posY + (player.game.isWinning ? 0 : dy)}
 		>
-			<sprite
-				texture={T_Cupid}
-				anchor={0.5}
-				scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
-			/>
-			{player.invincibleTimeout > 0 && (
+			{player.lives > 0 && (
 				<sprite
-					texture={getFrame(A_DemonExplosion, 15, player.lt, "hold")}
+					texture={getFrame(A_CupidIdle, 20, player.lt)}
+					anchor={0.5}
+					scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
+				/>
+			)}
+			{player.invincibleTimeout > 0 && player.lives > 0 && (
+				<sprite
+					texture={getFrame(A_CupidIdle, 20, player.lt)}
+					tint={
+						0xffffff -
+						0x000101 *
+							Math.floor((player.invincibleTimeout / 3) * 255)
+					}
 					anchor={0.5}
 					scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
 				/>
 			)}
 			{player.lives == 0 && (
 				<sprite
-					texture={getFrame(A_DemonExplosion, 15, player.lt, "loop")}
+					texture={getFrame(A_CupidDie, 10, player.lt, "remove")}
 					anchor={0.5}
-					scale={{ x: player.lookingLeft ? -2 : 2, y: 2 }}
+					scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
 				/>
 			)}
 			{/* <Circle x={-40} y={-40} radius={10} /> */}
