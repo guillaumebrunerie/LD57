@@ -147,14 +147,14 @@ export class Game {
 
 	cheat() {
 		if (import.meta.env.DEV) {
-			this.player.lives = 3;
+			this.player.lives = 4;
 			this.player.arrows = 3;
 		}
 	}
 
 	nextLevel() {
 		this.level++;
-		if (this.player.lives < 3) {
+		if (this.player.lives < 4) {
 			this.player.lives++;
 		}
 		if (this.player.arrows < 3) {

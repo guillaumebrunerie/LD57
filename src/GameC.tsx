@@ -281,17 +281,17 @@ const Hearts = ({ player }: { player: Player }) => {
 	return (
 		<container x={1080 / 2 - 120} y={55}>
 			<sprite
-				texture={player.lives >= 1 ? T_Heart_On : T_Heart_Off}
+				texture={player.lives >= 2 ? T_Heart_On : T_Heart_Off}
 				anchor={0.5}
 				x={-heartDeltaX}
 			/>
 			<sprite
-				texture={player.lives >= 2 ? T_Heart_On : T_Heart_Off}
+				texture={player.lives >= 3 ? T_Heart_On : T_Heart_Off}
 				anchor={0.5}
 				x={0}
 			/>
 			<sprite
-				texture={player.lives >= 3 ? T_Heart_On : T_Heart_Off}
+				texture={player.lives >= 4 ? T_Heart_On : T_Heart_Off}
 				anchor={0.5}
 				x={heartDeltaX}
 			/>

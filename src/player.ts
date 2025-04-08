@@ -28,7 +28,7 @@ export class Player {
 
 	tapActionY: "up" | "down" | null = null;
 
-	lives = 3;
+	lives = 4;
 	invincibleTimeout = 0;
 
 	arrows = 3;

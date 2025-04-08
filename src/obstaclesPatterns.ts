@@ -256,7 +256,7 @@ const patterns: Pattern[][] = [
 			side: "left",
 			data: [
 				spikeRight(1),
-				enemyHorizontal(8, 1, [230, 680], [-200, -100]),
+				// enemyHorizontal(8, 1, [230, 680], [-200, -100]),
 				enemyHorizontal(8, 1, [230, 680], [100, 200]),
 			],
 		},
@@ -264,7 +264,7 @@ const patterns: Pattern[][] = [
 			side: "left",
 			data: [
 				spikeRight(3),
-				enemyHorizontal(8, 1, [230, 580], [-200, -100]),
+				// enemyHorizontal(8, 1, [230, 580], [-200, -100]),
 				enemyHorizontal(8, 1, [230, 580], [100, 200]),
 			],
 		},
@@ -287,7 +287,7 @@ const patterns: Pattern[][] = [
 			side: "right",
 			data: [
 				spikeLeft(1),
-				enemyHorizontal(8, 1, [400, 850], [-200, -100]),
+				// enemyHorizontal(8, 1, [400, 850], [-200, -100]),
 				enemyHorizontal(8, 1, [400, 850], [100, 200]),
 			],
 		},
@@ -295,7 +295,7 @@ const patterns: Pattern[][] = [
 			side: "right",
 			data: [
 				spikeLeft(3),
-				enemyHorizontal(8, 1, [500, 850], [-200, -100]),
+				// enemyHorizontal(8, 1, [500, 850], [-200, -100]),
 				enemyHorizontal(8, 1, [500, 850], [100, 200]),
 			],
 		},
@@ -332,7 +332,7 @@ const patterns: Pattern[][] = [
 		},
 		{
 			side: "left",
-			data: [spikeRight(2), spikeLeft(2, [400, 500])],
+			data: [spikeRight(2), spikeLeft(2, [500, 600])],
 		},
 		{
 			side: "left",
@@ -381,22 +381,22 @@ export const obstaclesPatternsData: LevelPattern[] = [
 	},
 	// Level 6
 	{
-		spacing: [600, 1000],
+		spacing: [700, 1000],
 		data: [...patterns[3], ...patterns[6]],
 	},
 	// Level 7
 	{
-		spacing: [500, 900],
+		spacing: [600, 900],
 		data: [...patterns[4], ...patterns[7]],
 	},
 	// Level 8
 	{
-		spacing: [500, 900],
+		spacing: [600, 900],
 		data: [...patterns[5], ...patterns[6]],
 	},
 	// Level 9
 	{
-		spacing: [400, 800],
+		spacing: [500, 800],
 		data: [...patterns[5], ...patterns[6], ...patterns[7]],
 	},
 ];

@@ -1,6 +1,4 @@
 - cupid shooting animation
-- sound triggers
-- mobile fire
 
 Won’t do
 - better balancing
