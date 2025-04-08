@@ -52,7 +52,7 @@ export const StartScreen = ({ game }: { game: Game }) => {
 			<sprite texture={T_Cloud_03} anchor={0.5} x={300} y={2150} />
 			<sprite texture={T_Cloud_01} anchor={0.5} x={900} y={2800} />
 			<sprite texture={T_Cloud_02} anchor={0.5} x={200} y={3300} />
-			<sprite texture={T_Logo} anchor={0.5} x={1080 / 2} y={650} />
+			<sprite texture={T_Logo} anchor={0.5} x={580} y={650} />
 			<sprite texture={T_Cupid} anchor={0.5} x={1080 / 2} y={cupidY} />
 			<sprite texture={T_GroundMask} />
 			<sprite
@@ -89,7 +89,7 @@ export const PauseScreen = ({ game }: { game: Game }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
-					void S_Click.play();
+					void S_StartButton.play({ volume: 0.3 });
 					game.resume();
 				}}
 			/>
@@ -136,7 +136,7 @@ export const LevelSelectPauseScreen = ({ game }: { game: Game }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
-					void S_Click.play();
+					void S_StartButton.play({ volume: 0.3 });
 					game.resume();
 				}}
 			/>
@@ -186,7 +186,7 @@ const RestartButton = () => {
 				},
 			}}
 			onPointerDown={() => {
-				void S_Click.play();
+				void S_StartButton.play({ volume: 0.3 });
 				// game.restart();
 			}}
 		/>
@@ -211,7 +211,7 @@ const MainMenuButton = ({ game }: { game: Game }) => {
 			cursor="pointer"
 			eventMode="static"
 			onPointerDown={() => {
-				void S_Click.play();
+				void S_StartButton.play({ volume: 0.3 });
 				game.backToMainMenu();
 			}}
 		/>
@@ -236,7 +236,7 @@ const MainMenuButton2 = ({ game }: { game: Game }) => {
 			cursor="pointer"
 			eventMode="static"
 			onPointerDown={() => {
-				void S_Click.play();
+				void S_StartButton.play({ volume: 0.3 });
 				game.backToMainMenu();
 			}}
 		/>
@@ -261,7 +261,7 @@ const WipeSaveButton = ({ game }: { game: Game }) => {
 			cursor="pointer"
 			eventMode="static"
 			onPointerDown={() => {
-				void S_Click.play();
+				void S_StartButton.play({ volume: 0.3 });
 				// game.resetLastUnlockedLevel();
 				game.resume();
 			}}
@@ -284,7 +284,7 @@ export const GameOverScreen = ({ game }: { game: Game }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
-					void S_Click.play();
+					void S_StartButton.play({ volume: 0.3 });
 					game.restart();
 				}}
 			/>

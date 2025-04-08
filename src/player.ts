@@ -1,9 +1,4 @@
-import {
-	S_ArrowShot,
-	S_CupidHurt,
-	S_GameOver,
-	S_GameOverDevilLaughter,
-} from "./assets";
+import { S_ArrowShot, S_CupidHurt, S_GameOver } from "./assets";
 import type { Game } from "./game";
 import type { Point } from "./utils";
 
@@ -106,7 +101,6 @@ export class Player {
 			void S_CupidHurt.play({ volume: 0.5 });
 		} else {
 			void S_GameOver.play({ volume: 0.2 });
-			// void S_GameOverDevilLaughter.play({ volume: 0.3 });
 		}
 	}
 

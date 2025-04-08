@@ -10,6 +10,7 @@ import {
 	A_DevilWinLoop,
 	A_HeartExplosion,
 	S_Click,
+	S_StartButton,
 	T_Arrow_Off,
 	T_Arrow_On,
 	T_Bg_Level_01,
@@ -412,7 +413,7 @@ const PauseButton = ({ game }: { game: Game }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
-					void S_Click.play();
+					void S_StartButton.play();
 					game.pause();
 				}}
 				draw={() => {}}
