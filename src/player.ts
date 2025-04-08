@@ -15,6 +15,8 @@ export class Player {
 	movingLeft = false;
 	movingRight = false;
 
+	isShooting = false;
+
 	lookingLeft = false;
 
 	width = 50;
@@ -105,10 +107,13 @@ export class Player {
 		}
 	}
 
-	shoot(angle: number, distance: number, targetId: string) {
+	shoot(angle: number, distance: number, targetId: string, dx: number) {
 		if (this.arrow || this.arrows <= 0) {
 			return;
 		}
+		this.lookingLeft = dx < 0;
+		this.lt = 0;
+		this.isShooting = true;
 		this.arrows--;
 		this.arrow = new Arrow(this.posX, this.posY, angle, distance, targetId);
 		void S_ArrowShot.play({ volume: 0.5 });
@@ -119,6 +124,8 @@ export class Player {
 		const targetY = this.game.levelDepth * this.game.levels + 1920 - 700;
 		const dx = targetX - this.posX;
 		const dy = targetY - this.posY;
+		this.lt = 0;
+		this.isShooting = true;
 		this.arrow = new Arrow(
 			this.posX,
 			this.posY,

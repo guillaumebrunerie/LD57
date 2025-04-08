@@ -2,6 +2,7 @@ import type { Game } from "./game";
 import {
 	A_CupidDie,
 	A_CupidIdle,
+	A_CupidShot,
 	A_DevilHit,
 	A_DevilIdle,
 	A_DevilLookUp,
@@ -26,11 +27,7 @@ import {
 	T_Heart_On,
 } from "./assets";
 import { Rectangle } from "./Rectangle";
-import {
-	StartScreen,
-	GameOverScreen,
-	// WinScreen,
-} from "./Postings";
+import { StartScreen, GameOverScreen } from "./Postings";
 import { Polygon, type FederatedPointerEvent } from "pixi.js";
 import { mod, smoothTriangle } from "./utils";
 import type { Obstacle } from "./obstacle";
@@ -330,7 +327,14 @@ const PlayerC = ({ player }: { player: Player }) => {
 		>
 			{player.lives > 0 && (
 				<sprite
-					texture={getFrame(A_CupidIdle, 20, player.lt)}
+					texture={
+						(
+							player.isShooting &&
+							player.lt < getDuration(A_CupidShot, 20)
+						) ?
+							getFrame(A_CupidShot, 20, player.lt)
+						:	getFrame(A_CupidIdle, 20, player.lt)
+					}
 					anchor={0.5}
 					scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
 				/>

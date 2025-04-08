@@ -142,6 +142,7 @@ export class Game {
 			Math.atan2(dy, dx),
 			Math.sqrt(dx * dx + dy * dy),
 			target.id,
+			dx,
 		);
 	}
 
