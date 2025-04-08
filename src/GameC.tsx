@@ -22,6 +22,7 @@ import {
 	T_Bg_Level_09,
 	T_Bg_Level_09_End,
 	T_CupidArrow_Blurred,
+	T_DevilShadow,
 	T_Gradient,
 	T_Heart_Off,
 	T_Heart_On,
@@ -216,6 +217,12 @@ const End = ({ game }: { game: Game }) => {
 				anchor={{ x: 0, y: 1 }}
 				x={0}
 				y={game.levelDepth * game.levels + 1920}
+			/>
+			<sprite
+				texture={T_DevilShadow}
+				anchor={{ x: 0.5, y: 1 }}
+				x={750}
+				y={game.levelDepth * game.levels + 1920 - 440}
 			/>
 			<sprite
 				texture={frame}
