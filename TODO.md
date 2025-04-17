@@ -1,5 +1,16 @@
-- cupid shooting animation
-
-Won’t do
-- better balancing
+- better balancing (fix impossible patterns)
 - clouds slowly moving in start screen
+- flapping wings
+- animated foreground in some levels
+- fix sides that do not match
+- make music loop
+- should not be able to shoot while dead
+- shooting arrows in mobile is difficult
+- compressing images
+- fix hitboxes
+- add different obstacles for different levels (but same shape)
+- win posting ("the end")
+- win music? (try playing GameOver)
+- remove timer
+- hit animation (feathers)
+- screenshake when hit
