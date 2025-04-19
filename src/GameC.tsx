@@ -90,7 +90,7 @@ export const GameC = ({ game }: { game: Game }) => {
 
 	return (
 		<container>
-			<container y={-game.depth}>
+			<Screen game={game}>
 				<Background game={game} />
 				{mask && <PolygonShape polygon={mask} myRef={ref} />}
 				<container mask={mask ? ref.current : undefined}>
@@ -100,7 +100,7 @@ export const GameC = ({ game }: { game: Game }) => {
 				</container>
 				<PlayerC player={game.player} />
 				{game.player.arrow && <ArrowC arrow={game.player.arrow} />}
-			</container>
+			</Screen>
 			<Hearts player={game.player} />
 			<ArrowIndicators player={game.player} />
 			<Score game={game} />
@@ -116,6 +116,26 @@ export const GameC = ({ game }: { game: Game }) => {
 				alpha={game.isWinning ? 0 : fadeAlpha}
 				draw={() => {}}
 			/>
+		</container>
+	);
+};
+
+const Screen = ({
+	game,
+	children,
+}: {
+	game: Game;
+	children: React.ReactNode;
+}) => {
+	const screenShakeDuration = 0.2;
+	const screenShakeX = 20;
+	const screenShakeY = 20;
+	const inScreenShake = game.lt < game.lastHit + screenShakeDuration;
+	const shakeX = inScreenShake ? (Math.random() * 2 - 1) * screenShakeX : 0;
+	const shakeY = inScreenShake ? (Math.random() * 2 - 1) * screenShakeY : 0;
+	return (
+		<container x={shakeX} y={shakeY - game.depth}>
+			{children}
 		</container>
 	);
 };

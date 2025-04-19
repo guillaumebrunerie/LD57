@@ -1,16 +1,18 @@
-- better balancing (fix impossible patterns)
+- shooting arrows in mobile is difficult
+- win music? (try playing GameOver)
+- fix hitboxes
+- should not be able to shoot while dead
+- make music loop
+- compressing images automatically
+- remove timer
 - clouds slowly moving in start screen
+- fix impossible patterns in balancing + maybe more variety at the beginning
+
+Waiting for art:
+
 - flapping wings
 - animated foreground in some levels
-- fix sides that do not match
-- make music loop
-- should not be able to shoot while dead
-- shooting arrows in mobile is difficult
-- compressing images
-- fix hitboxes
 - add different obstacles for different levels (but same shape)
 - win posting ("the end")
-- win music? (try playing GameOver)
-- remove timer
 - hit animation (feathers)
-- screenshake when hit
+- fix sides that do not match
