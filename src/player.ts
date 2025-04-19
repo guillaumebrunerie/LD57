@@ -25,7 +25,8 @@ export class Player {
 	posY = 300;
 
 	tapPos: Point | null = null;
-	targetX: number | null = null;
+	baseTargetX = this.posX;
+	targetX = this.posX;
 	previousY = 0;
 
 	tapActionY: "up" | "down" | null = null;
@@ -55,13 +56,15 @@ export class Player {
 		}
 		if (this.movingLeft) {
 			this.posX -= this.sideSpeed * delta;
+			this.targetX = this.posX;
 			this.lookingLeft = true;
 		}
 		if (this.movingRight) {
 			this.posX += this.sideSpeed * delta;
+			this.targetX = this.posX;
 			this.lookingLeft = false;
 		}
-		if (!this.movingLeft && !this.movingRight && this.targetX !== null) {
+		if (!this.movingLeft && !this.movingRight) {
 			const speedFraction = Math.max(
 				-1,
 				Math.min(
@@ -146,7 +149,7 @@ export class Player {
 
 	onPointerDown(pos: Point) {
 		this.tapPos = pos;
-		this.targetX = 0;
+		this.baseTargetX = this.targetX;
 		this.previousY = pos.y;
 	}
 
@@ -154,7 +157,7 @@ export class Player {
 		if (!this.tapPos) {
 			return;
 		}
-		this.targetX = pos.x - this.tapPos.x + 1080 / 2;
+		this.targetX = this.baseTargetX + pos.x - this.tapPos.x;
 
 		if (pos.y < this.previousY - 50) {
 			this.game.shoot();
@@ -165,7 +168,6 @@ export class Player {
 	onPointerUp() {
 		this.tapPos = null;
 		this.tapActionY = null;
-		this.targetX = null;
 	}
 }
 

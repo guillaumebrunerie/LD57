@@ -199,6 +199,7 @@ const BackgroundFragment = ({ game, depth }: { game: Game; depth: number }) => {
 				onPointerDown={pointerEventListener(game, "pointerdown")}
 				onPointerMove={pointerEventListener(game, "pointermove")}
 				onPointerUp={pointerEventListener(game, "pointerup")}
+				onPointerUpOutside={pointerEventListener(game, "pointerup")}
 			/>
 			<sprite texture={T_Gradient} ref={ref} />
 			<sprite
@@ -207,6 +208,7 @@ const BackgroundFragment = ({ game, depth }: { game: Game; depth: number }) => {
 				onPointerDown={pointerEventListener(game, "pointerdown")}
 				onPointerMove={pointerEventListener(game, "pointermove")}
 				onPointerUp={pointerEventListener(game, "pointerup")}
+				onPointerUpOutside={pointerEventListener(game, "pointerup")}
 				mask={ref.current}
 			/>
 		</>
