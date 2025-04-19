@@ -1,4 +1,4 @@
-import { Matrix, type Polygon, type Texture } from "pixi.js";
+import { Matrix, Texture, type Polygon } from "pixi.js";
 import type { Game } from "./game";
 import type { Player } from "./player";
 import { getDuration } from "./Animation";
@@ -7,8 +7,21 @@ import { smoothTriangle } from "./utils";
 
 export type ObstacleData = {
 	type: "wall" | "spike" | "rock" | "enemy-horizontal" | "enemy-vertical";
-	texture: Texture;
+	texture:
+		| {
+				textures: Texture[];
+				fps: number;
+		  }
+		| Texture;
 	polygon: Polygon;
+};
+
+export const firstTexture = (data: ObstacleData): Texture => {
+	if (data.texture instanceof Texture) {
+		return data.texture;
+	} else {
+		return data.texture.textures[0];
+	}
 };
 
 export class Obstacle {
@@ -112,8 +125,8 @@ export class Obstacle {
 		transform.setTransform(
 			this.x,
 			this.y,
-			this.anchorX * this.data.texture.width,
-			this.anchorY * this.data.texture.height,
+			this.anchorX * firstTexture(this.data).width,
+			this.anchorY * firstTexture(this.data).height,
 			this.scaleX,
 			this.scaleY,
 			0,
