@@ -1,9 +1,9 @@
 - win music? (try playing GameOver)
-- fix hitboxes
 - make music loop
 - compressing images automatically
 - clouds slowly moving in start screen
-- fix impossible patterns in balancing + maybe more variety at the beginning
+- fix impossible patterns in balancing + maybe more variety at the beginning +
+  implement enemy 3
 
 Waiting for art:
 

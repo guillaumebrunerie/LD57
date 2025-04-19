@@ -4,9 +4,17 @@ import type { Player } from "./player";
 import { getDuration } from "./Animation";
 import { A_HeartExplosion, S_EnemyDiePuff, S_EnemyDieVoice } from "./assets";
 import { smoothTriangle } from "./utils";
+import { playerData, playerPoints } from "./obstaclesData";
 
 export type ObstacleData = {
-	type: "wall" | "spike" | "rock" | "enemy-horizontal" | "enemy-vertical";
+	type:
+		| "wall"
+		| "spike"
+		| "rock"
+		| "enemy-horizontal"
+		| "enemy-vertical"
+		| "enemy-still"
+		| "player";
 	texture:
 		| {
 				textures: Texture[];
@@ -133,15 +141,14 @@ export class Obstacle {
 			0,
 			0,
 		);
-		for (const { dx, dy } of [
-			{ dx: -40, dy: -40 },
-			{ dx: -40, dy: 40 },
-			{ dx: 40, dy: -40 },
-			{ dx: 40, dy: 40 },
-		]) {
+		for (const { x, y } of playerPoints) {
+			const newX =
+				player.lookingLeft ?
+					0.5 * firstTexture(playerData).width - x
+				:	x - 0.5 * firstTexture(playerData).width;
 			const pos = transform.applyInverse({
-				x: player.posX + dx,
-				y: player.posY + dy,
+				x: player.posX + newX,
+				y: player.posY + y - 0.5 * firstTexture(playerData).height,
 			});
 			if (polygon.contains(pos.x, pos.y)) {
 				return true;

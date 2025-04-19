@@ -72,6 +72,16 @@ const enemyVertical = (
 	range,
 });
 
+const enemyStill = (
+	x: number | [number, number],
+	y: number | [number, number] = 0,
+): PatternData => ({
+	x: typeof x == "number" ? [x, x] : x,
+	y: typeof y == "number" ? [y, y] : y,
+	flipped: false,
+	index: 10,
+});
+
 type LevelPattern = {
 	spacing: [number, number];
 	data: Pattern[];
