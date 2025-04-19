@@ -65,16 +65,13 @@ export class Player {
 			this.lookingLeft = false;
 		}
 		if (!this.movingLeft && !this.movingRight) {
-			const speedFraction = Math.max(
-				-1,
-				Math.min(
-					1,
-					(this.targetX - this.posX) / this.sideSpeed / delta,
-				),
+			const absDelta = Math.max(
+				-this.sideSpeed * delta,
+				Math.min(this.sideSpeed * delta, this.targetX - this.posX),
 			);
-			this.posX += this.sideSpeed * speedFraction * delta;
-			if (Math.abs(speedFraction) > 0.5) {
-				this.lookingLeft = speedFraction < 0;
+			this.posX += absDelta;
+			if (Math.abs(absDelta) > this.sideSpeed * delta * 0.1) {
+				this.lookingLeft = absDelta < 0;
 			}
 		}
 		this.posX = Math.max(minX, Math.min(this.posX, maxX));

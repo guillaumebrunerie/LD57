@@ -103,7 +103,7 @@ export const GameC = ({ game }: { game: Game }) => {
 			</Screen>
 			<Hearts player={game.player} />
 			<ArrowIndicators player={game.player} />
-			<Score game={game} />
+			{/* <Score game={game} /> */}
 			{game.player.lives == 0 && <GameOverScreen game={game} />}
 			{/* {game.state == "gameover" && <GameOverScreen game={game} />} */}
 			{/* {game.state == "win" && <WinScreen game={game} />} */}

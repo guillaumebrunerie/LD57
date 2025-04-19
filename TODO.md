@@ -2,7 +2,6 @@
 - fix hitboxes
 - make music loop
 - compressing images automatically
-- remove timer
 - clouds slowly moving in start screen
 - fix impossible patterns in balancing + maybe more variety at the beginning
 
