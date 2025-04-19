@@ -1,6 +1,7 @@
 import type { Game } from "./game";
 import {
 	A_CupidDie,
+	A_CupidHurt,
 	A_CupidIdle,
 	A_CupidShot,
 	A_DevilHit,
@@ -99,6 +100,7 @@ export const GameC = ({ game }: { game: Game }) => {
 					))}
 				</container>
 				<PlayerC player={game.player} />
+				<HitFeathers game={game} />
 				{game.player.arrow && <ArrowC arrow={game.player.arrow} />}
 			</Screen>
 			<Hearts player={game.player} />
@@ -130,7 +132,8 @@ const Screen = ({
 	const screenShakeDuration = 0.2;
 	const screenShakeX = 20;
 	const screenShakeY = 20;
-	const inScreenShake = game.lt < game.lastHit + screenShakeDuration;
+	const inScreenShake =
+		game.lastHit && game.lt < game.lastHit.lt + screenShakeDuration;
 	const shakeX = inScreenShake ? (Math.random() * 2 - 1) * screenShakeX : 0;
 	const shakeY = inScreenShake ? (Math.random() * 2 - 1) * screenShakeY : 0;
 	return (
@@ -272,6 +275,7 @@ const End = ({ game }: { game: Game }) => {
 	);
 };
 
+/*
 const Score = ({ game }: { game: Game }) => {
 	const minutes = Math.floor(game.score / 60);
 	const seconds = Math.floor(game.score - minutes * 60);
@@ -292,6 +296,7 @@ const Score = ({ game }: { game: Game }) => {
 		</container>
 	);
 };
+*/
 
 const heartDeltaX = 65;
 
@@ -338,6 +343,25 @@ const ArrowIndicators = ({ player }: { player: Player }) => {
 				x={arrowDeltaX}
 			/>
 		</container>
+	);
+};
+
+const HitFeathers = ({ game }: { game: Game }) => {
+	if (!game.lastHit) {
+		return null;
+	}
+	return (
+		<sprite
+			anchor={0.5}
+			x={game.lastHit.x}
+			y={game.lastHit.y}
+			texture={getFrame(
+				A_CupidHurt,
+				20,
+				game.lt - game.lastHit.lt,
+				"remove",
+			)}
+		/>
 	);
 };
 

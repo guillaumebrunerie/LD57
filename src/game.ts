@@ -13,7 +13,7 @@ import type { Obstacle } from "./obstacle";
 
 export class Game {
 	lt = 0;
-	lastHit = -Infinity;
+	lastHit: { lt: number; x: number; y: number } | null = null;
 	score = 0;
 
 	isPaused = true;
@@ -39,7 +39,7 @@ export class Game {
 
 	restart() {
 		this.lt = 0;
-		this.lastHit = -Infinity;
+		this.lastHit = null;
 		this.score = 0;
 		this.state = "game";
 		this.depth = 0;
@@ -108,14 +108,18 @@ export class Game {
 			this.player.invincibleTimeout == 0
 		) {
 			this.player.hit();
-			this.lastHit = this.lt;
+			this.lastHit = {
+				lt: this.lt,
+				x: this.player.posX,
+				y: this.player.posY,
+			};
 		}
 	}
 
 	win() {
 		if (!this.isWinning) {
 			this.lt = 0;
-			this.lastHit = -Infinity;
+			this.lastHit = null;
 			this.isWinning = true;
 		}
 	}
@@ -209,7 +213,7 @@ export class Game {
 	start() {
 		this.state = "game";
 		this.lt = 0;
-		this.lastHit = -Infinity;
+		this.lastHit = null;
 		S_MusicIntensity1.singleInstance = true;
 		S_MusicIntensity2.singleInstance = true;
 		S_MusicIntensity3.singleInstance = true;
