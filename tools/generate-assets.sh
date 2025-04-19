@@ -20,8 +20,8 @@ do
 	name=${texture%.*}
 	if [[ ! -a "$root/gfx/${name}.json" ]]
 	then
-		echo "import ${name}_ from \"../gfx/$texture?texture\";"
-		names+=(${name})
+		echo "import ${name}_TEXTURE from \"../gfx/$texture?texture\";"
+		names+=(${name}_TEXTURE)
 		exports+=(T_${name})
 	fi
 done
@@ -31,10 +31,10 @@ echo "/** Spritesheets */"
 for file in $root/gfx/*.json
 do
 	spritesheet=$(basename ${file%.*})
-	echo "import ${spritesheet}_ from \"../gfx/$spritesheet.png?spritesheet\";"
-	names+=($spritesheet)
+	echo "import ${spritesheet}_SPRITESHEET from \"../gfx/$spritesheet.png?spritesheet\";"
+	names+=(${spritesheet}_SPRITESHEET)
 	exports+=(SS_${spritesheet})
-	names+=($spritesheet)
+	names+=(${spritesheet}_SPRITESHEET)
 	exports+=("{ animations: { $spritesheet: A_$spritesheet } }")
 done
 
@@ -43,8 +43,8 @@ echo "/** Sounds */"
 for file in $root/audio/*.mp3
 do
 	sound=$(basename ${file%.*})
-	echo "import ${sound}_ from \"../audio/$sound.mp3?sound\";"
-	names+=($sound)
+	echo "import ${sound}_SOUND from \"../audio/$sound.mp3?sound\";"
+	names+=(${sound}_SOUND)
 	exports+=(S_${sound})
 done
 
@@ -53,8 +53,8 @@ echo "/** Fonts */"
 for file in $root/fonts/*.ttf
 do
 	font=$(basename ${file%.*})
-	echo "import ${font}_ from \"../fonts/$font.ttf?font\";"
-	names+=($font)
+	echo "import ${font}_FONT from \"../fonts/$font.ttf?font\";"
+	names+=(${font}_FONT)
 	exports+=(F_${font})
 done
 
@@ -67,6 +67,6 @@ done
 echo "] = await Promise.all(["
 for name in $names
 do
-	echo "	${name}_,"
+	echo "	${name},"
 done
 echo "]);"

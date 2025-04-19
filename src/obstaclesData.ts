@@ -1,5 +1,7 @@
 import { Polygon } from "pixi.js";
 import {
+	A_EnemyFlyingIdle,
+	A_EnemyStillIdle,
 	T_Bg_Walls_Level1,
 	T_EnemyFlying_Level1_01,
 	T_EnemyStill_Level1_01,
@@ -14,7 +16,6 @@ import {
 import type { ObstacleData } from "./obstacle";
 
 export const obstaclesData: ObstacleData[][] = [
-	// Level 1
 	[
 		{
 			type: "wall",
@@ -218,7 +219,7 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "enemy-horizontal",
-			texture: T_EnemyFlying_Level1_01,
+			texture: { textures: A_EnemyFlyingIdle, fps: 10 },
 			polygon: new Polygon(
 				59.72,
 				126.11,
@@ -232,7 +233,7 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "enemy-vertical",
-			texture: T_EnemyStill_Level1_01,
+			texture: { textures: A_EnemyStillIdle, fps: 10 },
 			polygon: new Polygon(
 				43.74,
 				103.02,

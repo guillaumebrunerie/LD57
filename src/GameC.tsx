@@ -29,9 +29,9 @@ import {
 } from "./assets";
 import { Rectangle } from "./Rectangle";
 import { StartScreen, GameOverScreen } from "./Postings";
-import { Polygon, type FederatedPointerEvent } from "pixi.js";
+import { Polygon, Texture, type FederatedPointerEvent } from "pixi.js";
 import { mod, smoothTriangle } from "./utils";
-import type { Obstacle } from "./obstacle";
+import { firstTexture, type Obstacle } from "./obstacle";
 import type { Arrow, Player } from "./player";
 import { CustomText } from "./CustomText";
 import { PolygonShape } from "./Polygon";
@@ -404,6 +404,18 @@ const ArrowC = ({ arrow }: { arrow: Arrow }) => {
 };
 
 const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
+	let texture;
+	if (obstacle.isDestroyed) {
+		texture = getFrame(A_HeartExplosion, 15, obstacle.lt, "remove");
+	} else if (obstacle.data.texture instanceof Texture) {
+		texture = obstacle.data.texture;
+	} else {
+		texture = getFrame(
+			obstacle.data.texture.textures,
+			obstacle.data.texture.fps,
+			obstacle.lt,
+		);
+	}
 	return (
 		<container
 			x={obstacle.x}
@@ -413,11 +425,7 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 			<sprite
 				anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
 				blendMode={obstacle.isDestroyed ? "add" : "normal"}
-				texture={
-					obstacle.isDestroyed ?
-						getFrame(A_HeartExplosion, 15, obstacle.lt, "remove")
-					:	obstacle.data.texture
-				}
+				texture={texture}
 				scale={obstacle.isDestroyed ? 1.2 : 1}
 			></sprite>
 			<PolygonShape alpha={0} polygon={obstacle.polygon()} />
@@ -448,7 +456,7 @@ const PolygonEditor = ({ game }: { game: Game }) => {
 				}}
 			/>
 			<container x={300} y={0}>
-				<sprite texture={game.polygonEditor.obstacle.texture} />
+				<sprite texture={firstTexture(game.polygonEditor.obstacle)} />
 				<PolygonShape
 					alpha={0.4}
 					polygon={game.polygonEditor.obstacle.polygon}
