@@ -7,9 +7,12 @@
 
 Waiting for art:
 
-- flapping wings
 - animated foreground in some levels
 - add different obstacles for different levels (but same shape)
 - win posting ("the end")
-- hit animation (feathers)
 - fix sides that do not match
+
+
+DONE:
+- hit animation (feathers)
+- flapping wings
