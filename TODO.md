@@ -1,7 +1,5 @@
-- shooting arrows in mobile is difficult
 - win music? (try playing GameOver)
 - fix hitboxes
-- should not be able to shoot while dead
 - make music loop
 - compressing images automatically
 - remove timer

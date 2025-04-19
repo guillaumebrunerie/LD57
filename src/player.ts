@@ -111,7 +111,7 @@ export class Player {
 	}
 
 	shoot(angle: number, distance: number, targetId: string, dx: number) {
-		if (this.arrow || this.arrows <= 0) {
+		if (this.arrow || this.arrows <= 0 || this.lives == 0) {
 			return;
 		}
 		this.lookingLeft = dx < 0;
