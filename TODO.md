@@ -1,5 +1,3 @@
-- win posting ("the end")
-- animated foreground in some levels
 - add different obstacles for different levels (but same shape)
 - win music
 - cross fading walls

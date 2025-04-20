@@ -9,7 +9,9 @@ import {
 	A_DevilLookUp,
 	A_DevilWin,
 	A_DevilWinLoop,
+	A_Embers,
 	A_HeartExplosion,
+	A_Snow,
 	A_TheEnd,
 	T_Arrow_Off,
 	T_Arrow_On,
@@ -103,6 +105,7 @@ export const GameC = ({ game }: { game: Game }) => {
 				<PlayerC player={game.player} />
 				<HitFeathers game={game} />
 				{game.player.arrow && <ArrowC arrow={game.player.arrow} />}
+				<Foreground game={game} />
 			</Screen>
 			<Hearts player={game.player} />
 			<ArrowIndicators player={game.player} />
@@ -219,6 +222,92 @@ const BackgroundFragment = ({ game, depth }: { game: Game; depth: number }) => {
 	);
 };
 
+const ForegroundFragment = ({
+	level,
+	lt,
+	alpha,
+}: {
+	level: number;
+	lt: number;
+	alpha: number;
+}) => {
+	switch (level) {
+		case 1:
+			return null;
+		case 2:
+			return (
+				<sprite
+					blendMode="add"
+					texture={getFrame(A_Snow, 20, lt)}
+					scale={5}
+					alpha={alpha}
+				/>
+			);
+		case 3:
+			return null;
+		case 4:
+			return null;
+		case 5:
+			return null;
+		case 6:
+			return (
+				<sprite
+					blendMode="add"
+					texture={getFrame(A_Embers, 20, lt)}
+					scale={5}
+					alpha={alpha}
+				/>
+			);
+		case 7:
+			return null;
+		case 8:
+			return (
+				<Rectangle
+					x={0}
+					y={0}
+					width={1080}
+					height={1920}
+					color={0x000000}
+					alpha={alpha * 0.6}
+					draw={() => {}}
+				/>
+			);
+		case 9:
+			return (
+				<sprite
+					blendMode="add"
+					texture={getFrame(A_Snow, 20, lt)}
+					scale={5}
+					alpha={alpha}
+				/>
+			);
+		default:
+			return null;
+	}
+};
+
+const Foreground = ({ game }: { game: Game }) => {
+	const previousLevel = 1 + Math.floor(game.depth / game.levelDepth);
+	const level = 1 + Math.floor((game.depth + 1920) / game.levelDepth);
+	const nt = ((level - 1) * game.levelDepth - game.depth) / 1920;
+	return (
+		<container y={game.depth}>
+			{previousLevel != level && (
+				<ForegroundFragment
+					level={previousLevel}
+					lt={game.lt}
+					alpha={nt}
+				/>
+			)}
+			<ForegroundFragment
+				level={level}
+				lt={game.lt}
+				alpha={previousLevel == level ? 1 : 1 - nt}
+			/>
+		</container>
+	);
+};
+
 const End = ({ game }: { game: Game }) => {
 	let frame = getFrame(A_DevilIdle, 25, game.lt);
 	let explosionLt = game.lt - 0.2;
@@ -263,8 +352,22 @@ const End = ({ game }: { game: Game }) => {
 					y={game.levelDepth * game.levels + 1920 - 700}
 					anchor={{ x: 0.5, y: 0.5 }}
 					blendMode="add"
-					texture={getFrame(A_TheEnd, 10, explosionLt, "hold")}
+					texture={getFrame(
+						A_HeartExplosion,
+						10,
+						explosionLt,
+						"remove",
+					)}
 					scale={1.2}
+				/>
+			)}
+			{game.isWinning && explosionLt > 2 && (
+				<sprite
+					x={540}
+					y={game.levelDepth * game.levels + 1920 / 2}
+					anchor={{ x: 0.5, y: 0.5 }}
+					texture={getFrame(A_TheEnd, 10, explosionLt - 2, "hold")}
+					scale={2}
 				/>
 			)}
 		</container>

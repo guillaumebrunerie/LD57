@@ -103,7 +103,7 @@ export class Game {
 		}
 
 		if (
-			this.level < this.levels &&
+			this.level <= this.levels &&
 			this.obstaclesManager.checkCollision(this.player) &&
 			this.player.invincibleTimeout == 0
 		) {
