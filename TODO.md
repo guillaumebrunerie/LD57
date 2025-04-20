@@ -1,5 +1,4 @@
 - win music? (try playing GameOver)
-- make music loop
 - compressing images automatically
 - clouds slowly moving in start screen
 - fix impossible patterns in balancing + maybe more variety at the beginning +
