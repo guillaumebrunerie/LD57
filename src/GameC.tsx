@@ -10,6 +10,7 @@ import {
 	A_DevilWin,
 	A_DevilWinLoop,
 	A_HeartExplosion,
+	A_TheEnd,
 	T_Arrow_Off,
 	T_Arrow_On,
 	T_Bg_Level_01,
@@ -34,12 +35,12 @@ import { Polygon, Texture, type FederatedPointerEvent } from "pixi.js";
 import { mod, smoothTriangle } from "./utils";
 import { firstTexture, type Obstacle } from "./obstacle";
 import type { Arrow, Player } from "./player";
-import { CustomText } from "./CustomText";
 import { PolygonShape } from "./Polygon";
 import { useOnKeyDown } from "./useOnKeyDown";
 import { useRef } from "react";
 import { useOnKeyDownUp } from "./useOnKeyDownUp";
 import { getDuration, getFrame } from "./Animation";
+import { CustomText } from "./CustomText";
 
 export const GameC = ({ game }: { game: Game }) => {
 	useOnKeyDownUp(
@@ -105,7 +106,7 @@ export const GameC = ({ game }: { game: Game }) => {
 			</Screen>
 			<Hearts player={game.player} />
 			<ArrowIndicators player={game.player} />
-			{/* <Score game={game} /> */}
+			<LevelIndicator game={game} />
 			{game.player.lives == 0 && <GameOverScreen game={game} />}
 			{/* {game.state == "gameover" && <GameOverScreen game={game} />} */}
 			{/* {game.state == "win" && <WinScreen game={game} />} */}
@@ -256,18 +257,13 @@ const End = ({ game }: { game: Game }) => {
 				y={game.levelDepth * game.levels + 1920 - 350}
 				scale={1.3}
 			/>
-			{explosionLt > 0 && (
+			{game.isWinning && explosionLt > 0 && (
 				<sprite
 					x={750}
 					y={game.levelDepth * game.levels + 1920 - 700}
 					anchor={{ x: 0.5, y: 0.5 }}
 					blendMode="add"
-					texture={getFrame(
-						A_HeartExplosion,
-						15,
-						explosionLt,
-						"remove",
-					)}
+					texture={getFrame(A_TheEnd, 10, explosionLt, "hold")}
 					scale={1.2}
 				/>
 			)}
@@ -275,28 +271,25 @@ const End = ({ game }: { game: Game }) => {
 	);
 };
 
-/*
-const Score = ({ game }: { game: Game }) => {
-	const minutes = Math.floor(game.score / 60);
-	const seconds = Math.floor(game.score - minutes * 60);
-
+const LevelIndicator = ({ game }: { game: Game }) => {
 	return (
-		<container x={1080 - 95} y={20}>
+		<container x={1080 - 20} y={20}>
 			<CustomText
 				anchor={{ x: 1, y: 0 }}
-				x={-10}
-				text={String(minutes).padStart(2, "0")}
-			/>
-			<CustomText anchor={{ x: 0.5, y: 0 }} text={":"} />
-			<CustomText
-				anchor={{ x: 0, y: 0 }}
-				x={10}
-				text={String(seconds).padStart(2, "0")}
+				text={game.level <= 9 ? `Level ${game.level}/9` : "The End"}
+				style={{
+					fontSize: 25,
+					fontFamily: "Heroes Legend",
+					fill: "#DDD",
+					dropShadow: {
+						angle: 90,
+						distance: 3,
+					},
+				}}
 			/>
 		</container>
 	);
 };
-*/
 
 const heartDeltaX = 65;
 
