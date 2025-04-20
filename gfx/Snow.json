@@ -1,0 +1,175 @@
+{"frames": {
+
+"Snow_000.png":
+{
+	"frame": {"x":1,"y":1,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_001.png":
+{
+	"frame": {"x":1,"y":403,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_002.png":
+{
+	"frame": {"x":228,"y":1,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_003.png":
+{
+	"frame": {"x":1,"y":805,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_004.png":
+{
+	"frame": {"x":228,"y":403,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_005.png":
+{
+	"frame": {"x":455,"y":1,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_006.png":
+{
+	"frame": {"x":1,"y":1207,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_007.png":
+{
+	"frame": {"x":228,"y":805,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_008.png":
+{
+	"frame": {"x":455,"y":403,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_009.png":
+{
+	"frame": {"x":682,"y":1,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_010.png":
+{
+	"frame": {"x":1,"y":1609,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_011.png":
+{
+	"frame": {"x":228,"y":1207,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_012.png":
+{
+	"frame": {"x":455,"y":805,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_013.png":
+{
+	"frame": {"x":682,"y":403,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_014.png":
+{
+	"frame": {"x":228,"y":1609,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_015.png":
+{
+	"frame": {"x":455,"y":1207,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_016.png":
+{
+	"frame": {"x":682,"y":805,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_017.png":
+{
+	"frame": {"x":455,"y":1609,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_018.png":
+{
+	"frame": {"x":682,"y":1207,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Snow_019.png":
+{
+	"frame": {"x":682,"y":1609,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+}},
+"animations": {
+	"Snow": ["Snow_000.png","Snow_001.png","Snow_002.png","Snow_003.png","Snow_004.png","Snow_005.png","Snow_006.png","Snow_007.png","Snow_008.png","Snow_009.png","Snow_010.png","Snow_011.png","Snow_012.png","Snow_013.png","Snow_014.png","Snow_015.png","Snow_016.png","Snow_017.png","Snow_018.png","Snow_019.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "Snow.png",
+	"format": "RGBA8888",
+	"size": {"w":908,"h":2010},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a9accfbc71a923630031282f384a43c5:0049cd3644e447c864e4ca1e1a43bfe9:5cde34c2a6bfffb5c9cc4d9048086210$"
+}
+}

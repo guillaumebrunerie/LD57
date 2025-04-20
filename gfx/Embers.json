@@ -1,0 +1,175 @@
+{"frames": {
+
+"Embers_000.png":
+{
+	"frame": {"x":444,"y":1173,"w":225,"h":371},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":19,"w":225,"h":371},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_001.png":
+{
+	"frame": {"x":452,"y":396,"w":225,"h":379},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":8,"w":225,"h":379},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_002.png":
+{
+	"frame": {"x":228,"y":1,"w":225,"h":393},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":225,"h":393},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_003.png":
+{
+	"frame": {"x":1,"y":402,"w":225,"h":394},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":394},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_004.png":
+{
+	"frame": {"x":1,"y":1,"w":225,"h":399},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":399},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_005.png":
+{
+	"frame": {"x":1,"y":798,"w":225,"h":388},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":8,"w":225,"h":388},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_006.png":
+{
+	"frame": {"x":228,"y":396,"w":222,"h":389},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":222,"h":389},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_007.png":
+{
+	"frame": {"x":454,"y":777,"w":224,"h":379},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":8,"w":224,"h":379},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_008.png":
+{
+	"frame": {"x":680,"y":768,"w":217,"h":367},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":10,"w":217,"h":367},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_009.png":
+{
+	"frame": {"x":671,"y":1158,"w":212,"h":365},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":3,"w":212,"h":365},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_010.png":
+{
+	"frame": {"x":655,"y":1546,"w":210,"h":361},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":210,"h":361},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_011.png":
+{
+	"frame": {"x":223,"y":1571,"w":211,"h":354},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":1,"w":211,"h":354},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_012.png":
+{
+	"frame": {"x":436,"y":1571,"w":217,"h":348},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":1,"w":217,"h":348},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_013.png":
+{
+	"frame": {"x":1,"y":1582,"w":220,"h":342},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":220,"h":342},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_014.png":
+{
+	"frame": {"x":680,"y":1,"w":222,"h":383},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":222,"h":383},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_015.png":
+{
+	"frame": {"x":455,"y":1,"w":223,"h":388},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":223,"h":388},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_016.png":
+{
+	"frame": {"x":228,"y":787,"w":224,"h":384},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":384},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_017.png":
+{
+	"frame": {"x":221,"y":1188,"w":221,"h":381},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":221,"h":381},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_018.png":
+{
+	"frame": {"x":679,"y":391,"w":219,"h":375},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":219,"h":375},
+	"sourceSize": {"w":225,"h":400}
+},
+"Embers_019.png":
+{
+	"frame": {"x":1,"y":1188,"w":218,"h":392},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":218,"h":392},
+	"sourceSize": {"w":225,"h":400}
+}},
+"animations": {
+	"Embers": ["Embers_000.png","Embers_001.png","Embers_002.png","Embers_003.png","Embers_004.png","Embers_005.png","Embers_006.png","Embers_007.png","Embers_008.png","Embers_009.png","Embers_010.png","Embers_011.png","Embers_012.png","Embers_013.png","Embers_014.png","Embers_015.png","Embers_016.png","Embers_017.png","Embers_018.png","Embers_019.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "Embers.png",
+	"format": "RGBA8888",
+	"size": {"w":903,"h":1926},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:db239de2f8ae792cc932ed3feb350cea:0e69564cb3abf9623fb7135c4f77fefe:65c4aeef8528bfb4c5d0aad21a4fb37d$"
+}
+}
