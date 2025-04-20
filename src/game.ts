@@ -1,15 +1,10 @@
-import {
-	S_MusicIntensity1,
-	S_MusicIntensity2,
-	S_MusicIntensity3,
-	S_StartButton,
-} from "./assets";
+import { S_StartButton, S_Win } from "./assets";
 import { ObstacleManager as ObstaclesManager } from "./obstaclesManager";
 import { Player } from "./player";
 import { type Point } from "./utils";
 import { PolygonEditor } from "./polygonEditor";
-import { fadeVolume } from "./sound";
 import type { Obstacle } from "./obstacle";
+import { setMusic, startMusic } from "./musicManager";
 
 export class Game {
 	lt = 0;
@@ -121,6 +116,8 @@ export class Game {
 			this.lt = 0;
 			this.lastHit = null;
 			this.isWinning = true;
+			void S_Win.play({ volume: 0.5 });
+			setMusic(10);
 		}
 	}
 
@@ -169,40 +166,7 @@ export class Game {
 		}
 		this.obstaclesManager.nextLevel();
 		this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;
-		S_MusicIntensity1.singleInstance = true;
-		S_MusicIntensity2.singleInstance = true;
-		S_MusicIntensity3.singleInstance = true;
-
-		const musicVolumes = [
-			[2, 0, 0],
-			[1.3, 0.7, 0],
-			[0.7, 1.3, 0],
-			[0, 2, 0],
-			[0, 1.6, 0.4],
-			[0, 1.2, 0.8],
-			[0, 0.8, 1.2],
-			[0, 0.4, 1.6],
-			[0, 0, 2],
-			[0, 0, 2],
-		];
-
-		const minVolume = 0.1;
-
-		fadeVolume(
-			S_MusicIntensity1,
-			musicVolumes[this.level - 1][0] + minVolume,
-			1000,
-		);
-		fadeVolume(
-			S_MusicIntensity2,
-			musicVolumes[this.level - 1][1] + minVolume,
-			1000,
-		);
-		fadeVolume(
-			S_MusicIntensity3,
-			musicVolumes[this.level - 1][2] + minVolume,
-			1000,
-		);
+		setMusic(this.level);
 	}
 
 	clickStart() {
@@ -214,36 +178,24 @@ export class Game {
 		this.state = "game";
 		this.lt = 0;
 		this.lastHit = null;
-		S_MusicIntensity1.singleInstance = true;
-		S_MusicIntensity2.singleInstance = true;
-		S_MusicIntensity3.singleInstance = true;
-		void S_MusicIntensity1.play({ loop: true, volume: 0.1 });
-		void S_MusicIntensity2.play({ loop: true, volume: 0.1 });
-		void S_MusicIntensity3.play({ loop: true, volume: 0.1 });
-		S_MusicIntensity1.volume = 0.1;
-		S_MusicIntensity2.volume = 0.1;
-		S_MusicIntensity3.volume = 0.1;
+		startMusic();
+		setMusic(1);
 	}
 
 	reset() {
 		this.isPaused = false;
-		// void S_Music.stop();
 	}
 
 	backToMainMenu() {
 		this.reset();
 		this.state = "startScreen";
-		// void S_Music.resume();
 	}
 
 	pause() {
-		// void S_Music.pause();
 		this.isPaused = true;
 	}
 
 	resume() {
-		// void S_Music.resume();
-
 		this.isPaused = false;
 	}
 
@@ -258,13 +210,6 @@ export class Game {
 			this.resume();
 		}
 	}
-
-	// win() {
-	// 	void S_Music.pause();
-	// 	void S_CompleteLevel.play({ volume: 0.5 });
-	// 	this.state = "win";
-	// 	this.startLt = 0;
-	// }
 
 	onEvent(type: "pointerdown" | "pointermove" | "pointerup", pos: Point) {
 		switch (type) {

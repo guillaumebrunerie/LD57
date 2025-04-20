@@ -1,5 +1,6 @@
 import { S_ArrowShot, S_CupidHurt, S_GameOver } from "./assets";
 import type { Game } from "./game";
+import { setMusic } from "./musicManager";
 import type { Point } from "./utils";
 
 const marginX = 10;
@@ -104,6 +105,7 @@ export class Player {
 			void S_CupidHurt.play({ volume: 0.5 });
 		} else {
 			void S_GameOver.play({ volume: 0.2 });
+			setMusic(0);
 		}
 	}
 

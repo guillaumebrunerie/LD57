@@ -361,12 +361,12 @@ const End = ({ game }: { game: Game }) => {
 					scale={1.2}
 				/>
 			)}
-			{game.isWinning && explosionLt > 2 && (
+			{game.isWinning && explosionLt > 3 && (
 				<sprite
 					x={540}
 					y={game.levelDepth * game.levels + 1920 / 2}
 					anchor={{ x: 0.5, y: 0.5 }}
-					texture={getFrame(A_TheEnd, 10, explosionLt - 2, "hold")}
+					texture={getFrame(A_TheEnd, 10, explosionLt - 3, "hold")}
 					scale={2}
 				/>
 			)}
