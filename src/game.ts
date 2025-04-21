@@ -5,6 +5,16 @@ import { type Point } from "./utils";
 import { PolygonEditor } from "./polygonEditor";
 import type { Obstacle } from "./obstacle";
 import { setMusic, startMusic } from "./musicManager";
+import { createContext, use } from "react";
+
+export const GameContext = createContext<Game | null>(null);
+export const useGame = () => {
+	const game = use(GameContext);
+	if (!game) {
+		throw new Error("useGame must be used within a GameProvider");
+	}
+	return game;
+};
 
 export class Game {
 	lt = 0;

@@ -1,4 +1,4 @@
-import type { Game } from "./game";
+import { useGame, type Game } from "./game";
 import {
 	A_CupidDie,
 	A_CupidHurt,
@@ -38,7 +38,7 @@ import { StartScreen, GameOverScreen } from "./Postings";
 import { Polygon, type FederatedPointerEvent } from "pixi.js";
 import { mod, smoothTriangle } from "./utils";
 import { firstTexture, type Obstacle } from "./obstacle";
-import type { Arrow, Player } from "./player";
+import type { Arrow } from "./player";
 import { PolygonShape } from "./Polygon";
 import { useOnKeyDown } from "./useOnKeyDown";
 import { useRef } from "react";
@@ -47,7 +47,9 @@ import { getDuration, getFrame } from "./Animation";
 import { CustomText } from "./CustomText";
 import { clamp } from "./math";
 
-export const GameC = ({ game }: { game: Game }) => {
+export const GameC = () => {
+	const game = useGame();
+
 	useOnKeyDownUp(
 		"ArrowLeft",
 		() => game.player.moveLeft(true),
@@ -64,11 +66,11 @@ export const GameC = ({ game }: { game: Game }) => {
 	const ref = useRef(null);
 
 	if (game.state == "startScreen") {
-		return <StartScreen game={game} />;
+		return <StartScreen />;
 	}
 
 	if (game.state == "polygonEditor") {
-		return <PolygonEditor game={game} />;
+		return <PolygonEditor />;
 	}
 
 	let mask = undefined;
@@ -97,30 +99,24 @@ export const GameC = ({ game }: { game: Game }) => {
 
 	return (
 		<container>
-			<Screen game={game}>
-				<Background game={game} />
+			<Screen>
+				<Background />
 				{mask && <PolygonShape polygon={mask} myRef={ref} />}
 				<container mask={mask ? ref.current : undefined}>
 					{game.obstaclesManager.obstacles.map((obstacle) => (
-						<ObstacleC
-							key={obstacle.id}
-							obstacle={obstacle}
-							game={game}
-						/>
+						<ObstacleC key={obstacle.id} obstacle={obstacle} />
 					))}
 				</container>
-				<PlayerC player={game.player} />
-				<HitFeathers game={game} />
+				<PlayerC />
+				<HitFeathers />
 				{game.player.arrow && <ArrowC arrow={game.player.arrow} />}
-				<Foreground game={game} />
-				<EndFg game={game} />
+				<Foreground />
+				<EndFg />
 			</Screen>
-			<Hearts player={game.player} />
-			<ArrowIndicators player={game.player} />
-			<LevelIndicator game={game} />
-			{game.player.lives == 0 && <GameOverScreen game={game} />}
-			{/* {game.state == "gameover" && <GameOverScreen game={game} />} */}
-			{/* {game.state == "win" && <WinScreen game={game} />} */}
+			<Hearts />
+			<ArrowIndicators />
+			<LevelIndicator />
+			{game.player.lives == 0 && <GameOverScreen />}
 			<Rectangle
 				x={0}
 				y={0}
@@ -134,13 +130,8 @@ export const GameC = ({ game }: { game: Game }) => {
 	);
 };
 
-const Screen = ({
-	game,
-	children,
-}: {
-	game: Game;
-	children: React.ReactNode;
-}) => {
+const Screen = ({ children }: { children: React.ReactNode }) => {
+	const game = useGame();
 	const screenShakeDuration = 0.2;
 	const screenShakeX = 20;
 	const screenShakeY = 20;
@@ -185,22 +176,24 @@ const getBg = (level: number) => {
 	}
 };
 
-const Background = ({ game }: { game: Game }) => {
+const Background = () => {
+	const game = useGame();
 	const y = mod(-game.depth, 1920);
 	return (
 		<>
 			<container y={y + game.depth}>
-				<BackgroundFragment game={game} depth={y + game.depth} />
+				<BackgroundFragment depth={y + game.depth} />
 			</container>
 			<container y={y + game.depth - 1920}>
-				<BackgroundFragment game={game} depth={y + game.depth - 1920} />
+				<BackgroundFragment depth={y + game.depth - 1920} />
 			</container>
-			<End game={game} />
+			<End />
 		</>
 	);
 };
 
-const BackgroundFragment = ({ game, depth }: { game: Game; depth: number }) => {
+const BackgroundFragment = ({ depth }: { depth: number }) => {
+	const game = useGame();
 	const startLevel = 1 + Math.floor(depth / game.levelDepth);
 	const endLevel = 1 + Math.floor((depth + 1920) / game.levelDepth);
 
@@ -232,13 +225,12 @@ const BackgroundFragment = ({ game, depth }: { game: Game; depth: number }) => {
 
 const ForegroundFragment = ({
 	level,
-	lt,
 	alpha,
 }: {
 	level: number;
-	lt: number;
 	alpha: number;
 }) => {
+	const game = useGame();
 	switch (level) {
 		case 1:
 			return null;
@@ -246,7 +238,7 @@ const ForegroundFragment = ({
 			return (
 				<sprite
 					blendMode="add"
-					texture={getFrame(A_Level2Wind, 20, lt)}
+					texture={getFrame(A_Level2Wind, 20, game.lt)}
 					scale={5}
 					alpha={alpha}
 				/>
@@ -255,7 +247,7 @@ const ForegroundFragment = ({
 			return (
 				<sprite
 					blendMode="add"
-					texture={getFrame(A_Level3Rain, 20, lt)}
+					texture={getFrame(A_Level3Rain, 20, game.lt)}
 					scale={5}
 					alpha={alpha}
 				/>
@@ -268,7 +260,7 @@ const ForegroundFragment = ({
 			return (
 				<sprite
 					blendMode="add"
-					texture={getFrame(A_Embers, 20, lt)}
+					texture={getFrame(A_Embers, 20, game.lt)}
 					scale={5}
 					alpha={alpha}
 				/>
@@ -291,7 +283,7 @@ const ForegroundFragment = ({
 			return (
 				<sprite
 					blendMode="add"
-					texture={getFrame(A_Snow, 20, lt)}
+					texture={getFrame(A_Snow, 20, game.lt)}
 					scale={5}
 					alpha={alpha}
 				/>
@@ -301,29 +293,26 @@ const ForegroundFragment = ({
 	}
 };
 
-const Foreground = ({ game }: { game: Game }) => {
+const Foreground = () => {
+	const game = useGame();
 	const previousLevel = 1 + Math.floor(game.depth / game.levelDepth);
 	const level = 1 + Math.floor((game.depth + 1920) / game.levelDepth);
 	const nt = ((level - 1) * game.levelDepth - game.depth) / 1920;
 	return (
 		<container y={game.depth}>
 			{previousLevel != level && (
-				<ForegroundFragment
-					level={previousLevel}
-					lt={game.lt}
-					alpha={nt}
-				/>
+				<ForegroundFragment level={previousLevel} alpha={nt} />
 			)}
 			<ForegroundFragment
 				level={level}
-				lt={game.lt}
 				alpha={previousLevel == level ? 1 : 1 - nt}
 			/>
 		</container>
 	);
 };
 
-const End = ({ game }: { game: Game }) => {
+const End = () => {
+	const game = useGame();
 	let frame = getFrame(A_DevilIdle, 25, game.lt);
 	if (game.isWinning) {
 		const d1 = getDuration(A_DevilLookUp, 15);
@@ -364,7 +353,8 @@ const End = ({ game }: { game: Game }) => {
 	);
 };
 
-const EndFg = ({ game }: { game: Game }) => {
+const EndFg = () => {
+	const game = useGame();
 	const explosionLt = game.lt - 0.2;
 	return (
 		<container>
@@ -412,7 +402,8 @@ const EndFg = ({ game }: { game: Game }) => {
 	);
 };
 
-const LevelIndicator = ({ game }: { game: Game }) => {
+const LevelIndicator = () => {
+	const game = useGame();
 	return (
 		<container x={1080 - 20} y={20}>
 			<CustomText
@@ -434,21 +425,23 @@ const LevelIndicator = ({ game }: { game: Game }) => {
 
 const heartDeltaX = 65;
 
-const Hearts = ({ player }: { player: Player }) => {
+const Hearts = () => {
+	const game = useGame();
+	const lives = game.player.lives;
 	return (
 		<container x={1080 / 2 - 120} y={55}>
 			<sprite
-				texture={player.lives >= 2 ? T_Heart_On : T_Heart_Off}
+				texture={lives >= 2 ? T_Heart_On : T_Heart_Off}
 				anchor={0.5}
 				x={-heartDeltaX}
 			/>
 			<sprite
-				texture={player.lives >= 3 ? T_Heart_On : T_Heart_Off}
+				texture={lives >= 3 ? T_Heart_On : T_Heart_Off}
 				anchor={0.5}
 				x={0}
 			/>
 			<sprite
-				texture={player.lives >= 4 ? T_Heart_On : T_Heart_Off}
+				texture={lives >= 4 ? T_Heart_On : T_Heart_Off}
 				anchor={0.5}
 				x={heartDeltaX}
 			/>
@@ -458,21 +451,23 @@ const Hearts = ({ player }: { player: Player }) => {
 
 const arrowDeltaX = 60;
 
-const ArrowIndicators = ({ player }: { player: Player }) => {
+const ArrowIndicators = () => {
+	const game = useGame();
+	const arrows = game.player.arrows;
 	return (
 		<container x={1080 / 2 + 120} y={55}>
 			<sprite
-				texture={player.arrows >= 1 ? T_Arrow_On : T_Arrow_Off}
+				texture={arrows >= 1 ? T_Arrow_On : T_Arrow_Off}
 				anchor={0.5}
 				x={-arrowDeltaX}
 			/>
 			<sprite
-				texture={player.arrows >= 2 ? T_Arrow_On : T_Arrow_Off}
+				texture={arrows >= 2 ? T_Arrow_On : T_Arrow_Off}
 				anchor={0.5}
 				x={0}
 			/>
 			<sprite
-				texture={player.arrows >= 3 ? T_Arrow_On : T_Arrow_Off}
+				texture={arrows >= 3 ? T_Arrow_On : T_Arrow_Off}
 				anchor={0.5}
 				x={arrowDeltaX}
 			/>
@@ -480,7 +475,8 @@ const ArrowIndicators = ({ player }: { player: Player }) => {
 	);
 };
 
-const HitFeathers = ({ game }: { game: Game }) => {
+const HitFeathers = () => {
+	const game = useGame();
 	if (!game.lastHit) {
 		return null;
 	}
@@ -499,19 +495,15 @@ const HitFeathers = ({ game }: { game: Game }) => {
 	);
 };
 
-const PlayerC = ({ player }: { player: Player }) => {
+const PlayerC = () => {
+	const game = useGame();
+	const player = game.player;
 	const initialDuration = 0.3;
 	const dy =
-		600 *
-			smoothTriangle(
-				Math.min(1 + 2 * (player.game.lt - initialDuration), 1),
-			) -
+		600 * smoothTriangle(Math.min(1 + 2 * (game.lt - initialDuration), 1)) -
 		600;
 	return (
-		<container
-			x={player.posX}
-			y={player.posY + (player.game.isWinning ? 0 : dy)}
-		>
+		<container x={player.posX} y={player.posY + (game.isWinning ? 0 : dy)}>
 			{player.lives > 0 && (
 				<sprite
 					texture={
@@ -557,7 +549,7 @@ const ArrowC = ({ arrow }: { arrow: Arrow }) => {
 	);
 };
 
-const ObstacleC = ({ obstacle, game }: { obstacle: Obstacle; game: Game }) => {
+const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 	const getTexture = (level: number) => {
 		if (obstacle.isDestroyed) {
 			return getFrame(A_HeartExplosion, 15, obstacle.lt, "remove");
@@ -609,7 +601,8 @@ const ObstacleC = ({ obstacle, game }: { obstacle: Obstacle; game: Game }) => {
 	);
 };
 
-const PolygonEditor = ({ game }: { game: Game }) => {
+const PolygonEditor = () => {
+	const game = useGame();
 	useOnKeyDown("Enter", async () => {
 		await game.polygonEditor.save();
 	});

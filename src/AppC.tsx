@@ -1,4 +1,5 @@
 import { app } from "./app";
+import { GameContext } from "./game";
 import { GameC } from "./GameC";
 import { SoundButton } from "./SoundButton";
 import { useWindowEventListener } from "./useWindowEventListener";
@@ -28,9 +29,9 @@ export const AppC = () => {
 	});
 
 	return (
-		<container>
-			<GameC game={app.game} />
+		<GameContext value={app.game}>
+			<GameC />
 			<SoundButton />
-		</container>
+		</GameContext>
 	);
 };

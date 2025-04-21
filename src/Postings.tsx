@@ -10,7 +10,7 @@ import {
 	S_StartButton,
 } from "./assets";
 import { CustomText } from "./CustomText";
-import type { Game } from "./game";
+import { useGame } from "./game";
 import { Rectangle } from "./Rectangle";
 import { getFrame } from "./Animation";
 import { smoothTriangle } from "./utils";
@@ -21,7 +21,8 @@ const textColor = "#DDD";
 const waveAround = (v: number, t: number, range = 100, speed = 0.2) =>
 	v + Math.sin(t * speed) * range;
 
-export const StartScreen = ({ game }: { game: Game }) => {
+export const StartScreen = () => {
+	const game = useGame();
 	const fallLt = Math.max(game.lt - 0.25, 0);
 	const cupidY = fallLt * fallLt * 2000 + 1350;
 	const cameraDt = Math.min(fallLt / 1, 1);
@@ -96,7 +97,8 @@ export const StartScreen = ({ game }: { game: Game }) => {
 	);
 };
 
-export const GameOverScreen = ({ game }: { game: Game }) => {
+export const GameOverScreen = () => {
+	const game = useGame();
 	return (
 		<container>
 			<Rectangle
@@ -105,7 +107,6 @@ export const GameOverScreen = ({ game }: { game: Game }) => {
 				width={1080}
 				height={1920}
 				draw={() => {}}
-				// filters={backdropFilter}
 				alpha={0.3}
 				color={0x000000}
 				cursor="pointer"
