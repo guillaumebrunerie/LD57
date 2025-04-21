@@ -18,6 +18,9 @@ import { useOnKeyDown } from "./useOnKeyDown";
 
 const textColor = "#DDD";
 
+const waveAround = (v: number, t: number, range = 100, speed = 0.2) =>
+	v + Math.sin(t * speed) * range;
+
 export const StartScreen = ({ game }: { game: Game }) => {
 	const fallLt = Math.max(game.lt - 0.25, 0);
 	const cupidY = fallLt * fallLt * 2000 + 1350;
@@ -35,12 +38,42 @@ export const StartScreen = ({ game }: { game: Game }) => {
 					game.clickStart();
 				}}
 			/>
-			<sprite texture={T_Cloud_01} anchor={0.5} x={300} y={250} />
-			<sprite texture={T_Cloud_02} anchor={0.5} x={900} y={900} />
-			<sprite texture={T_Cloud_03} anchor={0.5} x={200} y={1100} />
-			<sprite texture={T_Cloud_03} anchor={0.5} x={300} y={2150} />
-			<sprite texture={T_Cloud_01} anchor={0.5} x={900} y={2800} />
-			<sprite texture={T_Cloud_02} anchor={0.5} x={200} y={3300} />
+			<sprite
+				texture={T_Cloud_01}
+				anchor={0.5}
+				x={waveAround(300, game.cloudLt)}
+				y={250}
+			/>
+			<sprite
+				texture={T_Cloud_02}
+				anchor={0.5}
+				x={waveAround(850, game.cloudLt + 150)}
+				y={900}
+			/>
+			<sprite
+				texture={T_Cloud_03}
+				anchor={0.5}
+				x={waveAround(300, game.cloudLt + 300)}
+				y={1100}
+			/>
+			<sprite
+				texture={T_Cloud_03}
+				anchor={0.5}
+				x={waveAround(350, game.cloudLt)}
+				y={2150}
+			/>
+			<sprite
+				texture={T_Cloud_01}
+				anchor={0.5}
+				x={waveAround(800, game.cloudLt + 150)}
+				y={2800}
+			/>
+			<sprite
+				texture={T_Cloud_02}
+				anchor={0.5}
+				x={waveAround(350, game.cloudLt + 300)}
+				y={3300}
+			/>
 			<sprite texture={T_Logo} anchor={0.5} x={580} y={650} />
 			<sprite texture={T_Cupid} anchor={0.5} x={1080 / 2} y={cupidY} />
 			<sprite texture={T_GroundMask} />

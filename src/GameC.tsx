@@ -45,6 +45,7 @@ import { useRef } from "react";
 import { useOnKeyDownUp } from "./useOnKeyDownUp";
 import { getDuration, getFrame } from "./Animation";
 import { CustomText } from "./CustomText";
+import { clamp } from "./math";
 
 export const GameC = ({ game }: { game: Game }) => {
 	useOnKeyDownUp(
@@ -112,6 +113,7 @@ export const GameC = ({ game }: { game: Game }) => {
 				<HitFeathers game={game} />
 				{game.player.arrow && <ArrowC arrow={game.player.arrow} />}
 				<Foreground game={game} />
+				<EndFg game={game} />
 			</Screen>
 			<Hearts player={game.player} />
 			<ArrowIndicators player={game.player} />
@@ -323,7 +325,6 @@ const Foreground = ({ game }: { game: Game }) => {
 
 const End = ({ game }: { game: Game }) => {
 	let frame = getFrame(A_DevilIdle, 25, game.lt);
-	let explosionLt = game.lt - 0.2;
 	if (game.isWinning) {
 		const d1 = getDuration(A_DevilLookUp, 15);
 		const d2 = getDuration(A_DevilHit, 15);
@@ -359,6 +360,14 @@ const End = ({ game }: { game: Game }) => {
 				y={game.levelDepth * game.levels + 1920 - 350}
 				scale={1.3}
 			/>
+		</container>
+	);
+};
+
+const EndFg = ({ game }: { game: Game }) => {
+	const explosionLt = game.lt - 0.2;
+	return (
+		<container>
 			{game.isWinning && explosionLt > 0 && (
 				<sprite
 					x={750}
@@ -375,13 +384,29 @@ const End = ({ game }: { game: Game }) => {
 				/>
 			)}
 			{game.isWinning && explosionLt > 3 && (
-				<sprite
-					x={540}
-					y={game.levelDepth * game.levels + 1920 / 2}
-					anchor={{ x: 0.5, y: 0.5 }}
-					texture={getFrame(A_TheEnd, 10, explosionLt - 3, "hold")}
-					scale={2}
-				/>
+				<container>
+					<Rectangle
+						x={0}
+						y={game.levelDepth * game.levels}
+						width={1080}
+						height={1920}
+						color={0x000022}
+						alpha={clamp(explosionLt - 3, 0, 1) * 0.25}
+						draw={() => {}}
+					/>
+					<sprite
+						x={540}
+						y={game.levelDepth * game.levels + 1920 / 2}
+						anchor={{ x: 0.5, y: 0.5 }}
+						texture={getFrame(
+							A_TheEnd,
+							10,
+							explosionLt - 3,
+							"hold",
+						)}
+						scale={2}
+					/>
+				</container>
 			)}
 		</container>
 	);

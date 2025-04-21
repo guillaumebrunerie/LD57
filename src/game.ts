@@ -10,6 +10,7 @@ export class Game {
 	lt = 0;
 	lastHit: { lt: number; x: number; y: number } | null = null;
 	score = 0;
+	cloudLt = 0;
 
 	isPaused = true;
 	state: "startScreen" | "game" | "polygonEditor" = "startScreen";
@@ -46,6 +47,7 @@ export class Game {
 	levels = 9;
 
 	tick(delta: number) {
+		this.cloudLt += delta;
 		if (this.isPaused) {
 			return;
 		}
