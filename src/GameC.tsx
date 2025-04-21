@@ -550,10 +550,27 @@ const ArrowC = ({ arrow }: { arrow: Arrow }) => {
 };
 
 const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
+	const game = useGame();
+	const ref = useRef(null);
+
+	if (obstacle.isDestroyed) {
+		return (
+			<sprite
+				x={obstacle.x}
+				y={obstacle.y}
+				anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
+				blendMode="add"
+				texture={getFrame(A_HeartExplosion, 15, obstacle.lt, "remove")}
+				scale={{
+					x: obstacle.scaleX * 1.2,
+					y: obstacle.scaleY * 1.2,
+				}}
+			/>
+		);
+	}
+
 	const getTexture = (level: number) => {
-		if (obstacle.isDestroyed) {
-			return getFrame(A_HeartExplosion, 15, obstacle.lt, "remove");
-		} else if (obstacle.data.texture.type == "texture-by-level") {
+		if (obstacle.data.texture.type == "texture-by-level") {
 			return obstacle.data.texture.textures[level - 1];
 		} else {
 			return getFrame(
@@ -563,40 +580,96 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 			);
 		}
 	};
-	// const startLevel = 1 + Math.floor(game.depth / game.levelDepth);
-	// const endLevel = 1 + Math.floor((game.depth + 1920) / game.levelDepth);
-	// const ref = useRef(null);
+
+	const level =
+		1 + Math.floor((obstacle.y - (1920 * 1) / 2) / game.levelDepth);
+	const nextLevel =
+		1 + Math.floor((obstacle.y + (1920 * 3) / 2) / game.levelDepth);
+
+	const isBefore = obstacle.y + 1920 / 2 < level * game.levelDepth;
+
+	const maskBefore =
+		level != nextLevel &&
+		isBefore &&
+		game.depth >= level * game.levelDepth - 1920 * 2;
+	const maskAfter =
+		level != nextLevel &&
+		!isBefore &&
+		game.depth <= level * game.levelDepth;
+
 	return (
-		<container
-			x={obstacle.x}
-			y={obstacle.y}
-			scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
-		>
-			<sprite
-				anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
-				blendMode={obstacle.isDestroyed ? "add" : "normal"}
-				texture={getTexture(1)}
-				scale={obstacle.isDestroyed ? 1.2 : 1}
+		<container>
+			{!maskBefore && !maskAfter && (
+				<sprite
+					x={obstacle.x}
+					y={obstacle.y}
+					scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
+					anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
+					texture={getTexture(isBefore ? level : nextLevel)}
+				/>
+			)}
+			{maskBefore && (
+				<>
+					<sprite
+						x={obstacle.x}
+						y={obstacle.y}
+						scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
+						anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
+						texture={getTexture(level)}
+					/>
+					<sprite
+						texture={T_Gradient}
+						ref={ref}
+						x={0}
+						y={level * game.levelDepth - 1920}
+						alpha={0}
+					/>
+					<sprite
+						x={obstacle.x}
+						y={obstacle.y}
+						scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
+						anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
+						texture={getTexture(nextLevel)}
+						mask={ref.current}
+						alpha={ref.current ? 1 : 0}
+					/>
+				</>
+			)}
+			{maskAfter && (
+				<>
+					<sprite
+						x={obstacle.x}
+						y={obstacle.y}
+						scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
+						anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
+						texture={getTexture(nextLevel)}
+					/>
+					<sprite
+						texture={T_Gradient}
+						ref={ref}
+						x={0}
+						y={level * game.levelDepth}
+						alpha={0}
+						scale={{ x: 1, y: -1 }}
+					/>
+					<sprite
+						x={obstacle.x}
+						y={obstacle.y}
+						scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
+						anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
+						texture={getTexture(level)}
+						mask={ref.current}
+						alpha={ref.current ? 1 : 0}
+					/>
+				</>
+			)}
+			<PolygonShape
+				x={obstacle.x - getTexture(nextLevel).width * obstacle.anchorX}
+				y={obstacle.y - getTexture(nextLevel).height * obstacle.anchorY}
+				scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
+				alpha={0}
+				polygon={obstacle.polygon()}
 			/>
-			{/* <sprite */}
-			{/* 	texture={T_Gradient} */}
-			{/* 	ref={ref} */}
-			{/* 	x={-obstacle.x} */}
-			{/* 	y={startLevel * game.levelDepth - obstacle.y - 1920} */}
-			{/* 	scale={{ */}
-			{/* 		x: 1 / obstacle.scaleX, */}
-			{/* 		y: 1 / obstacle.scaleY, */}
-			{/* 	}} */}
-			{/* 	alpha={0} */}
-			{/* /> */}
-			{/* {!obstacle.isDestroyed && ( */}
-			{/* 	<sprite */}
-			{/* 		anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }} */}
-			{/* 		texture={getTexture(endLevel)} */}
-			{/* 		mask={ref.current} */}
-			{/* 	/> */}
-			{/* )} */}
-			<PolygonShape alpha={0} polygon={obstacle.polygon()} />
 		</container>
 	);
 };
