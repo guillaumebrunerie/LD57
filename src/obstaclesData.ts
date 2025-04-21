@@ -1,25 +1,57 @@
-import { Polygon } from "pixi.js";
+import { Polygon, Texture } from "pixi.js";
 import {
 	A_CupidIdle,
 	A_Enemy3Idle,
 	A_EnemyFlyingIdle,
 	A_EnemyStillIdle,
 	T_Bg_Walls_Level1,
+	T_Bg_Walls_Level9,
 	T_Rock_Level1_01,
 	T_Rock_Level1_02,
 	T_Rock_Level1_03,
+	T_Rock_Level9_01,
+	T_Rock_Level9_02,
+	T_Rock_Level9_03,
 	T_WallSpike_Level1_01,
 	T_WallSpike_Level1_02,
 	T_WallSpike_Level1_03,
 	T_WallSpike_Level1_04,
+	T_WallSpike_Level9_01,
+	T_WallSpike_Level9_02,
+	T_WallSpike_Level9_03,
+	T_WallSpike_Level9_04,
 } from "./assets";
 import type { ObstacleData } from "./obstacle";
+
+const makeTexturesByLevel = (
+	textureLevel1: Texture,
+	textureLevel9: Texture,
+) => ({
+	type: "texture-by-level" as const,
+	textures: [
+		textureLevel1,
+		textureLevel9,
+		textureLevel1,
+		textureLevel1,
+		textureLevel1,
+		textureLevel1,
+		textureLevel1,
+		textureLevel1,
+		textureLevel9,
+	],
+});
+
+const makeAnimation = (animation: Texture[], fps: number) => ({
+	type: "animation" as const,
+	textures: animation,
+	fps,
+});
 
 export const obstaclesData: ObstacleData[][] = [
 	[
 		{
 			type: "wall",
-			texture: T_Bg_Walls_Level1,
+			texture: makeTexturesByLevel(T_Bg_Walls_Level1, T_Bg_Walls_Level9),
 			polygon: new Polygon(
 				3.77,
 				3.55,
@@ -99,7 +131,10 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "spike",
-			texture: T_WallSpike_Level1_01,
+			texture: makeTexturesByLevel(
+				T_WallSpike_Level1_01,
+				T_WallSpike_Level9_01,
+			),
 			polygon: new Polygon(
 				46.94,
 				94.84,
@@ -115,7 +150,10 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "spike",
-			texture: T_WallSpike_Level1_02,
+			texture: makeTexturesByLevel(
+				T_WallSpike_Level1_02,
+				T_WallSpike_Level9_02,
+			),
 			polygon: new Polygon(
 				29.18,
 				14.91,
@@ -147,7 +185,10 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "spike",
-			texture: T_WallSpike_Level1_03,
+			texture: makeTexturesByLevel(
+				T_WallSpike_Level1_03,
+				T_WallSpike_Level9_03,
+			),
 			polygon: new Polygon(
 				20.3,
 				6.03,
@@ -163,7 +204,10 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "spike",
-			texture: T_WallSpike_Level1_04,
+			texture: makeTexturesByLevel(
+				T_WallSpike_Level1_04,
+				T_WallSpike_Level9_04,
+			),
 			polygon: new Polygon(
 				50.49,
 				6.03,
@@ -177,7 +221,7 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "rock",
-			texture: T_Rock_Level1_01,
+			texture: makeTexturesByLevel(T_Rock_Level1_01, T_Rock_Level9_01),
 			polygon: new Polygon(
 				36.28,
 				149.2,
@@ -199,7 +243,7 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "rock",
-			texture: T_Rock_Level1_02,
+			texture: makeTexturesByLevel(T_Rock_Level1_02, T_Rock_Level9_02),
 			polygon: new Polygon(
 				57.59,
 				74.6,
@@ -231,7 +275,7 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "rock",
-			texture: T_Rock_Level1_03,
+			texture: makeTexturesByLevel(T_Rock_Level1_03, T_Rock_Level9_03),
 			polygon: new Polygon(
 				9.1,
 				58.61,
@@ -259,7 +303,7 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "enemy-horizontal",
-			texture: { textures: A_EnemyFlyingIdle, fps: 10 },
+			texture: makeAnimation(A_EnemyFlyingIdle, 10),
 			polygon: new Polygon(
 				211.68,
 				307.63,
@@ -275,7 +319,7 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "enemy-vertical",
-			texture: { textures: A_EnemyStillIdle, fps: 10 },
+			texture: makeAnimation(A_EnemyStillIdle, 10),
 			polygon: new Polygon(
 				247.55,
 				203.78,
@@ -297,7 +341,7 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "enemy-still",
-			texture: { textures: A_Enemy3Idle, fps: 10 },
+			texture: makeAnimation(A_Enemy3Idle, 10),
 			polygon: new Polygon(
 				253.22,
 				188.67,
@@ -323,7 +367,7 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "player",
-			texture: { textures: A_CupidIdle, fps: 10 },
+			texture: makeAnimation(A_CupidIdle, 10),
 			polygon: new Polygon(
 				192.8,
 				209.44,

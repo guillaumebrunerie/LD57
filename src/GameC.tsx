@@ -33,7 +33,7 @@ import {
 } from "./assets";
 import { Rectangle } from "./Rectangle";
 import { StartScreen, GameOverScreen } from "./Postings";
-import { Polygon, Texture, type FederatedPointerEvent } from "pixi.js";
+import { Polygon, type FederatedPointerEvent } from "pixi.js";
 import { mod, smoothTriangle } from "./utils";
 import { firstTexture, type Obstacle } from "./obstacle";
 import type { Arrow, Player } from "./player";
@@ -99,7 +99,11 @@ export const GameC = ({ game }: { game: Game }) => {
 				{mask && <PolygonShape polygon={mask} myRef={ref} />}
 				<container mask={mask ? ref.current : undefined}>
 					{game.obstaclesManager.obstacles.map((obstacle) => (
-						<ObstacleC key={obstacle.id} obstacle={obstacle} />
+						<ObstacleC
+							key={obstacle.id}
+							obstacle={obstacle}
+							game={game}
+						/>
 					))}
 				</container>
 				<PlayerC player={game.player} />
@@ -507,10 +511,6 @@ const PlayerC = ({ player }: { player: Player }) => {
 					scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
 				/>
 			)}
-			{/* <Circle x={-40} y={-40} radius={10} /> */}
-			{/* <Circle x={-40} y={40} radius={10} /> */}
-			{/* <Circle x={40} y={-40} radius={10} /> */}
-			{/* <Circle x={40} y={40} radius={10} /> */}
 		</container>
 	);
 };
@@ -523,19 +523,23 @@ const ArrowC = ({ arrow }: { arrow: Arrow }) => {
 	);
 };
 
-const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
-	let texture;
-	if (obstacle.isDestroyed) {
-		texture = getFrame(A_HeartExplosion, 15, obstacle.lt, "remove");
-	} else if (obstacle.data.texture instanceof Texture) {
-		texture = obstacle.data.texture;
-	} else {
-		texture = getFrame(
-			obstacle.data.texture.textures,
-			obstacle.data.texture.fps,
-			obstacle.lt,
-		);
-	}
+const ObstacleC = ({ obstacle, game }: { obstacle: Obstacle; game: Game }) => {
+	const getTexture = (level: number) => {
+		if (obstacle.isDestroyed) {
+			return getFrame(A_HeartExplosion, 15, obstacle.lt, "remove");
+		} else if (obstacle.data.texture.type == "texture-by-level") {
+			return obstacle.data.texture.textures[level - 1];
+		} else {
+			return getFrame(
+				obstacle.data.texture.textures,
+				obstacle.data.texture.fps,
+				obstacle.lt,
+			);
+		}
+	};
+	// const startLevel = 1 + Math.floor(game.depth / game.levelDepth);
+	// const endLevel = 1 + Math.floor((game.depth + 1920) / game.levelDepth);
+	// const ref = useRef(null);
 	return (
 		<container
 			x={obstacle.x}
@@ -545,11 +549,28 @@ const ObstacleC = ({ obstacle }: { obstacle: Obstacle }) => {
 			<sprite
 				anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
 				blendMode={obstacle.isDestroyed ? "add" : "normal"}
-				texture={texture}
+				texture={getTexture(1)}
 				scale={obstacle.isDestroyed ? 1.2 : 1}
-			></sprite>
+			/>
+			{/* <sprite */}
+			{/* 	texture={T_Gradient} */}
+			{/* 	ref={ref} */}
+			{/* 	x={-obstacle.x} */}
+			{/* 	y={startLevel * game.levelDepth - obstacle.y - 1920} */}
+			{/* 	scale={{ */}
+			{/* 		x: 1 / obstacle.scaleX, */}
+			{/* 		y: 1 / obstacle.scaleY, */}
+			{/* 	}} */}
+			{/* 	alpha={0} */}
+			{/* /> */}
+			{/* {!obstacle.isDestroyed && ( */}
+			{/* 	<sprite */}
+			{/* 		anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }} */}
+			{/* 		texture={getTexture(endLevel)} */}
+			{/* 		mask={ref.current} */}
+			{/* 	/> */}
+			{/* )} */}
 			<PolygonShape alpha={0} polygon={obstacle.polygon()} />
-			{/* <Circle radius={10} color={0xff0000} draw={() => {}} /> */}
 		</container>
 	);
 };

@@ -16,17 +16,14 @@ export type ObstacleData = {
 		| "enemy-still"
 		| "player";
 	texture:
-		| {
-				textures: Texture[];
-				fps: number;
-		  }
-		| Texture;
+		| { type: "texture-by-level"; textures: Texture[] }
+		| { type: "animation"; textures: Texture[]; fps: number };
 	polygon: Polygon;
 };
 
 export const firstTexture = (data: ObstacleData): Texture => {
-	if (data.texture instanceof Texture) {
-		return data.texture;
+	if (data.texture.type == "texture-by-level") {
+		return data.texture.textures[8];
 	} else {
 		return data.texture.textures[0];
 	}
