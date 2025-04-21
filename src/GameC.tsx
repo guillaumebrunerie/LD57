@@ -11,6 +11,8 @@ import {
 	A_DevilWinLoop,
 	A_Embers,
 	A_HeartExplosion,
+	A_Level2Wind,
+	A_Level3Rain,
 	A_Snow,
 	A_TheEnd,
 	T_Arrow_Off,
@@ -242,13 +244,20 @@ const ForegroundFragment = ({
 			return (
 				<sprite
 					blendMode="add"
-					texture={getFrame(A_Snow, 20, lt)}
+					texture={getFrame(A_Level2Wind, 20, lt)}
 					scale={5}
 					alpha={alpha}
 				/>
 			);
 		case 3:
-			return null;
+			return (
+				<sprite
+					blendMode="add"
+					texture={getFrame(A_Level3Rain, 20, lt)}
+					scale={5}
+					alpha={alpha}
+				/>
+			);
 		case 4:
 			return null;
 		case 5:

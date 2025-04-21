@@ -1,4 +1,4 @@
-/** Generated on Mon Apr 21 00:00:11 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Mon Apr 21 17:03:13 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -66,6 +66,8 @@ import Enemy3Idle_SPRITESHEET from "../gfx/Enemy3Idle.png?spritesheet";
 import EnemyFlyingIdle_SPRITESHEET from "../gfx/EnemyFlyingIdle.png?spritesheet";
 import EnemyStillIdle_SPRITESHEET from "../gfx/EnemyStillIdle.png?spritesheet";
 import HeartExplosion_SPRITESHEET from "../gfx/HeartExplosion.png?spritesheet";
+import Level2Wind_SPRITESHEET from "../gfx/Level2Wind.png?spritesheet";
+import Level3Rain_SPRITESHEET from "../gfx/Level3Rain.png?spritesheet";
 import Snow_SPRITESHEET from "../gfx/Snow.png?spritesheet";
 import TheEnd_SPRITESHEET from "../gfx/TheEnd.png?spritesheet";
 
@@ -165,6 +167,10 @@ export const [
 	{ animations: { EnemyStillIdle: A_EnemyStillIdle } },
 	SS_HeartExplosion,
 	{ animations: { HeartExplosion: A_HeartExplosion } },
+	SS_Level2Wind,
+	{ animations: { Level2Wind: A_Level2Wind } },
+	SS_Level3Rain,
+	{ animations: { Level3Rain: A_Level3Rain } },
 	SS_Snow,
 	{ animations: { Snow: A_Snow } },
 	SS_TheEnd,
@@ -261,6 +267,10 @@ export const [
 	EnemyStillIdle_SPRITESHEET,
 	HeartExplosion_SPRITESHEET,
 	HeartExplosion_SPRITESHEET,
+	Level2Wind_SPRITESHEET,
+	Level2Wind_SPRITESHEET,
+	Level3Rain_SPRITESHEET,
+	Level3Rain_SPRITESHEET,
 	Snow_SPRITESHEET,
 	Snow_SPRITESHEET,
 	TheEnd_SPRITESHEET,
