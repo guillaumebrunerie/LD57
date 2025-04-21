@@ -1,0 +1,175 @@
+{"frames": {
+
+"Level3Rain_000.png":
+{
+	"frame": {"x":1,"y":1,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_001.png":
+{
+	"frame": {"x":1,"y":403,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_002.png":
+{
+	"frame": {"x":228,"y":1,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_003.png":
+{
+	"frame": {"x":1,"y":805,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_004.png":
+{
+	"frame": {"x":228,"y":403,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_005.png":
+{
+	"frame": {"x":455,"y":1,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_006.png":
+{
+	"frame": {"x":1,"y":1207,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_007.png":
+{
+	"frame": {"x":228,"y":805,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_008.png":
+{
+	"frame": {"x":455,"y":403,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_009.png":
+{
+	"frame": {"x":682,"y":1,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_010.png":
+{
+	"frame": {"x":1,"y":1609,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_011.png":
+{
+	"frame": {"x":228,"y":1207,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_012.png":
+{
+	"frame": {"x":455,"y":805,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_013.png":
+{
+	"frame": {"x":682,"y":403,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_014.png":
+{
+	"frame": {"x":228,"y":1609,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_015.png":
+{
+	"frame": {"x":455,"y":1207,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_016.png":
+{
+	"frame": {"x":682,"y":805,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_017.png":
+{
+	"frame": {"x":455,"y":1609,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_018.png":
+{
+	"frame": {"x":682,"y":1207,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level3Rain_019.png":
+{
+	"frame": {"x":682,"y":1609,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+}},
+"animations": {
+	"Level3Rain": ["Level3Rain_000.png","Level3Rain_001.png","Level3Rain_002.png","Level3Rain_003.png","Level3Rain_004.png","Level3Rain_005.png","Level3Rain_006.png","Level3Rain_007.png","Level3Rain_008.png","Level3Rain_009.png","Level3Rain_010.png","Level3Rain_011.png","Level3Rain_012.png","Level3Rain_013.png","Level3Rain_014.png","Level3Rain_015.png","Level3Rain_016.png","Level3Rain_017.png","Level3Rain_018.png","Level3Rain_019.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "Level3Rain.png",
+	"format": "RGBA8888",
+	"size": {"w":908,"h":2010},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d8c488dcf5e88e5501b3f758f309b01c:2b5cbbc415f10ea0a9a8b9ccf70e186c:d09595d14009c45035a664639000d5c2$"
+}
+}
