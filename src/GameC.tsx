@@ -293,20 +293,32 @@ const ForegroundFragment = ({
 	}
 };
 
+const tween = (t: number, ...tweens: [number, number][]) => {
+	const i = tweens.findIndex(([tweenT]) => t < tweenT);
+	if (i == 0) {
+		return tweens[0][1];
+	} else if (i == -1) {
+		return tweens[tweens.length - 1][1];
+	} else {
+		const [start, value1] = tweens[i - 1];
+		const [end, value2] = tweens[i];
+		return value1 + ((value2 - value1) * (t - start)) / (end - start);
+	}
+};
+
 const Foreground = () => {
 	const game = useGame();
-	const previousLevel = 1 + Math.floor(game.depth / game.levelDepth);
-	const level = 1 + Math.floor((game.depth + 1920) / game.levelDepth);
-	const nt = ((level - 1) * game.levelDepth - game.depth) / 1920;
+	const level = game.level;
+	const nextLevel = level + 1;
+	const nt = tween(
+		game.depth,
+		[game.levelDepth * level - 1920 * 2, 0],
+		[game.levelDepth * level, 1],
+	);
 	return (
 		<container y={game.depth}>
-			{previousLevel != level && (
-				<ForegroundFragment level={previousLevel} alpha={nt} />
-			)}
-			<ForegroundFragment
-				level={level}
-				alpha={previousLevel == level ? 1 : 1 - nt}
-			/>
+			<ForegroundFragment level={level} alpha={1 - nt} />
+			{nt > 0 && <ForegroundFragment level={nextLevel} alpha={nt} />}
 		</container>
 	);
 };

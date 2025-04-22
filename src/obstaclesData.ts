@@ -37,6 +37,7 @@ const makeTexturesByLevel = (
 		textureLevel9,
 		textureLevel1,
 		textureLevel9,
+		textureLevel1,
 		textureLevel9,
 	],
 });
