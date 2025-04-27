@@ -1,4 +1,3 @@
-import { Game } from "./game";
 import { Ticker } from "pixi.js";
 import { action } from "mobx";
 import { initSound, closeSound } from "./sound";
@@ -14,7 +13,6 @@ declare global {
 export class App {
 	speed = 1;
 	lt = 0;
-	game = new Game();
 	listener: (() => void) | undefined;
 
 	constructor() {
@@ -47,7 +45,6 @@ export class App {
 		const tick = action((ticker: Ticker) => {
 			const delta = (ticker.deltaTime / 60) * this.speed;
 			this.lt += delta;
-			this.game.tick(delta);
 			this.listener?.();
 		});
 		// Ticker.shared.minFPS = 10;

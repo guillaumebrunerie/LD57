@@ -2,7 +2,6 @@ import { S_StartButton, S_Win } from "./assets";
 import { ObstacleManager as ObstaclesManager } from "./obstaclesManager";
 import { Player } from "./player";
 import { type Point } from "./utils";
-import { PolygonEditor } from "./polygonEditor";
 import type { Obstacle } from "./obstacle";
 import { setMusic, startMusic } from "./musicManager";
 import { createContext, use } from "react";
@@ -23,8 +22,7 @@ export class Game {
 	cloudLt = 0;
 
 	isPaused = true;
-	state: "startScreen" | "game" | "polygonEditor" = "startScreen";
-	polygonEditor = new PolygonEditor();
+	state: "startScreen" | "game" = "startScreen";
 
 	depth = 0;
 	baseSpeed = 600;
@@ -34,7 +32,7 @@ export class Game {
 	yBgOffset = Math.random();
 
 	player = new Player(this);
-	obstaclesManager = new ObstaclesManager(this);
+	obstaclesManager = new ObstaclesManager();
 
 	level = 0;
 	levelDepth = 15000;
@@ -51,7 +49,7 @@ export class Game {
 		this.depth = 0;
 		this.level = 0;
 		this.player = new Player(this);
-		this.obstaclesManager = new ObstaclesManager(this);
+		this.obstaclesManager = new ObstaclesManager();
 	}
 
 	levels = 9;
@@ -87,7 +85,13 @@ export class Game {
 		}
 
 		this.player.tick(delta);
-		this.obstaclesManager.tick(delta);
+		this.obstaclesManager.tick(
+			delta,
+			this.levelDepth,
+			this.depth,
+			this.level,
+			this.levels,
+		);
 
 		if (this.player.arrow && this.player.arrow.targetId != "") {
 			const targetId = this.player.arrow.targetId;
@@ -168,6 +172,15 @@ export class Game {
 		}
 	}
 
+	cheatToLevel(level: number) {
+		if (import.meta.env.DEV) {
+			const oldDepth = this.depth;
+			this.depth = this.levelDepth * level - 1920 * 2;
+			this.level = level - 1;
+			this.player.posY += this.depth - oldDepth;
+		}
+	}
+
 	nextLevel() {
 		this.level++;
 		if (this.player.lives < 4) {
@@ -176,7 +189,6 @@ export class Game {
 		if (this.player.arrows < 3) {
 			this.player.arrows++;
 		}
-		this.obstaclesManager.nextLevel();
 		this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;
 		setMusic(this.level);
 	}

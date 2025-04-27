@@ -1,4 +1,3 @@
-import type { Game } from "./game";
 import { Obstacle, type ObstacleData } from "./obstacle";
 import { obstaclesData } from "./obstaclesData";
 import {
@@ -18,7 +17,7 @@ const getRandomObstacle = (level: number, type: ObstacleData["type"]) => {
 };
 
 export class ObstacleManager {
-	constructor(public game: Game) {}
+	constructor() {}
 
 	obstacles: Obstacle[] = [];
 
@@ -27,74 +26,75 @@ export class ObstacleManager {
 
 	lastY = 1500;
 
-	previousPatterns: Pattern[] = [];
+	previousPatterns: { side: "left" | "right"; pattern: Pattern }[] = [];
 
-	tick(delta: number) {
-		if (this.obstacles.some((o) => o.isOutOfBounds())) {
-			this.obstacles = this.obstacles.filter((o) => !o.isOutOfBounds());
+	reset(level: number) {
+		this.lastY = getPatternSpacing(level);
+		this.previousPatterns = [];
+
+		this.obstacles = [
+			new Obstacle(0, 1920 / 2, false, getRandomObstacle(level, "wall")),
+			new Obstacle(
+				1080,
+				1920 / 2,
+				true,
+				getRandomObstacle(level, "wall"),
+			),
+		];
+	}
+
+	tick(
+		delta: number,
+		levelDepth: number,
+		depth: number,
+		level: number,
+		levels: number,
+	) {
+		const getLevel = (y: number) => Math.ceil(y / levelDepth);
+		if (this.obstacles.some((o) => o.isOutOfBounds(depth))) {
+			this.obstacles = this.obstacles.filter(
+				(o) => !o.isOutOfBounds(depth),
+			);
 		}
 
 		let needSort = false;
-		while (this.lastYWallLeft <= this.game.depth + 1920) {
+		while (this.lastYWallLeft <= depth + 1920) {
 			this.lastYWallLeft += 1920;
 			this.obstacles.push(
 				new Obstacle(
-					this.game,
 					0,
 					this.lastYWallLeft,
 					false,
-					getRandomObstacle(this.game.level, "wall"),
+					getRandomObstacle(level, "wall"),
 				),
 			);
 			needSort = true;
 		}
 
-		while (this.lastYWallRight <= this.game.depth + 1920) {
+		while (this.lastYWallRight <= depth + 1920) {
 			this.lastYWallRight += 1920;
 			this.obstacles.push(
 				new Obstacle(
-					this.game,
 					1080,
 					this.lastYWallRight,
 					true,
-					getRandomObstacle(this.game.level, "wall"),
+					getRandomObstacle(level, "wall"),
 				),
 			);
 			needSort = true;
 		}
 
-		while (this.lastY <= this.game.depth + 1920) {
-			this.lastY += getPatternSpacing(this.game.level);
-			if (this.lastY >= this.game.levelDepth * this.game.levels) {
+		while (this.lastY <= depth + 1920) {
+			this.lastY += getPatternSpacing(level);
+			if (this.lastY >= levelDepth * levels) {
 				break;
 			}
-			const pattern = getObstaclePattern(
-				this.game.level,
+			const { pattern, side } = getObstaclePattern(
+				level,
 				this.previousPatterns,
 			);
-			this.previousPatterns.push(pattern);
-			let maxY = this.lastY;
-			for (const patternData of pattern.data) {
-				const x =
-					Math.random() * (patternData.x[1] - patternData.x[0]) +
-					patternData.x[0];
-				const y =
-					Math.random() * (patternData.y[1] - patternData.y[0]) +
-					patternData.y[0];
-				this.obstacles.push(
-					new Obstacle(
-						this.game,
-						x,
-						this.lastY + y,
-						patternData.flipped,
-						obstaclesData[this.game.level - 1][patternData.index],
-						patternData.frequency,
-						patternData.range,
-					),
-				);
-				maxY = Math.max(maxY, this.lastY + y);
-			}
-			this.lastY = maxY;
+			this.instantiatePattern(pattern, side, getLevel(this.lastY));
+			this.previousPatterns.push({ pattern, side });
 			needSort = true;
 		}
 
@@ -107,7 +107,46 @@ export class ObstacleManager {
 		});
 	}
 
-	nextLevel() {}
+	instantiatePattern(
+		pattern: Pattern,
+		side: "left" | "right",
+		level: number,
+	) {
+		let maxY = this.lastY;
+		for (const patternData of pattern.data) {
+			const xMin =
+				side == "right" ? 1080 - patternData.x[1] : patternData.x[0];
+			const xMax =
+				side == "right" ? 1080 - patternData.x[0] : patternData.x[1];
+			const yMin = patternData.y[0];
+			const yMax = patternData.y[1];
+			const x = xMin + Math.random() * (xMax - xMin);
+			const y = yMin + Math.random() * (yMax - yMin);
+			const flipped =
+				side == "right" ? !patternData.flipped : patternData.flipped;
+			const obstacleData = obstaclesData[level - 1][patternData.index];
+			const range: [number, number] | undefined =
+				(
+					side == "right" &&
+					obstacleData.type == "enemy-horizontal" &&
+					patternData.range
+				) ?
+					[1080 - patternData.range[1], 1080 - patternData.range[0]]
+				:	patternData.range;
+			this.obstacles.push(
+				new Obstacle(
+					x,
+					this.lastY + y,
+					flipped,
+					obstacleData,
+					patternData.frequency,
+					range,
+				),
+			);
+			maxY = Math.max(maxY, this.lastY + y);
+		}
+		this.lastY = maxY;
+	}
 
 	checkCollision(player: Player) {
 		for (const obstacle of this.obstacles) {

@@ -1,5 +1,4 @@
 import { Matrix, Texture, type Polygon } from "pixi.js";
-import type { Game } from "./game";
 import type { Player } from "./player";
 import { getDuration } from "./Animation";
 import { A_HeartExplosion, S_EnemyDiePuff, S_EnemyDieVoice } from "./assets";
@@ -30,7 +29,6 @@ export const firstTexture = (data: ObstacleData): Texture => {
 };
 
 export class Obstacle {
-	game: Game;
 	lt = Math.random() * 1000;
 	originalY: number;
 	x: number;
@@ -48,7 +46,6 @@ export class Obstacle {
 	destroyTimeout = Infinity;
 
 	constructor(
-		game: Game,
 		x: number,
 		y: number,
 		flipped: boolean,
@@ -56,7 +53,6 @@ export class Obstacle {
 		frequency?: number,
 		range?: [number, number],
 	) {
-		this.game = game;
 		this.id = Math.random().toString(36).substring(2, 15);
 		this.originalY = y;
 		this.x = x;
@@ -94,9 +90,9 @@ export class Obstacle {
 		}
 	}
 
-	isOutOfBounds() {
+	isOutOfBounds(depth: number) {
 		return (
-			this.y < this.game.depth - 1920 ||
+			this.y < depth - 1920 ||
 			(this.isDestroyed && this.destroyTimeout < 0)
 		);
 	}

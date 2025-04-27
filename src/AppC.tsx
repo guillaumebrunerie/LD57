@@ -1,37 +1,22 @@
-import { app } from "./app";
-import { GameContext } from "./game";
+import { useState } from "react";
 import { GameC } from "./GameC";
+import { PatternEditorC } from "./PatternEditorC";
 import { SoundButton } from "./SoundButton";
-import { useWindowEventListener } from "./useWindowEventListener";
+import { useOnKeyDownDEV } from "./useOnKeyDown";
+import { PolygonEditorC } from "./PolygonEditorC";
 
 export const AppC = () => {
-	useWindowEventListener("keydown", (event) => {
-		if (!import.meta.env.DEV || !event.shiftKey) {
-			return;
-		}
-		switch (event.code) {
-			case "ArrowUp":
-				app.speed *= 2;
-				break;
-			case "ArrowDown":
-				app.speed *= 1 / 2;
-				if (app.speed == 0) {
-					app.speed = 1 / 64;
-				}
-				break;
-			case "ArrowLeft":
-				app.speed = 0;
-				break;
-			case "ArrowRight":
-				app.speed = 1;
-				break;
-		}
-	});
+	const [state, setState] = useState("game");
+	useOnKeyDownDEV("S-KeyQ", () => setState("game"));
+	useOnKeyDownDEV("S-KeyW", () => setState("polygonEditor"));
+	useOnKeyDownDEV("S-KeyE", () => setState("patternEditor"));
 
 	return (
-		<GameContext value={app.game}>
-			<GameC />
+		<>
+			{state == "game" && <GameC />}
+			{state == "polygonEditor" && <PolygonEditorC />}
+			{state == "patternEditor" && <PatternEditorC />}
 			<SoundButton />
-		</GameContext>
+		</>
 	);
 };

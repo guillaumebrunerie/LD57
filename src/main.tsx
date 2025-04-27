@@ -5,7 +5,6 @@ import { Application, extend } from "@pixi/react";
 import { Container, Sprite, Text, Graphics, NineSliceSprite } from "pixi.js";
 
 import { AppC } from "./AppC";
-import { app } from "./app";
 
 extend({ Container, Sprite, Text, Graphics, NineSliceSprite });
 
@@ -23,10 +22,10 @@ root.render(
 	</StrictMode>,
 );
 
-document.addEventListener("visibilitychange", () => {
-	if (document.visibilityState == "hidden") {
-		app.game.autoPause();
-	} else if (document.visibilityState == "visible") {
-		app.game.autoResume();
-	}
-});
+// document.addEventListener("visibilitychange", () => {
+// 	if (document.visibilityState == "hidden") {
+// 		app.autoPause();
+// 	} else if (document.visibilityState == "visible") {
+// 		app.autoResume();
+// 	}
+// });

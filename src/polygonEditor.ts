@@ -8,9 +8,11 @@ export class PolygonEditor {
 	possibleObstacles = getPossibleObstacles(1);
 	index = 0;
 
-	constructor() {
+	constructor(data?: PolygonEditor) {
+		this.index = data?.index ?? 0;
 		this.obstacle = this.possibleObstacles[this.index];
 	}
+	tick(_: number) {}
 
 	switch(dx: number) {
 		this.index = mod(this.index + dx, this.possibleObstacles.length);
