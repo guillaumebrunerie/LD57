@@ -19,6 +19,19 @@ export const PolygonEditorC = () => {
 		polygonEditor.switch(-1);
 	});
 
+	useOnKeyDown("C-ArrowRight", () => {
+		polygonEditor.move(1, 0);
+	});
+	useOnKeyDown("C-ArrowLeft", () => {
+		polygonEditor.move(-1, 0);
+	});
+	useOnKeyDown("C-ArrowUp", () => {
+		polygonEditor.move(0, -1);
+	});
+	useOnKeyDown("C-ArrowDown", () => {
+		polygonEditor.move(0, 1);
+	});
+
 	return (
 		<container>
 			<sprite

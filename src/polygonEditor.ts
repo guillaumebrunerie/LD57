@@ -27,6 +27,14 @@ export class PolygonEditor {
 		);
 	}
 
+	move(dx: number, dy: number) {
+		this.obstacle.polygon = new Polygon(
+			...this.obstacle.polygon.points.map((t, i) =>
+				i % 2 === 0 ? t + dx : t + dy,
+			),
+		);
+	}
+
 	async save() {
 		await navigator.clipboard.writeText(
 			`new Polygon(${this.obstacle.polygon.points

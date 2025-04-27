@@ -44,7 +44,7 @@ const rock = (
 
 const enemyHorizontal = (
 	index: number,
-	frequency: number,
+	speed: number,
 	range: [number, number],
 	y: number | [number, number] = 0,
 ): PatternData => ({
@@ -52,13 +52,13 @@ const enemyHorizontal = (
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
 	index,
-	frequency,
+	frequency: (range[1] - range[0]) / speed,
 	range,
 });
 
 const enemyVertical = (
 	index: number,
-	frequency: number,
+	speed: number,
 	x: number | [number, number],
 	range: [number, number],
 	y: number | [number, number] = 0,
@@ -67,19 +67,19 @@ const enemyVertical = (
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
 	index,
-	frequency,
+	frequency: (range[1] - range[0]) / speed,
 	range,
 });
 
-// const enemyStill = (
-// 	x: number | [number, number],
-// 	y: number | [number, number] = 0,
-// ): PatternData => ({
-// 	x: typeof x == "number" ? [x, x] : x,
-// 	y: typeof y == "number" ? [y, y] : y,
-// 	flipped: false,
-// 	index: 10,
-// });
+const enemyStill = (
+	x: number | [number, number],
+	y: number | [number, number] = 0,
+): PatternData => ({
+	x: typeof x == "number" ? [x, x] : x,
+	y: typeof y == "number" ? [y, y] : y,
+	flipped: false,
+	index: 10,
+});
 
 type LevelPattern = {
 	spacing: [number, number];
@@ -95,6 +95,8 @@ const patterns: Pattern[][] = [
 		{ data: [spikeRight(4)] },
 		{ data: [rock(6, [50, 200])] },
 		{ data: [rock(7, [-50, 200])] },
+		{ data: [enemyStill([600, 700])] },
+		{ data: [enemyStill([600, 800])] },
 	],
 	// Difficulty 2
 	[
@@ -111,24 +113,24 @@ const patterns: Pattern[][] = [
 	// Difficulty 3
 	[
 		{
-			data: [enemyHorizontal(8, 1, [250, 830], [-100, 100])],
+			data: [enemyHorizontal(8, 580, [250, 830], [-100, 100])],
 		},
 		{
 			data: [
 				spikeRight(1),
-				enemyHorizontal(8, 1, [230, 680], [-100, 100]),
+				enemyHorizontal(8, 450, [230, 680], [-100, 100]),
 			],
 		},
 		{
 			data: [
 				spikeRight(3),
-				enemyHorizontal(8, 1, [230, 580], [-100, 100]),
+				enemyHorizontal(8, 350, [230, 580], [-100, 100]),
 			],
 		},
 		{
 			data: [
 				spikeRight(4),
-				enemyHorizontal(8, 1, [230, 730], [-100, 100]),
+				enemyHorizontal(8, 500, [230, 730], [-100, 100]),
 			],
 		},
 	],
@@ -137,20 +139,29 @@ const patterns: Pattern[][] = [
 		{
 			data: [
 				spikeRight(2),
-				enemyHorizontal(8, 2, [230, 580], [100, 150]),
+				enemyHorizontal(8, 175, [230, 580], [100, 150]),
 			],
 		},
 		{
-			data: [spikeRight(2), enemyVertical(9, 1, 480, [100, 350])],
+			data: [spikeRight(2), enemyVertical(9, 250, 480, [100, 350])],
 		},
 		{
-			data: [spikeRight(1), enemyVertical(9, 1, [280, 480], [-200, 200])],
+			data: [
+				spikeRight(1),
+				enemyVertical(9, 400, [280, 480], [-200, 200]),
+			],
 		},
 		{
-			data: [spikeRight(3), enemyVertical(9, 1, [280, 480], [-200, 200])],
+			data: [
+				spikeRight(3),
+				enemyVertical(9, 400, [280, 480], [-200, 200]),
+			],
 		},
 		{
-			data: [spikeRight(4), enemyVertical(9, 1, [280, 480], [-200, 200])],
+			data: [
+				spikeRight(4),
+				enemyVertical(9, 400, [280, 480], [-200, 200]),
+			],
 		},
 	],
 	// Difficulty 5
@@ -169,49 +180,49 @@ const patterns: Pattern[][] = [
 	[
 		{
 			data: [
-				enemyHorizontal(8, 2, [250, 830]),
-				enemyHorizontal(8, 2, [250, 830], [200, 300]),
+				enemyHorizontal(8, 290, [250, 830]),
+				enemyHorizontal(8, 290, [250, 830], [200, 300]),
 			],
 		},
 		{
 			data: [
 				spikeRight(1),
 				// enemyHorizontal(8, 1, [230, 680], [-200, -100]),
-				enemyHorizontal(8, 1, [230, 680], [100, 200]),
+				enemyHorizontal(8, 450, [230, 680], [100, 200]),
 			],
 		},
 		{
 			data: [
 				spikeRight(3),
 				// enemyHorizontal(8, 1, [230, 580], [-200, -100]),
-				enemyHorizontal(8, 1, [230, 580], [100, 200]),
+				enemyHorizontal(8, 350, [230, 580], [100, 200]),
 			],
 		},
 		{
 			data: [
 				spikeRight(4),
-				enemyHorizontal(8, 1, [230, 730], [-200, -100]),
-				enemyHorizontal(8, 1, [230, 730], [100, 200]),
+				enemyHorizontal(8, 500, [230, 730], [-200, -100]),
+				enemyHorizontal(8, 500, [230, 730], [100, 200]),
 			],
 		},
 	],
 	// Difficulty 7
 	[
 		{
-			data: [spikeRight(2), spikeLeft(2, [500, 600])],
+			data: [spikeRight(2), spikeLeft(2, [600, 700])],
 		},
 		{
 			data: [
 				spikeRight(3),
 				spikeLeft(4, [0, 100]),
-				enemyHorizontal(8, 2, [350, 580]),
+				enemyHorizontal(8, 115, [350, 580]),
 			],
 		},
 		{
 			data: [
 				spikeRight(4),
 				spikeLeft(1, [0, 100]),
-				enemyHorizontal(8, 2, [400, 730]),
+				enemyHorizontal(8, 200, [400, 730]),
 			],
 		},
 	],

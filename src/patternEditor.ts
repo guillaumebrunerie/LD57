@@ -28,7 +28,7 @@ export class PatternEditor {
 
 	refresh() {
 		this.obstacleManager.reset(this.level);
-		const side = Math.random() < 0.5 ? "left" : "right";
+		const side = "left"; //Math.random() < 0.5 ? "left" : "right";
 		this.obstacleManager.instantiatePattern(
 			obstaclesPatternsData[this.level - 1].data[this.patternIndex],
 			side,

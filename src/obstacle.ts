@@ -22,7 +22,7 @@ export type ObstacleData = {
 
 export const firstTexture = (data: ObstacleData): Texture => {
 	if (data.texture.type == "texture-by-level") {
-		return data.texture.textures[8];
+		return data.texture.textures[0];
 	} else {
 		return data.texture.textures[0];
 	}
