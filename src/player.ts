@@ -25,7 +25,7 @@ export class Player {
 	width = 50;
 
 	posX = 1080 / 2;
-	posY = 300;
+	posY = 600;
 
 	tapPos: Point | null = null;
 	baseTargetX = this.posX;
