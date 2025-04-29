@@ -2,7 +2,7 @@ type PatternData = {
 	x: [number, number];
 	y: [number, number];
 	flipped: boolean;
-	index: number;
+	index: number[];
 	frequency?: number;
 	range?: [number, number];
 	radius?: number;
@@ -20,7 +20,7 @@ const spikeLeft = (
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
-	index,
+	index: [index],
 });
 
 const spikeRight = (
@@ -30,7 +30,7 @@ const spikeRight = (
 	x: [1080, 1080],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: true,
-	index,
+	index: [index],
 });
 
 const rock = (
@@ -41,11 +41,10 @@ const rock = (
 	x: [1080 / 2 + x[0], 1080 / 2 + x[1]],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
-	index,
+	index: [index],
 });
 
 const enemyHorizontal = (
-	index: number,
 	speed: number,
 	range: [number, number],
 	y: number | [number, number] = 0,
@@ -53,13 +52,12 @@ const enemyHorizontal = (
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
-	index,
+	index: [8],
 	frequency: (range[1] - range[0]) / speed,
 	range,
 });
 
 const enemyVertical = (
-	index: number,
 	speed: number,
 	x: number | [number, number],
 	range: [number, number],
@@ -68,7 +66,7 @@ const enemyVertical = (
 	x: typeof x == "number" ? [x, x] : x,
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
-	index,
+	index: [9],
 	frequency: (range[1] - range[0]) / speed,
 	range,
 });
@@ -84,7 +82,7 @@ const enemyStill = (
 	flipped: false,
 	radius,
 	frequency: 1 / speed,
-	index: 10,
+	index: [10],
 });
 
 const fireball = (
@@ -96,7 +94,7 @@ const fireball = (
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
-	index: 11,
+	index: [11],
 	frequency: (range[1] - range[0]) / speed,
 	range,
 	dy,
@@ -111,7 +109,7 @@ const iceball = (
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
-	index: 12,
+	index: [12],
 	frequency: (range[1] - range[0]) / speed,
 	range,
 	dy,
@@ -127,7 +125,7 @@ const patterns: Pattern[][] = [
 	// Difficulty 1
 	[
 		{ data: [fireball(2000, [-700, 1700])] },
-		{ data: [iceball(2001, [-700, 1700])] },
+		{ data: [iceball(2000, [-700, 1700])] },
 		{ data: [spikeRight(1)] },
 		{ data: [spikeRight(3)] },
 		{ data: [spikeRight(4)] },
@@ -151,55 +149,43 @@ const patterns: Pattern[][] = [
 	// Difficulty 3
 	[
 		{
-			data: [enemyHorizontal(8, 580, [250, 830], [-100, 100])],
+			data: [enemyHorizontal(580, [250, 830], [-100, 100])],
 		},
 		{
 			data: [
 				spikeRight(1),
-				enemyHorizontal(8, 450, [230, 680], [-100, 100]),
+				enemyHorizontal(450, [230, 680], [-100, 100]),
 			],
 		},
 		{
 			data: [
 				spikeRight(3),
-				enemyHorizontal(8, 350, [230, 580], [-100, 100]),
+				enemyHorizontal(350, [230, 580], [-100, 100]),
 			],
 		},
 		{
 			data: [
 				spikeRight(4),
-				enemyHorizontal(8, 500, [230, 730], [-100, 100]),
+				enemyHorizontal(500, [230, 730], [-100, 100]),
 			],
 		},
 	],
 	// Difficulty 4
 	[
 		{
-			data: [
-				spikeRight(2),
-				enemyHorizontal(8, 175, [230, 580], [100, 150]),
-			],
+			data: [spikeRight(2), enemyHorizontal(175, [230, 580], [100, 150])],
 		},
 		{
-			data: [spikeRight(2), enemyVertical(9, 250, 480, [100, 350])],
+			data: [spikeRight(2), enemyVertical(250, 480, [100, 350])],
 		},
 		{
-			data: [
-				spikeRight(1),
-				enemyVertical(9, 400, [280, 480], [-200, 200]),
-			],
+			data: [spikeRight(1), enemyVertical(400, [280, 480], [-200, 200])],
 		},
 		{
-			data: [
-				spikeRight(3),
-				enemyVertical(9, 400, [280, 480], [-200, 200]),
-			],
+			data: [spikeRight(3), enemyVertical(400, [280, 480], [-200, 200])],
 		},
 		{
-			data: [
-				spikeRight(4),
-				enemyVertical(9, 400, [280, 480], [-200, 200]),
-			],
+			data: [spikeRight(4), enemyVertical(400, [280, 480], [-200, 200])],
 		},
 	],
 	// Difficulty 5
@@ -218,29 +204,21 @@ const patterns: Pattern[][] = [
 	[
 		{
 			data: [
-				enemyHorizontal(8, 290, [250, 830]),
-				enemyHorizontal(8, 290, [250, 830], [200, 300]),
+				enemyHorizontal(290, [250, 830]),
+				enemyHorizontal(290, [250, 830], [200, 300]),
 			],
 		},
 		{
-			data: [
-				spikeRight(1),
-				// enemyHorizontal(8, 1, [230, 680], [-200, -100]),
-				enemyHorizontal(8, 450, [230, 680], [100, 200]),
-			],
+			data: [spikeRight(1), enemyHorizontal(450, [230, 680], [100, 200])],
 		},
 		{
-			data: [
-				spikeRight(3),
-				// enemyHorizontal(8, 1, [230, 580], [-200, -100]),
-				enemyHorizontal(8, 350, [230, 580], [100, 200]),
-			],
+			data: [spikeRight(3), enemyHorizontal(350, [230, 580], [100, 200])],
 		},
 		{
 			data: [
 				spikeRight(4),
-				enemyHorizontal(8, 500, [230, 730], [-200, -100]),
-				enemyHorizontal(8, 500, [230, 730], [100, 200]),
+				enemyHorizontal(500, [230, 730], [-200, -100]),
+				enemyHorizontal(500, [230, 730], [100, 200]),
 			],
 		},
 	],
@@ -253,14 +231,14 @@ const patterns: Pattern[][] = [
 			data: [
 				spikeRight(3),
 				spikeLeft(4, [0, 100]),
-				enemyHorizontal(8, 115, [350, 580]),
+				enemyHorizontal(115, [350, 580]),
 			],
 		},
 		{
 			data: [
 				spikeRight(4),
 				spikeLeft(1, [0, 100]),
-				enemyHorizontal(8, 200, [400, 730]),
+				enemyHorizontal(200, [400, 730]),
 			],
 		},
 	],

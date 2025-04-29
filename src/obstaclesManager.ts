@@ -6,6 +6,7 @@ import {
 	type Pattern,
 } from "./obstaclesPatterns";
 import type { Player } from "./player";
+import { pick } from "./utils";
 
 export const getPossibleObstacles = (_level: number) => {
 	return obstaclesData[0];
@@ -124,7 +125,8 @@ export class ObstacleManager {
 			const y = yMin + Math.random() * (yMax - yMin);
 			const flipped =
 				side == "right" ? !patternData.flipped : patternData.flipped;
-			const obstacleData = obstaclesData[level - 1][patternData.index];
+			const obstacleData =
+				obstaclesData[level - 1][pick(patternData.index)];
 			const range: [number, number] | undefined =
 				(
 					side == "right" &&
