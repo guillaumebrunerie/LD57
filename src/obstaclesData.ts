@@ -106,10 +106,15 @@ const makeTexturesByLevel = (
 	],
 });
 
-const makeAnimation = (animation: Texture[], fps: number) => ({
+const makeAnimation = (
+	animation: Texture[],
+	fps: number,
+	blendMode = "normal",
+) => ({
 	type: "animation" as const,
 	textures: animation,
 	fps,
+	blendMode,
 });
 
 export const obstaclesData: ObstacleData[][] = [
@@ -500,7 +505,7 @@ export const obstaclesData: ObstacleData[][] = [
 		},
 		{
 			type: "fireball",
-			texture: makeAnimation(A_Fireball, 10),
+			texture: makeAnimation(A_Fireball, 30, "add"),
 			polygon: new Polygon(
 				50.84,
 				202.48,

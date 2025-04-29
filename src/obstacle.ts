@@ -17,7 +17,12 @@ export type ObstacleData = {
 		| "player";
 	texture:
 		| { type: "texture-by-level"; textures: Texture[] }
-		| { type: "animation"; textures: Texture[]; fps: number };
+		| {
+				type: "animation";
+				textures: Texture[];
+				fps: number;
+				blendMode: "normal" | "add";
+		  };
 	polygon: Polygon;
 };
 

@@ -45,6 +45,11 @@ export const ObstacleC = ({
 		}
 	};
 
+	const blendMode =
+		obstacle.data.texture.type == "animation" ?
+			obstacle.data.texture.blendMode
+		:	"normal";
+
 	const isBefore = obstacle.y < nextLevelDepth - 1920 / 2;
 
 	type Interval = [number, number];
@@ -69,6 +74,7 @@ export const ObstacleC = ({
 				scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
 				anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
 				texture={getTexture(baseLevel)}
+				blendMode={blendMode}
 			/>
 			<sprite
 				texture={T_Gradient}
