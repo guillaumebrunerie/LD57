@@ -1,0 +1,47 @@
+{"frames": {
+
+"IcicleExplode_000.png":
+{
+	"frame": {"x":572,"y":1,"w":120,"h":150},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":41,"y":21,"w":120,"h":150},
+	"sourceSize": {"w":200,"h":200}
+},
+"IcicleExplode_001.png":
+{
+	"frame": {"x":398,"y":1,"w":172,"h":194},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":0,"w":172,"h":194},
+	"sourceSize": {"w":200,"h":200}
+},
+"IcicleExplode_002.png":
+{
+	"frame": {"x":203,"y":1,"w":193,"h":200},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":0,"w":193,"h":200},
+	"sourceSize": {"w":200,"h":200}
+},
+"IcicleExplode_003.png":
+{
+	"frame": {"x":1,"y":1,"w":200,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":200},
+	"sourceSize": {"w":200,"h":200}
+}},
+"animations": {
+	"IcicleExplode": ["IcicleExplode_000.png","IcicleExplode_001.png","IcicleExplode_002.png","IcicleExplode_003.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "IcicleExplode.png",
+	"format": "RGBA8888",
+	"size": {"w":693,"h":202},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:8bb0e52222303ec55edca5c0a4689f4c:5bb3bd23d3f01b269b4cdff5000b1705:303cab7c1435689cd3ec72732c8aafc8$"
+}
+}
