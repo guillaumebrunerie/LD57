@@ -5,6 +5,7 @@ import {
 	A_EnemyFlyingIdle,
 	A_EnemyStillIdle,
 	A_Fireball,
+	A_Iceball,
 	T_Bg_Walls_Level1,
 	T_Bg_Walls_Level2,
 	T_Bg_Walls_Level3,
@@ -109,7 +110,7 @@ const makeTexturesByLevel = (
 const makeAnimation = (
 	animation: Texture[],
 	fps: number,
-	blendMode = "normal",
+	blendMode: "normal" | "add" = "normal",
 ) => ({
 	type: "animation" as const,
 	textures: animation,
@@ -506,6 +507,20 @@ export const obstaclesData: ObstacleData[][] = [
 		{
 			type: "fireball",
 			texture: makeAnimation(A_Fireball, 30, "add"),
+			polygon: new Polygon(
+				50.84,
+				202.48,
+				102.35,
+				156.3,
+				180.5,
+				195.37,
+				100.57,
+				243.33,
+			),
+		},
+		{
+			type: "fireball",
+			texture: makeAnimation(A_Iceball, 30, "add"),
 			polygon: new Polygon(
 				50.84,
 				202.48,

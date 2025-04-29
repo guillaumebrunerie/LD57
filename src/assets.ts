@@ -1,4 +1,4 @@
-/** Generated on Tue Apr 29 20:59:42 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Tue Apr 29 22:12:03 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -128,6 +128,8 @@ import EnemyStillIdle_SPRITESHEET from "../gfx/EnemyStillIdle.png?spritesheet";
 import Fireball_SPRITESHEET from "../gfx/Fireball.png?spritesheet";
 import Heart_SPRITESHEET from "../gfx/Heart.png?spritesheet";
 import HeartExplosion_SPRITESHEET from "../gfx/HeartExplosion.png?spritesheet";
+import Iceball_SPRITESHEET from "../gfx/Iceball.png?spritesheet";
+import IcicleExplode_SPRITESHEET from "../gfx/IcicleExplode.png?spritesheet";
 import Level2Wind_SPRITESHEET from "../gfx/Level2Wind.png?spritesheet";
 import Level3Rain_SPRITESHEET from "../gfx/Level3Rain.png?spritesheet";
 import Level8Black_SPRITESHEET from "../gfx/Level8Black.png?spritesheet";
@@ -141,6 +143,7 @@ import CupidHurt_SOUND from "../audio/CupidHurt.mp3?sound";
 import EnemyDiePuff_SOUND from "../audio/EnemyDiePuff.mp3?sound";
 import EnemyDieVoice_SOUND from "../audio/EnemyDieVoice.mp3?sound";
 import GameOver_SOUND from "../audio/GameOver.mp3?sound";
+import Icicle_SOUND from "../audio/Icicle.mp3?sound";
 import LoseGame_SOUND from "../audio/LoseGame.mp3?sound";
 import MusicIntensity1_SOUND from "../audio/MusicIntensity1.mp3?sound";
 import MusicIntensity2_SOUND from "../audio/MusicIntensity2.mp3?sound";
@@ -296,6 +299,10 @@ export const [
 	{ animations: { Heart: A_Heart } },
 	SS_HeartExplosion,
 	{ animations: { HeartExplosion: A_HeartExplosion } },
+	SS_Iceball,
+	{ animations: { Iceball: A_Iceball } },
+	SS_IcicleExplode,
+	{ animations: { IcicleExplode: A_IcicleExplode } },
 	SS_Level2Wind,
 	{ animations: { Level2Wind: A_Level2Wind } },
 	SS_Level3Rain,
@@ -312,6 +319,7 @@ export const [
 	S_EnemyDiePuff,
 	S_EnemyDieVoice,
 	S_GameOver,
+	S_Icicle,
 	S_LoseGame,
 	S_MusicIntensity1,
 	S_MusicIntensity2,
@@ -464,6 +472,10 @@ export const [
 	Heart_SPRITESHEET,
 	HeartExplosion_SPRITESHEET,
 	HeartExplosion_SPRITESHEET,
+	Iceball_SPRITESHEET,
+	Iceball_SPRITESHEET,
+	IcicleExplode_SPRITESHEET,
+	IcicleExplode_SPRITESHEET,
 	Level2Wind_SPRITESHEET,
 	Level2Wind_SPRITESHEET,
 	Level3Rain_SPRITESHEET,
@@ -480,6 +492,7 @@ export const [
 	EnemyDiePuff_SOUND,
 	EnemyDieVoice_SOUND,
 	GameOver_SOUND,
+	Icicle_SOUND,
 	LoseGame_SOUND,
 	MusicIntensity1_SOUND,
 	MusicIntensity2_SOUND,

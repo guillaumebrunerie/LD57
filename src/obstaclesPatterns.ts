@@ -99,6 +99,19 @@ const fireball = (
 	range,
 });
 
+const iceball = (
+	speed: number,
+	range: [number, number],
+	y: number | [number, number] = 0,
+): PatternData => ({
+	x: [0, 0],
+	y: typeof y == "number" ? [y, y] : y,
+	flipped: false,
+	index: 12,
+	frequency: (range[1] - range[0]) / speed,
+	range,
+});
+
 type LevelPattern = {
 	spacing: [number, number];
 	data: Pattern[];
@@ -109,7 +122,7 @@ const patterns: Pattern[][] = [
 	// Difficulty 1
 	[
 		{ data: [fireball(2000, [-700, 1700])] },
-		{ data: [fireball(2001, [-700, 1700])] },
+		{ data: [iceball(2001, [-700, 1700])] },
 		{ data: [spikeRight(1)] },
 		{ data: [spikeRight(3)] },
 		{ data: [spikeRight(4)] },
