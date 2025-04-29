@@ -40,7 +40,6 @@ export class ArrowIndicators {
 
 export class ArrowIndicator {
 	lt = 0;
-	addedAt = -Infinity;
 	hasArrow = true;
 	constructor(hasArrow = true) {
 		this.hasArrow = hasArrow;
@@ -49,7 +48,7 @@ export class ArrowIndicator {
 		this.lt += delta;
 	}
 	refill() {
-		this.addedAt = this.lt;
+		this.lt = 0;
 		this.hasArrow = true;
 	}
 	consume() {

@@ -48,6 +48,8 @@ export class Player {
 	tick(delta: number) {
 		this.lt += delta;
 		this.arrow?.tick(delta);
+		this.heartIndicators.tick(delta);
+		this.arrowIndicators.tick(delta);
 
 		if (this.isGameOver) {
 			return;

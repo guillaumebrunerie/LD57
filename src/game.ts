@@ -120,7 +120,8 @@ export class Game {
 		if (
 			this.level <= this.levels &&
 			this.obstaclesManager.checkCollision(this.player) &&
-			this.player.invincibleTimeout == 0
+			this.player.invincibleTimeout == 0 &&
+			!this.player.isGameOver
 		) {
 			this.player.hit();
 			this.lastHit = {

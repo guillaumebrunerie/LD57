@@ -40,7 +40,6 @@ export class HeartIndicators {
 
 export class HeartIndicator {
 	lt = 0;
-	addedAt = -Infinity;
 	hasHeart = true;
 	constructor(hasHeart = true) {
 		this.hasHeart = hasHeart;
@@ -49,7 +48,7 @@ export class HeartIndicator {
 		this.lt += delta;
 	}
 	refill() {
-		this.addedAt = this.lt;
+		this.lt = 0;
 		this.hasHeart = true;
 	}
 	consume() {

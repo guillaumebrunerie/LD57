@@ -1,4 +1,4 @@
-/** Generated on Tue Apr 29 20:08:52 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Tue Apr 29 20:59:42 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -24,6 +24,7 @@ import Bg_Walls_Level4_TEXTURE from "../gfx/Bg_Walls_Level4.png?texture";
 import Bg_Walls_Level5_TEXTURE from "../gfx/Bg_Walls_Level5.png?texture";
 import Bg_Walls_Level6_TEXTURE from "../gfx/Bg_Walls_Level6.png?texture";
 import Bg_Walls_Level7_TEXTURE from "../gfx/Bg_Walls_Level7.png?texture";
+import Bg_Walls_Level8_TEXTURE from "../gfx/Bg_Walls_Level8.png?texture";
 import Bg_Walls_Level9_TEXTURE from "../gfx/Bg_Walls_Level9.png?texture";
 import CloudStart_Btn_TEXTURE from "../gfx/CloudStart_Btn.png?texture";
 import Cloud_01_TEXTURE from "../gfx/Cloud_01.png?texture";
@@ -39,6 +40,9 @@ import Gradient_TEXTURE from "../gfx/Gradient.png?texture";
 import GroundMask_TEXTURE from "../gfx/GroundMask.png?texture";
 import Heart_Off_TEXTURE from "../gfx/Heart_Off.png?texture";
 import Heart_On_TEXTURE from "../gfx/Heart_On.png?texture";
+import Icicle_01_TEXTURE from "../gfx/Icicle_01.png?texture";
+import Icicle_02_TEXTURE from "../gfx/Icicle_02.png?texture";
+import Icicle_03_TEXTURE from "../gfx/Icicle_03.png?texture";
 import Loading_TEXTURE from "../gfx/Loading.jpg?texture";
 import Logo_TEXTURE from "../gfx/Logo.png?texture";
 import Rock_Level1_01_TEXTURE from "../gfx/Rock_Level1_01.png?texture";
@@ -62,6 +66,9 @@ import Rock_Level6_03_TEXTURE from "../gfx/Rock_Level6_03.png?texture";
 import Rock_Level7_01_TEXTURE from "../gfx/Rock_Level7_01.png?texture";
 import Rock_Level7_02_TEXTURE from "../gfx/Rock_Level7_02.png?texture";
 import Rock_Level7_03_TEXTURE from "../gfx/Rock_Level7_03.png?texture";
+import Rock_Level8_01_TEXTURE from "../gfx/Rock_Level8_01.png?texture";
+import Rock_Level8_02_TEXTURE from "../gfx/Rock_Level8_02.png?texture";
+import Rock_Level8_03_TEXTURE from "../gfx/Rock_Level8_03.png?texture";
 import Rock_Level9_01_TEXTURE from "../gfx/Rock_Level9_01.png?texture";
 import Rock_Level9_02_TEXTURE from "../gfx/Rock_Level9_02.png?texture";
 import Rock_Level9_03_TEXTURE from "../gfx/Rock_Level9_03.png?texture";
@@ -93,12 +100,17 @@ import WallSpike_Level7_01_TEXTURE from "../gfx/WallSpike_Level7_01.png?texture"
 import WallSpike_Level7_02_TEXTURE from "../gfx/WallSpike_Level7_02.png?texture";
 import WallSpike_Level7_03_TEXTURE from "../gfx/WallSpike_Level7_03.png?texture";
 import WallSpike_Level7_04_TEXTURE from "../gfx/WallSpike_Level7_04.png?texture";
+import WallSpike_Level8_01_TEXTURE from "../gfx/WallSpike_Level8_01.png?texture";
+import WallSpike_Level8_02_TEXTURE from "../gfx/WallSpike_Level8_02.png?texture";
+import WallSpike_Level8_03_TEXTURE from "../gfx/WallSpike_Level8_03.png?texture";
+import WallSpike_Level8_04_TEXTURE from "../gfx/WallSpike_Level8_04.png?texture";
 import WallSpike_Level9_01_TEXTURE from "../gfx/WallSpike_Level9_01.png?texture";
 import WallSpike_Level9_02_TEXTURE from "../gfx/WallSpike_Level9_02.png?texture";
 import WallSpike_Level9_03_TEXTURE from "../gfx/WallSpike_Level9_03.png?texture";
 import WallSpike_Level9_04_TEXTURE from "../gfx/WallSpike_Level9_04.png?texture";
 
 /** Spritesheets */
+import Arrow_SPRITESHEET from "../gfx/Arrow.png?spritesheet";
 import CloudStartButton_SPRITESHEET from "../gfx/CloudStartButton.png?spritesheet";
 import CupidDie_SPRITESHEET from "../gfx/CupidDie.png?spritesheet";
 import CupidHurt_SPRITESHEET from "../gfx/CupidHurt.png?spritesheet";
@@ -114,6 +126,7 @@ import Enemy3Idle_SPRITESHEET from "../gfx/Enemy3Idle.png?spritesheet";
 import EnemyFlyingIdle_SPRITESHEET from "../gfx/EnemyFlyingIdle.png?spritesheet";
 import EnemyStillIdle_SPRITESHEET from "../gfx/EnemyStillIdle.png?spritesheet";
 import Fireball_SPRITESHEET from "../gfx/Fireball.png?spritesheet";
+import Heart_SPRITESHEET from "../gfx/Heart.png?spritesheet";
 import HeartExplosion_SPRITESHEET from "../gfx/HeartExplosion.png?spritesheet";
 import Level2Wind_SPRITESHEET from "../gfx/Level2Wind.png?spritesheet";
 import Level3Rain_SPRITESHEET from "../gfx/Level3Rain.png?spritesheet";
@@ -122,6 +135,7 @@ import Snow_SPRITESHEET from "../gfx/Snow.png?spritesheet";
 import TheEnd_SPRITESHEET from "../gfx/TheEnd.png?spritesheet";
 
 /** Sounds */
+import AddHeartAndArrow_SOUND from "../audio/AddHeartAndArrow.mp3?sound";
 import ArrowShot_SOUND from "../audio/ArrowShot.mp3?sound";
 import CupidHurt_SOUND from "../audio/CupidHurt.mp3?sound";
 import EnemyDiePuff_SOUND from "../audio/EnemyDiePuff.mp3?sound";
@@ -162,6 +176,7 @@ export const [
 	T_Bg_Walls_Level5,
 	T_Bg_Walls_Level6,
 	T_Bg_Walls_Level7,
+	T_Bg_Walls_Level8,
 	T_Bg_Walls_Level9,
 	T_CloudStart_Btn,
 	T_Cloud_01,
@@ -177,6 +192,9 @@ export const [
 	T_GroundMask,
 	T_Heart_Off,
 	T_Heart_On,
+	T_Icicle_01,
+	T_Icicle_02,
+	T_Icicle_03,
 	T_Loading,
 	T_Logo,
 	T_Rock_Level1_01,
@@ -200,6 +218,9 @@ export const [
 	T_Rock_Level7_01,
 	T_Rock_Level7_02,
 	T_Rock_Level7_03,
+	T_Rock_Level8_01,
+	T_Rock_Level8_02,
+	T_Rock_Level8_03,
 	T_Rock_Level9_01,
 	T_Rock_Level9_02,
 	T_Rock_Level9_03,
@@ -231,10 +252,16 @@ export const [
 	T_WallSpike_Level7_02,
 	T_WallSpike_Level7_03,
 	T_WallSpike_Level7_04,
+	T_WallSpike_Level8_01,
+	T_WallSpike_Level8_02,
+	T_WallSpike_Level8_03,
+	T_WallSpike_Level8_04,
 	T_WallSpike_Level9_01,
 	T_WallSpike_Level9_02,
 	T_WallSpike_Level9_03,
 	T_WallSpike_Level9_04,
+	SS_Arrow,
+	{ animations: { Arrow: A_Arrow } },
 	SS_CloudStartButton,
 	{ animations: { CloudStartButton: A_CloudStartButton } },
 	SS_CupidDie,
@@ -265,6 +292,8 @@ export const [
 	{ animations: { EnemyStillIdle: A_EnemyStillIdle } },
 	SS_Fireball,
 	{ animations: { Fireball: A_Fireball } },
+	SS_Heart,
+	{ animations: { Heart: A_Heart } },
 	SS_HeartExplosion,
 	{ animations: { HeartExplosion: A_HeartExplosion } },
 	SS_Level2Wind,
@@ -277,6 +306,7 @@ export const [
 	{ animations: { Snow: A_Snow } },
 	SS_TheEnd,
 	{ animations: { TheEnd: A_TheEnd } },
+	S_AddHeartAndArrow,
 	S_ArrowShot,
 	S_CupidHurt,
 	S_EnemyDiePuff,
@@ -314,6 +344,7 @@ export const [
 	Bg_Walls_Level5_TEXTURE,
 	Bg_Walls_Level6_TEXTURE,
 	Bg_Walls_Level7_TEXTURE,
+	Bg_Walls_Level8_TEXTURE,
 	Bg_Walls_Level9_TEXTURE,
 	CloudStart_Btn_TEXTURE,
 	Cloud_01_TEXTURE,
@@ -329,6 +360,9 @@ export const [
 	GroundMask_TEXTURE,
 	Heart_Off_TEXTURE,
 	Heart_On_TEXTURE,
+	Icicle_01_TEXTURE,
+	Icicle_02_TEXTURE,
+	Icicle_03_TEXTURE,
 	Loading_TEXTURE,
 	Logo_TEXTURE,
 	Rock_Level1_01_TEXTURE,
@@ -352,6 +386,9 @@ export const [
 	Rock_Level7_01_TEXTURE,
 	Rock_Level7_02_TEXTURE,
 	Rock_Level7_03_TEXTURE,
+	Rock_Level8_01_TEXTURE,
+	Rock_Level8_02_TEXTURE,
+	Rock_Level8_03_TEXTURE,
 	Rock_Level9_01_TEXTURE,
 	Rock_Level9_02_TEXTURE,
 	Rock_Level9_03_TEXTURE,
@@ -383,10 +420,16 @@ export const [
 	WallSpike_Level7_02_TEXTURE,
 	WallSpike_Level7_03_TEXTURE,
 	WallSpike_Level7_04_TEXTURE,
+	WallSpike_Level8_01_TEXTURE,
+	WallSpike_Level8_02_TEXTURE,
+	WallSpike_Level8_03_TEXTURE,
+	WallSpike_Level8_04_TEXTURE,
 	WallSpike_Level9_01_TEXTURE,
 	WallSpike_Level9_02_TEXTURE,
 	WallSpike_Level9_03_TEXTURE,
 	WallSpike_Level9_04_TEXTURE,
+	Arrow_SPRITESHEET,
+	Arrow_SPRITESHEET,
 	CloudStartButton_SPRITESHEET,
 	CloudStartButton_SPRITESHEET,
 	CupidDie_SPRITESHEET,
@@ -417,6 +460,8 @@ export const [
 	EnemyStillIdle_SPRITESHEET,
 	Fireball_SPRITESHEET,
 	Fireball_SPRITESHEET,
+	Heart_SPRITESHEET,
+	Heart_SPRITESHEET,
 	HeartExplosion_SPRITESHEET,
 	HeartExplosion_SPRITESHEET,
 	Level2Wind_SPRITESHEET,
@@ -429,6 +474,7 @@ export const [
 	Snow_SPRITESHEET,
 	TheEnd_SPRITESHEET,
 	TheEnd_SPRITESHEET,
+	AddHeartAndArrow_SOUND,
 	ArrowShot_SOUND,
 	CupidHurt_SOUND,
 	EnemyDiePuff_SOUND,

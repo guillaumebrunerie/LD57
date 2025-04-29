@@ -1,10 +1,12 @@
 import { Game, GameContext, useGame } from "./game";
 import {
+	A_Arrow,
 	A_CupidDie,
 	A_CupidHurt,
 	A_CupidIdle,
 	A_CupidShot,
 	A_Embers,
+	A_Heart,
 	A_HeartExplosion,
 	A_Level2Wind,
 	A_Level3Rain,
@@ -344,7 +346,11 @@ const HeartIndicatorC = ({
 }) => {
 	return (
 		<sprite
-			texture={heartIndicator.hasHeart ? T_Heart_On : T_Heart_Off}
+			texture={
+				heartIndicator.hasHeart ?
+					getFrame(A_Heart, 20, heartIndicator.lt, "hold")
+				:	T_Heart_Off
+			}
 			anchor={0.5}
 		/>
 	);
@@ -375,7 +381,11 @@ const ArrowIndicatorC = ({
 }) => {
 	return (
 		<sprite
-			texture={arrowIndicator.hasArrow ? T_Arrow_On : T_Arrow_Off}
+			texture={
+				arrowIndicator.hasArrow ?
+					getFrame(A_Arrow, 20, arrowIndicator.lt, "hold")
+				:	T_Arrow_Off
+			}
 			anchor={0.5}
 		/>
 	);
