@@ -1,0 +1,335 @@
+{"frames": {
+
+"Level2Souls_000.png":
+{
+	"frame": {"x":1717,"y":1,"w":145,"h":202},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":80,"y":147,"w":145,"h":202},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_001.png":
+{
+	"frame": {"x":1124,"y":671,"w":152,"h":204},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":73,"y":136,"w":152,"h":204},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_002.png":
+{
+	"frame": {"x":1540,"y":715,"w":159,"h":207},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":66,"y":123,"w":159,"h":207},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_003.png":
+{
+	"frame": {"x":1649,"y":296,"w":165,"h":213},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":60,"y":111,"w":165,"h":213},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_004.png":
+{
+	"frame": {"x":926,"y":960,"w":225,"h":223},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":98,"w":225,"h":223},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_005.png":
+{
+	"frame": {"x":1630,"y":924,"w":225,"h":226},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":85,"w":225,"h":226},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_006.png":
+{
+	"frame": {"x":1649,"y":463,"w":212,"h":230},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":71,"w":212,"h":230},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_007.png":
+{
+	"frame": {"x":1380,"y":1144,"w":225,"h":234},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":57,"w":225,"h":234},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_008.png":
+{
+	"frame": {"x":1153,"y":924,"w":225,"h":243},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":39,"w":225,"h":243},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_009.png":
+{
+	"frame": {"x":892,"y":1185,"w":225,"h":249},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":24,"w":225,"h":249},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_010.png":
+{
+	"frame": {"x":1,"y":1207,"w":215,"h":254},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":12,"w":215,"h":254},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_011.png":
+{
+	"frame": {"x":257,"y":1156,"w":203,"h":261},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":22,"y":0,"w":203,"h":261},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_012.png":
+{
+	"frame": {"x":1616,"y":1152,"w":190,"h":256},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":35,"y":0,"w":190,"h":256},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_013.png":
+{
+	"frame": {"x":1153,"y":1169,"w":177,"h":251},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":48,"y":0,"w":177,"h":251},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_014.png":
+{
+	"frame": {"x":455,"y":1,"w":182,"h":400},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":39,"y":0,"w":182,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_015.png":
+{
+	"frame": {"x":228,"y":754,"w":168,"h":400},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":38,"y":0,"w":168,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_016.png":
+{
+	"frame": {"x":1315,"y":1,"w":152,"h":400},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":40,"y":0,"w":152,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_017.png":
+{
+	"frame": {"x":1315,"y":155,"w":139,"h":400},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":38,"y":0,"w":139,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_018.png":
+{
+	"frame": {"x":398,"y":754,"w":151,"h":358},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":42,"w":151,"h":358},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_019.png":
+{
+	"frame": {"x":551,"y":751,"w":171,"h":352},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":31,"w":171,"h":352},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_020.png":
+{
+	"frame": {"x":455,"y":403,"w":189,"h":346},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17,"y":20,"w":189,"h":346},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_021.png":
+{
+	"frame": {"x":867,"y":344,"w":208,"h":339},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":11,"y":9,"w":208,"h":339},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_022.png":
+{
+	"frame": {"x":646,"y":349,"w":219,"h":330},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":219,"h":330},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_023.png":
+{
+	"frame": {"x":666,"y":1105,"w":224,"h":312},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":224,"h":312},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_024.png":
+{
+	"frame": {"x":1,"y":1,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_025.png":
+{
+	"frame": {"x":1,"y":403,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_026.png":
+{
+	"frame": {"x":228,"y":1,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_027.png":
+{
+	"frame": {"x":1,"y":805,"w":225,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":400},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_028.png":
+{
+	"frame": {"x":228,"y":403,"w":225,"h":349},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":51,"w":225,"h":349},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_029.png":
+{
+	"frame": {"x":639,"y":1,"w":225,"h":346},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":39,"w":225,"h":346},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_030.png":
+{
+	"frame": {"x":866,"y":1,"w":225,"h":341},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":27,"w":225,"h":341},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_031.png":
+{
+	"frame": {"x":1093,"y":1,"w":220,"h":336},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":17,"w":220,"h":336},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_032.png":
+{
+	"frame": {"x":1315,"y":296,"w":211,"h":332},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":7,"w":211,"h":332},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_033.png":
+{
+	"frame": {"x":1077,"y":344,"w":204,"h":325},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":204,"h":325},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_034.png":
+{
+	"frame": {"x":1283,"y":509,"w":204,"h":312},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":204,"h":312},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_035.png":
+{
+	"frame": {"x":462,"y":1114,"w":202,"h":299},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":202,"h":299},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_036.png":
+{
+	"frame": {"x":724,"y":685,"w":200,"h":286},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":286},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_037.png":
+{
+	"frame": {"x":926,"y":685,"w":196,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":196,"h":273},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_038.png":
+{
+	"frame": {"x":1278,"y":715,"w":207,"h":260},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":207,"h":260},
+	"sourceSize": {"w":225,"h":400}
+},
+"Level2Souls_039.png":
+{
+	"frame": {"x":1380,"y":924,"w":218,"h":248},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":218,"h":248},
+	"sourceSize": {"w":225,"h":400}
+}},
+"animations": {
+	"Level2Souls": ["Level2Souls_000.png","Level2Souls_001.png","Level2Souls_002.png","Level2Souls_003.png","Level2Souls_004.png","Level2Souls_005.png","Level2Souls_006.png","Level2Souls_007.png","Level2Souls_008.png","Level2Souls_009.png","Level2Souls_010.png","Level2Souls_011.png","Level2Souls_012.png","Level2Souls_013.png","Level2Souls_014.png","Level2Souls_015.png","Level2Souls_016.png","Level2Souls_017.png","Level2Souls_018.png","Level2Souls_019.png","Level2Souls_020.png","Level2Souls_021.png","Level2Souls_022.png","Level2Souls_023.png","Level2Souls_024.png","Level2Souls_025.png","Level2Souls_026.png","Level2Souls_027.png","Level2Souls_028.png","Level2Souls_029.png","Level2Souls_030.png","Level2Souls_031.png","Level2Souls_032.png","Level2Souls_033.png","Level2Souls_034.png","Level2Souls_035.png","Level2Souls_036.png","Level2Souls_037.png","Level2Souls_038.png","Level2Souls_039.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "Level2Souls.png",
+	"format": "RGBA8888",
+	"size": {"w":1863,"h":1423},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:ca83f7179be3ec58299a73997f3e72f0:d881863b6c8046288f2ed0186764d375:bb6b6df63c6f8c5554a0326001edab1c$"
+}
+}
