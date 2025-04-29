@@ -133,6 +133,7 @@ export class ObstacleManager {
 				) ?
 					[1080 - patternData.range[1], 1080 - patternData.range[0]]
 				:	patternData.range;
+			const radius = patternData.radius;
 			this.obstacles.push(
 				new Obstacle(
 					x,
@@ -141,6 +142,7 @@ export class ObstacleManager {
 					obstacleData,
 					patternData.frequency,
 					range,
+					radius,
 				),
 			);
 			maxY = Math.max(maxY, this.lastY + y);

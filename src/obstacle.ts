@@ -31,6 +31,7 @@ export const firstTexture = (data: ObstacleData): Texture => {
 
 export class Obstacle {
 	lt = Math.random() * 1000;
+	originalX: number;
 	originalY: number;
 	x: number;
 	y: number;
@@ -42,6 +43,7 @@ export class Obstacle {
 	data: ObstacleData;
 	frequency?: number;
 	range?: [number, number];
+	radius?: number;
 
 	isDestroyed = false;
 	destroyTimeout = Infinity;
@@ -53,8 +55,10 @@ export class Obstacle {
 		data: ObstacleData,
 		frequency?: number,
 		range?: [number, number],
+		radius?: number,
 	) {
 		this.id = Math.random().toString(36).substring(2, 15);
+		this.originalX = x;
 		this.originalY = y;
 		this.x = x;
 		this.y = y;
@@ -63,6 +67,7 @@ export class Obstacle {
 		this.data = data;
 		this.frequency = frequency;
 		this.range = range;
+		this.radius = radius;
 		if (["wall", "spike"].includes(this.data.type)) {
 			this.anchorX = 0;
 		}
@@ -71,11 +76,14 @@ export class Obstacle {
 	tick(delta: number) {
 		this.lt += delta;
 		this.destroyTimeout -= delta;
-		if (this.frequency === undefined || !this.range || this.isDestroyed) {
+		if (this.isDestroyed) {
 			return;
 		}
 		switch (this.data.type) {
 			case "enemy-horizontal":
+				if (this.frequency === undefined || !this.range) {
+					return;
+				}
 				this.x =
 					smoothTriangle(this.lt / this.frequency) *
 						(this.range[1] - this.range[0]) +
@@ -84,13 +92,30 @@ export class Obstacle {
 					Math.floor(this.lt / this.frequency) % 2 === 0 ? 1 : -1;
 				break;
 			case "enemy-vertical":
+				if (this.frequency === undefined || !this.range) {
+					return;
+				}
 				this.y =
 					this.originalY +
 					smoothTriangle(this.lt / this.frequency) *
 						(this.range[1] - this.range[0]) +
 					this.range[0];
 				break;
+			case "enemy-still":
+				if (this.frequency === undefined || !this.radius) {
+					return;
+				}
+				this.x =
+					this.originalX +
+					Math.cos(this.lt / this.frequency) * this.radius;
+				this.y =
+					this.originalY +
+					Math.sin(this.lt / this.frequency) * this.radius;
+				break;
 			case "enemy-fireball":
+				if (this.frequency === undefined || !this.range) {
+					return;
+				}
 				this.x =
 					seesaw(this.lt / this.frequency) *
 						(this.range[1] - this.range[0]) +

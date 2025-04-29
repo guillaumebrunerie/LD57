@@ -5,6 +5,7 @@ type PatternData = {
 	index: number;
 	frequency?: number;
 	range?: [number, number];
+	radius?: number;
 };
 
 export type Pattern = {
@@ -72,12 +73,16 @@ const enemyVertical = (
 });
 
 const enemyStill = (
+	radius: number,
+	speed: number,
 	x: number | [number, number],
 	y: number | [number, number] = 0,
 ): PatternData => ({
 	x: typeof x == "number" ? [x, x] : x,
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
+	radius,
+	frequency: 1 / speed,
 	index: 10,
 });
 
@@ -110,8 +115,8 @@ const patterns: Pattern[][] = [
 		{ data: [spikeRight(4)] },
 		{ data: [rock(6, [50, 200])] },
 		{ data: [rock(7, [-50, 200])] },
-		{ data: [enemyStill([600, 700])] },
-		{ data: [enemyStill([600, 800])] },
+		{ data: [enemyStill(20, 2, [600, 700])] },
+		{ data: [enemyStill(20, 2, [600, 800])] },
 	],
 	// Difficulty 2
 	[
