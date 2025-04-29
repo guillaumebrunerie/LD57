@@ -143,6 +143,7 @@ export class ObstacleManager {
 					patternData.frequency,
 					range,
 					radius,
+					patternData.dy,
 				),
 			);
 			maxY = Math.max(maxY, this.lastY + y);

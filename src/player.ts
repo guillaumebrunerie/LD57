@@ -115,7 +115,7 @@ export class Player {
 		} else {
 			this.heartIndicators.consume();
 			this.invincibleTimeout = 1.2;
-			void S_CupidHurt.play({ volume: 0.5 });
+			void S_CupidHurt.play({ volume: 0.3 });
 		}
 	}
 
@@ -128,7 +128,7 @@ export class Player {
 		this.isShooting = true;
 		this.arrowIndicators.consume();
 		this.arrow = new Arrow(this.posX, this.posY, angle, distance, targetId);
-		void S_ArrowShot.play({ volume: 0.5 });
+		void S_ArrowShot.play({ volume: 0.3 });
 	}
 
 	finalShoot() {
@@ -145,7 +145,7 @@ export class Player {
 			Math.sqrt(dx * dx + dy * dy),
 			"",
 		);
-		void S_ArrowShot.play({ volume: 0.5 });
+		void S_ArrowShot.play({ volume: 0.3 });
 	}
 
 	moveLeft(activate: boolean) {

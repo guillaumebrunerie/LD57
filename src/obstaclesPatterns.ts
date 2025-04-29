@@ -6,6 +6,7 @@ type PatternData = {
 	frequency?: number;
 	range?: [number, number];
 	radius?: number;
+	dy?: number;
 };
 
 export type Pattern = {
@@ -89,6 +90,7 @@ const enemyStill = (
 const fireball = (
 	speed: number,
 	range: [number, number],
+	dy = 0,
 	y: number | [number, number] = 0,
 ): PatternData => ({
 	x: [0, 0],
@@ -97,11 +99,13 @@ const fireball = (
 	index: 11,
 	frequency: (range[1] - range[0]) / speed,
 	range,
+	dy,
 });
 
 const iceball = (
 	speed: number,
 	range: [number, number],
+	dy = 0,
 	y: number | [number, number] = 0,
 ): PatternData => ({
 	x: [0, 0],
@@ -110,6 +114,7 @@ const iceball = (
 	index: 12,
 	frequency: (range[1] - range[0]) / speed,
 	range,
+	dy,
 });
 
 type LevelPattern = {

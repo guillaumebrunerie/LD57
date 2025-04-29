@@ -49,6 +49,7 @@ export class Obstacle {
 	frequency?: number;
 	range?: [number, number];
 	radius?: number;
+	dy?: number;
 
 	isDestroyed = false;
 	destroyTimeout = Infinity;
@@ -61,6 +62,7 @@ export class Obstacle {
 		frequency?: number,
 		range?: [number, number],
 		radius?: number,
+		dy?: number,
 	) {
 		this.id = Math.random().toString(36).substring(2, 15);
 		this.originalX = x;
@@ -73,6 +75,7 @@ export class Obstacle {
 		this.frequency = frequency;
 		this.range = range;
 		this.radius = radius;
+		this.dy = dy;
 		if (["wall", "spike"].includes(this.data.type)) {
 			this.anchorX = 0;
 		}
@@ -118,13 +121,19 @@ export class Obstacle {
 					Math.sin(this.lt / this.frequency) * this.radius;
 				break;
 			case "fireball":
-				if (this.frequency === undefined || !this.range) {
+				if (
+					this.frequency === undefined ||
+					!this.range ||
+					this.dy == undefined
+				) {
 					return;
 				}
 				this.x =
 					seesaw(this.lt / this.frequency) *
 						(this.range[1] - this.range[0]) +
 					this.range[0];
+				this.y =
+					this.originalY + seesaw(this.lt / this.frequency) * this.dy;
 				if (this.scaleX == 1) {
 					this.x = 1080 / 2 - this.x;
 				}
@@ -144,8 +153,8 @@ export class Obstacle {
 		this.isDestroyed = true;
 		this.destroyTimeout = getDuration(A_HeartExplosion, 15);
 		this.lt = 0;
-		void S_EnemyDiePuff.play({ volume: 0.3 });
-		void S_EnemyDieVoice.play({ volume: 0.3 });
+		void S_EnemyDiePuff.play({ volume: 0.2 });
+		void S_EnemyDieVoice.play({ volume: 0.2 });
 	}
 
 	polygon() {

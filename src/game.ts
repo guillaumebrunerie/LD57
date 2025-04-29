@@ -141,7 +141,7 @@ export class Game {
 			this.lt = 0;
 			this.lastHit = null;
 			this.isWinning = true;
-			void S_Win.play({ volume: 0.5 });
+			void S_Win.play({ volume: 0.3 });
 			setMusic(10);
 		}
 	}
@@ -197,7 +197,7 @@ export class Game {
 			!this.player.heartIndicators.isFull() ||
 			!this.player.arrowIndicators.isFull()
 		) {
-			void S_AddHeartAndArrow.play({ volume: 0.5 });
+			void S_AddHeartAndArrow.play({ volume: 0.3 });
 		}
 		this.player.heartIndicators.refill();
 		this.player.arrowIndicators.refill();
