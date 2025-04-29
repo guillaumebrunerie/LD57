@@ -36,6 +36,11 @@ export class HeartIndicators {
 			heartIndicator.isEmpty(),
 		);
 	}
+	isFull() {
+		return this.heartIndicators.every(
+			(heartIndicator) => !heartIndicator.isEmpty(),
+		);
+	}
 }
 
 export class HeartIndicator {

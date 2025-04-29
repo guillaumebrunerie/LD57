@@ -1,4 +1,4 @@
-import { S_StartButton, S_Win } from "./assets";
+import { S_AddHeartAndArrow, S_StartButton, S_Win } from "./assets";
 import { ObstacleManager as ObstaclesManager } from "./obstaclesManager";
 import { Player } from "./player";
 import { type Point } from "./utils";
@@ -189,6 +189,12 @@ export class Game {
 
 	nextLevel() {
 		this.level++;
+		if (
+			!this.player.heartIndicators.isFull() ||
+			!this.player.arrowIndicators.isFull()
+		) {
+			void S_AddHeartAndArrow.play({ volume: 0.5 });
+		}
 		this.player.heartIndicators.refill();
 		this.player.arrowIndicators.refill();
 		this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;

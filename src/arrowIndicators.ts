@@ -36,6 +36,11 @@ export class ArrowIndicators {
 			arrowIndicator.isEmpty(),
 		);
 	}
+	isFull() {
+		return this.arrowIndicators.every(
+			(arrowIndicator) => !arrowIndicator.isEmpty(),
+		);
+	}
 }
 
 export class ArrowIndicator {
