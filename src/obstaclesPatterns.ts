@@ -23,6 +23,20 @@ const spikeLeft = (
 	index: [index],
 });
 
+const shortSpikeLeft = (y: number | [number, number] = 0): PatternData => ({
+	x: [0, 0],
+	y: typeof y == "number" ? [y, y] : y,
+	flipped: false,
+	index: [1, 3, 4],
+});
+
+const longSpikeLeft = (y: number | [number, number] = 0): PatternData => ({
+	x: [0, 0],
+	y: typeof y == "number" ? [y, y] : y,
+	flipped: false,
+	index: [2],
+});
+
 const spikeRight = (
 	index: number,
 	y: number | [number, number] = 0,
@@ -31,6 +45,20 @@ const spikeRight = (
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: true,
 	index: [index],
+});
+
+const shortSpikeRight = (y: number | [number, number] = 0): PatternData => ({
+	x: [1080, 1080],
+	y: typeof y == "number" ? [y, y] : y,
+	flipped: true,
+	index: [1, 3, 4],
+});
+
+const longSpikeRight = (y: number | [number, number] = 0): PatternData => ({
+	x: [1080, 1080],
+	y: typeof y == "number" ? [y, y] : y,
+	flipped: true,
+	index: [2],
 });
 
 const rock = (
