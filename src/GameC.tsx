@@ -214,6 +214,15 @@ const ForegroundFragment = ({
 					alpha={alpha}
 				/>
 			);
+		case 10:
+			return (
+				<sprite
+					blendMode="add"
+					texture={getFrame(A_Snow, 20, game.lt)}
+					scale={5}
+					alpha={alpha}
+				/>
+			);
 		default:
 			return null;
 	}
