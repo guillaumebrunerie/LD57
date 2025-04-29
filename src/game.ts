@@ -39,7 +39,11 @@ export class Game {
 
 	isWinning = false;
 
-	constructor() {}
+	constructor(data?: Game) {
+		if (data) {
+			Object.assign(this, data);
+		}
+	}
 
 	restart() {
 		this.lt = 0;

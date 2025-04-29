@@ -14,10 +14,8 @@ import {
 	A_Snow,
 	A_TheEnd,
 	T_Arrow_Off,
-	T_Arrow_On,
 	T_CupidArrow_Blurred,
 	T_Heart_Off,
-	T_Heart_On,
 } from "./assets";
 import { Rectangle } from "./Rectangle";
 import { StartScreen, GameOverScreen } from "./Postings";
