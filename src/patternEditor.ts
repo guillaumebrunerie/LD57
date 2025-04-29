@@ -7,6 +7,7 @@ export class PatternEditor {
 	level = 1;
 	patternIndex = 0;
 	obstacleManager: ObstacleManager;
+	lt = 0;
 
 	constructor(
 		data: { level: number; patternIndex: number } = {
@@ -21,6 +22,7 @@ export class PatternEditor {
 	}
 
 	tick(delta: number) {
+		this.lt += delta;
 		for (const obstacle of this.obstacleManager.obstacles) {
 			obstacle.tick(delta);
 		}

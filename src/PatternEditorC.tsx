@@ -5,6 +5,7 @@ import { PatternEditor } from "./patternEditor";
 import { ObstacleC } from "./ObstacleC";
 import { getBg } from "./Background";
 import { useTickingObject } from "./useTickingObject";
+import { ForegroundFragment } from "./Foreground";
 
 export const PatternEditorC = () => {
 	const patternEditor = useTickingObject(PatternEditor);
@@ -37,6 +38,11 @@ export const PatternEditorC = () => {
 					nextLevelDepth={Infinity}
 				/>
 			))}
+			<ForegroundFragment
+				level={patternEditor.level}
+				lt={patternEditor.lt}
+				alpha={1}
+			/>
 			<CustomText
 				anchor={{ x: 0.5, y: 1 }}
 				x={1080 / 2}
