@@ -75,6 +75,10 @@ export class Player {
 				this.lookingLeft = absDelta < 0;
 			}
 		}
+
+		// // Level 2 wind
+		// this.targetX += Math.cos(this.lt * 2) * 200 * delta;
+
 		this.posX = Math.max(minX, Math.min(this.posX, maxX));
 		this.posY += this.game.cameraSpeed * delta;
 		const targetY = this.game.levelDepth * this.game.levels + 1920 - 1200;
