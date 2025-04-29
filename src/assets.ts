@@ -1,4 +1,4 @@
-/** Generated on Tue Apr 29 19:05:46 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Tue Apr 29 20:08:52 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -23,6 +23,7 @@ import Bg_Walls_Level3_TEXTURE from "../gfx/Bg_Walls_Level3.png?texture";
 import Bg_Walls_Level4_TEXTURE from "../gfx/Bg_Walls_Level4.png?texture";
 import Bg_Walls_Level5_TEXTURE from "../gfx/Bg_Walls_Level5.png?texture";
 import Bg_Walls_Level6_TEXTURE from "../gfx/Bg_Walls_Level6.png?texture";
+import Bg_Walls_Level7_TEXTURE from "../gfx/Bg_Walls_Level7.png?texture";
 import Bg_Walls_Level9_TEXTURE from "../gfx/Bg_Walls_Level9.png?texture";
 import CloudStart_Btn_TEXTURE from "../gfx/CloudStart_Btn.png?texture";
 import Cloud_01_TEXTURE from "../gfx/Cloud_01.png?texture";
@@ -58,6 +59,9 @@ import Rock_Level5_03_TEXTURE from "../gfx/Rock_Level5_03.png?texture";
 import Rock_Level6_01_TEXTURE from "../gfx/Rock_Level6_01.png?texture";
 import Rock_Level6_02_TEXTURE from "../gfx/Rock_Level6_02.png?texture";
 import Rock_Level6_03_TEXTURE from "../gfx/Rock_Level6_03.png?texture";
+import Rock_Level7_01_TEXTURE from "../gfx/Rock_Level7_01.png?texture";
+import Rock_Level7_02_TEXTURE from "../gfx/Rock_Level7_02.png?texture";
+import Rock_Level7_03_TEXTURE from "../gfx/Rock_Level7_03.png?texture";
 import Rock_Level9_01_TEXTURE from "../gfx/Rock_Level9_01.png?texture";
 import Rock_Level9_02_TEXTURE from "../gfx/Rock_Level9_02.png?texture";
 import Rock_Level9_03_TEXTURE from "../gfx/Rock_Level9_03.png?texture";
@@ -85,6 +89,10 @@ import WallSpike_Level6_01_TEXTURE from "../gfx/WallSpike_Level6_01.png?texture"
 import WallSpike_Level6_02_TEXTURE from "../gfx/WallSpike_Level6_02.png?texture";
 import WallSpike_Level6_03_TEXTURE from "../gfx/WallSpike_Level6_03.png?texture";
 import WallSpike_Level6_04_TEXTURE from "../gfx/WallSpike_Level6_04.png?texture";
+import WallSpike_Level7_01_TEXTURE from "../gfx/WallSpike_Level7_01.png?texture";
+import WallSpike_Level7_02_TEXTURE from "../gfx/WallSpike_Level7_02.png?texture";
+import WallSpike_Level7_03_TEXTURE from "../gfx/WallSpike_Level7_03.png?texture";
+import WallSpike_Level7_04_TEXTURE from "../gfx/WallSpike_Level7_04.png?texture";
 import WallSpike_Level9_01_TEXTURE from "../gfx/WallSpike_Level9_01.png?texture";
 import WallSpike_Level9_02_TEXTURE from "../gfx/WallSpike_Level9_02.png?texture";
 import WallSpike_Level9_03_TEXTURE from "../gfx/WallSpike_Level9_03.png?texture";
@@ -153,6 +161,7 @@ export const [
 	T_Bg_Walls_Level4,
 	T_Bg_Walls_Level5,
 	T_Bg_Walls_Level6,
+	T_Bg_Walls_Level7,
 	T_Bg_Walls_Level9,
 	T_CloudStart_Btn,
 	T_Cloud_01,
@@ -188,6 +197,9 @@ export const [
 	T_Rock_Level6_01,
 	T_Rock_Level6_02,
 	T_Rock_Level6_03,
+	T_Rock_Level7_01,
+	T_Rock_Level7_02,
+	T_Rock_Level7_03,
 	T_Rock_Level9_01,
 	T_Rock_Level9_02,
 	T_Rock_Level9_03,
@@ -215,6 +227,10 @@ export const [
 	T_WallSpike_Level6_02,
 	T_WallSpike_Level6_03,
 	T_WallSpike_Level6_04,
+	T_WallSpike_Level7_01,
+	T_WallSpike_Level7_02,
+	T_WallSpike_Level7_03,
+	T_WallSpike_Level7_04,
 	T_WallSpike_Level9_01,
 	T_WallSpike_Level9_02,
 	T_WallSpike_Level9_03,
@@ -297,6 +313,7 @@ export const [
 	Bg_Walls_Level4_TEXTURE,
 	Bg_Walls_Level5_TEXTURE,
 	Bg_Walls_Level6_TEXTURE,
+	Bg_Walls_Level7_TEXTURE,
 	Bg_Walls_Level9_TEXTURE,
 	CloudStart_Btn_TEXTURE,
 	Cloud_01_TEXTURE,
@@ -332,6 +349,9 @@ export const [
 	Rock_Level6_01_TEXTURE,
 	Rock_Level6_02_TEXTURE,
 	Rock_Level6_03_TEXTURE,
+	Rock_Level7_01_TEXTURE,
+	Rock_Level7_02_TEXTURE,
+	Rock_Level7_03_TEXTURE,
 	Rock_Level9_01_TEXTURE,
 	Rock_Level9_02_TEXTURE,
 	Rock_Level9_03_TEXTURE,
@@ -359,6 +379,10 @@ export const [
 	WallSpike_Level6_02_TEXTURE,
 	WallSpike_Level6_03_TEXTURE,
 	WallSpike_Level6_04_TEXTURE,
+	WallSpike_Level7_01_TEXTURE,
+	WallSpike_Level7_02_TEXTURE,
+	WallSpike_Level7_03_TEXTURE,
+	WallSpike_Level7_04_TEXTURE,
 	WallSpike_Level9_01_TEXTURE,
 	WallSpike_Level9_02_TEXTURE,
 	WallSpike_Level9_03_TEXTURE,
