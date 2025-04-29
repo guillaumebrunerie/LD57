@@ -13,7 +13,7 @@ export type ObstacleData = {
 		| "enemy-horizontal"
 		| "enemy-vertical"
 		| "enemy-still"
-		| "enemy-fireball"
+		| "fireball"
 		| "player";
 	texture:
 		| { type: "texture-by-level"; textures: Texture[] }
@@ -112,7 +112,7 @@ export class Obstacle {
 					this.originalY +
 					Math.sin(this.lt / this.frequency) * this.radius;
 				break;
-			case "enemy-fireball":
+			case "fireball":
 				if (this.frequency === undefined || !this.range) {
 					return;
 				}

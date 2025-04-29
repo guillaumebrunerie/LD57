@@ -467,7 +467,7 @@ export const obstaclesData: ObstacleData[][] = [
 			),
 		},
 		{
-			type: "enemy-fireball",
+			type: "fireball",
 			texture: makeAnimation(A_Fireball, 10),
 			polygon: new Polygon(
 				50.84,
