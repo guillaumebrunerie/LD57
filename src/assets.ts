@@ -1,4 +1,4 @@
-/** Generated on Tue Apr 29 22:12:03 CEST 2025 by 'tools/generate-assets.sh' */
+/** Generated on Tue Apr 29 23:29:24 CEST 2025 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -130,6 +130,7 @@ import Heart_SPRITESHEET from "../gfx/Heart.png?spritesheet";
 import HeartExplosion_SPRITESHEET from "../gfx/HeartExplosion.png?spritesheet";
 import Iceball_SPRITESHEET from "../gfx/Iceball.png?spritesheet";
 import IcicleExplode_SPRITESHEET from "../gfx/IcicleExplode.png?spritesheet";
+import Level2Souls_SPRITESHEET from "../gfx/Level2Souls.png?spritesheet";
 import Level2Wind_SPRITESHEET from "../gfx/Level2Wind.png?spritesheet";
 import Level3Rain_SPRITESHEET from "../gfx/Level3Rain.png?spritesheet";
 import Level8Black_SPRITESHEET from "../gfx/Level8Black.png?spritesheet";
@@ -303,6 +304,8 @@ export const [
 	{ animations: { Iceball: A_Iceball } },
 	SS_IcicleExplode,
 	{ animations: { IcicleExplode: A_IcicleExplode } },
+	SS_Level2Souls,
+	{ animations: { Level2Souls: A_Level2Souls } },
 	SS_Level2Wind,
 	{ animations: { Level2Wind: A_Level2Wind } },
 	SS_Level3Rain,
@@ -476,6 +479,8 @@ export const [
 	Iceball_SPRITESHEET,
 	IcicleExplode_SPRITESHEET,
 	IcicleExplode_SPRITESHEET,
+	Level2Souls_SPRITESHEET,
+	Level2Souls_SPRITESHEET,
 	Level2Wind_SPRITESHEET,
 	Level2Wind_SPRITESHEET,
 	Level3Rain_SPRITESHEET,

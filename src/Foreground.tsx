@@ -2,6 +2,7 @@ import { getFrame } from "./Animation";
 import {
 	A_Embers,
 	A_HeartExplosion,
+	A_Level2Souls,
 	A_Level2Wind,
 	A_Level3Rain,
 	A_Level8Black,
@@ -26,12 +27,20 @@ export const ForegroundFragment = ({
 			return null;
 		case 2:
 			return (
-				<sprite
-					blendMode="add"
-					texture={getFrame(A_Level2Wind, 20, lt)}
-					scale={5}
-					alpha={alpha}
-				/>
+				<>
+					<sprite
+						blendMode="add"
+						texture={getFrame(A_Level2Wind, 20, lt)}
+						scale={5}
+						alpha={alpha}
+					/>
+					<sprite
+						blendMode="add"
+						texture={getFrame(A_Level2Souls, 20, lt)}
+						scale={5}
+						alpha={alpha}
+					/>
+				</>
 			);
 		case 3:
 			return (
