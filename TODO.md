@@ -1,3 +1,6 @@
-- add different obstacles for different levels (but same shape)
-- fix impossible patterns in balancing + maybe more variety at the beginning +
-  implement enemy 3
+- angle for fireballs
+- do not gain life/arrow at level 10
+- variable length levels
+- variable speed per level
+
+- balancing
