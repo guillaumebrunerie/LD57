@@ -193,7 +193,7 @@ const ForegroundFragment = ({
 		case 8:
 			return (
 				<sprite
-					blendMode="add"
+					blendMode="multiply"
 					texture={getFrame(A_Level8Black, 20, game.lt)}
 					scale={5}
 					alpha={alpha}

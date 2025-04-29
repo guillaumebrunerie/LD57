@@ -2,7 +2,7 @@ import { Matrix, Texture, type Polygon } from "pixi.js";
 import type { Player } from "./player";
 import { getDuration } from "./Animation";
 import { A_HeartExplosion, S_EnemyDiePuff, S_EnemyDieVoice } from "./assets";
-import { smoothTriangle } from "./utils";
+import { seesaw, smoothTriangle } from "./utils";
 import { playerData, playerPoints } from "./obstaclesData";
 
 export type ObstacleData = {
@@ -13,6 +13,7 @@ export type ObstacleData = {
 		| "enemy-horizontal"
 		| "enemy-vertical"
 		| "enemy-still"
+		| "enemy-fireball"
 		| "player";
 	texture:
 		| { type: "texture-by-level"; textures: Texture[] }
@@ -73,20 +74,32 @@ export class Obstacle {
 		if (this.frequency === undefined || !this.range || this.isDestroyed) {
 			return;
 		}
-		if (this.data.type == "enemy-horizontal") {
-			this.x =
-				smoothTriangle(this.lt / this.frequency) *
-					(this.range[1] - this.range[0]) +
-				this.range[0];
-			this.scaleX =
-				Math.floor(this.lt / this.frequency) % 2 === 0 ? 1 : -1;
-		}
-		if (this.data.type == "enemy-vertical") {
-			this.y =
-				this.originalY +
-				smoothTriangle(this.lt / this.frequency) *
-					(this.range[1] - this.range[0]) +
-				this.range[0];
+		switch (this.data.type) {
+			case "enemy-horizontal":
+				this.x =
+					smoothTriangle(this.lt / this.frequency) *
+						(this.range[1] - this.range[0]) +
+					this.range[0];
+				this.scaleX =
+					Math.floor(this.lt / this.frequency) % 2 === 0 ? 1 : -1;
+				break;
+			case "enemy-vertical":
+				this.y =
+					this.originalY +
+					smoothTriangle(this.lt / this.frequency) *
+						(this.range[1] - this.range[0]) +
+					this.range[0];
+				break;
+			case "enemy-fireball":
+				this.x =
+					seesaw(this.lt / this.frequency) *
+						(this.range[1] - this.range[0]) +
+					this.range[0];
+				if (this.scaleX == 1) {
+					this.x = 1080 / 2 - this.x;
+				}
+
+				break;
 		}
 	}
 

@@ -4,6 +4,7 @@ import {
 	A_Enemy3Idle,
 	A_EnemyFlyingIdle,
 	A_EnemyStillIdle,
+	A_Fireball,
 	T_Bg_Walls_Level1,
 	T_Bg_Walls_Level4,
 	T_Bg_Walls_Level5,
@@ -463,6 +464,20 @@ export const obstaclesData: ObstacleData[][] = [
 				243.43,
 				290.98,
 				213.22,
+			),
+		},
+		{
+			type: "enemy-fireball",
+			texture: makeAnimation(A_Fireball, 10),
+			polygon: new Polygon(
+				50.84,
+				202.48,
+				102.35,
+				156.3,
+				180.5,
+				195.37,
+				100.57,
+				243.33,
 			),
 		},
 		{

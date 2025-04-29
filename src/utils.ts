@@ -79,3 +79,7 @@ export const smoothTriangle = (t: number) => {
 	// Apply smoothstep-style easing
 	return raw * raw * (3 - 2 * raw);
 };
+
+export const seesaw = (t: number) => {
+	return t % 1;
+};
