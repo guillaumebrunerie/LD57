@@ -1,0 +1,95 @@
+{"frames": {
+
+"Heart_000.png":
+{
+	"frame": {"x":1,"y":464,"w":60,"h":47},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":20,"y":16,"w":60,"h":47},
+	"sourceSize": {"w":100,"h":79}
+},
+"Heart_001.png":
+{
+	"frame": {"x":1,"y":1,"w":62,"h":51},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":19,"y":14,"w":62,"h":51},
+	"sourceSize": {"w":100,"h":79}
+},
+"Heart_002.png":
+{
+	"frame": {"x":1,"y":54,"w":62,"h":51},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":19,"y":14,"w":62,"h":51},
+	"sourceSize": {"w":100,"h":79}
+},
+"Heart_003.png":
+{
+	"frame": {"x":1,"y":107,"w":62,"h":49},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":19,"y":15,"w":62,"h":49},
+	"sourceSize": {"w":100,"h":79}
+},
+"Heart_004.png":
+{
+	"frame": {"x":1,"y":158,"w":62,"h":49},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":19,"y":15,"w":62,"h":49},
+	"sourceSize": {"w":100,"h":79}
+},
+"Heart_005.png":
+{
+	"frame": {"x":1,"y":209,"w":62,"h":49},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":19,"y":15,"w":62,"h":49},
+	"sourceSize": {"w":100,"h":79}
+},
+"Heart_006.png":
+{
+	"frame": {"x":1,"y":260,"w":62,"h":49},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":19,"y":15,"w":62,"h":49},
+	"sourceSize": {"w":100,"h":79}
+},
+"Heart_007.png":
+{
+	"frame": {"x":1,"y":311,"w":60,"h":49},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":20,"y":15,"w":60,"h":49},
+	"sourceSize": {"w":100,"h":79}
+},
+"Heart_008.png":
+{
+	"frame": {"x":1,"y":362,"w":60,"h":49},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":20,"y":15,"w":60,"h":49},
+	"sourceSize": {"w":100,"h":79}
+},
+"Heart_009.png":
+{
+	"frame": {"x":1,"y":413,"w":60,"h":49},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":20,"y":15,"w":60,"h":49},
+	"sourceSize": {"w":100,"h":79}
+}},
+"animations": {
+	"Heart": ["Heart_000.png","Heart_001.png","Heart_002.png","Heart_003.png","Heart_004.png","Heart_005.png","Heart_006.png","Heart_007.png","Heart_008.png","Heart_009.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "Heart.png",
+	"format": "RGBA8888",
+	"size": {"w":64,"h":512},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:94dd2513a70398e75d9ddec7777ab1e1:646695dd3fe5ef8f15d9a25d5699d387:bcb1ad48c230a12191f4780d6f253a31$"
+}
+}
