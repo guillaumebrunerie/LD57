@@ -114,7 +114,7 @@ export class ObstacleManager {
 		level: number,
 	) {
 		let maxY = this.lastY;
-		for (const patternData of pattern.data) {
+		for (const patternData of pattern) {
 			const xMin =
 				side == "right" ? 1080 - patternData.x[1] : patternData.x[0];
 			const xMax =
