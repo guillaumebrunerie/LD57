@@ -61,7 +61,11 @@ export class Game {
 		}
 
 		this.lt += delta;
-		if (this.state == "game" && this.player.lives > 0 && !this.isWinning) {
+		if (
+			this.state == "game" &&
+			!this.player.isGameOver &&
+			!this.isWinning
+		) {
 			this.score += delta;
 		}
 
@@ -73,7 +77,7 @@ export class Game {
 			return;
 		}
 
-		if (this.player.lives > 0) {
+		if (!this.player.isGameOver) {
 			if (this.level <= this.levels) {
 				this.depth += this.cameraSpeed * delta;
 				if (this.depth > this.levelDepth * this.level) {
@@ -167,8 +171,9 @@ export class Game {
 
 	cheat() {
 		if (import.meta.env.DEV) {
-			this.player.lives = 4;
-			this.player.arrows = 3;
+			this.player.isGameOver = false;
+			this.player.heartIndicators.reset();
+			this.player.arrowIndicators.reset();
 		}
 	}
 
@@ -183,12 +188,8 @@ export class Game {
 
 	nextLevel() {
 		this.level++;
-		if (this.player.lives < 4) {
-			this.player.lives++;
-		}
-		if (this.player.arrows < 3) {
-			this.player.arrows++;
-		}
+		this.player.heartIndicators.refill();
+		this.player.arrowIndicators.refill();
 		this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;
 		setMusic(this.level);
 	}

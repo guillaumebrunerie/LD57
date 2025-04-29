@@ -9,10 +9,16 @@ export const useTickingObject = <
 	},
 >(
 	Obj: new (data?: T) => T,
+	name?: string,
 ): T => {
 	const [obj, setObj] = useState(new Obj());
 	useEffect(() => {
-		setObj(new Obj(obj));
+		const newObj = new Obj(obj);
+		if (name) {
+			// @ts-ignore
+			window[name] = newObj;
+		}
+		setObj(newObj);
 	}, []);
 
 	useEffect(() => {

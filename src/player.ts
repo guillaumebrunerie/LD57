@@ -1,5 +1,7 @@
+import { ArrowIndicators } from "./arrowIndicators";
 import { S_ArrowShot, S_CupidHurt, S_GameOver } from "./assets";
 import type { Game } from "./game";
+import { HeartIndicators } from "./heartIndicators";
 import { setMusic } from "./musicManager";
 import type { Point } from "./utils";
 
@@ -32,10 +34,11 @@ export class Player {
 
 	tapActionY: "up" | "down" | null = null;
 
-	lives = 4;
+	isGameOver = false;
+	heartIndicators = new HeartIndicators(3);
 	invincibleTimeout = 0;
 
-	arrows = 3;
+	arrowIndicators = new ArrowIndicators(3);
 	arrow: Arrow | null = null;
 
 	constructor(game: Game) {
@@ -46,7 +49,7 @@ export class Player {
 		this.lt += delta;
 		this.arrow?.tick(delta);
 
-		if (this.lives == 0) {
+		if (this.isGameOver) {
 			return;
 		}
 
@@ -102,25 +105,26 @@ export class Player {
 	}
 
 	hit() {
-		this.lives--;
-		this.invincibleTimeout = 1.2;
-		this.lt = 0;
-		if (this.lives > 0) {
-			void S_CupidHurt.play({ volume: 0.5 });
-		} else {
+		if (this.heartIndicators.isEmpty()) {
+			this.isGameOver = true;
+			this.lt = 0;
 			void S_GameOver.play({ volume: 0.2 });
 			setMusic(0);
+		} else {
+			this.heartIndicators.consume();
+			this.invincibleTimeout = 1.2;
+			void S_CupidHurt.play({ volume: 0.5 });
 		}
 	}
 
 	shoot(angle: number, distance: number, targetId: string, dx: number) {
-		if (this.arrow || this.arrows <= 0 || this.lives == 0) {
+		if (this.arrow || this.arrowIndicators.isEmpty() || this.isGameOver) {
 			return;
 		}
 		this.lookingLeft = dx < 0;
 		this.lt = 0;
 		this.isShooting = true;
-		this.arrows--;
+		this.arrowIndicators.consume();
 		this.arrow = new Arrow(this.posX, this.posY, angle, distance, targetId);
 		void S_ArrowShot.play({ volume: 0.5 });
 	}

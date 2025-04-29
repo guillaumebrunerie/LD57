@@ -32,9 +32,11 @@ import { clamp } from "./math";
 import { ObstacleC } from "./ObstacleC";
 import { Background } from "./Background";
 import { useTickingObject } from "./useTickingObject";
+import type { ArrowIndicator, ArrowIndicators } from "./arrowIndicators";
+import type { HeartIndicator, HeartIndicators } from "./heartIndicators";
 
 export const GameC = () => {
-	const game = useTickingObject(Game);
+	const game = useTickingObject(Game, "game");
 
 	useOnKeyDownUp(
 		"ArrowLeft",
@@ -112,10 +114,14 @@ export const GameC = () => {
 					<Foreground />
 					<EndFg />
 				</Screen>
-				<Hearts />
-				<ArrowIndicators />
+				<HeartIndicatorsC
+					heartIndicators={game.player.heartIndicators}
+				/>
+				<ArrowIndicatorsC
+					arrowIndicators={game.player.arrowIndicators}
+				/>
 				<LevelIndicator />
-				{game.player.lives == 0 && <GameOverScreen />}
+				{game.player.isGameOver && <GameOverScreen />}
 				<Rectangle
 					x={0}
 					y={0}
@@ -315,53 +321,63 @@ const LevelIndicator = () => {
 
 const heartDeltaX = 65;
 
-const Hearts = () => {
-	const game = useGame();
-	const lives = game.player.lives;
+const HeartIndicatorsC = ({
+	heartIndicators,
+}: {
+	heartIndicators: HeartIndicators;
+}) => {
 	return (
 		<container x={1080 / 2 - 120} y={55}>
-			<sprite
-				texture={lives >= 2 ? T_Heart_On : T_Heart_Off}
-				anchor={0.5}
-				x={-heartDeltaX}
-			/>
-			<sprite
-				texture={lives >= 3 ? T_Heart_On : T_Heart_Off}
-				anchor={0.5}
-				x={0}
-			/>
-			<sprite
-				texture={lives >= 4 ? T_Heart_On : T_Heart_Off}
-				anchor={0.5}
-				x={heartDeltaX}
-			/>
+			{heartIndicators.heartIndicators.map((heartIndicator, i) => (
+				<container key={i} x={(i - 1) * heartDeltaX}>
+					<HeartIndicatorC heartIndicator={heartIndicator} />
+				</container>
+			))}
 		</container>
+	);
+};
+
+const HeartIndicatorC = ({
+	heartIndicator,
+}: {
+	heartIndicator: HeartIndicator;
+}) => {
+	return (
+		<sprite
+			texture={heartIndicator.hasHeart ? T_Heart_On : T_Heart_Off}
+			anchor={0.5}
+		/>
 	);
 };
 
 const arrowDeltaX = 60;
 
-const ArrowIndicators = () => {
-	const game = useGame();
-	const arrows = game.player.arrows;
+const ArrowIndicatorsC = ({
+	arrowIndicators,
+}: {
+	arrowIndicators: ArrowIndicators;
+}) => {
 	return (
 		<container x={1080 / 2 + 120} y={55}>
-			<sprite
-				texture={arrows >= 1 ? T_Arrow_On : T_Arrow_Off}
-				anchor={0.5}
-				x={-arrowDeltaX}
-			/>
-			<sprite
-				texture={arrows >= 2 ? T_Arrow_On : T_Arrow_Off}
-				anchor={0.5}
-				x={0}
-			/>
-			<sprite
-				texture={arrows >= 3 ? T_Arrow_On : T_Arrow_Off}
-				anchor={0.5}
-				x={arrowDeltaX}
-			/>
+			{arrowIndicators.arrowIndicators.map((arrowIndicator, i) => (
+				<container key={i} x={(i - 1) * arrowDeltaX}>
+					<ArrowIndicatorC arrowIndicator={arrowIndicator} />
+				</container>
+			))}
 		</container>
+	);
+};
+
+const ArrowIndicatorC = ({
+	arrowIndicator,
+}: {
+	arrowIndicator: ArrowIndicator;
+}) => {
+	return (
+		<sprite
+			texture={arrowIndicator.hasArrow ? T_Arrow_On : T_Arrow_Off}
+			anchor={0.5}
+		/>
 	);
 };
 
@@ -394,7 +410,7 @@ const PlayerC = () => {
 		600;
 	return (
 		<container x={player.posX} y={player.posY + (game.isWinning ? 0 : dy)}>
-			{player.lives > 0 && (
+			{!player.isGameOver && (
 				<sprite
 					texture={
 						(
@@ -408,7 +424,7 @@ const PlayerC = () => {
 					scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
 				/>
 			)}
-			{player.invincibleTimeout > 0 && player.lives > 0 && (
+			{player.invincibleTimeout > 0 && !player.isGameOver && (
 				<sprite
 					texture={getFrame(A_CupidIdle, 20, player.lt)}
 					tint={
@@ -420,7 +436,7 @@ const PlayerC = () => {
 					scale={{ x: player.lookingLeft ? -1 : 1, y: 1 }}
 				/>
 			)}
-			{player.lives == 0 && (
+			{player.isGameOver && (
 				<sprite
 					texture={getFrame(A_CupidDie, 10, player.lt, "remove")}
 					anchor={0.5}
