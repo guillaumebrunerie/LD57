@@ -8,6 +8,7 @@ import {
 	A_HeartExplosion,
 	A_Level2Wind,
 	A_Level3Rain,
+	A_Level8Black,
 	A_Snow,
 	A_TheEnd,
 	T_Arrow_Off,
@@ -191,14 +192,11 @@ const ForegroundFragment = ({
 			return null;
 		case 8:
 			return (
-				<Rectangle
-					x={0}
-					y={0}
-					width={1080}
-					height={1920}
-					color={0x000000}
-					alpha={alpha * 0.6}
-					draw={() => {}}
+				<sprite
+					blendMode="add"
+					texture={getFrame(A_Level8Black, 20, game.lt)}
+					scale={5}
+					alpha={alpha}
 				/>
 			);
 		case 9:
