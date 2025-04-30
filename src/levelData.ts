@@ -152,6 +152,7 @@ const iceball = (
 });
 
 type LevelData = {
+	speed: number;
 	duration: number;
 	spacing: [number, number];
 	patterns: Pattern[];
@@ -231,54 +232,63 @@ const patterns: Pattern[][] = [
 export const levelData: LevelData[] = [
 	// Level 1: only rocks/spikes
 	{
+		speed: 600,
 		duration: 4,
 		spacing: [800, 1200],
 		patterns: [...patterns[1]],
 	},
 	// Level 2: introduce still enemy
 	{
+		speed: 650,
 		duration: 8,
 		spacing: [700, 1000],
 		patterns: [...patterns[1], ...patterns[2]],
 	},
 	// Level 3: more still enemies and more rock patterns
 	{
+		speed: 700,
 		duration: 8,
 		spacing: [700, 900],
 		patterns: [...patterns[1], ...patterns[2], ...patterns[3]],
 	},
 	// Level 4: introduce vertical enemies
 	{
+		speed: 750,
 		duration: 8,
 		spacing: [600, 1000],
 		patterns: [...patterns[1], ...patterns[4]],
 	},
 	// Level 5: introduce horizontal enemies
 	{
+		speed: 800,
 		duration: 4,
 		spacing: [700, 1000],
 		patterns: [...patterns[2], ...patterns[5]],
 	},
 	// Level 6: introduce fireballs
 	{
+		speed: 850,
 		duration: 8,
 		spacing: [700, 1000],
 		patterns: [...patterns[3], ...patterns[6]],
 	},
 	// Level 7: more patterns
 	{
+		speed: 900,
 		duration: 4,
 		spacing: [600, 900],
 		patterns: [...patterns[4], ...patterns[7]],
 	},
 	// Level 8: nothing special, it’s already dark
 	{
+		speed: 950,
 		duration: 8,
 		spacing: [600, 900],
 		patterns: [...patterns[5], ...patterns[6]],
 	},
 	// Level 9: introduce iceballs
 	{
+		speed: 1000,
 		duration: 8,
 		spacing: [500, 800],
 		patterns: [...patterns[5], ...patterns[6], ...patterns[7]],

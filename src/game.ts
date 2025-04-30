@@ -26,9 +26,7 @@ export class Game {
 	state: "startScreen" | "game" = "startScreen";
 
 	depth = 0;
-	baseSpeed = 600;
-	speedIncrease = 40;
-	cameraSpeed = this.baseSpeed;
+	cameraSpeed = 100;
 
 	yBgOffset = Math.random();
 
@@ -212,7 +210,9 @@ export class Game {
 		}
 		this.player.heartIndicators.refill();
 		this.player.arrowIndicators.refill();
-		this.cameraSpeed = this.baseSpeed + this.level * this.speedIncrease;
+		if (this.level <= levelData.length) {
+			this.cameraSpeed = levelData[this.level - 1].speed;
+		}
 		setMusic(this.level);
 	}
 

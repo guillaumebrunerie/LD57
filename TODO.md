@@ -1,5 +1,4 @@
 - rotation of obstacles
 - angle for fireballs
-- variable speed per level
 - do not gain life/arrow at level 10
 - (obstacles as separate types)
