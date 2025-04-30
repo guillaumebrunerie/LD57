@@ -202,3 +202,116 @@ export class Obstacle {
 		return false;
 	}
 }
+
+// class EnemyHorizontalMovement<T = unknown> {
+// 	lt = 0;
+// 	gameObject: T;
+// 	frequency: number;
+// 	range: [number, number];
+
+// 	constructor(gameObject: T, frequency: number, range: [number, number]) {
+// 		this.gameObject = gameObject;
+// 		this.frequency = frequency;
+// 		this.range = range;
+// 	}
+
+// 	tick(
+// 		this: EnemyHorizontalMovement<{ transform: Transform }>,
+// 		delta: number,
+// 	) {
+// 		this.lt += delta;
+// 		this.gameObject.transform.x =
+// 			smoothTriangle(this.lt / this.frequency) *
+// 				(this.range[1] - this.range[0]) +
+// 			this.range[0];
+// 		this.gameObject.transform.scaleX =
+// 			Math.floor(this.lt / this.frequency) % 2 === 0 ? 1 : -1;
+// 	}
+// }
+
+// class Transform<T = unknown> {
+// 	constructor(
+// 		public gameObject: T,
+// 		public x: number,
+// 		public y: number,
+// 		public pivotX: number,
+// 		public pivotY: number,
+// 		public scaleX: number,
+// 		public scaleY: number,
+// 		public rotation: number,
+// 	) {}
+// }
+
+// class Destroyable<T = unknown> {
+// 	isDestroyed = false;
+// 	destroyTimeout = Infinity;
+// 	constructor(public gameObject: T) {}
+// 	destroy(destroyTimeout: number) {
+// 		this.isDestroyed = true;
+// 		this.destroyTimeout = destroyTimeout;
+// 	}
+// 	tick(delta: number) {
+// 		this.destroyTimeout -= delta;
+// 	}
+// }
+
+// class PolygonCollider<T = unknown> {
+// 	constructor(public gameObject: T, public polygon: Polygon) {}
+
+// 	points() {
+// 		return Array.from(
+// 			{ length: this.polygon.points.length / 2 },
+// 			(_, i) => ({
+// 				x: this.polygon.points[2 * i],
+// 				y: this.polygon.points[2 * i + 1],
+// 			}),
+// 		);
+// 	}
+
+// 	checkCollision(
+// 		this: PolygonCollider<{ transform: Transform; destroyable: Destroyable }>,
+// 		other: PolygonCollider,
+// 	) {
+// 		if (this.gameObject.destroyable.isDestroyed) {
+// 			return false;
+// 		}
+// 		const polygon = this.polygon;
+// 		const transform = Matrix.shared;
+// 		transform.setTransform(
+// 			this.gameObject.transform.x,
+// 			this.gameObject.transform.y,
+// 			this.gameObject.transform.pivotX,
+// 			this.gameObject.transform.pivotY,
+// 			this.gameObject.transform.scaleX,
+// 			this.gameObject.transform.scaleY,
+// 			0,
+// 			0,
+// 			0,
+// 		);
+// 		for (const pos /* { x, y } */ of other.points() /* playerPoints */) {
+// 			// const newX =
+// 			// 	other.lookingLeft ?
+// 			// 		0.5 * firstTexture(playerData).width - x
+// 			// 	:	x - 0.5 * firstTexture(playerData).width;
+// 			// const pos = transform.applyInverse({
+// 			// 	x: player.posX + newX,
+// 			// 	y: player.posY + y - 0.5 * firstTexture(playerData).height,
+// 			// });
+// 			if (polygon.contains(pos.x, pos.y)) {
+// 				return true;
+// 			}
+// 		}
+// 		return false;
+// 	}
+// }
+
+// class Obstacle2 {
+// 	transform = new Transform(this, 0, 0, 0, 0, 1, 1, 0);
+// 	destroyable = new Destroyable(this);
+// 	collider: PolygonCollider;
+// 	constructor (
+// 		public polygon: Polygon,
+// 	) {
+// 		this.collider = new PolygonCollider(this, polygon);
+// 	}
+// }

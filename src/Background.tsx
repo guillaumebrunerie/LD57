@@ -22,6 +22,7 @@ import { Game, useGame } from "./game";
 import { mod } from "./utils";
 import type { FederatedPointerEvent } from "pixi.js";
 import { getDuration, getFrame } from "./Animation";
+import { totalDuration } from "./levelData";
 
 export const getBg = (level: number) => {
 	switch (level) {
@@ -49,13 +50,20 @@ export const getBg = (level: number) => {
 export const Background = () => {
 	const game = useGame();
 	const y = mod(-game.depth, 1920);
+	const level1 = game.level;
+	const level2 =
+		game.nextLevelDepth - game.depth > 1920 ? game.level : game.level + 1;
+	const level3 =
+		game.nextLevelDepth - game.depth > 1920 * 2 ?
+			game.level
+		:	game.level + 1;
 	return (
 		<>
-			<container y={y + game.depth}>
-				<BackgroundFragment depth={y + game.depth} />
-			</container>
 			<container y={y + game.depth - 1920}>
-				<BackgroundFragment depth={y + game.depth - 1920} />
+				<BackgroundFragment levelFrom={level1} levelTo={level2} />
+			</container>
+			<container y={y + game.depth}>
+				<BackgroundFragment levelFrom={level2} levelTo={level3} />
 			</container>
 			<End />
 		</>
@@ -69,17 +77,21 @@ const pointerEventListener =
 		game.onEvent(type, { x, y });
 	};
 
-const BackgroundFragment = ({ depth }: { depth: number }) => {
+const BackgroundFragment = ({
+	levelFrom,
+	levelTo,
+}: {
+	levelFrom: number;
+	levelTo: number;
+}) => {
 	const game = useGame();
-	const startLevel = 1 + Math.floor(depth / game.levelDepth);
-	const endLevel = 1 + Math.floor((depth + 1920) / game.levelDepth);
-
 	const ref = useRef(null);
+	game.depth; // TODO: remove, but currently needed (bug?)
 
 	return (
 		<>
 			<sprite
-				texture={getBg(startLevel)}
+				texture={getBg(levelFrom)}
 				eventMode="static"
 				onPointerDown={pointerEventListener(game, "pointerdown")}
 				onPointerMove={pointerEventListener(game, "pointermove")}
@@ -88,7 +100,7 @@ const BackgroundFragment = ({ depth }: { depth: number }) => {
 			/>
 			<sprite texture={T_Gradient} ref={ref} />
 			<sprite
-				texture={getBg(endLevel)}
+				texture={getBg(levelTo)}
 				eventMode="static"
 				onPointerDown={pointerEventListener(game, "pointerdown")}
 				onPointerMove={pointerEventListener(game, "pointermove")}
@@ -123,19 +135,19 @@ const End = () => {
 				texture={T_Bg_Level_09_End}
 				anchor={{ x: 0, y: 1 }}
 				x={0}
-				y={game.levelDepth * game.levels + 1920}
+				y={totalDuration + 1920}
 			/>
 			<sprite
 				texture={T_DevilShadow}
 				anchor={{ x: 0.5, y: 1 }}
 				x={750}
-				y={game.levelDepth * game.levels + 1920 - 440}
+				y={totalDuration + 1920 - 440}
 			/>
 			<sprite
 				texture={frame}
 				anchor={{ x: 0.5, y: 1 }}
 				x={750}
-				y={game.levelDepth * game.levels + 1920 - 350}
+				y={totalDuration + 1920 - 350}
 				scale={1.3}
 			/>
 		</container>

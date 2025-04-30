@@ -3,6 +3,7 @@ import { S_ArrowShot, S_CupidHurt, S_GameOver } from "./assets";
 import type { Game } from "./game";
 import { HeartIndicators } from "./heartIndicators";
 import { setMusic } from "./musicManager";
+import { totalDuration } from "./levelData";
 import type { Point } from "./utils";
 
 const marginX = 10;
@@ -86,7 +87,7 @@ export class Player {
 
 		this.posX = Math.max(minX, Math.min(this.posX, maxX));
 		this.posY += this.game.cameraSpeed * delta;
-		const targetY = this.game.levelDepth * this.game.levels + 1920 - 1200;
+		const targetY = totalDuration + 1920 - 1200;
 		this.posY = Math.min(this.posY, targetY);
 
 		if (
@@ -133,7 +134,7 @@ export class Player {
 
 	finalShoot() {
 		const targetX = 750;
-		const targetY = this.game.levelDepth * this.game.levels + 1920 - 700;
+		const targetY = totalDuration + 1920 - 700;
 		const dx = targetX - this.posX;
 		const dy = targetY - this.posY;
 		this.lt = 0;

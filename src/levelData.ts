@@ -151,9 +151,10 @@ const iceball = (
 	dy,
 });
 
-type LevelPattern = {
+type LevelData = {
+	duration: number;
 	spacing: [number, number];
-	data: Pattern[];
+	patterns: Pattern[];
 };
 
 const patterns: Pattern[][] = [
@@ -227,53 +228,65 @@ const patterns: Pattern[][] = [
 	],
 ];
 
-export const obstaclesPatternsData: LevelPattern[] = [
+export const levelData: LevelData[] = [
 	// Level 1: only rocks/spikes
 	{
+		duration: 4,
 		spacing: [800, 1200],
-		data: [...patterns[1]],
+		patterns: [...patterns[1]],
 	},
 	// Level 2: introduce still enemy
 	{
+		duration: 8,
 		spacing: [700, 1000],
-		data: [...patterns[1], ...patterns[2]],
+		patterns: [...patterns[1], ...patterns[2]],
 	},
 	// Level 3: more still enemies and more rock patterns
 	{
+		duration: 8,
 		spacing: [700, 900],
-		data: [...patterns[1], ...patterns[2], ...patterns[3]],
+		patterns: [...patterns[1], ...patterns[2], ...patterns[3]],
 	},
 	// Level 4: introduce vertical enemies
 	{
+		duration: 8,
 		spacing: [600, 1000],
-		data: [...patterns[1], ...patterns[4]],
+		patterns: [...patterns[1], ...patterns[4]],
 	},
 	// Level 5: introduce horizontal enemies
 	{
+		duration: 4,
 		spacing: [700, 1000],
-		data: [...patterns[2], ...patterns[5]],
+		patterns: [...patterns[2], ...patterns[5]],
 	},
 	// Level 6: introduce fireballs
 	{
+		duration: 8,
 		spacing: [700, 1000],
-		data: [...patterns[3], ...patterns[6]],
+		patterns: [...patterns[3], ...patterns[6]],
 	},
 	// Level 7: more patterns
 	{
+		duration: 4,
 		spacing: [600, 900],
-		data: [...patterns[4], ...patterns[7]],
+		patterns: [...patterns[4], ...patterns[7]],
 	},
 	// Level 8: nothing special, it’s already dark
 	{
+		duration: 8,
 		spacing: [600, 900],
-		data: [...patterns[5], ...patterns[6]],
+		patterns: [...patterns[5], ...patterns[6]],
 	},
 	// Level 9: introduce iceballs
 	{
+		duration: 8,
 		spacing: [500, 800],
-		data: [...patterns[5], ...patterns[6], ...patterns[7]],
+		patterns: [...patterns[5], ...patterns[6], ...patterns[7]],
 	},
 ];
+
+export const totalDuration =
+	1920 * levelData.reduce((acc, level) => acc + level.duration, 0);
 
 const otherSide = {
 	left: "right",
@@ -295,9 +308,7 @@ export const getObstaclePattern = (
 		side = last.side == "left" ? "right" : "left";
 	}
 
-	const possibleObstaclePatterns = obstaclesPatternsData[
-		level - 1
-	].data.filter(
+	const possibleObstaclePatterns = levelData[level - 1].patterns.filter(
 		(o) => !last || JSON.stringify(o) != JSON.stringify(last.pattern),
 	);
 	return {
@@ -310,6 +321,6 @@ export const getObstaclePattern = (
 };
 
 export const getPatternSpacing = (level: number) => {
-	const [minSpacingY, maxSpacingY] = obstaclesPatternsData[level - 1].spacing;
+	const [minSpacingY, maxSpacingY] = levelData[level - 1].spacing;
 	return Math.random() * (maxSpacingY - minSpacingY) + minSpacingY;
 };

@@ -4,7 +4,7 @@ import {
 	getObstaclePattern,
 	getPatternSpacing,
 	type Pattern,
-} from "./obstaclesPatterns";
+} from "./levelData";
 import type { Player } from "./player";
 import { pick } from "./utils";
 
@@ -44,14 +44,7 @@ export class ObstacleManager {
 		];
 	}
 
-	tick(
-		delta: number,
-		levelDepth: number,
-		depth: number,
-		level: number,
-		levels: number,
-	) {
-		const getLevel = (y: number) => Math.ceil(y / levelDepth);
+	tick(delta: number, depth: number, level: number, nextLevelDepth: number) {
 		if (this.obstacles.some((o) => o.isOutOfBounds(depth))) {
 			this.obstacles = this.obstacles.filter(
 				(o) => !o.isOutOfBounds(depth),
@@ -87,14 +80,15 @@ export class ObstacleManager {
 
 		while (this.lastY <= depth + 1920) {
 			this.lastY += getPatternSpacing(level);
-			if (this.lastY >= levelDepth * levels) {
+			if (level == 9 && this.lastY >= nextLevelDepth) {
 				break;
 			}
 			const { pattern, side } = getObstaclePattern(
 				level,
 				this.previousPatterns,
 			);
-			this.instantiatePattern(pattern, side, getLevel(this.lastY));
+			const thisLevel = this.lastY >= nextLevelDepth ? level + 1 : level;
+			this.instantiatePattern(pattern, side, thisLevel);
 			this.previousPatterns.push({ pattern, side });
 			needSort = true;
 		}

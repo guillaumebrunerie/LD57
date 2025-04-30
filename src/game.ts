@@ -5,6 +5,7 @@ import { type Point } from "./utils";
 import type { Obstacle } from "./obstacle";
 import { setMusic, startMusic } from "./musicManager";
 import { createContext, use } from "react";
+import { levelData, totalDuration } from "./levelData";
 
 export const GameContext = createContext<Game | null>(null);
 export const useGame = () => {
@@ -35,7 +36,7 @@ export class Game {
 	obstaclesManager = new ObstaclesManager();
 
 	level = 0;
-	levelDepth = 15000;
+	nextLevelDepth = 0;
 
 	isWinning = false;
 
@@ -84,21 +85,20 @@ export class Game {
 		if (!this.player.isGameOver) {
 			if (this.level <= this.levels) {
 				this.depth += this.cameraSpeed * delta;
-				if (this.depth > this.levelDepth * this.level) {
+				if (this.depth > this.nextLevelDepth) {
 					this.nextLevel();
 				}
 			} else {
-				this.depth = this.levelDepth * this.levels;
+				this.depth = totalDuration;
 			}
 		}
 
 		this.player.tick(delta);
 		this.obstaclesManager.tick(
 			delta,
-			this.levelDepth,
 			this.depth,
 			this.level,
-			this.levels,
+			this.nextLevelDepth,
 		);
 
 		if (this.player.arrow && this.player.arrow.targetId != "") {
@@ -184,14 +184,25 @@ export class Game {
 
 	cheatToLevel(level: number) {
 		if (import.meta.env.DEV) {
-			const oldDepth = this.depth;
-			this.depth = this.levelDepth * level - 1920 * 2;
-			this.level = level - 1;
-			this.player.posY += this.depth - oldDepth;
+			if (this.level >= level) {
+				return;
+			}
+			while (this.level < level) {
+				const delta = this.nextLevelDepth - this.depth;
+				this.depth += delta;
+				this.player.posY += delta;
+				this.nextLevelDepth += levelData[this.level].duration * 1920;
+				this.level++;
+			}
 		}
 	}
 
 	nextLevel() {
+		if (this.level < levelData.length) {
+			this.nextLevelDepth += levelData[this.level].duration * 1920;
+		} else {
+			this.nextLevelDepth += 1920 * 2;
+		}
 		this.level++;
 		if (
 			!this.player.heartIndicators.isFull() ||

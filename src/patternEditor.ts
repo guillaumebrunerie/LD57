@@ -1,6 +1,6 @@
 import { clamp } from "./math";
 import { ObstacleManager } from "./obstaclesManager";
-import { obstaclesPatternsData } from "./obstaclesPatterns";
+import { levelData } from "./levelData";
 import { mod } from "./utils";
 
 export class PatternEditor {
@@ -32,7 +32,7 @@ export class PatternEditor {
 		this.obstacleManager.reset(this.level);
 		const side = "left"; //Math.random() < 0.5 ? "left" : "right";
 		this.obstacleManager.instantiatePattern(
-			obstaclesPatternsData[this.level - 1].data[this.patternIndex],
+			levelData[this.level - 1].patterns[this.patternIndex],
 			side,
 			this.level,
 		);
@@ -41,7 +41,7 @@ export class PatternEditor {
 	switchPattern(dx: number) {
 		this.patternIndex = mod(
 			this.patternIndex + dx,
-			obstaclesPatternsData[this.level - 1].data.length,
+			levelData[this.level - 1].patterns.length,
 		);
 		this.refresh();
 	}

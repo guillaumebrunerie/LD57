@@ -11,6 +11,7 @@ import {
 } from "./assets";
 import { useGame } from "./game";
 import { clamp } from "./math";
+import { totalDuration } from "./levelData";
 import { Rectangle } from "./Rectangle";
 
 export const ForegroundFragment = ({
@@ -117,8 +118,8 @@ export const Foreground = () => {
 	const nextLevel = level + 1;
 	const nt = tween(
 		game.depth,
-		[game.levelDepth * level - 1920 * 2, 0],
-		[game.levelDepth * level, 1],
+		[game.nextLevelDepth - 1920 * 2, 0],
+		[game.nextLevelDepth, 1],
 	);
 	return (
 		<container y={game.depth}>
@@ -138,7 +139,7 @@ export const EndFg = () => {
 			{game.isWinning && explosionLt > 0 && (
 				<sprite
 					x={750}
-					y={game.levelDepth * game.levels + 1920 - 700}
+					y={totalDuration + 1920 - 700}
 					anchor={{ x: 0.5, y: 0.5 }}
 					blendMode="add"
 					texture={getFrame(
@@ -154,7 +155,7 @@ export const EndFg = () => {
 				<container>
 					<Rectangle
 						x={0}
-						y={game.levelDepth * game.levels}
+						y={totalDuration}
 						width={1080}
 						height={1920}
 						color={0x000022}
@@ -163,7 +164,7 @@ export const EndFg = () => {
 					/>
 					<sprite
 						x={540}
-						y={game.levelDepth * game.levels + 1920 / 2}
+						y={totalDuration + 1920 / 2}
 						anchor={{ x: 0.5, y: 0.5 }}
 						texture={getFrame(
 							A_TheEnd,

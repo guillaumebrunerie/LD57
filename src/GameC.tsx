@@ -27,6 +27,7 @@ import { useTickingObject } from "./useTickingObject";
 import type { ArrowIndicator, ArrowIndicators } from "./arrowIndicators";
 import type { HeartIndicator, HeartIndicators } from "./heartIndicators";
 import { EndFg, Foreground } from "./Foreground";
+import { totalDuration } from "./levelData";
 
 export const GameC = () => {
 	const game = useTickingObject(Game, "game");
@@ -61,24 +62,24 @@ export const GameC = () => {
 	}
 
 	let mask = undefined;
-	if (game.depth >= game.levelDepth * game.levels - 2000) {
+	if (game.depth >= totalDuration - 2000) {
 		mask = new Polygon([
 			0,
 			0,
 			1080,
 			0,
 			1080,
-			game.levelDepth * game.levels - 30,
+			totalDuration - 30,
 			1080 - 75,
-			game.levelDepth * game.levels,
+			totalDuration,
 			1080 - 150,
-			game.levelDepth * game.levels - 30,
+			totalDuration - 30,
 			150,
-			game.levelDepth * game.levels - 30,
+			totalDuration - 30,
 			75,
-			game.levelDepth * game.levels,
+			totalDuration,
 			0,
-			game.levelDepth * game.levels - 30,
+			totalDuration - 30,
 		]);
 	}
 
@@ -97,7 +98,7 @@ export const GameC = () => {
 								obstacle={obstacle}
 								level={game.level}
 								depth={game.depth}
-								nextLevelDepth={game.levelDepth * game.level}
+								nextLevelDepth={game.nextLevelDepth}
 							/>
 						))}
 					</container>

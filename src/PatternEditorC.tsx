@@ -1,5 +1,5 @@
 import { CustomText } from "./CustomText";
-import { obstaclesPatternsData } from "./obstaclesPatterns";
+import { levelData } from "./levelData";
 import { useOnKeyDown } from "./useOnKeyDown";
 import { PatternEditor } from "./patternEditor";
 import { ObstacleC } from "./ObstacleC";
@@ -47,7 +47,7 @@ export const PatternEditorC = () => {
 				anchor={{ x: 0.5, y: 1 }}
 				x={1080 / 2}
 				y={1920 - 20}
-				text={`Level ${patternEditor.level}, pattern ${patternEditor.patternIndex + 1}/${obstaclesPatternsData[patternEditor.level - 1].data.length}`}
+				text={`Level ${patternEditor.level}, pattern ${patternEditor.patternIndex + 1}/${levelData[patternEditor.level - 1].patterns.length}`}
 				style={{
 					fontSize: 25,
 					fontFamily: "Heroes Legend",
