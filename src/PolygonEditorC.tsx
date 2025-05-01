@@ -43,10 +43,10 @@ export const PolygonEditorC = () => {
 				}}
 			/>
 			<container x={300} y={0}>
-				<sprite texture={firstTexture(polygonEditor.obstacle)} />
+				<sprite texture={firstTexture(polygonEditor.colliderData)} />
 				<PolygonShape
 					alpha={0.4}
-					polygon={polygonEditor.obstacle.polygon}
+					polygon={polygonEditor.colliderData.polygon}
 				/>
 			</container>
 		</container>

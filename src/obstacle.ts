@@ -3,7 +3,8 @@ import type { Player } from "./player";
 import { getDuration } from "./Animation";
 import { A_HeartExplosion, S_EnemyDiePuff, S_EnemyDieVoice } from "./assets";
 import { seesaw, smoothTriangle } from "./utils";
-import { playerData, playerPoints } from "./obstaclesData";
+import { playerData, playerPoints, type ColliderData } from "./obstaclesData";
+import type { PatternData } from "./levelData";
 
 export type ObstacleData = {
 	type:
@@ -26,7 +27,7 @@ export type ObstacleData = {
 	polygon: Polygon;
 };
 
-export const firstTexture = (data: ObstacleData): Texture => {
+export const firstTexture = (data: ColliderData): Texture => {
 	if (data.texture.type == "texture-by-level") {
 		return data.texture.textures[0];
 	} else {
@@ -45,11 +46,8 @@ export class Obstacle {
 	anchorX = 0.5;
 	anchorY = 0.5;
 	id: string;
-	data: ObstacleData;
-	frequency?: number;
-	range?: [number, number];
-	radius?: number;
-	dy?: number;
+	colliderData: ColliderData;
+	patternData: PatternData;
 
 	isDestroyed = false;
 	destroyTimeout = Infinity;
@@ -58,11 +56,8 @@ export class Obstacle {
 		x: number,
 		y: number,
 		flipped: boolean,
-		data: ObstacleData,
-		frequency?: number,
-		range?: [number, number],
-		radius?: number,
-		dy?: number,
+		colliderData: ColliderData,
+		patternData: PatternData,
 	) {
 		this.id = Math.random().toString(36).substring(2, 15);
 		this.originalX = x;
@@ -71,12 +66,9 @@ export class Obstacle {
 		this.y = y;
 		this.scaleX = flipped ? -1 : 1;
 		this.scaleY = 1;
-		this.data = data;
-		this.frequency = frequency;
-		this.range = range;
-		this.radius = radius;
-		this.dy = dy;
-		if (["wall", "spike"].includes(this.data.type)) {
+		this.colliderData = colliderData;
+		this.patternData = patternData;
+		if (["wall", "spike"].includes(this.patternData.type)) {
 			this.anchorX = 0;
 		}
 	}
@@ -87,53 +79,71 @@ export class Obstacle {
 		if (this.isDestroyed) {
 			return;
 		}
-		switch (this.data.type) {
+		switch (this.patternData.type) {
 			case "enemy-horizontal":
-				if (this.frequency === undefined || !this.range) {
-					return;
-				}
-				this.x =
-					smoothTriangle(this.lt / this.frequency) *
-						(this.range[1] - this.range[0]) +
-					this.range[0];
-				this.scaleX =
-					Math.floor(this.lt / this.frequency) % 2 === 0 ? 1 : -1;
-				break;
-			case "enemy-vertical":
-				if (this.frequency === undefined || !this.range) {
-					return;
-				}
-				this.y =
-					this.originalY +
-					smoothTriangle(this.lt / this.frequency) *
-						(this.range[1] - this.range[0]) +
-					this.range[0];
-				break;
-			case "enemy-still":
-				if (this.frequency === undefined || !this.radius) {
-					return;
-				}
-				this.x =
-					this.originalX +
-					Math.cos(this.lt / this.frequency) * this.radius;
-				this.y =
-					this.originalY +
-					Math.sin(this.lt / this.frequency) * this.radius;
-				break;
-			case "fireball":
 				if (
-					this.frequency === undefined ||
-					!this.range ||
-					this.dy == undefined
+					this.patternData.frequency === undefined ||
+					!this.patternData.range
 				) {
 					return;
 				}
 				this.x =
-					seesaw(this.lt / this.frequency) *
-						(this.range[1] - this.range[0]) +
-					this.range[0];
+					smoothTriangle(this.lt / this.patternData.frequency) *
+						(this.patternData.range[1] -
+							this.patternData.range[0]) +
+					this.patternData.range[0];
+				this.scaleX =
+					Math.floor(this.lt / this.patternData.frequency) % 2 === 0 ?
+						1
+					:	-1;
+				break;
+			case "enemy-vertical":
+				if (
+					this.patternData.frequency === undefined ||
+					!this.patternData.range
+				) {
+					return;
+				}
 				this.y =
-					this.originalY + seesaw(this.lt / this.frequency) * this.dy;
+					this.originalY +
+					smoothTriangle(this.lt / this.patternData.frequency) *
+						(this.patternData.range[1] -
+							this.patternData.range[0]) +
+					this.patternData.range[0];
+				break;
+			case "enemy-still":
+				if (
+					this.patternData.frequency === undefined ||
+					!this.patternData.radius
+				) {
+					return;
+				}
+				this.x =
+					this.originalX +
+					Math.cos(this.lt / this.patternData.frequency) *
+						this.patternData.radius;
+				this.y =
+					this.originalY +
+					Math.sin(this.lt / this.patternData.frequency) *
+						this.patternData.radius;
+				break;
+			case "fireball":
+				if (
+					this.patternData.frequency === undefined ||
+					!this.patternData.range ||
+					this.patternData.dy == undefined
+				) {
+					return;
+				}
+				this.x =
+					seesaw(this.lt / this.patternData.frequency) *
+						(this.patternData.range[1] -
+							this.patternData.range[0]) +
+					this.patternData.range[0];
+				this.y =
+					this.originalY +
+					seesaw(this.lt / this.patternData.frequency) *
+						this.patternData.dy;
 				if (this.scaleX == 1) {
 					this.x = 1080 / 2 - this.x;
 				}
@@ -158,11 +168,11 @@ export class Obstacle {
 	}
 
 	polygon() {
-		return this.data.polygon;
+		return this.colliderData.polygon;
 	}
 
 	get z() {
-		if (this.data.type == "wall") {
+		if (this.patternData.type == "wall") {
 			return 0;
 		} else {
 			return 1;
@@ -178,8 +188,8 @@ export class Obstacle {
 		transform.setTransform(
 			this.x,
 			this.y,
-			this.anchorX * firstTexture(this.data).width,
-			this.anchorY * firstTexture(this.data).height,
+			this.anchorX * firstTexture(this.colliderData).width,
+			this.anchorY * firstTexture(this.colliderData).height,
 			this.scaleX,
 			this.scaleY,
 			0,

@@ -1,4 +1,12 @@
-type PatternData = {
+export type PatternData = {
+	type:
+		| "wall"
+		| "spike"
+		| "rock"
+		| "enemy-horizontal"
+		| "enemy-vertical"
+		| "enemy-still"
+		| "fireball";
 	x: [number, number];
 	y: [number, number];
 	flipped: boolean;
@@ -15,6 +23,7 @@ const spikeLeft = (
 	index: number,
 	y: number | [number, number] = 0,
 ): PatternData => ({
+	type: "spike",
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
@@ -22,6 +31,7 @@ const spikeLeft = (
 });
 
 const shortSpikeLeft = (y: number | [number, number] = 0): PatternData => ({
+	type: "spike",
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
@@ -29,6 +39,7 @@ const shortSpikeLeft = (y: number | [number, number] = 0): PatternData => ({
 });
 
 const longSpikeLeft = (y: number | [number, number] = 0): PatternData => ({
+	type: "spike",
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
@@ -39,6 +50,7 @@ const spikeRight = (
 	index: number,
 	y: number | [number, number] = 0,
 ): PatternData => ({
+	type: "spike",
 	x: [1080, 1080],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: true,
@@ -46,6 +58,7 @@ const spikeRight = (
 });
 
 const shortSpikeRight = (y: number | [number, number] = 0): PatternData => ({
+	type: "spike",
 	x: [1080, 1080],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: true,
@@ -53,6 +66,7 @@ const shortSpikeRight = (y: number | [number, number] = 0): PatternData => ({
 });
 
 const longSpikeRight = (y: number | [number, number] = 0): PatternData => ({
+	type: "spike",
 	x: [1080, 1080],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: true,
@@ -64,6 +78,7 @@ const rock = (
 	x: [number, number],
 	y: number | [number, number] = 0,
 ): PatternData => ({
+	type: "rock",
 	x: [1080 / 2 + x[0], 1080 / 2 + x[1]],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
@@ -74,6 +89,7 @@ const anyRock = (
 	x: [number, number],
 	y: number | [number, number] = 0,
 ): PatternData => ({
+	type: "rock",
 	x: [1080 / 2 + x[0], 1080 / 2 + x[1]],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
@@ -85,6 +101,7 @@ const enemyHorizontal = (
 	range: [number, number],
 	y: number | [number, number] = 0,
 ): PatternData => ({
+	type: "enemy-horizontal",
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
@@ -99,6 +116,7 @@ const enemyVertical = (
 	range: [number, number],
 	y: number | [number, number] = 0,
 ): PatternData => ({
+	type: "enemy-vertical",
 	x: typeof x == "number" ? [x, x] : x,
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
@@ -113,6 +131,7 @@ const enemyStill = (
 	x: number | [number, number],
 	y: number | [number, number] = 0,
 ): PatternData => ({
+	type: "enemy-still",
 	x: typeof x == "number" ? [x, x] : x,
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
@@ -127,6 +146,7 @@ const fireball = (
 	dy = 0,
 	y: number | [number, number] = 0,
 ): PatternData => ({
+	type: "fireball",
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
@@ -142,6 +162,7 @@ const iceball = (
 	dy = 0,
 	y: number | [number, number] = 0,
 ): PatternData => ({
+	type: "fireball",
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
 	flipped: false,
@@ -331,6 +352,9 @@ export const getObstaclePattern = (
 };
 
 export const getPatternSpacing = (level: number) => {
+	if (level == 10) {
+		level = 9;
+	}
 	const [minSpacingY, maxSpacingY] = levelData[level - 1].spacing;
 	return Math.random() * (maxSpacingY - minSpacingY) + minSpacingY;
 };

@@ -34,20 +34,20 @@ export const ObstacleC = ({
 	}
 
 	const getTexture = (level: number) => {
-		if (obstacle.data.texture.type == "texture-by-level") {
-			return obstacle.data.texture.textures[level - 1];
+		if (obstacle.colliderData.texture.type == "texture-by-level") {
+			return obstacle.colliderData.texture.textures[level - 1];
 		} else {
 			return getFrame(
-				obstacle.data.texture.textures,
-				obstacle.data.texture.fps,
+				obstacle.colliderData.texture.textures,
+				obstacle.colliderData.texture.fps,
 				obstacle.lt,
 			);
 		}
 	};
 
 	const blendMode =
-		obstacle.data.texture.type == "animation" ?
-			obstacle.data.texture.blendMode
+		obstacle.colliderData.texture.type == "animation" ?
+			obstacle.colliderData.texture.blendMode
 		:	"normal";
 
 	const isBefore = obstacle.y < nextLevelDepth - 1920 / 2;

@@ -1,20 +1,20 @@
-import { Obstacle, type ObstacleData } from "./obstacle";
-import { obstaclesData } from "./obstaclesData";
+import { Obstacle } from "./obstacle";
+import { collidersData } from "./obstaclesData";
 import {
 	getObstaclePattern,
 	getPatternSpacing,
 	type Pattern,
+	type PatternData,
 } from "./levelData";
 import type { Player } from "./player";
 import { pick } from "./utils";
 
-export const getPossibleObstacles = (_level: number) => {
-	return obstaclesData[0];
-};
-
-const getRandomObstacle = (level: number, type: ObstacleData["type"]) => {
-	const obstacles = getPossibleObstacles(level).filter((o) => o.type == type);
-	return obstacles[Math.floor(Math.random() * obstacles.length)];
+const wallPatternData: PatternData = {
+	type: "wall",
+	x: [0, 0],
+	y: [0, 0],
+	flipped: false,
+	index: [0],
 };
 
 export class ObstacleManager {
@@ -34,12 +34,13 @@ export class ObstacleManager {
 		this.previousPatterns = [];
 
 		this.obstacles = [
-			new Obstacle(0, 1920 / 2, false, getRandomObstacle(level, "wall")),
+			new Obstacle(0, 1920 / 2, false, collidersData[0], wallPatternData),
 			new Obstacle(
 				1080,
 				1920 / 2,
 				true,
-				getRandomObstacle(level, "wall"),
+				collidersData[0],
+				wallPatternData,
 			),
 		];
 	}
@@ -59,7 +60,8 @@ export class ObstacleManager {
 					0,
 					this.lastYWallLeft,
 					false,
-					getRandomObstacle(level, "wall"),
+					collidersData[0],
+					wallPatternData,
 				),
 			);
 			needSort = true;
@@ -72,23 +74,25 @@ export class ObstacleManager {
 					1080,
 					this.lastYWallRight,
 					true,
-					getRandomObstacle(level, "wall"),
+					collidersData[0],
+					wallPatternData,
 				),
 			);
 			needSort = true;
 		}
 
 		while (this.lastY <= depth + 1920) {
-			this.lastY += getPatternSpacing(level);
+			this.lastY += getPatternSpacing(
+				this.lastY < nextLevelDepth ? level : level + 1,
+			);
 			if (level == 9 && this.lastY >= nextLevelDepth) {
 				break;
 			}
 			const { pattern, side } = getObstaclePattern(
-				level,
+				this.lastY < nextLevelDepth ? level : level + 1,
 				this.previousPatterns,
 			);
-			const thisLevel = this.lastY >= nextLevelDepth ? level + 1 : level;
-			this.instantiatePattern(pattern, side, thisLevel);
+			this.instantiatePattern(pattern, side);
 			this.previousPatterns.push({ pattern, side });
 			needSort = true;
 		}
@@ -102,11 +106,7 @@ export class ObstacleManager {
 		});
 	}
 
-	instantiatePattern(
-		pattern: Pattern,
-		side: "left" | "right",
-		level: number,
-	) {
+	instantiatePattern(pattern: Pattern, side: "left" | "right") {
 		let maxY = this.lastY;
 		for (const patternData of pattern) {
 			const xMin =
@@ -119,27 +119,22 @@ export class ObstacleManager {
 			const y = yMin + Math.random() * (yMax - yMin);
 			const flipped =
 				side == "right" ? !patternData.flipped : patternData.flipped;
-			const obstacleData =
-				obstaclesData[level - 1][pick(patternData.index)];
-			const range: [number, number] | undefined =
+			const obstacleData = collidersData[pick(patternData.index)];
+			patternData.range =
 				(
 					side == "right" &&
-					obstacleData.type == "enemy-horizontal" &&
+					patternData.type == "enemy-horizontal" &&
 					patternData.range
 				) ?
 					[1080 - patternData.range[1], 1080 - patternData.range[0]]
 				:	patternData.range;
-			const radius = patternData.radius;
 			this.obstacles.push(
 				new Obstacle(
 					x,
 					this.lastY + y,
 					flipped,
 					obstacleData,
-					patternData.frequency,
-					range,
-					radius,
-					patternData.dy,
+					patternData,
 				),
 			);
 			maxY = Math.max(maxY, this.lastY + y);

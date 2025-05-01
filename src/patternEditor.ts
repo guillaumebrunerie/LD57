@@ -34,7 +34,6 @@ export class PatternEditor {
 		this.obstacleManager.instantiatePattern(
 			levelData[this.level - 1].patterns[this.patternIndex],
 			side,
-			this.level,
 		);
 	}
 

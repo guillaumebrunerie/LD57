@@ -147,7 +147,7 @@ export class Game {
 	shoot() {
 		const targets = this.obstaclesManager.obstacles.filter(
 			(o) =>
-				o.data.type.startsWith("enemy") &&
+				o.patternData.type.startsWith("enemy") &&
 				!o.isDestroyed &&
 				o.y > this.player.posY &&
 				o.y < this.depth + 1920,

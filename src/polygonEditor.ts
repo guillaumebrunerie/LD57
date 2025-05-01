@@ -1,35 +1,33 @@
 import { Polygon } from "pixi.js";
-import type { ObstacleData } from "./obstacle";
-import { getPossibleObstacles } from "./obstaclesManager";
 import { mod, type Point } from "./utils";
+import { collidersData, type ColliderData } from "./obstaclesData";
 
 export class PolygonEditor {
-	obstacle: ObstacleData;
-	possibleObstacles = getPossibleObstacles(1);
+	colliderData: ColliderData;
 	index = 0;
 
 	constructor(data?: PolygonEditor) {
 		this.index = data?.index ?? 0;
-		this.obstacle = this.possibleObstacles[this.index];
+		this.colliderData = collidersData[this.index];
 	}
 	tick(_: number) {}
 
 	switch(dx: number) {
-		this.index = mod(this.index + dx, this.possibleObstacles.length);
-		this.obstacle = this.possibleObstacles[this.index];
+		this.index = mod(this.index + dx, collidersData.length);
+		this.colliderData = collidersData[this.index];
 	}
 
 	click(pos: Point) {
-		this.obstacle.polygon = new Polygon(
-			...this.obstacle.polygon.points,
+		this.colliderData.polygon = new Polygon(
+			...this.colliderData.polygon.points,
 			pos.x,
 			pos.y,
 		);
 	}
 
 	move(dx: number, dy: number) {
-		this.obstacle.polygon = new Polygon(
-			...this.obstacle.polygon.points.map((t, i) =>
+		this.colliderData.polygon = new Polygon(
+			...this.colliderData.polygon.points.map((t, i) =>
 				i % 2 === 0 ? t + dx : t + dy,
 			),
 		);
@@ -37,7 +35,7 @@ export class PolygonEditor {
 
 	async save() {
 		await navigator.clipboard.writeText(
-			`new Polygon(${this.obstacle.polygon.points
+			`new Polygon(${this.colliderData.polygon.points
 				.map((t) => t.toFixed(2))
 				.join(", ")})`,
 		);
