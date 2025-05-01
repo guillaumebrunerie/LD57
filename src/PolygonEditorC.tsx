@@ -3,8 +3,8 @@ import { getBg } from "./Background";
 import { PolygonEditor } from "./polygonEditor";
 import { useOnKeyDown } from "./useOnKeyDown";
 import { useTickingObject } from "./useTickingObject";
-import { firstTexture } from "./obstacle";
 import { PolygonShape } from "./Polygon";
+import { firstTexture } from "./obstaclesData";
 
 export const PolygonEditorC = () => {
 	const polygonEditor = useTickingObject(PolygonEditor);

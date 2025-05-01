@@ -22,7 +22,7 @@ export const ObstacleC = ({
 			<sprite
 				x={obstacle.x}
 				y={obstacle.y}
-				anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
+				anchor={{ x: obstacle.pivotX, y: obstacle.pivotY }}
 				blendMode="add"
 				texture={getFrame(A_HeartExplosion, 15, obstacle.lt, "remove")}
 				scale={{
@@ -72,7 +72,7 @@ export const ObstacleC = ({
 				x={obstacle.x}
 				y={obstacle.y}
 				scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
-				anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
+				anchor={{ x: obstacle.pivotX, y: obstacle.pivotY }}
 				texture={getTexture(baseLevel)}
 				blendMode={blendMode}
 			/>
@@ -90,15 +90,15 @@ export const ObstacleC = ({
 					x={obstacle.x}
 					y={obstacle.y}
 					scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
-					anchor={{ x: obstacle.anchorX, y: obstacle.anchorY }}
+					anchor={{ x: obstacle.pivotX, y: obstacle.pivotY }}
 					texture={getTexture(maskingLevel)}
 					mask={ref.current}
 					alpha={ref.current ? 1 : 0}
 				/>
 			)}
 			<PolygonShape
-				x={obstacle.x - getTexture(1).width * obstacle.anchorX}
-				y={obstacle.y - getTexture(1).height * obstacle.anchorY}
+				x={obstacle.x - getTexture(1).width * obstacle.pivotX}
+				y={obstacle.y - getTexture(1).height * obstacle.pivotY}
 				scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
 				alpha={0}
 				polygon={obstacle.polygon()}

@@ -1,21 +1,53 @@
-export type PatternData = {
-	type:
-		| "wall"
-		| "spike"
-		| "rock"
-		| "enemy-horizontal"
-		| "enemy-vertical"
-		| "enemy-still"
-		| "fireball";
-	x: [number, number];
-	y: [number, number];
-	flipped: boolean;
-	index: number[];
-	frequency?: number;
-	range?: [number, number];
-	radius?: number;
-	dy?: number;
-};
+export type PatternData =
+	| {
+			type: "wall";
+	  }
+	| {
+			type: "spike";
+			x: [number, number];
+			y: [number, number];
+			flipped: boolean;
+			index: number[];
+	  }
+	| {
+			type: "rock";
+			x: [number, number];
+			y: [number, number];
+			index: number[];
+	  }
+	| {
+			type: "enemy-horizontal";
+			x: [number, number];
+			y: [number, number];
+			index: number[];
+			speed: number;
+			range: [number, number];
+	  }
+	| {
+			type: "enemy-vertical";
+			x: [number, number];
+			y: [number, number];
+			index: number[];
+			speed: number;
+			range: [number, number];
+	  }
+	| {
+			type: "enemy-still";
+			x: [number, number];
+			y: [number, number];
+			index: number[];
+			speed: number;
+			radius: number;
+	  }
+	| {
+			type: "fireball";
+			x: [number, number];
+			y: [number, number];
+			index: number[];
+			speed: number;
+			range: [number, number];
+			dy: number;
+	  };
 
 export type Pattern = PatternData[];
 
@@ -81,7 +113,6 @@ const rock = (
 	type: "rock",
 	x: [1080 / 2 + x[0], 1080 / 2 + x[1]],
 	y: typeof y == "number" ? [y, y] : y,
-	flipped: false,
 	index: [index],
 });
 
@@ -92,7 +123,6 @@ const anyRock = (
 	type: "rock",
 	x: [1080 / 2 + x[0], 1080 / 2 + x[1]],
 	y: typeof y == "number" ? [y, y] : y,
-	flipped: false,
 	index: [5, 6, 7],
 });
 
@@ -104,9 +134,8 @@ const enemyHorizontal = (
 	type: "enemy-horizontal",
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
-	flipped: false,
 	index: [8],
-	frequency: (range[1] - range[0]) / speed,
+	speed,
 	range,
 });
 
@@ -119,9 +148,8 @@ const enemyVertical = (
 	type: "enemy-vertical",
 	x: typeof x == "number" ? [x, x] : x,
 	y: typeof y == "number" ? [y, y] : y,
-	flipped: false,
 	index: [9],
-	frequency: (range[1] - range[0]) / speed,
+	speed,
 	range,
 });
 
@@ -134,9 +162,8 @@ const enemyStill = (
 	type: "enemy-still",
 	x: typeof x == "number" ? [x, x] : x,
 	y: typeof y == "number" ? [y, y] : y,
-	flipped: false,
 	radius,
-	frequency: 1 / speed,
+	speed,
 	index: [10],
 });
 
@@ -149,9 +176,8 @@ const fireball = (
 	type: "fireball",
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
-	flipped: false,
 	index: [11],
-	frequency: (range[1] - range[0]) / speed,
+	speed,
 	range,
 	dy,
 });
@@ -165,9 +191,8 @@ const iceball = (
 	type: "fireball",
 	x: [0, 0],
 	y: typeof y == "number" ? [y, y] : y,
-	flipped: false,
 	index: [12],
-	frequency: (range[1] - range[0]) / speed,
+	speed,
 	range,
 	dy,
 });

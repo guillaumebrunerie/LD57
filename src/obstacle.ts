@@ -1,39 +1,15 @@
-import { Matrix, Texture, type Polygon } from "pixi.js";
+import { Matrix } from "pixi.js";
 import type { Player } from "./player";
 import { getDuration } from "./Animation";
 import { A_HeartExplosion, S_EnemyDiePuff, S_EnemyDieVoice } from "./assets";
 import { seesaw, smoothTriangle } from "./utils";
-import { playerData, playerPoints, type ColliderData } from "./obstaclesData";
+import {
+	firstTexture,
+	playerData,
+	playerPoints,
+	type ColliderData,
+} from "./obstaclesData";
 import type { PatternData } from "./levelData";
-
-export type ObstacleData = {
-	type:
-		| "wall"
-		| "spike"
-		| "rock"
-		| "enemy-horizontal"
-		| "enemy-vertical"
-		| "enemy-still"
-		| "fireball"
-		| "player";
-	texture:
-		| { type: "texture-by-level"; textures: Texture[] }
-		| {
-				type: "animation";
-				textures: Texture[];
-				fps: number;
-				blendMode: "normal" | "add";
-		  };
-	polygon: Polygon;
-};
-
-export const firstTexture = (data: ColliderData): Texture => {
-	if (data.texture.type == "texture-by-level") {
-		return data.texture.textures[0];
-	} else {
-		return data.texture.textures[0];
-	}
-};
 
 export class Obstacle {
 	lt = Math.random() * 1000;
@@ -43,8 +19,8 @@ export class Obstacle {
 	y: number;
 	scaleX: number;
 	scaleY: number;
-	anchorX = 0.5;
-	anchorY = 0.5;
+	pivotX: number;
+	pivotY: number;
 	id: string;
 	colliderData: ColliderData;
 	patternData: PatternData;
@@ -53,9 +29,7 @@ export class Obstacle {
 	destroyTimeout = Infinity;
 
 	constructor(
-		x: number,
-		y: number,
-		flipped: boolean,
+		{ x = 0, y = 0, scaleX = 1, scaleY = 1, pivotX = 0.5, pivotY = 0.5 },
 		colliderData: ColliderData,
 		patternData: PatternData,
 	) {
@@ -64,13 +38,12 @@ export class Obstacle {
 		this.originalY = y;
 		this.x = x;
 		this.y = y;
-		this.scaleX = flipped ? -1 : 1;
-		this.scaleY = 1;
+		this.scaleX = scaleX;
+		this.scaleY = scaleY;
+		this.pivotX = pivotX;
+		this.pivotY = pivotY;
 		this.colliderData = colliderData;
 		this.patternData = patternData;
-		if (["wall", "spike"].includes(this.patternData.type)) {
-			this.anchorX = 0;
-		}
 	}
 
 	tick(delta: number) {
@@ -80,75 +53,42 @@ export class Obstacle {
 			return;
 		}
 		switch (this.patternData.type) {
-			case "enemy-horizontal":
-				if (
-					this.patternData.frequency === undefined ||
-					!this.patternData.range
-				) {
-					return;
-				}
+			case "enemy-horizontal": {
+				const { range, speed } = this.patternData;
+				const dRange = range[1] - range[0];
 				this.x =
-					smoothTriangle(this.lt / this.patternData.frequency) *
-						(this.patternData.range[1] -
-							this.patternData.range[0]) +
-					this.patternData.range[0];
+					smoothTriangle((this.lt * speed) / dRange) * dRange +
+					range[0];
 				this.scaleX =
-					Math.floor(this.lt / this.patternData.frequency) % 2 === 0 ?
-						1
-					:	-1;
+					Math.floor((this.lt * speed) / dRange) % 2 === 0 ? 1 : -1;
 				break;
-			case "enemy-vertical":
-				if (
-					this.patternData.frequency === undefined ||
-					!this.patternData.range
-				) {
-					return;
-				}
+			}
+			case "enemy-vertical": {
+				const { range, speed } = this.patternData;
+				const dRange = range[1] - range[0];
 				this.y =
 					this.originalY +
-					smoothTriangle(this.lt / this.patternData.frequency) *
-						(this.patternData.range[1] -
-							this.patternData.range[0]) +
-					this.patternData.range[0];
+					smoothTriangle((this.lt * speed) / dRange) * dRange +
+					range[0];
 				break;
-			case "enemy-still":
-				if (
-					this.patternData.frequency === undefined ||
-					!this.patternData.radius
-				) {
-					return;
-				}
-				this.x =
-					this.originalX +
-					Math.cos(this.lt / this.patternData.frequency) *
-						this.patternData.radius;
-				this.y =
-					this.originalY +
-					Math.sin(this.lt / this.patternData.frequency) *
-						this.patternData.radius;
+			}
+			case "enemy-still": {
+				const { speed, radius } = this.patternData;
+				this.x = this.originalX + Math.cos(this.lt * speed) * radius;
+				this.y = this.originalY + Math.sin(this.lt * speed) * radius;
 				break;
-			case "fireball":
-				if (
-					this.patternData.frequency === undefined ||
-					!this.patternData.range ||
-					this.patternData.dy == undefined
-				) {
-					return;
-				}
-				this.x =
-					seesaw(this.lt / this.patternData.frequency) *
-						(this.patternData.range[1] -
-							this.patternData.range[0]) +
-					this.patternData.range[0];
+			}
+			case "fireball": {
+				const { range, speed, dy } = this.patternData;
+				const dRange = range[1] - range[0];
+				this.x = seesaw((this.lt * speed) / dRange) * dRange + range[0];
 				this.y =
-					this.originalY +
-					seesaw(this.lt / this.patternData.frequency) *
-						this.patternData.dy;
+					this.originalY + seesaw((this.lt * speed) / dRange) * dy;
 				if (this.scaleX == 1) {
 					this.x = 1080 / 2 - this.x;
 				}
-
 				break;
+			}
 		}
 	}
 
@@ -188,8 +128,8 @@ export class Obstacle {
 		transform.setTransform(
 			this.x,
 			this.y,
-			this.anchorX * firstTexture(this.colliderData).width,
-			this.anchorY * firstTexture(this.colliderData).height,
+			this.pivotX * firstTexture(this.colliderData).width,
+			this.pivotY * firstTexture(this.colliderData).height,
 			this.scaleX,
 			this.scaleY,
 			0,
