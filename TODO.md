@@ -1,4 +1,2 @@
 - rotation of obstacles
 - angle for fireballs
-- do not gain life/arrow at level 10
-- (obstacles as separate types)

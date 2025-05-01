@@ -202,14 +202,16 @@ export class Game {
 			this.nextLevelDepth += 1920 * 2;
 		}
 		this.level++;
-		if (
-			!this.player.heartIndicators.isFull() ||
-			!this.player.arrowIndicators.isFull()
-		) {
-			void S_AddHeartAndArrow.play({ volume: 0.3 });
+		if (this.level < 10) {
+			if (
+				!this.player.heartIndicators.isFull() ||
+				!this.player.arrowIndicators.isFull()
+			) {
+				void S_AddHeartAndArrow.play({ volume: 0.3 });
+			}
+			this.player.heartIndicators.refill();
+			this.player.arrowIndicators.refill();
 		}
-		this.player.heartIndicators.refill();
-		this.player.arrowIndicators.refill();
 		if (this.level <= levelData.length) {
 			this.cameraSpeed = levelData[this.level - 1].speed;
 		}
