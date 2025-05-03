@@ -4,7 +4,7 @@ import { PolygonEditor } from "./polygonEditor";
 import { useOnKeyDown } from "./useOnKeyDown";
 import { useTickingObject } from "./useTickingObject";
 import { PolygonShape } from "./Polygon";
-import { firstTexture } from "./obstaclesData";
+import { firstTexture } from "./colliderData";
 
 export const PolygonEditorC = () => {
 	const polygonEditor = useTickingObject(PolygonEditor);

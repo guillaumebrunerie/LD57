@@ -8,7 +8,7 @@ import {
 	playerData,
 	playerPoints,
 	type ColliderData,
-} from "./obstaclesData";
+} from "./colliderData";
 import type { PatternData } from "./levelData";
 
 export class Obstacle {
@@ -21,6 +21,7 @@ export class Obstacle {
 	scaleY: number;
 	pivotX: number;
 	pivotY: number;
+	rotation: number;
 	id: string;
 	colliderData: ColliderData;
 	patternData: PatternData;
@@ -29,7 +30,7 @@ export class Obstacle {
 	destroyTimeout = Infinity;
 
 	constructor(
-		{ x = 0, y = 0, scaleX = 1, scaleY = 1, pivotX = 0.5, pivotY = 0.5 },
+		{ x = 0, y = 0, scaleX = 1, scaleY = 1, rotation = 0 },
 		colliderData: ColliderData,
 		patternData: PatternData,
 	) {
@@ -40,8 +41,9 @@ export class Obstacle {
 		this.y = y;
 		this.scaleX = scaleX;
 		this.scaleY = scaleY;
-		this.pivotX = pivotX;
-		this.pivotY = pivotY;
+		this.pivotX = colliderData.pivot.x;
+		this.pivotY = colliderData.pivot.y;
+		this.rotation = rotation;
 		this.colliderData = colliderData;
 		this.patternData = patternData;
 	}
@@ -132,7 +134,7 @@ export class Obstacle {
 			this.pivotY * firstTexture(this.colliderData).height,
 			this.scaleX,
 			this.scaleY,
-			0,
+			this.rotation,
 			0,
 			0,
 		);

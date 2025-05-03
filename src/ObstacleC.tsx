@@ -73,6 +73,7 @@ export const ObstacleC = ({
 				y={obstacle.y}
 				scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
 				anchor={{ x: obstacle.pivotX, y: obstacle.pivotY }}
+				rotation={obstacle.rotation}
 				texture={getTexture(baseLevel)}
 				blendMode={blendMode}
 			/>
@@ -91,6 +92,7 @@ export const ObstacleC = ({
 					y={obstacle.y}
 					scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
 					anchor={{ x: obstacle.pivotX, y: obstacle.pivotY }}
+					rotation={obstacle.rotation}
 					texture={getTexture(maskingLevel)}
 					mask={ref.current}
 					alpha={ref.current ? 1 : 0}
@@ -100,6 +102,7 @@ export const ObstacleC = ({
 				x={obstacle.x - getTexture(1).width * obstacle.pivotX}
 				y={obstacle.y - getTexture(1).height * obstacle.pivotY}
 				scale={{ x: obstacle.scaleX, y: obstacle.scaleY }}
+				rotation={obstacle.rotation}
 				alpha={0}
 				polygon={obstacle.polygon()}
 			/>

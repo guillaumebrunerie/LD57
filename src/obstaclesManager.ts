@@ -1,8 +1,9 @@
 import { Obstacle } from "./obstacle";
-import { collidersData } from "./obstaclesData";
+import { collidersData } from "./colliderData";
 import {
 	getObstaclePattern,
 	getPatternSpacing,
+	type NumberOrRange,
 	type Pattern,
 	type PatternData,
 } from "./levelData";
@@ -29,7 +30,7 @@ export class ObstacleManager {
 
 		this.obstacles = [
 			new Obstacle(
-				{ x: 0, y: 1920 / 2, pivotX: 0 },
+				{ x: 0, y: 1920 / 2 },
 				collidersData[0],
 				wallPatternData,
 			),
@@ -38,7 +39,6 @@ export class ObstacleManager {
 					x: 1080,
 					y: 1920 / 2,
 					scaleX: -1,
-					pivotX: 0,
 				},
 				collidersData[0],
 				wallPatternData,
@@ -61,7 +61,6 @@ export class ObstacleManager {
 					{
 						x: 0,
 						y: this.lastYWallLeft,
-						pivotX: 0,
 					},
 					collidersData[0],
 					wallPatternData,
@@ -77,7 +76,6 @@ export class ObstacleManager {
 					{
 						x: 1080,
 						y: this.lastYWallRight,
-						pivotX: 0,
 						scaleX: -1,
 					},
 					collidersData[0],
@@ -114,34 +112,41 @@ export class ObstacleManager {
 
 	instantiatePattern(pattern: Pattern, side: "left" | "right") {
 		let maxY = this.lastY;
-		for (const patternData of pattern) {
+		for (let patternData of pattern) {
 			if (patternData.type == "wall") {
 				continue;
 			}
-			const xMin =
-				side == "right" ? 1080 - patternData.x[1] : patternData.x[0];
-			const xMax =
-				side == "right" ? 1080 - patternData.x[0] : patternData.x[1];
-			const yMin = patternData.y[0];
-			const yMax = patternData.y[1];
-			const x = xMin + Math.random() * (xMax - xMin);
-			const y = yMin + Math.random() * (yMax - yMin);
+			const getValue = (value: NumberOrRange): number => {
+				if (typeof value == "number") {
+					return value;
+				} else {
+					return value[0] + Math.random() * (value[1] - value[0]);
+				}
+			};
+			const x =
+				side == "right" ?
+					1080 - getValue(patternData.transform.x || 0)
+				:	getValue(patternData.transform.x || 0);
+			const y = getValue(patternData.transform.y || 0);
 			const scaleX =
-				("flipped" in patternData && patternData.flipped ? -1 : 1) *
+				getValue(patternData.transform.scaleX || 1) *
 				(side == "right" ? -1 : 1);
+			const scaleY = getValue(patternData.transform.scaleY || 1);
+			const rotation =
+				(getValue(patternData.transform.rotation || 0) * Math.PI) / 180;
 			const obstacleData = collidersData[pick(patternData.index)];
-			if (patternData.type == "enemy-horizontal") {
-				patternData.range =
-					side == "right" && patternData.range ?
-						[
-							1080 - patternData.range[1],
-							1080 - patternData.range[0],
-						]
-					:	patternData.range;
+			if (patternData.type == "enemy-horizontal" && side == "right") {
+				patternData = {
+					...patternData,
+					range: [
+						1080 - patternData.range[1],
+						1080 - patternData.range[0],
+					],
+				};
 			}
 			this.obstacles.push(
 				new Obstacle(
-					{ x, y: this.lastY + y, scaleX },
+					{ x, y: this.lastY + y, scaleX, scaleY, rotation },
 					obstacleData,
 					patternData,
 				),

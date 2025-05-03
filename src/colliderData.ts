@@ -81,6 +81,7 @@ import {
 } from "./assets";
 
 export type ColliderData = {
+	pivot: { x: number; y: number };
 	texture:
 		| { type: "texture-by-level"; textures: Texture[] }
 		| {
@@ -140,6 +141,7 @@ export const firstTexture = (data: ColliderData): Texture => {
 export const collidersData: ColliderData[] = [
 	{
 		// Wall
+		pivot: { x: 0, y: 0.5 },
 		texture: makeTexturesByLevel(
 			T_Bg_Walls_Level1,
 			T_Bg_Walls_Level2,
@@ -230,6 +232,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Double spike
+		pivot: { x: 0, y: 0.5 },
 		texture: makeTexturesByLevel(
 			T_WallSpike_Level1_01,
 			T_WallSpike_Level2_01,
@@ -256,6 +259,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Long spike
+		pivot: { x: 0, y: 0.5 },
 		texture: makeTexturesByLevel(
 			T_WallSpike_Level1_02,
 			T_WallSpike_Level2_02,
@@ -298,6 +302,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Short spike
+		pivot: { x: 0, y: 0.5 },
 		texture: makeTexturesByLevel(
 			T_WallSpike_Level1_03,
 			T_WallSpike_Level2_03,
@@ -324,6 +329,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Thick spike
+		pivot: { x: 0, y: 0.5 },
 		texture: makeTexturesByLevel(
 			T_WallSpike_Level1_04,
 			T_WallSpike_Level2_04,
@@ -348,6 +354,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Diamond rock
+		pivot: { x: 0.5, y: 0.5 },
 		texture: makeTexturesByLevel(
 			T_Rock_Level1_01,
 			T_Rock_Level2_01,
@@ -380,6 +387,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Horizontal rock
+		pivot: { x: 0.5, y: 0.5 },
 		texture: makeTexturesByLevel(
 			T_Rock_Level1_02,
 			T_Rock_Level2_02,
@@ -422,6 +430,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Small rock
+		pivot: { x: 0.5, y: 0.5 },
 		texture: makeTexturesByLevel(
 			T_Rock_Level1_03,
 			T_Rock_Level2_03,
@@ -460,6 +469,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Horizontal enemy
+		pivot: { x: 0.5, y: 0.5 },
 		texture: makeAnimation(A_EnemyFlyingIdle, 10),
 		polygon: new Polygon(
 			211.68,
@@ -476,6 +486,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Vertical enemy
+		pivot: { x: 0.5, y: 0.5 },
 		texture: makeAnimation(A_EnemyStillIdle, 10),
 		polygon: new Polygon(
 			247.55,
@@ -498,6 +509,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Still enemy
+		pivot: { x: 0.5, y: 0.5 },
 		texture: makeAnimation(A_Enemy3Idle, 10),
 		polygon: new Polygon(
 			253.22,
@@ -524,6 +536,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Fireball
+		pivot: { x: 0.5, y: 0.5 },
 		texture: makeAnimation(A_Fireball, 30, "add"),
 		polygon: new Polygon(
 			50.84,
@@ -538,6 +551,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Iceball
+		pivot: { x: 0.5, y: 0.5 },
 		texture: makeAnimation(A_Iceball, 30, "add"),
 		polygon: new Polygon(
 			50.84,
@@ -552,6 +566,7 @@ export const collidersData: ColliderData[] = [
 	},
 	{
 		// Player
+		pivot: { x: 0.5, y: 0.5 },
 		texture: makeAnimation(A_CupidIdle, 10),
 		polygon: new Polygon(
 			192.8,

@@ -1,6 +1,6 @@
 import { Polygon } from "pixi.js";
 import { mod, type Point } from "./utils";
-import { collidersData, type ColliderData } from "./obstaclesData";
+import { collidersData, type ColliderData } from "./colliderData";
 
 export class PolygonEditor {
 	colliderData: ColliderData;

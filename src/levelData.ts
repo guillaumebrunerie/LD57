@@ -1,48 +1,51 @@
+export type NumberOrRange = number | [number, number];
+
+export type TransformBlueprint = {
+	x?: NumberOrRange;
+	y?: NumberOrRange;
+	scaleX?: NumberOrRange;
+	scaleY?: NumberOrRange;
+	rotation?: NumberOrRange;
+};
+
 export type PatternData =
 	| {
 			type: "wall";
 	  }
 	| {
 			type: "spike";
-			x: [number, number];
-			y: [number, number];
-			flipped: boolean;
+			transform: TransformBlueprint;
 			index: number[];
 	  }
 	| {
 			type: "rock";
-			x: [number, number];
-			y: [number, number];
+			transform: TransformBlueprint;
 			index: number[];
 	  }
 	| {
 			type: "enemy-horizontal";
-			x: [number, number];
-			y: [number, number];
+			transform: TransformBlueprint;
 			index: number[];
 			speed: number;
 			range: [number, number];
 	  }
 	| {
 			type: "enemy-vertical";
-			x: [number, number];
-			y: [number, number];
+			transform: TransformBlueprint;
 			index: number[];
 			speed: number;
 			range: [number, number];
 	  }
 	| {
 			type: "enemy-still";
-			x: [number, number];
-			y: [number, number];
+			transform: TransformBlueprint;
 			index: number[];
 			speed: number;
 			radius: number;
 	  }
 	| {
 			type: "fireball";
-			x: [number, number];
-			y: [number, number];
+			transform: TransformBlueprint;
 			index: number[];
 			speed: number;
 			range: [number, number];
@@ -51,150 +54,98 @@ export type PatternData =
 
 export type Pattern = PatternData[];
 
-const spikeLeft = (
-	index: number,
-	y: number | [number, number] = 0,
-): PatternData => ({
+const spike1 = (transform: TransformBlueprint = {}): PatternData => ({
 	type: "spike",
-	x: [0, 0],
-	y: typeof y == "number" ? [y, y] : y,
-	flipped: false,
-	index: [index],
+	transform,
+	index: [1],
 });
 
-const shortSpikeLeft = (y: number | [number, number] = 0): PatternData => ({
+const spike2 = (transform: TransformBlueprint = {}): PatternData => ({
 	type: "spike",
-	x: [0, 0],
-	y: typeof y == "number" ? [y, y] : y,
-	flipped: false,
-	index: [1, 3, 4],
-});
-
-const longSpikeLeft = (y: number | [number, number] = 0): PatternData => ({
-	type: "spike",
-	x: [0, 0],
-	y: typeof y == "number" ? [y, y] : y,
-	flipped: false,
+	transform,
 	index: [2],
 });
 
-const spikeRight = (
-	index: number,
-	y: number | [number, number] = 0,
-): PatternData => ({
+const spike3 = (transform: TransformBlueprint = {}): PatternData => ({
 	type: "spike",
-	x: [1080, 1080],
-	y: typeof y == "number" ? [y, y] : y,
-	flipped: true,
-	index: [index],
+	transform,
+	index: [3],
 });
 
-const shortSpikeRight = (y: number | [number, number] = 0): PatternData => ({
+const spike4 = (transform: TransformBlueprint = {}): PatternData => ({
 	type: "spike",
-	x: [1080, 1080],
-	y: typeof y == "number" ? [y, y] : y,
-	flipped: true,
-	index: [1, 3, 4],
+	transform,
+	index: [4],
 });
 
-const longSpikeRight = (y: number | [number, number] = 0): PatternData => ({
-	type: "spike",
-	x: [1080, 1080],
-	y: typeof y == "number" ? [y, y] : y,
-	flipped: true,
-	index: [2],
-});
-
-const rock = (
-	index: number,
-	x: [number, number],
-	y: number | [number, number] = 0,
-): PatternData => ({
+const rock1 = (transform: TransformBlueprint = {}): PatternData => ({
 	type: "rock",
-	x: [1080 / 2 + x[0], 1080 / 2 + x[1]],
-	y: typeof y == "number" ? [y, y] : y,
-	index: [index],
+	transform,
+	index: [5],
 });
 
-const anyRock = (
-	x: [number, number],
-	y: number | [number, number] = 0,
-): PatternData => ({
+const rock2 = (transform: TransformBlueprint = {}): PatternData => ({
 	type: "rock",
-	x: [1080 / 2 + x[0], 1080 / 2 + x[1]],
-	y: typeof y == "number" ? [y, y] : y,
-	index: [5, 6, 7],
+	transform,
+	index: [6],
+});
+
+const rock3 = (transform: TransformBlueprint = {}): PatternData => ({
+	type: "rock",
+	transform,
+	index: [7],
 });
 
 const enemyHorizontal = (
-	speed: number,
-	range: [number, number],
-	y: number | [number, number] = 0,
+	data: TransformBlueprint & { speed: number; range: [number, number] },
 ): PatternData => ({
 	type: "enemy-horizontal",
-	x: [0, 0],
-	y: typeof y == "number" ? [y, y] : y,
+	transform: data,
+	speed: data.speed,
+	range: data.range,
 	index: [8],
-	speed,
-	range,
 });
 
 const enemyVertical = (
-	speed: number,
-	x: number | [number, number],
-	range: [number, number],
-	y: number | [number, number] = 0,
+	data: TransformBlueprint & { speed: number; range: [number, number] },
 ): PatternData => ({
 	type: "enemy-vertical",
-	x: typeof x == "number" ? [x, x] : x,
-	y: typeof y == "number" ? [y, y] : y,
+	transform: data,
+	speed: data.speed,
+	range: data.range,
 	index: [9],
-	speed,
-	range,
 });
 
 const enemyStill = (
-	radius: number,
-	speed: number,
-	x: number | [number, number],
-	y: number | [number, number] = 0,
+	data: TransformBlueprint & { speed: number; radius: number },
 ): PatternData => ({
 	type: "enemy-still",
-	x: typeof x == "number" ? [x, x] : x,
-	y: typeof y == "number" ? [y, y] : y,
-	radius,
-	speed,
+	transform: data,
+	speed: data.speed,
+	radius: data.radius,
 	index: [10],
 });
 
 const fireball = (
-	speed: number,
-	range: [number, number],
-	dy = 0,
-	y: number | [number, number] = 0,
+	data: TransformBlueprint & { speed: number; range: [number, number] },
 ): PatternData => ({
 	type: "fireball",
-	x: [0, 0],
-	y: typeof y == "number" ? [y, y] : y,
+	transform: data,
 	index: [11],
-	speed,
-	range,
-	dy,
+	speed: data.speed,
+	range: data.range,
+	dy: 0,
 });
 
 const iceball = (
-	speed: number,
-	range: [number, number],
-	dy = 0,
-	y: number | [number, number] = 0,
+	data: TransformBlueprint & { speed: number; range: [number, number] },
 ): PatternData => ({
 	type: "fireball",
-	x: [0, 0],
-	y: typeof y == "number" ? [y, y] : y,
+	transform: data,
 	index: [12],
-	speed,
-	range,
-	dy,
+	speed: data.speed,
+	range: data.range,
+	dy: 0,
 });
 
 type LevelData = {
@@ -208,69 +159,99 @@ const patterns: Pattern[][] = [
 	[],
 	// Difficulty 1
 	[
-		[fireball(2000, [-700, 1700])],
-		[shortSpikeRight()],
-		[iceball(2000, [-700, 1700])],
-		[rock(6, [50, 200])],
-		[rock(7, [-50, 200])],
-		[enemyStill(20, 2, [600, 700])],
-		[enemyStill(20, 2, [600, 800])],
+		[fireball({ speed: 2000, range: [-700, 1700] })],
+		// [shortSpikeRight()],
+		[iceball({ speed: 2000, range: [-700, 1700] })],
+		[rock2({ x: [600, 750] })],
+		[rock3({ x: [500, 750] })],
+		[enemyStill({ x: [600, 700], radius: 20, speed: 2 })],
+		[enemyStill({ x: [600, 800], radius: 20, speed: 2 })],
 	],
 	// Difficulty 2
 	[
-		[spikeRight(2)],
-		[spikeRight(2, [0, 50])],
-		[spikeLeft(3, [0, 100]), spikeRight(4, [0, 100])],
-		[spikeLeft(1, [0, 100]), spikeRight(3, [0, 100])],
-		[rock(5, [50, 200])],
+		[spike2({ x: 1080, scaleX: -1 })],
+		[spike2({ x: 1080, y: [0, 50], scaleX: -1 })],
+		[spike3({ y: [0, 100] }), spike4({ x: 1080, y: [0, 100], scaleX: -1 })],
+		[spike1({ y: [0, 100] }), spike3({ x: 1080, y: [0, 100], scaleX: -1 })],
+		[rock1({ x: [600, 750] })],
 	],
 	// Difficulty 3
 	[
-		[enemyHorizontal(580, [250, 830], [-100, 100])],
-		[spikeRight(1), enemyHorizontal(450, [230, 680], [-100, 100])],
-		[spikeRight(3), enemyHorizontal(350, [230, 580], [-100, 100])],
-		[spikeRight(4), enemyHorizontal(500, [230, 730], [-100, 100])],
+		[enemyHorizontal({ y: [-100, 100], speed: 580, range: [250, 830] })],
+		[
+			spike1({ x: 1080, scaleX: -1 }),
+			enemyHorizontal({ y: [-100, 100], speed: 450, range: [230, 680] }),
+		],
+		[
+			spike3({ x: 1080, scaleX: -1 }),
+			enemyHorizontal({ y: [-100, 100], speed: 350, range: [230, 580] }),
+		],
+		[
+			spike4({ x: 1080, scaleX: -1 }),
+			enemyHorizontal({ y: [-100, 100], speed: 500, range: [230, 730] }),
+		],
 	],
 	// Difficulty 4
 	[
-		[spikeRight(2), enemyHorizontal(175, [230, 580], [100, 150])],
-		[spikeRight(2), enemyVertical(250, 480, [100, 350])],
-		[spikeRight(1), enemyVertical(400, [280, 480], [-200, 200])],
-		[spikeRight(3), enemyVertical(400, [280, 480], [-200, 200])],
-		[spikeRight(4), enemyVertical(400, [280, 480], [-200, 200])],
+		[
+			spike2({ x: 1080, scaleX: -1 }),
+			enemyHorizontal({ y: [100, 150], speed: 175, range: [230, 580] }),
+		],
+		[
+			spike2({ x: 1080, scaleX: -1 }),
+			enemyVertical({ x: 480, speed: 250, range: [100, 350] }),
+		],
+		[
+			spike1({ x: 1080, scaleX: -1 }),
+			enemyVertical({ x: [280, 480], speed: 400, range: [-200, 200] }),
+		],
+		[
+			spike3({ x: 1080, scaleX: -1 }),
+			enemyVertical({ x: [280, 480], speed: 400, range: [-200, 200] }),
+		],
+		[
+			spike4({ x: 1080, scaleX: -1 }),
+			enemyVertical({ x: [280, 480], speed: 400, range: [-200, 200] }),
+		],
 	],
 	// Difficulty 5
 	[
-		[spikeRight(2), spikeLeft(1, [350, 450])],
-		[spikeRight(2), spikeLeft(3, [200, 300])],
-		[spikeRight(2), spikeLeft(4, [200, 300])],
+		[spike2({ x: 1080, scaleX: -1 }), spike1({ y: [350, 450] })],
+		[spike2({ x: 1080, scaleX: -1 }), spike3({ y: [200, 300] })],
+		[spike2({ x: 1080, scaleX: -1 }), spike4({ y: [200, 300] })],
 	],
 	// Difficulty 6
 	[
 		[
-			enemyHorizontal(290, [250, 830]),
-			enemyHorizontal(290, [250, 830], [200, 300]),
+			enemyHorizontal({ speed: 290, range: [250, 830] }),
+			enemyHorizontal({ y: [200, 300], speed: 290, range: [250, 830] }),
 		],
-		[spikeRight(1), enemyHorizontal(450, [230, 680], [100, 200])],
-		[spikeRight(3), enemyHorizontal(350, [230, 580], [100, 200])],
 		[
-			spikeRight(4),
-			enemyHorizontal(500, [230, 730], [-200, -100]),
-			enemyHorizontal(500, [230, 730], [100, 200]),
+			spike1({ x: 1080, scaleX: -1 }),
+			enemyHorizontal({ y: [100, 200], speed: 450, range: [230, 680] }),
+		],
+		[
+			spike3({ x: 1080, scaleX: -1 }),
+			enemyHorizontal({ y: [100, 200], speed: 350, range: [230, 580] }),
+		],
+		[
+			spike4({ x: 1080, scaleX: -1 }),
+			enemyHorizontal({ y: [-200, -100], speed: 500, range: [230, 730] }),
+			enemyHorizontal({ y: [100, 200], speed: 500, range: [230, 730] }),
 		],
 	],
 	// Difficulty 7
 	[
-		[spikeRight(2), spikeLeft(2, [600, 700])],
+		[spike2({ x: 1080, scaleX: -1 }), spike2({ y: [600, 700] })],
 		[
-			spikeRight(3),
-			spikeLeft(4, [0, 100]),
-			enemyHorizontal(115, [350, 580]),
+			spike3({ x: 1080, scaleX: -1 }),
+			spike4({ y: [0, 100] }),
+			enemyHorizontal({ speed: 115, range: [350, 580] }),
 		],
 		[
-			spikeRight(4),
-			spikeLeft(1, [0, 100]),
-			enemyHorizontal(200, [400, 730]),
+			spike4({ x: 1080, scaleX: -1 }),
+			spike1({ y: [0, 100] }),
+			enemyHorizontal({ speed: 200, range: [400, 730] }),
 		],
 	],
 ];
