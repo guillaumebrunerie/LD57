@@ -159,11 +159,13 @@ const patterns: Pattern[][] = [
 	[],
 	// Difficulty 1
 	[
-		[fireball({ speed: 2000, range: [-700, 1700] })],
-		// [shortSpikeRight()],
-		[iceball({ speed: 2000, range: [-700, 1700] })],
+		[spike1({ x: 1080, scaleX: -1 })],
+		[spike3({ x: 1080, scaleX: -1 })],
+		[spike4({ x: 1080, scaleX: -1 })],
 		[rock2({ x: [600, 750] })],
 		[rock3({ x: [500, 750] })],
+		[fireball({ speed: 2000, range: [-700, 1700] })],
+		[iceball({ speed: 2000, range: [-700, 1700] })],
 		[enemyStill({ x: [600, 700], radius: 20, speed: 2 })],
 		[enemyStill({ x: [600, 800], radius: 20, speed: 2 })],
 	],
@@ -325,31 +327,26 @@ export const levelData: LevelData[] = [
 export const totalDuration =
 	1920 * levelData.reduce((acc, level) => acc + level.duration, 0);
 
-const otherSide = {
-	left: "right",
-	right: "left",
-} as const;
-
 export const getObstaclePattern = (
 	level: number,
-	previousPatterns: { side: "left" | "right"; pattern: Pattern }[],
+	previousPatterns: { flipped: boolean; pattern: Pattern }[],
 ) => {
 	const last = previousPatterns.at(-1);
 	const previousLast = previousPatterns.at(-2);
-	let side: "left" | "right";
+	let flipped = false;
 	if (!last) {
-		side = Math.random() < 0.5 ? "left" : "right";
-	} else if (!previousLast || last.side != previousLast.side) {
-		side = Math.random() < 0.7 ? otherSide[last.side] : last.side;
+		flipped = Math.random() < 0.5;
+	} else if (!previousLast || last.flipped != previousLast.flipped) {
+		flipped = Math.random() < 0.7 ? !last.flipped : last.flipped;
 	} else {
-		side = last.side == "left" ? "right" : "left";
+		flipped = !last.flipped;
 	}
 
 	const possibleObstaclePatterns = levelData[level - 1].patterns.filter(
 		(o) => !last || JSON.stringify(o) != JSON.stringify(last.pattern),
 	);
 	return {
-		side,
+		flipped,
 		pattern:
 			possibleObstaclePatterns[
 				Math.floor(Math.random() * possibleObstaclePatterns.length)

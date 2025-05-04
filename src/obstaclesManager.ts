@@ -22,7 +22,7 @@ export class ObstacleManager {
 
 	lastY = 1500;
 
-	previousPatterns: { side: "left" | "right"; pattern: Pattern }[] = [];
+	previousPatterns: { flipped: boolean; pattern: Pattern }[] = [];
 
 	reset(level: number) {
 		this.lastY = getPatternSpacing(level);
@@ -92,12 +92,12 @@ export class ObstacleManager {
 			if (level == 9 && this.lastY >= nextLevelDepth) {
 				break;
 			}
-			const { pattern, side } = getObstaclePattern(
+			const { pattern, flipped } = getObstaclePattern(
 				this.lastY < nextLevelDepth ? level : level + 1,
 				this.previousPatterns,
 			);
-			this.instantiatePattern(pattern, side);
-			this.previousPatterns.push({ pattern, side });
+			this.instantiatePattern(pattern, flipped);
+			this.previousPatterns.push({ pattern, flipped });
 			needSort = true;
 		}
 
@@ -110,7 +110,7 @@ export class ObstacleManager {
 		});
 	}
 
-	instantiatePattern(pattern: Pattern, side: "left" | "right") {
+	instantiatePattern(pattern: Pattern, flipped: boolean) {
 		let maxY = this.lastY;
 		for (let patternData of pattern) {
 			if (patternData.type == "wall") {
@@ -124,18 +124,18 @@ export class ObstacleManager {
 				}
 			};
 			const x =
-				side == "right" ?
+				flipped ?
 					1080 - getValue(patternData.transform.x || 0)
 				:	getValue(patternData.transform.x || 0);
 			const y = getValue(patternData.transform.y || 0);
 			const scaleX =
 				getValue(patternData.transform.scaleX || 1) *
-				(side == "right" ? -1 : 1);
+				(flipped ? -1 : 1);
 			const scaleY = getValue(patternData.transform.scaleY || 1);
 			const rotation =
 				(getValue(patternData.transform.rotation || 0) * Math.PI) / 180;
 			const obstacleData = collidersData[pick(patternData.index)];
-			if (patternData.type == "enemy-horizontal" && side == "right") {
+			if (patternData.type == "enemy-horizontal" && flipped) {
 				patternData = {
 					...patternData,
 					range: [
