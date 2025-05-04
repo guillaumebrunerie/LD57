@@ -135,12 +135,16 @@ export class ObstacleManager {
 			const rotation =
 				(getValue(patternData.transform.rotation || 0) * Math.PI) / 180;
 			const obstacleData = collidersData[pick(patternData.index)];
-			if (patternData.type == "enemy-horizontal" && flipped) {
+			if (
+				flipped &&
+				(patternData.type == "enemy-horizontal" ||
+					patternData.type == "fireball")
+			) {
 				patternData = {
 					...patternData,
 					range: [
-						1080 - patternData.range[1],
 						1080 - patternData.range[0],
+						1080 - patternData.range[1],
 					],
 				};
 			}

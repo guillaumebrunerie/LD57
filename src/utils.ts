@@ -74,12 +74,12 @@ export const pick = <T>(array: T[]) => {
 };
 
 export const smoothTriangle = (t: number) => {
-	const x = ((t % 2) + 2) % 2; // wrap to [0, 2)
+	const x = mod(t, 2);
 	const raw = x < 1 ? x : 2 - x; // triangle shape in [0, 1]
 	// Apply smoothstep-style easing
 	return raw * raw * (3 - 2 * raw);
 };
 
 export const seesaw = (t: number) => {
-	return t % 1;
+	return mod(t, 1);
 };
