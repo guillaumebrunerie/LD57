@@ -159,68 +159,65 @@ const patterns: Pattern[][] = [
 	[],
 	// Difficulty 1
 	[
-		[spike1({ x: 1080, scaleX: -1 })],
-		[spike3({ x: 1080, scaleX: -1 })],
-		[spike4({ x: 1080, scaleX: -1 })],
-		[rock2({ x: [600, 750] })],
-		[rock3({ x: [500, 750] })],
-		[fireball({ speed: 2000, range: [-700, 1700] })],
-		[iceball({ speed: 2000, range: [-700, 1700] })],
-		[enemyStill({ x: [600, 700], radius: 20, speed: 2 })],
-		[enemyStill({ x: [600, 800], radius: 20, speed: 2 })],
+		[spike1()],
+		[spike3()],
+		[spike4()],
+		[rock2({ x: [300, 500] })],
+		[rock3({ x: [300, 500] })],
+		// [fireball({ speed: 2000, range: [-700, 1700] })],
+		// [iceball({ speed: 2000, range: [-700, 1700] })],
+		// [enemyStill({ x: [600, 700], radius: 20, speed: 2 })],
+		// [enemyStill({ x: [600, 800], radius: 20, speed: 2 })],
 	],
 	// Difficulty 2
 	[
-		[spike2({ x: 1080, scaleX: -1 })],
-		[spike2({ x: 1080, y: [0, 50], scaleX: -1 })],
+		[spike2()],
+		[spike2({ y: [0, 50] })],
 		[spike3({ y: [0, 100] }), spike4({ x: 1080, y: [0, 100], scaleX: -1 })],
-		[spike1({ y: [0, 100] }), spike3({ x: 1080, y: [0, 100], scaleX: -1 })],
-		[rock1({ x: [600, 750] })],
+		[spike3({ y: [0, 100] }), spike1({ x: 1080, y: [0, 100], scaleX: -1 })],
+		[rock1({ x: [300, 500] })],
 	],
 	// Difficulty 3
 	[
 		[enemyHorizontal({ y: [-100, 100], speed: 580, range: [250, 830] })],
 		[
-			spike1({ x: 1080, scaleX: -1 }),
-			enemyHorizontal({ y: [-100, 100], speed: 450, range: [230, 680] }),
+			spike1(),
+			enemyHorizontal({ y: [-100, 100], speed: 450, range: [400, 850] }),
 		],
 		[
-			spike3({ x: 1080, scaleX: -1 }),
-			enemyHorizontal({ y: [-100, 100], speed: 350, range: [230, 580] }),
+			spike3(),
+			enemyHorizontal({ y: [-100, 100], speed: 350, range: [500, 850] }),
 		],
 		[
-			spike4({ x: 1080, scaleX: -1 }),
-			enemyHorizontal({ y: [-100, 100], speed: 500, range: [230, 730] }),
+			spike4(),
+			enemyHorizontal({ y: [-100, 100], speed: 500, range: [350, 850] }),
 		],
 	],
 	// Difficulty 4
 	[
 		[
-			spike2({ x: 1080, scaleX: -1 }),
-			enemyHorizontal({ y: [100, 150], speed: 175, range: [230, 580] }),
+			spike2(),
+			enemyHorizontal({ y: [100, 150], speed: 175, range: [500, 850] }),
+		],
+		[spike2(), enemyVertical({ x: 600, speed: 250, range: [100, 350] })],
+		[
+			spike1(),
+			enemyVertical({ x: [600, 800], speed: 400, range: [-200, 200] }),
 		],
 		[
-			spike2({ x: 1080, scaleX: -1 }),
-			enemyVertical({ x: 480, speed: 250, range: [100, 350] }),
+			spike3(),
+			enemyVertical({ x: [600, 800], speed: 400, range: [-200, 200] }),
 		],
 		[
-			spike1({ x: 1080, scaleX: -1 }),
-			enemyVertical({ x: [280, 480], speed: 400, range: [-200, 200] }),
-		],
-		[
-			spike3({ x: 1080, scaleX: -1 }),
-			enemyVertical({ x: [280, 480], speed: 400, range: [-200, 200] }),
-		],
-		[
-			spike4({ x: 1080, scaleX: -1 }),
-			enemyVertical({ x: [280, 480], speed: 400, range: [-200, 200] }),
+			spike4(),
+			enemyVertical({ x: [600, 800], speed: 400, range: [-200, 200] }),
 		],
 	],
 	// Difficulty 5
 	[
-		[spike2({ x: 1080, scaleX: -1 }), spike1({ y: [350, 450] })],
-		[spike2({ x: 1080, scaleX: -1 }), spike3({ y: [200, 300] })],
-		[spike2({ x: 1080, scaleX: -1 }), spike4({ y: [200, 300] })],
+		[spike2(), spike1({ x: 1080, y: [350, 450], scaleX: -1 })],
+		[spike2(), spike3({ x: 1080, y: [200, 300], scaleX: -1 })],
+		[spike2(), spike4({ x: 1080, y: [200, 300], scaleX: -1 })],
 	],
 	// Difficulty 6
 	[
@@ -229,31 +226,31 @@ const patterns: Pattern[][] = [
 			enemyHorizontal({ y: [200, 300], speed: 290, range: [250, 830] }),
 		],
 		[
-			spike1({ x: 1080, scaleX: -1 }),
-			enemyHorizontal({ y: [100, 200], speed: 450, range: [230, 680] }),
+			spike1(),
+			enemyHorizontal({ y: [100, 200], speed: 450, range: [400, 850] }),
 		],
 		[
-			spike3({ x: 1080, scaleX: -1 }),
-			enemyHorizontal({ y: [100, 200], speed: 350, range: [230, 580] }),
+			spike3(),
+			enemyHorizontal({ y: [100, 200], speed: 350, range: [500, 850] }),
 		],
 		[
-			spike4({ x: 1080, scaleX: -1 }),
-			enemyHorizontal({ y: [-200, -100], speed: 500, range: [230, 730] }),
-			enemyHorizontal({ y: [100, 200], speed: 500, range: [230, 730] }),
+			spike4(),
+			enemyHorizontal({ y: [-200, -100], speed: 500, range: [350, 850] }),
+			enemyHorizontal({ y: [100, 200], speed: 500, range: [350, 850] }),
 		],
 	],
 	// Difficulty 7
 	[
-		[spike2({ x: 1080, scaleX: -1 }), spike2({ y: [600, 700] })],
+		[spike2(), spike2({ x: 1080, y: [600, 700], scaleX: -1 })],
 		[
-			spike3({ x: 1080, scaleX: -1 }),
-			spike4({ y: [0, 100] }),
-			enemyHorizontal({ speed: 115, range: [350, 580] }),
+			spike3(),
+			spike4({ x: 1080, y: [0, 100], scaleX: -1 }),
+			enemyHorizontal({ speed: 115, range: [500, 730] }),
 		],
 		[
-			spike4({ x: 1080, scaleX: -1 }),
-			spike1({ y: [0, 100] }),
-			enemyHorizontal({ speed: 200, range: [400, 730] }),
+			spike4(),
+			spike1({ x: 1080, y: [0, 100], scaleX: -1 }),
+			enemyHorizontal({ speed: 200, range: [350, 680] }),
 		],
 	],
 ];

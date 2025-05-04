@@ -17,7 +17,10 @@ export class PatternEditor {
 	) {
 		this.obstacleManager = new ObstacleManager();
 		this.level = data.level;
-		this.patternIndex = data.patternIndex;
+		this.patternIndex = mod(
+			data.patternIndex,
+			levelData[this.level - 1].patterns.length,
+		);
 		this.refresh();
 	}
 
@@ -30,10 +33,9 @@ export class PatternEditor {
 
 	refresh() {
 		this.obstacleManager.reset(this.level);
-		const side = "left"; //Math.random() < 0.5 ? "left" : "right";
 		this.obstacleManager.instantiatePattern(
 			levelData[this.level - 1].patterns[this.patternIndex],
-			side,
+			false,
 		);
 	}
 
