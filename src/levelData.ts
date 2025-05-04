@@ -12,137 +12,122 @@ export type PatternData =
 	| {
 			type: "wall";
 	  }
-	| {
+	| ({
 			type: "spike";
-			transform: TransformBlueprint;
-			index: number[];
-	  }
-	| {
+			colliderIndex: number;
+	  } & TransformBlueprint)
+	| ({
 			type: "rock";
-			transform: TransformBlueprint;
-			index: number[];
-	  }
-	| {
+			colliderIndex: number;
+	  } & TransformBlueprint)
+	| ({
 			type: "enemy-horizontal";
-			transform: TransformBlueprint;
-			index: number[];
+			colliderIndex: number;
 			speed: number;
 			range: [number, number];
-	  }
-	| {
+	  } & TransformBlueprint)
+	| ({
 			type: "enemy-vertical";
-			transform: TransformBlueprint;
-			index: number[];
+			colliderIndex: number;
 			speed: number;
 			range: [number, number];
-	  }
-	| {
+	  } & TransformBlueprint)
+	| ({
 			type: "enemy-still";
-			transform: TransformBlueprint;
-			index: number[];
+			colliderIndex: number;
+
 			speed: number;
 			radius: number;
-	  }
-	| {
+	  } & TransformBlueprint)
+	| ({
 			type: "fireball";
-			transform: TransformBlueprint;
-			index: number[];
+			colliderIndex: number;
 			speed: number;
 			range: [number, number];
-	  };
+	  } & TransformBlueprint);
 
 export type Pattern = PatternData[];
 
-const spike1 = (transform: TransformBlueprint = {}): PatternData => ({
+const spike1 = (data: TransformBlueprint = {}): PatternData => ({
 	type: "spike",
-	transform,
-	index: [1],
+	colliderIndex: 1,
+	...data,
 });
 
-const spike2 = (transform: TransformBlueprint = {}): PatternData => ({
+const spike2 = (data: TransformBlueprint = {}): PatternData => ({
 	type: "spike",
-	transform,
-	index: [2],
+	colliderIndex: 2,
+	...data,
 });
 
-const spike3 = (transform: TransformBlueprint = {}): PatternData => ({
+const spike3 = (data: TransformBlueprint = {}): PatternData => ({
 	type: "spike",
-	transform,
-	index: [3],
+	colliderIndex: 3,
+	...data,
 });
 
-const spike4 = (transform: TransformBlueprint = {}): PatternData => ({
+const spike4 = (data: TransformBlueprint = {}): PatternData => ({
 	type: "spike",
-	transform,
-	index: [4],
+	colliderIndex: 4,
+	...data,
 });
 
-const rock1 = (transform: TransformBlueprint = {}): PatternData => ({
+const rock1 = (data: TransformBlueprint = {}): PatternData => ({
 	type: "rock",
-	transform,
-	index: [5],
+	colliderIndex: 5,
+	...data,
 });
 
-const rock2 = (transform: TransformBlueprint = {}): PatternData => ({
+const rock2 = (data: TransformBlueprint = {}): PatternData => ({
 	type: "rock",
-	transform,
-	index: [6],
+	colliderIndex: 6,
+	...data,
 });
 
-const rock3 = (transform: TransformBlueprint = {}): PatternData => ({
+const rock3 = (data: TransformBlueprint = {}): PatternData => ({
 	type: "rock",
-	transform,
-	index: [7],
+	colliderIndex: 7,
+	...data,
 });
 
 const enemyHorizontal = (
 	data: TransformBlueprint & { speed: number; range: [number, number] },
 ): PatternData => ({
 	type: "enemy-horizontal",
-	transform: data,
-	speed: data.speed,
-	range: data.range,
-	index: [8],
+	colliderIndex: 8,
+	...data,
 });
 
 const enemyVertical = (
 	data: TransformBlueprint & { speed: number; range: [number, number] },
 ): PatternData => ({
 	type: "enemy-vertical",
-	transform: data,
-	speed: data.speed,
-	range: data.range,
-	index: [9],
+	colliderIndex: 9,
+	...data,
 });
 
 const enemyStill = (
 	data: TransformBlueprint & { speed: number; radius: number },
 ): PatternData => ({
 	type: "enemy-still",
-	transform: data,
-	speed: data.speed,
-	radius: data.radius,
-	index: [10],
+	colliderIndex: 10,
+	...data,
 });
 
 const fireball = (
 	data: TransformBlueprint & { speed: number; range: [number, number] },
 ): PatternData => ({
 	type: "fireball",
-	transform: data,
-	index: [11],
-	speed: data.speed,
-	range: data.range,
+	colliderIndex: 11,
+	...data,
 });
 
 const iceball = (
 	data: TransformBlueprint & { speed: number; range: [number, number] },
 ): PatternData => ({
 	type: "fireball",
-	transform: data,
-	index: [12],
-	speed: data.speed,
-	range: data.range,
+	colliderIndex: 12,
+	...data,
 });
 
 type LevelData = {
@@ -151,10 +136,6 @@ type LevelData = {
 	spacing: [number, number];
 	patterns: Pattern[];
 };
-
-// [enemyStill({ x: [600, 800], radius: 20, speed: 2 })],
-// [fireball({ speed: 2000, range: [-700, 1700] })],
-// [iceball({ speed: 2000, range: [-700, 1700] })],
 
 export const levelData: LevelData[] = [
 	// Level 1: only rocks/spikes

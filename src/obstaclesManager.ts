@@ -8,8 +8,6 @@ import {
 	type PatternData,
 } from "./levelData";
 import type { Player } from "./player";
-import { pick } from "./utils";
-
 const wallPatternData: PatternData = { type: "wall" };
 
 export class ObstacleManager {
@@ -125,16 +123,15 @@ export class ObstacleManager {
 			};
 			const x =
 				flipped ?
-					1080 - getValue(patternData.transform.x || 0)
-				:	getValue(patternData.transform.x || 0);
-			const y = getValue(patternData.transform.y || 0);
+					1080 - getValue(patternData.x || 0)
+				:	getValue(patternData.x || 0);
+			const y = getValue(patternData.y || 0);
 			const scaleX =
-				getValue(patternData.transform.scaleX || 1) *
-				(flipped ? -1 : 1);
-			const scaleY = getValue(patternData.transform.scaleY || 1);
+				getValue(patternData.scaleX || 1) * (flipped ? -1 : 1);
+			const scaleY = getValue(patternData.scaleY || 1);
 			const rotation =
-				(getValue(patternData.transform.rotation || 0) * Math.PI) / 180;
-			const obstacleData = collidersData[pick(patternData.index)];
+				(getValue(patternData.rotation || 0) * Math.PI) / 180;
+			const obstacleData = collidersData[patternData.colliderIndex];
 			if (
 				flipped &&
 				(patternData.type == "enemy-horizontal" ||
