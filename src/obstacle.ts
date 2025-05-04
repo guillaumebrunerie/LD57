@@ -81,8 +81,9 @@ export class Obstacle {
 				break;
 			}
 			case "fireball": {
-				const { range, speed, dy } = this.patternData;
+				const { range, speed } = this.patternData;
 				const dRange = range[1] - range[0];
+				const dy = dRange * Math.sin(this.rotation);
 				this.x =
 					seesaw((this.lt * speed) / Math.abs(dRange)) * dRange +
 					range[0];

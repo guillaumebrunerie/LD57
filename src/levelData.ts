@@ -49,7 +49,6 @@ export type PatternData =
 			index: number[];
 			speed: number;
 			range: [number, number];
-			dy: number;
 	  };
 
 export type Pattern = PatternData[];
@@ -134,7 +133,6 @@ const fireball = (
 	index: [11],
 	speed: data.speed,
 	range: data.range,
-	dy: 0,
 });
 
 const iceball = (
@@ -145,7 +143,6 @@ const iceball = (
 	index: [12],
 	speed: data.speed,
 	range: data.range,
-	dy: 0,
 });
 
 type LevelData = {
@@ -167,8 +164,15 @@ export const levelData: LevelData[] = [
 		spacing: [800, 1200],
 		patterns: [
 			[enemyStill({ x: [300, 500], radius: 20, speed: 2 })],
-			[fireball({ speed: 2000, range: [-700, 1700], scaleX: -1 })],
-			[iceball({ speed: 2000, range: [-700, 1700] })],
+			[
+				fireball({
+					speed: 4000,
+					range: [-700, 1700],
+					scaleX: -1,
+					rotation: [-30, 30],
+				}),
+			],
+			[iceball({ speed: 2000, range: [-700, 1700], scaleX: -1 })],
 			[spike1()],
 			[spike3()],
 			[spike4()],
