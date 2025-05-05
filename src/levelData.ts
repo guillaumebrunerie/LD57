@@ -144,10 +144,10 @@ export const levelData: LevelData[] = [
 		duration: 4,
 		spacing: [800, 1200],
 		patterns: [
-			[enemyStill({ x: [300, 500], radius: 20, speed: 2 })],
+			[enemyStill({ x: [300, 500], radius: 50, speed: 2 })],
 			[
 				fireball({
-					speed: 4000,
+					speed: 2000,
 					range: [-700, 1700],
 					scaleX: -1,
 					rotation: [-30, 30],
