@@ -145,14 +145,14 @@ export const levelData: LevelData[] = [
 		spacing: [800, 1200],
 		patterns: [
 			[enemyStill({ x: [300, 500], radius: 50, speed: 2 })],
-			[
+			/*[
 				fireball({
 					speed: 2000,
 					range: [-700, 1700],
 					scaleX: -1,
 					rotation: [-30, 30],
 				}),
-			],
+			],*/
 			[iceball({ speed: 2000, range: [-700, 1700], scaleX: -1 })],
 			[spike1()],
 			[spike3()],
@@ -383,6 +383,19 @@ export const levelData: LevelData[] = [
 					y: [100, 200],
 					speed: 500,
 					range: [350, 850],
+				}),
+			],
+			[
+				spike1({
+					y: [400, 900],
+				}),
+				fireball({
+					y: [400, 900],
+					speed: 2000,
+					range: [-1000, 1400],
+					scaleX: -1,
+					rotation: -30
+					,
 				}),
 			],
 		],
