@@ -141,10 +141,10 @@ export const levelData: LevelData[] = [
 	// Level 1: only rocks/spikes
 	{
 		speed: 600,
-		duration: 4,
+		duration: 6,
 		spacing: [800, 1200],
 		patterns: [
-			[enemyStill({ x: [300, 500], radius: 50, speed: 2 })],
+			/*[enemyStill({ x: [300, 500], radius: 50, speed: 2 })],*/
 			/*[
 				fireball({
 					speed: 2000,
@@ -153,12 +153,35 @@ export const levelData: LevelData[] = [
 					rotation: [-30, 30],
 				}),
 			],*/
-			[iceball({ speed: 2000, range: [-700, 1700], scaleX: -1 })],
-			[spike1()],
-			[spike3()],
-			[spike4()],
-			[rock2({ x: [300, 500] })],
-			[rock3({ x: [300, 500] })],
+			/*[iceball({ speed: 2000, range: [-700, 1700], scaleX: -1 })],*/
+			[
+				spike1({ x: 1080, y: [0, 600], scaleX: -1 }),
+				spike4({ y: [-600, 0] }),
+				rock3({ x: [400, 500], y: [-200, 200] })
+			],
+			[
+				spike3({ x: 1080, y: [250, 600], scaleX: -1 }),
+				spike4({ x: 1080, y: [0, -200], scaleX: -1 }),
+				spike2({ y: [-600, -300] })
+			],
+			[
+				spike1({ x: 1080, y: [400, 600], scaleX: -1 }),
+				spike3({ x: 1080, y: [0, -100], scaleX: -1 }),
+				spike1({ y: [-600, -300] }),
+				rock1({ x: [600, 700], y: [-460, -500] }),
+				rock3({ x: [360, 400], y: [260, 600] })
+			],
+			[rock2({ x: [500, 600], y: [400, -300] })],
+			/*[rock3({ x: [330, 700] })],*/
+			[
+				rock1({ x: [300, 350], y: [0, -500] }),
+				rock2({ x: [600, 700], y: [300, 500] })
+			],
+			[
+				rock3({ x: [330, 700], y: [-440, -500] }),
+				rock2({ x: [330, 660], y: [100, 0] }),
+				rock1({ x: [450, 600], y: [440, 550] })
+			],
 		],
 	},
 	// Level 2: introduce still enemy
