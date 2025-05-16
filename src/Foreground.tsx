@@ -37,9 +37,9 @@ export const ForegroundFragment = ({
 					/>
 					<sprite
 						blendMode="add"
-						texture={getFrame(A_Level2Souls, 20, lt)}
+						texture={getFrame(A_Level2Souls, 30, lt)}
 						scale={5}
-						alpha={alpha}
+						alpha={0}
 					/>
 				</>
 			);
