@@ -125,12 +125,13 @@ export class ObstacleManager {
 				flipped ?
 					1080 - getValue(patternData.x || 0)
 				:	getValue(patternData.x || 0);
-			const y = getValue(patternData.y || 0);
+			let y = getValue(patternData.y || 0);
 			const scaleX =
 				getValue(patternData.scaleX || 1) * (flipped ? -1 : 1);
 			const scaleY = getValue(patternData.scaleY || 1);
 			const rotation =
-				(getValue(patternData.rotation || 0) * Math.PI) / 180;
+				((getValue(patternData.rotation || 0) * Math.PI) / 180) *
+				(flipped ? -1 : 1);
 			const obstacleData = collidersData[patternData.colliderIndex];
 			if (
 				flipped &&
@@ -144,6 +145,12 @@ export class ObstacleManager {
 						1080 - patternData.range[1],
 					],
 				};
+			}
+			if (flipped && patternData.type == "fireball") {
+				y +=
+					Math.sin(rotation) *
+					(patternData.range[1] - patternData.range[0]) *
+					scaleX;
 			}
 			this.obstacles.push(
 				new Obstacle(

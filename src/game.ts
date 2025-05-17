@@ -28,8 +28,6 @@ export class Game {
 	depth = 0;
 	cameraSpeed = 100;
 
-	yBgOffset = Math.random();
-
 	player = new Player(this);
 	obstaclesManager = new ObstaclesManager();
 
@@ -48,11 +46,14 @@ export class Game {
 		this.lt = 0;
 		this.lastHit = null;
 		this.score = 0;
+		this.cloudLt = 0;
 		this.state = "game";
 		this.depth = 0;
-		this.level = 0;
+		this.cameraSpeed = 100;
 		this.player = new Player(this);
 		this.obstaclesManager = new ObstaclesManager();
+		this.level = 0;
+		this.nextLevelDepth = 0;
 	}
 
 	levels = 9;
